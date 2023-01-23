@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/23 11:42:24 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/23 19:24:30 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@ int	ft_echo(t_msh msh, int dash_n)
 	char *echo_line;
 	
 	echo_line = ft_strnstr(msh.line, "echo", strlen(msh.line));
-	printf("bjr");
 	i = 4;
-	while (echo_line[i] >= 9 && echo_line[i] <= 13)
+	while ((echo_line[i] >= 9 && echo_line[i] <= 13) || echo_line[i] == ' ')
+		i++;
+	if (dash_n == 0)
+		while (echo_line[i] == '-' || echo_line[i] == 'n')
+			i++;
+	while ((echo_line[i] >= 9 && echo_line[i] <= 13) || echo_line[i] == ' ')
 		i++;
 	while (echo_line[i])
 		write(1, &echo_line[i++], 1);
@@ -41,11 +45,11 @@ int	ft_echo(t_msh msh, int dash_n)
 
 int	exec_cmd(t_msh msh)
 {
-	if (strstr(msh.line, "pwd"))
+	if (search_cmd(msh.line, "pwd"))
 		ft_pwd();
-	else if (strstr(msh.line, "echo"))
+	else if (search_cmd(msh.line, "echo"))
 	{	
-		if (!strncmp(msh.line, "-n", strlen(msh.line)))
+		if (search_cmd(msh.line, "-n"))
 			ft_echo(msh, 0);
 		else
 			ft_echo(msh, 1);
