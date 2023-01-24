@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:13:34 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/23 11:45:52 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/23 19:17:17 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	ft_strstr(const char *str, const char *to_find)
 
 	i = 0;
 	j = 0;
-	printf("%c", str[i + j + 1]);
 	if ((!str || !to_find))
 		return (0);
 	if (to_find[0] == 0)
@@ -60,11 +59,31 @@ int	ft_strstr(const char *str, const char *to_find)
 			if (str[i + j] != to_find[j])
 				break ;
 			j++;
-			if (!to_find[j] && (str[i + j + 1] == ' ' || str[i + j + 1] == '=')){
+			if (!to_find[j])
 				return (1);
-			}
 		}
 		j = 0;
+		i++;
+	}
+	return (0);
+}
+
+int	search_cmd(const char *hs, const char *nee)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (hs[i])
+	{
+		j = 0;
+		while (nee[j] == hs[i + j])
+		{
+			if (nee[j + 1] == '\0' && (hs[i + j + 1] == ' ' || hs[i + j + 1] == '=' || hs[i + j + 1] == '\0'))
+				return (1);
+			j++;
+		}
 		i++;
 	}
 	return (0);
