@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_u.c                                      :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 18:51:17 by cgelin            #+#    #+#             */
-/*   Updated: 2022/11/16 08:41:21 by cgelin           ###   ########.fr       */
+/*   Created: 2023/01/24 09:07:58 by cgelin            #+#    #+#             */
+/*   Updated: 2023/01/24 10:30:13 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../msh.h"
 
-unsigned int	ft_putnbr_u_len(unsigned int n)
+int	is_white_space(char c)
 {
-	int	i;
-
-	i = 0;
-	if (n == 0)
+	if ((c <= 13 && c >= 9) || c == ' ')
 		return (1);
-	while (n != 0)
-	{
-		n /= 10;
-		i++;
-	}
-	return (i);
+	return (0);
 }
 
-int	ft_putnbr_u_int(unsigned int n)
-{	
-	unsigned int	nb;
-
-	nb = n;
-	if (n > 9)
-		ft_putnbr_u_int(n / 10);
-	ft_putchar_int((n % 10) + 48);
-	return (ft_putnbr_u_len(nb));
+int	is_delimiter(char *str, int i)
+{
+	if (str[i] == '|' || str[i] == '>' || str[i] == '<' \
+	|| (str[i] == '>' && str[i + 1] == '>') \
+	|| (str[i] == '<' && str[i + 1] == '<'))
+		return (1);
+	return (0);
 }

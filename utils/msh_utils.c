@@ -6,11 +6,11 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:25:58 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/24 11:30:15 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/24 11:30:19 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "../msh.h"
 
 size_t	ft_strlen(const char *s)
 {

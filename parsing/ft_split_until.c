@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_until.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 10:03:34 by colas             #+#    #+#             */
-/*   Updated: 2023/01/24 11:30:16 by cgelin           ###   ########.fr       */
+/*   Created: 2023/01/24 10:16:26 by cgelin            #+#    #+#             */
+/*   Updated: 2023/01/24 18:11:22 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../msh.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -70,7 +70,7 @@ static int	ft_size_word(char const *s, char c, int i)
 	return (size);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split_until(t_msh msh, char c)
 {
 	int		i;
 	int		word;
@@ -80,20 +80,21 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	j = -1;
-	word = ft_count_word(s, c);
-	strs = malloc((word + 1) * sizeof(char *));
+	word = ft_count_word(msh.line, c);
+	strs = (char **)malloc((word + 1) * sizeof(char *));
 	if (!strs)
 		return (NULL);
 	while (++j < word)
 	{
-		while (s[i] == c)
+		while (msh.line[i] == c || is_delimiter(msh.line, i))
 			i++;
-		size = ft_size_word(s, c, i);
-		strs[j] = ft_substr(s, i, size);
-		if (!strs[j])
-			return (free_all(strs), NULL);
+		size = ft_size_word(msh.line, c, i);
+		strs[j] = ft_substr(msh.line, i, size);
+		// if (!strs[j])
+		// 	return (free_all(strs), NULL);
 		i += size;
 	}
 	strs[j] = 0;
 	return (strs);
 }
+

@@ -6,11 +6,76 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 10:47:31 by cgelin            #+#    #+#             */
-/*   Updated: 2022/12/11 11:53:59 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/24 11:30:18 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdarg.h>
+
+int	ft_putchar_int(int c)
+{
+	write(2, &c, 1);
+	return (1);
+}
+
+int	ft_putstr_int(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+	{
+		write(2, "(null)", 6);
+		i += 6;
+		return (i);
+	}
+	while (s[i])
+	{
+		write(2, &s[i], 1);
+		i++;
+	}
+	return (i);
+}
+
+int	ft_putnbr_len(int n)
+{
+	int	i;
+
+	i = 0;
+	if (n < 0)
+	{
+		n *= -1;
+		i++;
+	}
+	if (n == 0)
+		return (1);
+	while (n != 0)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
+}
+
+int	ft_putnbr_int(int n)
+{	
+	int			nb;
+
+	nb = n;
+	if (n == -2147483648)
+		return (ft_putstr_int("-2147483648"));
+	if (n < 0)
+	{	
+		n *= -1;
+		ft_putchar_int('-');
+	}
+	if (n > 9)
+		ft_putnbr_int(n / 10);
+	ft_putchar_int((n % 10) + 48);
+	return (ft_putnbr_len(nb));
+}
 
 int	get_next_char_count(char *str, int i, va_list args)
 {
@@ -18,19 +83,8 @@ int	get_next_char_count(char *str, int i, va_list args)
 		return (ft_putchar_int(va_arg(args, int)));
 	else if (str[i] == 's')
 		return (ft_putstr_int(va_arg(args, char *)));
-	else if (str[i] == 'p')
-	{
-		write(2, "0x", 2);
-		return (print_hexa_adress(va_arg(args, unsigned long long), 0));
-	}
 	else if (str[i] == 'd' || str[i] == 'i')
 		return (ft_putnbr_int(va_arg(args, int)));
-	else if (str[i] == 'u')
-		return (ft_putnbr_u_int(va_arg(args, unsigned int)));
-	else if (str[i] == 'x' || str[i] == 'X')
-		return (print_hexa(va_arg(args, unsigned int), str[i]));
-	else if (str[i] == '%')
-		return (ft_putchar_int('%'));
 	return (0);
 }
 
