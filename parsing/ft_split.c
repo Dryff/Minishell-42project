@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_until.c                                   :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:16:26 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/24 18:11:22 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/25 18:02:46 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	ft_size_word(char const *s, char c, int i)
 	return (size);
 }
 
-char	**ft_split_until(t_msh msh, char c)
+char	**ft_split(char const *s, char c)
 {
 	int		i;
 	int		word;
@@ -80,16 +80,16 @@ char	**ft_split_until(t_msh msh, char c)
 
 	i = 0;
 	j = -1;
-	word = ft_count_word(msh.line, c);
-	strs = (char **)malloc((word + 1) * sizeof(char *));
+	word = ft_count_word(s, c);
+	strs = malloc((word + 1) * sizeof(char *));
 	if (!strs)
 		return (NULL);
 	while (++j < word)
 	{
-		while (msh.line[i] == c || is_delimiter(msh.line, i))
+		while (s[i] == c)
 			i++;
-		size = ft_size_word(msh.line, c, i);
-		strs[j] = ft_substr(msh.line, i, size);
+		size = ft_size_word(s, c, i);
+		strs[j] = ft_substr(s, i, size);
 		// if (!strs[j])
 		// 	return (free_all(strs), NULL);
 		i += size;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/24 12:09:41 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/25 18:08:37 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ int	get_cmd_nbr(char *str)
 
 int	parse_line(t_msh *msh)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char 	*cmd;
 
 	i = 0;
 	j = 0;
@@ -43,13 +44,23 @@ int	parse_line(t_msh *msh)
 		|| is_white_space(msh->line[i])))
 			i++;
 		if (msh->line[i])
-			msh->cmd[j++].param = ft_split_until(*msh, ' ');
+		{
+			
+			cmd = ft_substr(msh->line, i, get_size(msh->line, i));
+			msh->cmd[j++].param = ft_split(cmd, ' ');
+			free(cmd);
+		}
 		while (msh->line[i] && !is_delimiter(msh->line, i))
 			i++;
 	}
-	j = 0;
-	printf("cmd_nbr : %d\n-----\n", msh->cmd_nbr);
+	// j = 0;
+	// printf("cmd_nbr : %d\n-----\n", msh->cmd_nbr);
 	// while (j < msh->cmd_nbr)
-	// 	printf("%s\n", msh->cmd[j++].param[0]);
+	// {
+	// 	printf("cmd : %d\n", j);
+	// 	printf("param 1: %s\n", msh->cmd[j].param[0]);
+	// 	printf("param 2: %s\n", msh->cmd[j++].param[1]);
+	// 	printf("---------\n");
+	// }
 	return (1);
 }

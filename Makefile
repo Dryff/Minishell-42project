@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
+#    By: colas <colas@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/01/24 11:30:15 by cgelin           ###   ########.fr        #
+#    Updated: 2023/01/25 18:02:23 by colas            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ FILES = main					\
 		parsing/parsing			\
 		utils/msh_utils			\
 		utils/cmd_utils			\
-		parsing/ft_split_until	\
+		parsing/ft_split		\
 		
 							
 

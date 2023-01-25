@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/24 11:37:33 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/25 18:02:33 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ int		parse_line(t_msh *msh);
 /* Parse_utils */
 int		is_delimiter(char *str, int i);
 int		is_white_space(char c);
-char	**ft_split_until(t_msh msh, char c);
+char	**ft_split(char const *str, char c);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		get_size(char *s, int i);
+
 
 #endif
