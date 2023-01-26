@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:16:26 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/25 18:02:46 by colas            ###   ########.fr       */
+/*   Updated: 2023/01/26 08:15:38 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,9 @@ char	**ft_split(char const *s, char c)
 			i++;
 		size = ft_size_word(s, c, i);
 		strs[j] = ft_substr(s, i, size);
-		// if (!strs[j])
-		// 	return (free_all(strs), NULL);
+		if (!strs[j])
+			return (free_all(strs), NULL);
 		i += size;
 	}
-	strs[j] = 0;
-	return (strs);
+	return (strs[j] = 0, strs);
 }
-

@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:13:34 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/24 11:30:19 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/26 08:13:03 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int	search_cmd(const char *hs, const char *nee)
 		j = 0;
 		while (nee[j] == hs[i + j])
 		{
-			if (nee[j + 1] == '\0' && (hs[i + j + 1] == ' ' || hs[i + j + 1] == '=' || hs[i + j + 1] == '\0'))
+			if (nee[j + 1] == '\0' && (hs[i + j + 1] == ' ' \
+			|| hs[i + j + 1] == '=' || hs[i + j + 1] == '\0'))
 				return (1);
 			j++;
 		}

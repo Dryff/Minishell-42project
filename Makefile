@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: colas <colas@student.42.fr>                +#+  +:+       +#+         #
+#    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/01/25 18:02:23 by colas            ###   ########.fr        #
+#    Updated: 2023/01/26 08:25:38 by cgelin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,11 @@ CYAN = \033[0;96m
 FILES = main					\
 		builtins/builtins		\
 		builtins/env			\
-		parsing/parse_utils		\
 		parsing/parsing			\
+		utils/parse_utils		\
 		utils/msh_utils			\
 		utils/cmd_utils			\
-		parsing/ft_split		\
+		utils/ft_split			\
 		
 							
 

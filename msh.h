@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/25 18:02:33 by colas            ###   ########.fr       */
+/*   Updated: 2023/01/26 08:14:03 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		ft_strstr(const char *str, const char *to_find);
 /* Msh_utils */
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *s);
+void	free_all(char **strs);
 
 /* Parsing */
 int		parse_line(t_msh *msh);
@@ -69,6 +70,5 @@ int		is_white_space(char c);
 char	**ft_split(char const *str, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		get_size(char *s, int i);
-
 
 #endif

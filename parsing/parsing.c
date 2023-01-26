@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/25 18:08:37 by colas            ###   ########.fr       */
+/*   Updated: 2023/01/26 08:11:29 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	parse_line(t_msh *msh)
 			i++;
 		if (msh->line[i])
 		{
-			
 			cmd = ft_substr(msh->line, i, get_size(msh->line, i));
 			msh->cmd[j++].param = ft_split(cmd, ' ');
 			free(cmd);
