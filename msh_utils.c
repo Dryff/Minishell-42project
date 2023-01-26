@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:25:58 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/24 11:30:15 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/26 19:09:41 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[i])
 		str[len1++] = s2[i++];
 	str[len1] = '\0';
-	return (str);
+	
+	return (free(s1), free(s2), str);
 }

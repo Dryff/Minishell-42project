@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/26 11:42:19 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/26 19:28:11 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,21 @@ int	get_cmd_nbr(char *str)
 	return (count);
 }
 
-char	*rmchar_substr(char const *s, unsigned int start, size_t len, char c)
+char	*rmchar_substr(char const *s, unsigned int start, size_t end, char c)
 {
 	char		*str;
 	size_t		i;
+	size_t		len;
 
 	i = 0;
-	if (len + start > ft_strlen((char *)s))
-		len = ft_strlen((char *)s) - start;
+	len = end - start;
 	str = malloc(sizeof(char) * len + 1);
 	if (!str)
 		return (NULL);
-	if (start >= ft_strlen((char *)s))
-		return (str);
 	if (str == NULL)
 		return (NULL);
-	while (i < len && s[i])
-	{
+	while (i <= len && s[i] && start + i < end)
+	{	
 		while (s[start + i] == c)
 			start++;
 		str[i] = s[start + i];
@@ -74,6 +72,7 @@ int	strlen_until(char *s, char c)
 char	*rm_quotes(char *line)
 {
 	char	*res;
+	char	*tmp;
 	int		i;
 	int		start;
 
@@ -84,24 +83,23 @@ char	*rm_quotes(char *line)
 		start = i;
 		while (line[i] && line[i] != '"')
 			i++;
-		printf("start : %d, i : %d\n", start, i);
-		res = ft_substr(line, start, i);
-		printf("res1 : %s\n", res);
+		tmp = ft_substr(line, start, i - start);
+		// printf("res1 : %s\n", tmp);
 		if (line[i] && line[i] == '"')
 		{
 			start = i;
-			i++;
 			while (line[i] && !end_quote(line, i))
 				i++;
 			if (i - start)
 			{	
-				printf("start : %d, i : %d\n", start, i);
-				res = rmchar_substr(line, start, i - start, '"');
-				printf("res2 : %s\n", res);
+				res = rmchar_substr(line, start, i, '"');
+				// printf("res2 : %s\n", res);
 			}
+			i++;
 		}
-		i++;
+		res = ft_strjoin(res, tmp);
 	}
+	printf("joined : %s\n", res);
 	return (res);
 }
 
