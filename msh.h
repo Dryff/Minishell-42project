@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/26 08:14:03 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/26 08:28:18 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,13 @@ void	free_all(char **strs);
 /* Parsing */
 int		parse_line(t_msh *msh);
 
+/* Basic utils */
+char	**ft_split(char const *str, char c);
+void	*ft_calloc(size_t count, size_t size);
+
 /* Parse_utils */
 int		is_delimiter(char *str, int i);
 int		is_white_space(char c);
-char	**ft_split(char const *str, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		get_size(char *s, int i);
 

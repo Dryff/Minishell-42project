@@ -6,7 +6,7 @@
 #    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/01/26 08:25:38 by cgelin           ###   ########.fr        #
+#    Updated: 2023/01/26 08:29:47 by cgelin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,7 @@ FILES = main					\
 		utils/msh_utils			\
 		utils/cmd_utils			\
 		utils/ft_split			\
-		
-							
+		utils/ft_calloc			
 
 all: $(NAME)
 

@@ -6,11 +6,11 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 08:15:41 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/26 08:23:33 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/26 08:29:16 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msh.h"
+#include "../msh.h"
 
 void	ft_bzero(void *s, size_t n)
 {
