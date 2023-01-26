@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/26 08:28:18 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/26 10:16:08 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ int		is_delimiter(char *str, int i);
 int		is_white_space(char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		get_size(char *s, int i);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif
