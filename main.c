@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/01/24 11:30:19 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/26 08:36:14 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main(int argc, char **argv, char **old_env)
 {
     t_msh msh;
     
-    // msh.env = init_env(old_env);
+    msh.env = init_env(old_env);
     // export_var(&msh, argv[1]);
     while (1)
     {

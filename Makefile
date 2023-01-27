@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
+#    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/01/26 08:29:47 by cgelin           ###   ########.fr        #
+#    Updated: 2023/01/27 09:16:53 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC		= cc
 FLAGS	= -Wall -Wextra -Werror
 AR		= ar rcs
 RM		= @rm -f
-HEADER	= minishell.h
+HEADER	= msh.h
 DEF_COLOR = \033[0;39m
 YELLOW = \033[0;93m
 GREEN = \033[0;92m
@@ -26,6 +26,7 @@ CYAN = \033[0;96m
 FILES = main					\
 		builtins/builtins		\
 		builtins/env			\
+		builtins/export			\
 		parsing/parsing			\
 		utils/parse_utils		\
 		utils/msh_utils			\
@@ -48,6 +49,7 @@ OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 $(NAME): $(OBJS)
 	@echo "$(GREEN)😳😎minishell compiled!😎😳$(DEF_COLOR)"
 	@${CC} ${CFLAGS} ${SRCS} -o ${NAME} -l readline
+	./minishell
 
 
 clean:

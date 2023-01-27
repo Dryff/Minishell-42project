@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/26 08:28:18 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/27 08:42:19 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ int		minishell(t_msh *msh);
 
 /* Env */
 t_env	init_env(char **envp);
-void	ft_print_env(t_msh msh);
+void	ft_print_env(t_msh *msh);
 char	*get_export_cmd(char *line);
-void	ft_export(t_msh *msh, char *cmd);
+int		ft_export(t_env *env, char *cmd);
+int		*ft_bool_strnstr(const char *haystack, const char *needle, size_t len);
 
 /* Cmd_utils */
 int		search_cmd(const char *hs, const char *nee);
@@ -67,6 +68,8 @@ int		parse_line(t_msh *msh);
 /* Basic utils */
 char	**ft_split(char const *str, char c);
 void	*ft_calloc(size_t count, size_t size);
+char	*ft_strdup(const char *src);
+int		ft_strlen_until(char *str, char c);
 
 /* Parse_utils */
 int		is_delimiter(char *str, int i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/24 11:30:18 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/27 08:44:49 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	ft_pwd(void)
 	return (0);
 }
 
-int	ft_echo(t_msh msh, int dash_n)
+int	ft_echo(t_msh *msh, int dash_n)
 {
 	int		i;
 	char	*echo_line;
 
-	echo_line = ft_strnstr(msh.line, "echo", strlen(msh.line));
+	echo_line = ft_strnstr(msh->line, "echo", strlen(msh->line));
 	i = 4;
 	while ((echo_line[i] >= 9 && echo_line[i] <= 13) || echo_line[i] == ' ')
 		i++;
@@ -43,30 +43,29 @@ int	ft_echo(t_msh msh, int dash_n)
 	return (0);
 }
 
-int	exec_builtin_cmd(t_msh msh)
+int	exec_builtin_cmd(t_msh *msh)
 {
-	if (search_cmd(msh.line, "pwd"))
+	if (search_cmd(msh->line, "pwd"))
 		return (ft_pwd(), 1);
-	else if (search_cmd(msh.line, "echo"))
+	else if (search_cmd(msh->line, "echo"))
 	{	
-		if (search_cmd(msh.line, "-n"))
+		if (search_cmd(msh->line, "-n"))
 			return (ft_echo(msh, 0), 1);
 		else
 			return (ft_echo(msh, 1), 1);
 	}
-	else if (search_cmd(msh.line, "cd"))
-	{
-		
+	else if (search_cmd(msh->line, "cd"))
+	{	
 	}
-	else if (search_cmd(msh.line, "env"))
+	else if (search_cmd(msh->line, "env"))
 		return (ft_print_env(msh), 1);
-	else if (search_cmd(msh.line, "export"))
-		return (ft_export(&msh, get_export_cmd(msh.line)), 1);
+	else if (search_cmd(msh->line, "export"))
+		return (ft_export(&msh->env, get_export_cmd(msh->line)), 1);
 	return (0);
 }
 
 int	minishell(t_msh *msh)
 {
-	exec_builtin_cmd(*msh);
+	exec_builtin_cmd(msh);
 	return (0);
 }

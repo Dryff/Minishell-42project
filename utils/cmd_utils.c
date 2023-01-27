@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:13:34 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/26 08:13:03 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/27 08:42:10 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,14 @@ int	search_cmd(const char *hs, const char *nee)
 		i++;
 	}
 	return (0);
+}
+
+int	ft_strlen_until(char *str, char c)
+{
+	int	i;
+	
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	return (i);
 }
