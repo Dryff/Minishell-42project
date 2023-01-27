@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:25:58 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/24 11:30:19 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/27 11:05:23 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 		i++;
 	return (i);
 }
@@ -65,22 +65,22 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	len2;
 	char	*str;
 
-	if (!s1 || !s2)
-		return (NULL);
-	len1 = ft_strlen((char *)s1);
+	len1 = ft_strlen((char *)s1) + 1;
 	len2 = ft_strlen((char *)s2);
 	str = malloc(sizeof(char) * (len1 + len2 + 1));
 	if (str == NULL)
 		return (NULL);
 	i = 0;
-	while (s1[i])
+	while (s1 && s1[i])
 	{
 		str[i] = s1[i];
 		i++;
 	}
+	str[i] = '|';
 	i = 0;
-	while (s2[i])
+	while (s2 && s2[i])
 		str[len1++] = s2[i++];
-	str[len1] = '\0';
+	str[len1] = '|';
+	str[++len1] = '\0';
 	return (str);
 }

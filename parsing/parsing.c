@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/26 19:28:11 by colas            ###   ########.fr       */
+/*   Updated: 2023/01/27 12:06:55 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,17 @@ char	*rmchar_substr(char const *s, unsigned int start, size_t end, char c)
 		return (NULL);
 	if (str == NULL)
 		return (NULL);
-	while (i <= len && s[i] && start + i < end)
+	while (i <= len && s[i] && start + i <= end)
 	{	
 		while (s[start + i] == c)
 			start++;
-		str[i] = s[start + i];
+		if (start + i <= end)
+			str[i] = s[start + i];
+		printf("%lu, %c\n", start + i, str[i]);
 		i++;
 	}
 	str[i] = '\0';
 	return (str);
-}
-
-int	end_quote(char *line, int i)
-{
-	if (line[i] == '"' && (line[i + 1] == ' ' || line[i + 1] == '\0'))
-		return (1);
-	return (0);
 }
 
 int	strlen_until(char *s, char c)
@@ -69,6 +64,24 @@ int	strlen_until(char *s, char c)
 	return (i);
 }
 
+int is_last_quote(char *s, int i, int start)
+{
+	int q_count;
+
+	q_count = 0;
+	if (!(s[i + 1] == '"' && (s[i + 2] == ' ' || s[i + 2] == '\0')))
+		return (0);
+	while (i >= start)
+	{
+		if (s[i] == '"')
+			q_count++;
+		i--;
+	}
+	if (q_count % 2 == 1)
+		return (0);
+	return (1);
+}
+
 char	*rm_quotes(char *line)
 {
 	char	*res;
@@ -78,28 +91,24 @@ char	*rm_quotes(char *line)
 
 	i = 0;
 	start = 0;
+	res = NULL;
 	while (line[i])
 	{	
-		start = i;
-		while (line[i] && line[i] != '"')
+		//place start after first quote
+		while (line[start] && (is_white_space(line[start]) || line[start] == '"'))
+			start++;
+		//place i before quote that comes before space
+		i = start;
+		while (line[i] && !is_last_quote(line, i, start))
 			i++;
-		tmp = ft_substr(line, start, i - start);
-		// printf("res1 : %s\n", tmp);
-		if (line[i] && line[i] == '"')
-		{
-			start = i;
-			while (line[i] && !end_quote(line, i))
-				i++;
-			if (i - start)
-			{	
-				res = rmchar_substr(line, start, i, '"');
-				// printf("res2 : %s\n", res);
-			}
-			i++;
-		}
+		printf("start = %d, i = %d\n", start, i);
+		tmp = rmchar_substr(line, start, i, '"');
+		printf("tmp : |%s|\n", tmp);
 		res = ft_strjoin(res, tmp);
+		printf("joined : %s\n", res);
+		// go to next word/quote
+		start = i+2;
 	}
-	printf("joined : %s\n", res);
 	return (res);
 }
 
@@ -122,7 +131,7 @@ int	parse_line(t_msh *msh)
 		{
 			cmd = rm_quotes(ft_substr(msh->line, i, get_size(msh->line, i)));
 			// printf("cmd : %s\n", cmd);
-			// msh->cmd[j++].param = ft_split(cmd, ' ');
+			// msh->cmd[j++].param = ft_split(cmd, '|');
 		}
 		while (msh->line[i] && !is_delimiter(msh->line, i))
 			i++;
