@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/01/26 18:18:31 by colas            ###   ########.fr       */
+/*   Updated: 2023/01/28 19:17:17 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	init_prompt(t_msh *msh)
 {
-    msh->prompt = "--- msh -> ";
+    msh->prompt = "msh -> ";
     return (0);
 }
 
@@ -29,7 +29,9 @@ int main(int argc, char **argv, char **old_env)
 {
     t_msh msh;
     
-    // msh.env = init_env(old_env);
+	(void)argc;
+	(void)argv;
+    msh.env = init_env(old_env);
     // export_var(&msh, argv[1]);
     while (1)
     {

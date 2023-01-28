@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/28 18:50:05 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/28 19:18:37 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*rmchar_substr(char const *s, unsigned int start, size_t end, char c)
 			start += 2;
 		if (start + i <= end)
 			str[i] = s[start + i];
-		// printf("%lu, %c\n", start + i, str[i]);
+		printf("%lu, %c\n", start + i, str[i]);
 		i++;
 	}
 	str[i] = '\0';
@@ -96,6 +96,7 @@ char	*rm_quotes(char *line)
 
 	start = 0;
 	res = NULL;
+	i = 0;
 	//place start after first quote
 	delim = '"';
 	while (line[i])

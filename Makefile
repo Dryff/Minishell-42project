@@ -6,7 +6,7 @@
 #    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/01/26 08:29:47 by cgelin           ###   ########.fr        #
+#    Updated: 2023/01/28 19:21:21 by cgelin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC		= cc
 FLAGS	= -Wall -Wextra -Werror
 AR		= ar rcs
 RM		= @rm -f
-HEADER	= minishell.h
+HEADER	= msh.h
 DEF_COLOR = \033[0;39m
 YELLOW = \033[0;93m
 GREEN = \033[0;92m
@@ -26,10 +26,12 @@ CYAN = \033[0;96m
 FILES = main					\
 		builtins/builtins		\
 		builtins/env			\
+		builtins/export			\
 		parsing/parsing			\
 		utils/parse_utils		\
 		utils/msh_utils			\
 		utils/cmd_utils			\
+		utils/env_utils			\
 		utils/ft_split			\
 		utils/ft_calloc			
 
@@ -43,12 +45,12 @@ OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 %.o:%.c $(HEADER)
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@echo "$(GREEN)😳😎minishell compiled!😎😳$(DEF_COLOR)"
-	@${CC} ${CFLAGS} ${SRCS} -o ${NAME} -l readline
-
+	@${CC} ${FLAGS} ${SRCS} -o ${NAME} -l readline
+	./minishell
 
 clean:
 	@$(RM) $(OBJS)
