@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/28 12:38:57 by colas            ###   ########.fr       */
+/*   Updated: 2023/01/28 18:12:10 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*rmchar_substr(char const *s, unsigned int start, size_t end, char c)
 			start++;
 		if (start + i <= end)
 			str[i] = s[start + i];
-		printf("%lu, %c\n", start + i, str[i]);
+		// printf("%lu, %c\n", start + i, str[i]);
 		i++;
 	}
 	str[i] = '\0';
@@ -64,9 +64,9 @@ int	strlen_until(char *s, char c)
 	return (i);
 }
 
-int is_end_of_arg(char *s, int i, int start)
+int	is_end_of_arg(char *s, int i, int start)
 {
-	int q_count;
+	int	q_count;
 
 	q_count = 0;
 	if (s[i + 1] != ' ')
@@ -88,30 +88,30 @@ char	*rm_quotes(char *line)
 	char	*tmp;
 	int		i;
 	int		start;
+	char	delim;
 
 	start = 0;
 	res = NULL;
 	//place start after first quote
-	while (line[start] && is_white_space(line[start]))
-			start++; 
-	i = start;
+	delim = '"';
 	while (line[i])
 	{	
+		while (line[start] && is_white_space(line[start]))
+			start++;
+		i = start;
 		//place i at end of arg
 		while (line[i] && !is_end_of_arg(line, i, start))
 			i++;
 		printf("start = %d, i = %d\n", start, i);
-		tmp = rmchar_substr(line, start, i, '"');
+		tmp = rmchar_substr(line, start, i, delim);
 		printf("tmp : |%s|\n", tmp);
 		res = ft_strjoin(res, tmp);
 		printf("joined : %s\n", res);
 		// go to next word/quote
-		if (line[i] == '"' && line[i + 1] != '\0')
+		if (line[i] == delim && line[i + 1] != '\0')
 			i++;
 		i++;
 		start = i;
-		while (line[start] && is_white_space(line[start]))
-			start++; 
 		printf("start = %d, i = %d\n", start, i);
 	}
 	return (res);
@@ -135,20 +135,20 @@ int	parse_line(t_msh *msh)
 		if (msh->line[i])
 		{
 			cmd = rm_quotes(ft_substr(msh->line, i, get_size(msh->line, i)));
-			// printf("cmd : %s\n", cmd);
-			// msh->cmd[j++].param = ft_split(cmd, '|');
+			printf("cmd : %s\n", cmd);
+			msh->cmd[j++].param = ft_split(cmd, '|');
 		}
 		while (msh->line[i] && !is_delimiter(msh->line, i))
 			i++;
 	}
-	// j = 0;
-	// printf("cmd_nbr : %d\n-----\n", msh->cmd_nbr);
-	// while (j < msh->cmd_nbr)
-	// {
-	// 	printf("cmd : %d\n", j);
-	// 	printf("param 1: %s\n", msh->cmd[j].param[0]);
-	// 	printf("param 2: %s\n", msh->cmd[j++].param[1]);
-	// 	printf("---------\n");
-	// }
+	j = 0;
+	printf("cmd_nbr : %d\n-----\n", msh->cmd_nbr);
+	while (j < msh->cmd_nbr)
+	{
+		printf("cmd : %d\n", j);
+		printf("param 1: %s\n", msh->cmd[j].param[0]);
+		printf("param 2: %s\n", msh->cmd[j++].param[1]);
+		printf("---------\n");
+	}
 	return (1);
 }
