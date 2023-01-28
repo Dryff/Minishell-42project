@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/28 18:12:10 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/01/28 18:50:05 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	get_cmd_nbr(char *str)
 char	*rmchar_substr(char const *s, unsigned int start, size_t end, char c)
 {
 	char		*str;
+	char		delim;
 	size_t		i;
 	size_t		len;
 
@@ -39,12 +40,15 @@ char	*rmchar_substr(char const *s, unsigned int start, size_t end, char c)
 	str = malloc(sizeof(char) * len + 1);
 	if (!str)
 		return (NULL);
-	if (str == NULL)
-		return (NULL);
+	delim = '\'';
+	if (c == '\'')
+		delim = '"';
 	while (i <= len && s[i] && start + i <= end)
 	{	
 		while (s[start + i] == c)
 			start++;
+		while (s[start + i] == delim && s[start + i + 1] == delim)
+			start += 2;
 		if (start + i <= end)
 			str[i] = s[start + i];
 		// printf("%lu, %c\n", start + i, str[i]);
@@ -98,6 +102,8 @@ char	*rm_quotes(char *line)
 	{	
 		while (line[start] && is_white_space(line[start]))
 			start++;
+		if (line[start] == '\'')
+			delim = '\'';
 		i = start;
 		//place i at end of arg
 		while (line[i] && !is_end_of_arg(line, i, start))
