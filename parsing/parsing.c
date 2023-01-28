@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/27 12:06:55 by colas            ###   ########.fr       */
+/*   Updated: 2023/01/28 12:38:57 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ int	strlen_until(char *s, char c)
 	return (i);
 }
 
-int is_last_quote(char *s, int i, int start)
+int is_end_of_arg(char *s, int i, int start)
 {
 	int q_count;
 
 	q_count = 0;
-	if (!(s[i + 1] == '"' && (s[i + 2] == ' ' || s[i + 2] == '\0')))
+	if (s[i + 1] != ' ')
 		return (0);
 	while (i >= start)
 	{
@@ -89,17 +89,16 @@ char	*rm_quotes(char *line)
 	int		i;
 	int		start;
 
-	i = 0;
 	start = 0;
 	res = NULL;
+	//place start after first quote
+	while (line[start] && is_white_space(line[start]))
+			start++; 
+	i = start;
 	while (line[i])
 	{	
-		//place start after first quote
-		while (line[start] && (is_white_space(line[start]) || line[start] == '"'))
-			start++;
-		//place i before quote that comes before space
-		i = start;
-		while (line[i] && !is_last_quote(line, i, start))
+		//place i at end of arg
+		while (line[i] && !is_end_of_arg(line, i, start))
 			i++;
 		printf("start = %d, i = %d\n", start, i);
 		tmp = rmchar_substr(line, start, i, '"');
@@ -107,7 +106,13 @@ char	*rm_quotes(char *line)
 		res = ft_strjoin(res, tmp);
 		printf("joined : %s\n", res);
 		// go to next word/quote
-		start = i+2;
+		if (line[i] == '"' && line[i + 1] != '\0')
+			i++;
+		i++;
+		start = i;
+		while (line[start] && is_white_space(line[start]))
+			start++; 
+		printf("start = %d, i = %d\n", start, i);
 	}
 	return (res);
 }
