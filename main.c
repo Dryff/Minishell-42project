@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/01/26 08:36:14 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/01/27 19:35:36 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int main(int argc, char **argv, char **old_env)
 {
     t_msh msh;
     
+	(void)argc;
+	(void)argv;
     msh.env = init_env(old_env);
     // export_var(&msh, argv[1]);
     while (1)

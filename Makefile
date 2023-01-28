@@ -6,7 +6,7 @@
 #    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/01/27 09:16:53 by mfinette         ###   ########.fr        #
+#    Updated: 2023/01/28 17:37:02 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 $(NAME): $(OBJS)
 	@echo "$(GREEN)😳😎minishell compiled!😎😳$(DEF_COLOR)"
-	@${CC} ${CFLAGS} ${SRCS} -o ${NAME} -l readline
+	@${CC} ${FLAGS} ${SRCS} -o ${NAME} -l readline -g -g3
 	./minishell
 
 

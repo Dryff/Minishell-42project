@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 08:15:41 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/27 08:40:30 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/01/28 10:44:14 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ void	*ft_calloc(size_t count, size_t size)
 
 	if (size != 0 && SIZE_MAX / size < count)
 		return (NULL);
-	if (count < 50)
-		tab = malloc(500 * size);
-	else
-		tab = malloc(size * count);
+	tab = malloc(size * count);
 	if (!tab)
 		return (NULL);
 	ft_bzero(tab, count * size);

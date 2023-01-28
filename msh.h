@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/27 08:42:19 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/01/28 12:09:28 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_cmd
 typedef struct s_env
 {
 	char	**tab;
+	char	**sort_tab;
+	int		sort_size;
 	int		size;
 }				t_env;
 
@@ -48,6 +50,7 @@ int		minishell(t_msh *msh);
 /* Env */
 t_env	init_env(char **envp);
 void	ft_print_env(t_msh *msh);
+void	ft_declare_print(t_env *env);
 char	*get_export_cmd(char *line);
 int		ft_export(t_env *env, char *cmd);
 int		*ft_bool_strnstr(const char *haystack, const char *needle, size_t len);
@@ -70,6 +73,10 @@ char	**ft_split(char const *str, char c);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *src);
 int		ft_strlen_until(char *str, char c);
+int		is_in_charset(char c, char *str);
+void	sort_tab(t_env *env);
+char	**tab_dup(char **tab);
+void	free_tab(char **tab);
 
 /* Parse_utils */
 int		is_delimiter(char *str, int i);
