@@ -6,7 +6,7 @@
 #    By: colas <colas@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/02/02 21:12:24 by colas            ###   ########.fr        #
+#    Updated: 2023/02/06 18:43:51 by colas            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ FILES = main					\
 		utils/ft_calloc			\
 		commands/cmds			\
 		commands/paths			\
+		commands/here_doc			\
 		ft_err_printf/ft_print_hexa	\
 		ft_err_printf/ft_printf		\
 		ft_err_printf/ft_putnbr		\

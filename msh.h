@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/02 14:14:09 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/06 18:44:14 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int		commands(t_msh *msh);
 char	**get_paths(char **envp);
 char	*get_pathing(t_msh msh, int j);
+int		here_doc(t_msh *msh);
 
 /* Msh_utils */
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

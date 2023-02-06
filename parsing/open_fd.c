@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:05:21 by colas             #+#    #+#             */
-/*   Updated: 2023/02/06 15:08:44 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/06 19:38:35 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ int	open_fd(t_msh *msh)
 	msh->fildes.infd = 0;
 	msh->fildes.outfd = 0;
 	check_hub(msh);
+	if (msh->fildes.input == 2)
+		here_doc(msh);
 	return (0);
 }
