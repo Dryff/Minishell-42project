@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:25:58 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/28 17:25:55 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/02/02 14:21:56 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-char	*path_finder(char **envp)
-{
-	size_t	i;
-
-	i = 0;
-	while (ft_strncmp(envp[i], "PATH", 4))
-		i++;
-	return (&envp[i][5]);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_by_sep(char const *s1, char const *s2)
 {
 	size_t	i;
 	size_t	len1;
@@ -82,5 +72,31 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		str[len1++] = s2[i++];
 	str[len1] = '|';
 	str[++len1] = '\0';
+	return (str);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*str;
+	size_t	i;
+	size_t	j;
+
+	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j] != '\0')
+	{
+		str[i] = s2[j];
+		i++;
+		j++;
+	}
+	str[i] = '\0';
 	return (str);
 }

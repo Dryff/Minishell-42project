@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/28 19:18:37 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/02/02 21:09:20 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	get_cmd_nbr(char *str)
 	count = 1;
 	while (str[i])
 	{	
-		if (is_delimiter(str, i))
+		if (str[i] == '|')
 			count++;
 		i++;
 	}
@@ -51,7 +51,6 @@ char	*rmchar_substr(char const *s, unsigned int start, size_t end, char c)
 			start += 2;
 		if (start + i <= end)
 			str[i] = s[start + i];
-		printf("%lu, %c\n", start + i, str[i]);
 		i++;
 	}
 	str[i] = '\0';
@@ -109,19 +108,36 @@ char	*rm_quotes(char *line)
 		//place i at end of arg
 		while (line[i] && !is_end_of_arg(line, i, start))
 			i++;
-		printf("start = %d, i = %d\n", start, i);
+		// printf("start = %d, i = %d\n", start, i);
 		tmp = rmchar_substr(line, start, i, delim);
-		printf("tmp : |%s|\n", tmp);
-		res = ft_strjoin(res, tmp);
-		printf("joined : %s\n", res);
+		// printf("tmp : |%s|\n", tmp);
+		res = ft_strjoin_by_sep(res, tmp);
+		// printf("joined : %s\n", res);
 		// go to next word/quote
-		if (line[i] == delim && line[i + 1] != '\0')
+		if (line[i] && line[i] == delim && line[i + 1] != '\0')
 			i++;
-		i++;
+		if (line[i])
+			i++;
 		start = i;
-		printf("start = %d, i = %d\n", start, i);
+		// printf("start = %d, i = %d\n", start, i);
 	}
 	return (res);
+}
+
+int go_after_fd(t_msh *msh, int i)
+{
+	if (msh->line[i] == '>' || msh->line[i] == '<')
+	{
+		while (msh->line[i] && is_delimiter(msh->line[i]))
+			i++;
+		while (msh->line[i] && (is_white_space(msh->line[i]) \
+		|| is_delimiter(msh->line[i])))
+			i++;
+		while (msh->line[i] && !is_white_space(msh->line[i]) \
+		&& !is_delimiter(msh->line[i]))
+			i++;
+	}
+	return (i);
 }
 
 int	parse_line(t_msh *msh)
@@ -136,26 +152,32 @@ int	parse_line(t_msh *msh)
 	msh->cmd = malloc(sizeof(t_cmd) * msh->cmd_nbr);
 	while (msh->line[i])
 	{
-		while (msh->line[i] && (is_delimiter(msh->line, i) \
+		while (msh->line[i] && (msh->line[i] == '|' \
 		|| is_white_space(msh->line[i])))
 			i++;
+		i = go_after_fd(msh, i);
 		if (msh->line[i])
 		{
 			cmd = rm_quotes(ft_substr(msh->line, i, get_size(msh->line, i)));
-			printf("cmd : %s\n", cmd);
+			// printf("cmd : %s\n", cmd);
 			msh->cmd[j++].param = ft_split(cmd, '|');
 		}
-		while (msh->line[i] && !is_delimiter(msh->line, i))
+		while (msh->line[i] && !is_delimiter(msh->line[i]))
 			i++;
 	}
-	j = 0;
-	printf("cmd_nbr : %d\n-----\n", msh->cmd_nbr);
-	while (j < msh->cmd_nbr)
-	{
-		printf("cmd : %d\n", j);
-		printf("param 1: %s\n", msh->cmd[j].param[0]);
-		printf("param 2: %s\n", msh->cmd[j++].param[1]);
-		printf("---------\n");
-	}
+	// j = 0;
+	// printf("cmd_nbr : %d\n-----\n", msh->cmd_nbr);
+	// while (j < msh->cmd_nbr)
+	// {
+	// 	i = 0;
+	// 		printf("cmd : %d\n", j);
+	// 	while (msh->cmd[j].param[i])
+	// 	{
+	// 		printf("param [%d]: %s\n", i, msh->cmd[j].param[i]);
+	// 		i++;
+	// 	}
+	// 	j++;
+	// 	printf("---------\n");
+	// }
 	return (1);
 }

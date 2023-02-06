@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/28 19:15:11 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/02/02 14:14:09 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <fcntl.h>
+#include "ft_err_printf/ft_printf.h"
 
 typedef struct s_cmd
 {
@@ -35,14 +37,32 @@ typedef struct s_env
 	int		size;
 }				t_env;
 
+
+typedef struct s_fildes
+{
+	int		input;
+	int		output;
+	int		infd;
+	int		outfd;
+	char	*in_name;
+	char	*out_name;
+}				t_fildes;
+
 typedef struct s_msh
 {
 	t_env	env;
+	t_fildes fildes;
 	t_cmd	*cmd;
+
 	int		cmd_nbr;
+	int		pid;
+	char	**paths;
+	
 	char	*prompt;
 	char	*line;
 }				t_msh;
+
+
 
 /* Minishell */
 int		minishell(t_msh *msh);
@@ -59,6 +79,10 @@ int		*ft_bool_strnstr(const char *haystack, const char *needle, size_t len);
 int		search_cmd(const char *hs, const char *nee);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_strstr(const char *str, const char *to_find);
+char	*ft_strjoin(char const *s1, char const *s2);
+int		commands(t_msh *msh);
+char	**get_paths(char **envp);
+char	*get_pathing(t_msh msh, int j);
 
 /* Msh_utils */
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -67,6 +91,9 @@ void	free_all(char **strs);
 
 /* Parsing */
 int		parse_line(t_msh *msh);
+int		open_fd(t_msh *msh);
+int		check_hub(t_msh *msh);
+
 
 /* Basic utils */
 char	**ft_split(char const *str, char c);
@@ -80,11 +107,11 @@ void	free_tab(char **tab);
 
 
 /* Parse_utils */
-int		is_delimiter(char *str, int i);
+int		is_delimiter(char c);
 int		is_white_space(char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		get_size(char *s, int i);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin_by_sep(char const *s1, char const *s2);
 
 
 #endif

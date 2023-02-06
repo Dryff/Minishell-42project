@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*   ft_putstr_int.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 09:07:58 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/02 10:30:34 by colas            ###   ########.fr       */
+/*   Created: 2022/11/14 18:58:16 by cgelin            #+#    #+#             */
+/*   Updated: 2022/12/08 16:22:17 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../msh.h"
+#include "ft_printf.h"
 
-int	is_white_space(char c)
+int	ft_putchar_int(int c)
 {
-	if ((c <= 13 && c >= 9) || c == ' ')
-		return (1);
-	return (0);
+	write(2, &c, 1);
+	return (1);
 }
 
-int	is_delimiter(char c)
+int	ft_putstr_int(char *s)
 {
-	if (c == '|' || c == '>' || c == '<')
-		return (1);
-	return (0);
-}
+	int	i;
 
-int	get_size(char *s, int i)
-{
-	int size;
-
-	size = 0;
-	while (s[i] && !is_delimiter(s[i++]))
-		size++;
-	return (size);
+	i = 0;
+	if (!s)
+	{
+		write(2, "(null)", 6);
+		i += 6;
+		return (i);
+	}
+	while (s[i])
+	{
+		write(2, &s[i], 1);
+		i++;
+	}
+	return (i);
 }

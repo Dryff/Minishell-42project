@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
+#    By: colas <colas@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/01/28 19:21:21 by cgelin           ###   ########.fr        #
+#    Updated: 2023/02/02 21:12:24 by colas            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,21 @@ FILES = main					\
 		builtins/env			\
 		builtins/export			\
 		parsing/parsing			\
+		parsing/check			\
+		parsing/open_fd			\
 		utils/parse_utils		\
 		utils/msh_utils			\
 		utils/cmd_utils			\
 		utils/env_utils			\
 		utils/ft_split			\
-		utils/ft_calloc			
+		utils/ft_calloc			\
+		commands/cmds			\
+		commands/paths			\
+		ft_err_printf/ft_print_hexa	\
+		ft_err_printf/ft_printf		\
+		ft_err_printf/ft_putnbr		\
+		ft_err_printf/ft_putnbr_u	\
+		ft_err_printf/ft_putstr_int	
 
 all: $(NAME)
 
