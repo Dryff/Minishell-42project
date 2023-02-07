@@ -17,16 +17,16 @@
 #define EMPTY_EXPORT 3
 #define EXISTING_EXPORT 4
 
-static	int	get_position(t_env *env, char *cmd)
+static	int	get_position(char **tab, char *cmd)
 {
 	int		i;
 	char	*temp;
 
 	i = 0;
 	temp = ft_substr(cmd, 0, ft_strlen_until(cmd, '='));
-	while (i < env->size + 1)
+	while (tab[i])
 	{
-		if (ft_strstr(env->tab[i], temp))
+		if (ft_strstr(tab[i], temp))
 		{
 			free(temp);
 			return (i);
@@ -48,8 +48,15 @@ static	int	is_valid_c(char c)
 
 static	int	valid_export(char *cmd)
 {
-	if (!is_valid_c(cmd[0]))
-		return (WRONG_EXPORT);
+	int	i;
+
+	i = 0;
+	while (i < ft_strlen_until(cmd, cmd[i]))
+	{
+		if (!is_valid_c(cmd[i]))
+			return (WRONG_EXPORT);
+		i++;
+	}
 	if (!is_in_charset('=', cmd))
 		return (EMPTY_EXPORT);
 	return (VALID_EXPORT);
@@ -68,8 +75,10 @@ void	add_export(t_env *env, char *cmd)
 
 void	replace_export(t_env *env, char *cmd)
 {
-	free(env->tab[get_position(env, cmd)]);	
-	env->tab[get_position(env, cmd)] = ft_strdup(cmd);	
+	//free(env->tab[get_position(env->tab, cmd)]);
+	//free(env->tab[get_position(env->sort_tab, cmd)]);
+	env->tab[get_position(env->tab, cmd)] = ft_strdup(cmd);
+	env->sort_tab[get_position(env->sort_tab, cmd)] = ft_strdup(cmd);
 }
 
 char	**add_comand_to_tab(char **tab, char *cmd)
@@ -112,7 +121,7 @@ int	ft_export(t_env *env, char *cmd)
 		add_invisible_export(env, cmd);
 	else if (valid_export(cmd) == VALID_EXPORT) // real export
 	{
-		if (get_position(env, cmd) < 0)
+		if (get_position(env->tab, cmd) < 0)
 			add_export(env, cmd);
 		else
 			replace_export(env, cmd);
