@@ -28,9 +28,7 @@ int check_exit(t_msh msh)
 int main(int argc, char **argv, char **old_env)
 {
     t_msh msh;
-    int i;
 
-    i = 0;
 	(void)argc;
 	(void)argv;
     msh.env = init_env(old_env);

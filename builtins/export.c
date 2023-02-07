@@ -57,11 +57,13 @@ static	int	valid_export(char *cmd)
 
 void	add_export(t_env *env, char *cmd)
 {
-	env->size++;
-	env->tab[env->size] = ft_strdup(cmd); //modifier ici sinon c la deshhhhhhhh
-	env->sort_size++;
-	env->sort_tab[env->size] = ft_strdup(cmd);
-	sort_tab(env);	
+	char **dup;
+	
+	dup = add_comand_to_tab(env->tab, cmd);
+	env->tab = tab_dup(dup);
+	free(dup);
+	add_invisible_export(env, cmd);
+	sort_tab(env);
 }
 
 void	replace_export(t_env *env, char *cmd)
@@ -96,22 +98,7 @@ void	add_invisible_export(t_env *env, char *cmd)
 	char **dup;
 	
 	dup = add_comand_to_tab(env->sort_tab, cmd);
-	free_tab(env->sort_tab);
-	// int	i = 0;
-	// while (env->sort_tab[i])
-	// {
-	// 	printf("sort_tab[%d] = %s\n", i, env->sort_tab[i]);
-	// 	i++;
-	// }
-	// 	printf("sort_tab[%d] = %s\n", i, env->sort_tab[i]);
-	// i = 0;
-	// while (dup[i])
-	// {
-	// 	printf("dup[%d] = %s\n", i, dup[i]);
-	// 	i++;
-	// }
-	// printf("dup[%d] = %s\n", i, dup[i]);
-	//env->sort_tab = tab_dup(dup);
+	env->sort_tab = tab_dup(dup);
 	free(dup);
 }
 

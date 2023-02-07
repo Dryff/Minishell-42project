@@ -110,13 +110,13 @@ void	free_tab(char **tab)
 void	ft_declare_print(t_env *env)
 {
 	int	i;
-	char **dup;
+	//char **dup;
 	
 	i = 0;
-	dup = tab_dup(env->sort_tab);
-	free_tab(env->sort_tab);
+	//dup = tab_dup(env->sort_tab);
+	//free_tab(env->sort_tab);
 	//env->sort_tab = sort_env(env->sort_tab);
-	free_tab(dup);
+	//free_tab(dup);
 	while (env->sort_tab[i])
 	{
 		printf("\e[2;93mdeclare -x \"%s\"\e[0m\n", env->sort_tab[i]);

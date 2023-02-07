@@ -75,6 +75,8 @@ void	ft_declare_print(t_env *env);
 char	*get_export_cmd(char *line);
 int		ft_export(t_env *env, char *cmd);
 int		*ft_bool_strnstr(const char *haystack, const char *needle, size_t len);
+void	add_invisible_export(t_env *env, char *cmd);
+char	**add_comand_to_tab(char **tab, char *cmd);
 
 /* builtins */
 int		exec_builtin_cmd(t_msh *msh);
