@@ -1,0 +1,16 @@
+Makefile
+builtins
+commands
+ft_err_printf
+ft_printf.c
+gpt.c
+heredoc_fd
+infile
+main.c
+main.o
+minishell
+msh.h
+output
+parsing
+pipex
+utils

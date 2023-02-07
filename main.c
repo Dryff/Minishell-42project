@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/06 19:39:00 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/07 15:39:46 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ int check_exit(t_msh msh)
 int main(int argc, char **argv, char **old_env)
 {
     t_msh msh;
-    
+    int i;
+
+    i = 0;
 	(void)argc;
 	(void)argv;
     msh.env = init_env(old_env);

@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/06 18:44:14 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/07 14:40:17 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_fildes
 	int		output;
 	int		infd;
 	int		outfd;
+	int		heredoc_fd;
 	char	*in_name;
 	char	*out_name;
 }				t_fildes;

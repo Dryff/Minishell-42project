@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/06 18:50:54 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/07 15:40:21 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@ int	get_cmd_nbr(char *str)
 	int	count;
 
 	i = 0;
-	count = 1;
+	count = 0;
+	while (str[i])
+	{
+		if (!is_white_space(str[i]))
+			count = 1;
+		i++;
+	}
+	i = 0;
 	while (str[i])
 	{	
 		if (str[i] == '|')

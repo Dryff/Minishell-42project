@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/02/06 19:38:19 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/07 15:33:15 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	check_input(t_msh *msh)
 			ft_err_printf("msh: no such file or directory: %s\n", msh->fildes.in_name);
 		return ;
 	}
-	if (msh->cmd[0].param[0])
+	if (msh->cmd_nbr)
 		if (check_param(msh, msh->cmd[0].param[0]) == 1)
 			ft_err_printf("msh: command not found: %s\n", msh->cmd->param[0]);
 }
@@ -83,7 +83,7 @@ void	check_output(t_msh *msh)
 int	check_hub(t_msh *msh)
 {
 	check_input(msh);
-	check_cmds_between(msh);
-	check_output(msh);
+	// check_cmds_between(msh);
+	// check_output(msh);
 	return (1);
 }

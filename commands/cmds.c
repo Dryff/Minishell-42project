@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/02/06 18:50:52 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/07 15:40:35 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,12 @@ int commands(t_msh *msh)
 	// dprintf(2, "infd : %d\n", msh->fildes.infd);
 	// dprintf(2, "output : %d\n", msh->fildes.output);
 	// dprintf(2, "outfd : %d\n", msh->fildes.outfd);
-	// dprintf(2, "outname : %s\n", msh->fildes.out_name);
-	if (msh->fildes.input)
+	// dprintf(2, "heredoc_fd : %d\n", msh->fildes.heredoc_fd);
+	if (msh->fildes.input == 1)
 		if (dup2(msh->fildes.infd, STDIN_FILENO) == -1)
+			printf("ERROR - 1\n");
+	if (msh->fildes.input == 2)
+		if (dup2(msh->fildes.heredoc_fd, STDIN_FILENO) == -1)
 			printf("ERROR - 1\n");
 	msh->pid = fork();
 	if (msh->pid == -1)
@@ -79,5 +82,6 @@ int commands(t_msh *msh)
 		exec_last_cmd(*msh, i);
 	}
 	waitpid(msh->pid, NULL, 0);
+	msh->fildes.input = 0;
 	return (0);
 }
