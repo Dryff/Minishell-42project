@@ -33,8 +33,6 @@ typedef struct s_env
 {
 	char	**tab;
 	char	**sort_tab;
-	int		sort_size;
-	int		size;
 }				t_env;
 
 
