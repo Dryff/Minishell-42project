@@ -75,6 +75,9 @@ char	*get_export_cmd(char *line);
 int		ft_export(t_env *env, char *cmd);
 int		*ft_bool_strnstr(const char *haystack, const char *needle, size_t len);
 
+/* builtins */
+int		exec_builtin_cmd(t_msh *msh);
+
 /* Cmd_utils */
 int		search_cmd(const char *hs, const char *nee);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);

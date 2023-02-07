@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../msh.h"
+#include <stdint.h>
 
 void	ft_bzero(void *s, size_t n)
 {
@@ -28,11 +29,9 @@ void	ft_bzero(void *s, size_t n)
 void	*ft_calloc(size_t count, size_t size)
 {
 	unsigned char	*tab;
-	size_t			i;
 
 	if (size != 0 && SIZE_MAX / size < count)
 		return (NULL);
-	i = 0;
 	tab = malloc(size * count);
 	if (!tab)
 		return (NULL);

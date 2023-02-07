@@ -48,9 +48,6 @@ static	int	is_valid_c(char c)
 
 static	int	valid_export(char *cmd)
 {
-	int	i;
-
-	i = 1;
 	if (!is_valid_c(cmd[0]))
 		return (WRONG_EXPORT);
 	if (!is_in_charset('=', cmd))
@@ -87,20 +84,10 @@ char	**add_comand_to_tab(char **tab, char *cmd)
 	while (i < count)
 	{
 		dup[i] = ft_strdup(tab[i]);
-		printf("(BEFORE)dup[%d] = %s\n", i, dup[i]);
 		i++;
 	}
 	dup[i] = ft_strdup(cmd);
-	printf("(BEFORE)dup[%d] = %s\n", i, dup[i]);
 	dup[i + 1] = NULL;
-	printf("(BEFORE)dup[%d] = %s\n", i + 1, dup[i + 1]);
-	i = 0;
-	while (dup[i])
-	{
-		printf("dup[%d] = %s\n", i, dup[i]);
-		i++;
-	}
-	printf("dup[%d] = %s\n", i, dup[i]);	
 	return (dup);
 }
 

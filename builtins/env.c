@@ -42,15 +42,15 @@ char	*get_export_cmd(char *line)
 
 t_env	init_env(char **envp)
 {
-	int		i;
 	t_env	env;
 
-	i = 0;
 	env.tab = tab_dup(envp);
 	env.size = ft_tablen(envp) - 1;
 	env.sort_tab = tab_dup(env.tab);
 	env.sort_size = env.size;
-	printf("tablen = %d\n", ft_tablen(envp) + 1);
+	printf("real tablen = %d\n", ft_tablen(envp) + 1);
+	printf("tablen = %d\n", ft_tablen(env.tab) + 1);
+	printf("sort_tablen = %d\n", ft_tablen(env.sort_tab) + 1);
 	return (env);
 }
 

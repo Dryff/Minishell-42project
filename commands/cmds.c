@@ -18,7 +18,7 @@ void	exec_to_pipe(t_msh msh, int cmd_id, int *fd)
 
 	close(fd[0]);
 	if (dup2(fd[1], STDOUT_FILENO) == -1)
-		printf("ERROR - 5");
+		printf("ERROR - 5\n");
 	close(fd[1]);
 	pathing = get_pathing(msh, cmd_id);
 	if (execve(pathing, msh.cmd[cmd_id].param, msh.env.tab) == -1)
@@ -31,16 +31,16 @@ void	exec_cmd(t_msh msh, int cmd_id)
 	int fd[2];
 
 	if (pipe(fd) == -1)
-		printf("ERROR - 3");
+		printf("ERROR - 3\n");
 	pid = fork();
 	if (pid == -1)
-		printf("ERROR - 4");
+		printf("ERROR - 4\n");
 	if (pid == 0)
 		exec_to_pipe(msh, cmd_id, fd);
 	waitpid(pid, NULL, 0);
 	close(fd[1]);
 	if (dup2(fd[0], STDIN_FILENO) == -1)
-		printf("ERROR - 6");
+		printf("ERROR - 6\n");
 	close(fd[0]);
 }
 
@@ -50,7 +50,7 @@ void	exec_last_cmd(t_msh msh, int cmd_id)
 	
 	if (msh.fildes.output)
 		if (dup2(msh.fildes.outfd, STDOUT_FILENO) == -1)
-			printf("ERROR - 2");
+			printf("ERROR - 2\n");
 	pathing = get_pathing(msh, cmd_id);
 	if (execve(pathing, msh.cmd[cmd_id].param, msh.env.tab) == -1)
 		printf("Command not found : %s\n", msh.cmd[cmd_id].param[0]);
@@ -60,17 +60,17 @@ int commands(t_msh *msh)
 {
 	int i;
 	
-	dprintf(2, "input : %d\n", msh->fildes.input);
-	dprintf(2, "infd : %d\n", msh->fildes.infd);
-	dprintf(2, "output : %d\n", msh->fildes.output);
-	dprintf(2, "outfd : %d\n", msh->fildes.outfd);
-	dprintf(2, "outname : %s\n", msh->fildes.out_name);
+	// dprintf(2, "input : %d\n", msh->fildes.input);
+	// dprintf(2, "infd : %d\n", msh->fildes.infd);
+	// dprintf(2, "output : %d\n", msh->fildes.output);
+	// dprintf(2, "outfd : %d\n", msh->fildes.outfd);
+	// dprintf(2, "outname : %s\n", msh->fildes.out_name);
 	if (msh->fildes.input)
 		if (dup2(msh->fildes.infd, STDIN_FILENO) == -1)
-			printf("ERROR - 1");
+			printf("ERROR - 1\n");
 	msh->pid = fork();
 	if (msh->pid == -1)
-		printf("ERROR - 12");
+		printf("ERROR - 12\n");
 	i = 0;
 	if (msh->pid == 0)
 	{	

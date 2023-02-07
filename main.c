@@ -32,7 +32,6 @@ int main(int argc, char **argv, char **old_env)
 	(void)argc;
 	(void)argv;
     msh.env = init_env(old_env);
-    // export_var(&msh, argv[1]);
     while (1)
     {
         init_prompt(&msh);
@@ -40,7 +39,8 @@ int main(int argc, char **argv, char **old_env)
 	    msh.paths = get_paths(msh.env.tab);
         parse_line(&msh);
 	    open_fd(&msh);
-        commands(&msh);
+        if (!exec_builtin_cmd(&msh))
+            commands(&msh);
         if (!check_exit(msh))
             break;   
     }
