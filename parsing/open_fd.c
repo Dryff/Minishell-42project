@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_fd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:05:21 by colas             #+#    #+#             */
-/*   Updated: 2023/02/07 15:37:21 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/08 11:45:33 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	get_fd_name(t_msh *msh, char c, int mode)
 	res = 1;
 	while (msh->line[start] && msh->line[start] != c)
 		start++;
-	start++;
+	if (msh->line[start])
+		start++;
 	if (msh->line[start] && msh->line[start] == c)
 	{
 		res = 2;
