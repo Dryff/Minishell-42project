@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/07 15:39:46 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/08 11:40:34 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,28 @@ int check_exit(t_msh msh)
     return (1);
 }
 
+void    ft_free_tab(char **tab)
+{
+    int i;
+
+    i = 0;
+    while (tab[i])
+    {
+        free(tab[i]);
+        i++;
+    }
+    free(tab);
+}
+
 int main(int argc, char **argv, char **old_env)
 {
     t_msh msh;
-
+    int i;
 	(void)argc;
 	(void)argv;
     msh.env = init_env(old_env);
+
+    i = 0;
     while (1)
     {
         init_prompt(&msh);
@@ -41,6 +56,13 @@ int main(int argc, char **argv, char **old_env)
 	    open_fd(&msh);
         if (!exec_builtin_cmd(&msh))
             commands(&msh);
+        while (i < msh.cmd_nbr)
+        {
+            ft_free_tab(msh.cmd[i].param);
+            i++;
+        }
+        free(msh.cmd);
+        ft_free_tab(msh.paths);
         if (!check_exit(msh))
             break;   
     }
