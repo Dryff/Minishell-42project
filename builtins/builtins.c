@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/09 10:11:11 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/09 11:14:10 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_echo(t_msh *msh, int dash_n)
 	while ((echo_line[i] >= 9 && echo_line[i] <= 13) || echo_line[i] == ' ')
 		i++;
 	while (echo_line[i])
-		printf("\e[1;34m%c\e[0m", echo_line[i++]);
+		printf("%c", echo_line[i++]);
 	if (dash_n == 1)
 		printf("\n");
 	return (0);
