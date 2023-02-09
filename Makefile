@@ -6,7 +6,7 @@
 #    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/02/09 10:03:23 by mfinette         ###   ########.fr        #
+#    Updated: 2023/02/09 11:18:54 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ FILES = main							\
 		builtins/env					\
 		builtins/expand					\
 		builtins/export					\
+		builtins/unset					\
 		parsing/parsing					\
 		parsing/check					\
 		parsing/open_fd					\

@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/09 10:06:45 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/09 11:21:51 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ int		ft_export(t_env *env, char *cmd);
 int		*ft_bool_strnstr(const char *haystack, const char *needle, size_t len);
 void	add_invisible_export(t_env *env, char *cmd);
 char	**add_comand_to_tab(char **tab, char *cmd);
+
+/* UNSET attention ca va chaufer sa mere*/
+char    *get_unset_cmd(char *line);
+void    ft_unset(t_env *env, char *cmd);
 
 /* Expand */
 void	ft_expand(t_env *env, char *cmd);
