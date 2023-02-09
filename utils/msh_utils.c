@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:25:58 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/02 14:21:56 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/09 16:17:56 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,12 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 char	*ft_strjoin_by_sep(char const *s1, char const *s2)
 {
-	size_t	i;
-	size_t	len1;
-	size_t	len2;
 	char	*str;
+	size_t	i;
+	size_t	j;
 
-	len1 = ft_strlen((char *)s1) + 1;
-	len2 = ft_strlen((char *)s2);
-	str = malloc(sizeof(char) * (len1 + len2 + 1));
-	if (str == NULL)
+	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
 		return (NULL);
 	i = 0;
 	while (s1 && s1[i])
@@ -67,11 +64,11 @@ char	*ft_strjoin_by_sep(char const *s1, char const *s2)
 		i++;
 	}
 	str[i] = '|';
-	i = 0;
-	while (s2 && s2[i])
-		str[len1++] = s2[i++];
-	str[len1] = '|';
-	str[++len1] = '\0';
+	j = 0;
+	while (s2 && s2[j])
+		str[i] = s2[j++];
+	str[i] = '|';
+	str[++i] = '\0';
 	return (str);
 }
 
@@ -85,18 +82,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (s1[i] != '\0')
+	while (s1 && s1[i])
 	{
 		str[i] = s1[i];
 		i++;
 	}
 	j = 0;
-	while (s2[j] != '\0')
-	{
-		str[i] = s2[j];
-		i++;
-		j++;
-	}
+	while (s2 && s2[j])
+		str[i++] = s2[j++];
 	str[i] = '\0';
 	return (str);
 }

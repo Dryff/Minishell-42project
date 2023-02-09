@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/07 15:40:21 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/09 16:31:39 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	strlen_until(char *s, char c)
 	return (i);
 }
 
-int	is_end_of_arg(char *s, int i, int start)
+int	is_end_of_arg(char *s, int i, int start, int delim)
 {
 	int	q_count;
 
@@ -83,7 +83,7 @@ int	is_end_of_arg(char *s, int i, int start)
 		return (0);
 	while (i >= start)
 	{
-		if (s[i] == '"')
+		if (s[i] == delim)
 			q_count++;
 		i--;
 	}
@@ -94,32 +94,50 @@ int	is_end_of_arg(char *s, int i, int start)
 
 char	*rm_quotes(char *line)
 {
-	char	*res;
-	char	*tmp;
+	char	*tmp[3];
 	int		i;
 	int		start;
 	char	delim;
 
 	start = 0;
-	res = NULL;
+	tmp[2] = NULL;
+	tmp[1] = NULL;
 	i = 0;
-	//place start after first quote
-	delim = '"';
+	// place start after first quote
+	delim = 10;
 	while (line[i])
 	{	
 		while (line[start] && is_white_space(line[start]))
-			start++;
-		if (line[start] == '\'')
-			delim = '\'';
+				start++;
 		i = start;
-		//place i at end of arg
-		while (line[i] && !is_end_of_arg(line, i, start))
-			i++;
-		// printf("start = %d, i = %d\n", start, i);
-		tmp = rmchar_substr(line, start, i, delim);
-		// printf("tmp : |%s|\n", tmp);
-		res = ft_strjoin_by_sep(res, tmp);
-		// printf("joined : %s\n", res);
+		while (line[i] && !is_end_of_arg(line, i, start, delim))
+		{
+			// place i at end of arg
+			start = i;
+			while (line[i] && !is_end_of_arg(line, i, start, delim))
+			{
+				if (line[i] == '\'' && delim != '"')
+					delim = '\'';
+				else if (line[i] == '"' && delim != '\'')
+					delim = '"';
+				i++;
+			}
+			//go to last quote
+			// printf("1i = %d, delim = %c\n", i, delim);
+			while (line[i] && line[i] > 0 && line[i] != delim)
+				i--;
+			// printf("2start = %d, i = %d, delim = %c\n", start, i, delim);
+			tmp[0] = rmchar_substr(line, start, i, delim);
+			// printf("tmp[0] = %s\n", tmp[0]);
+			tmp[1] = ft_strjoin(tmp[1], tmp[0]);
+			// printf("tmp[1] = %s\n", tmp[1]);
+			delim = 10;
+			if (!is_end_of_arg(line, i, start, delim))
+				i++;
+		}
+		// printf("tmp[2] : |%s|\n", tmp[1]);
+		tmp[2] = ft_strjoin_by_sep(tmp[2], tmp[1]);
+		// printf("joined : %s\n", tmp[1]);
 		// go to next word/quote
 		if (line[i] && line[i] == delim && line[i + 1] != '\0')
 			i++;
@@ -128,7 +146,7 @@ char	*rm_quotes(char *line)
 		start = i;
 		// printf("start = %d, i = %d\n", start, i);
 	}
-	return (res);
+	return (tmp[2]);
 }
 
 int go_after_fd(t_msh *msh, int i)
