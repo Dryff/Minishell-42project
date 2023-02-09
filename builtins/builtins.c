@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/31 22:54:08 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/09 10:11:11 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,7 @@ int	exec_builtin_cmd(t_msh *msh)
 		return (ft_print_env(msh), 1);
 	else if (search_cmd(msh->line, "export"))
 		return (ft_export(&msh->env, get_export_cmd(msh->line)), 1);
+	else if (search_cmd(msh->line, "var"))
+		return (ft_expand(&msh->env, get_expand_cmd(msh->line)), 1);
 	return (0);
 }

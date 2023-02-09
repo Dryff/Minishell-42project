@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: colas <colas@student.42.fr>                +#+  +:+       +#+         #
+#    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/02/06 18:43:51 by colas            ###   ########.fr        #
+#    Updated: 2023/02/09 10:03:23 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,26 +23,27 @@ GREEN = \033[0;92m
 BLUE = \033[0;94m
 CYAN = \033[0;96m
 
-FILES = main					\
-		builtins/builtins		\
-		builtins/env			\
-		builtins/export			\
-		parsing/parsing			\
-		parsing/check			\
-		parsing/open_fd			\
-		utils/parse_utils		\
-		utils/msh_utils			\
-		utils/cmd_utils			\
-		utils/env_utils			\
-		utils/ft_split			\
-		utils/ft_calloc			\
-		commands/cmds			\
-		commands/paths			\
-		commands/here_doc			\
-		ft_err_printf/ft_print_hexa	\
-		ft_err_printf/ft_printf		\
-		ft_err_printf/ft_putnbr		\
-		ft_err_printf/ft_putnbr_u	\
+FILES = main							\
+		builtins/builtins				\
+		builtins/env					\
+		builtins/expand					\
+		builtins/export					\
+		parsing/parsing					\
+		parsing/check					\
+		parsing/open_fd					\
+		utils/parse_utils				\
+		utils/msh_utils					\
+		utils/cmd_utils					\
+		utils/env_utils					\
+		utils/ft_split					\
+		utils/ft_calloc					\
+		commands/cmds					\
+		commands/paths					\
+		commands/here_doc				\
+		ft_err_printf/ft_print_hexa		\
+		ft_err_printf/ft_printf			\
+		ft_err_printf/ft_putnbr			\
+		ft_err_printf/ft_putnbr_u		\
 		ft_err_printf/ft_putstr_int	
 
 all: $(NAME)
