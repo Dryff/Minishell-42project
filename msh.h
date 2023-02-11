@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/09 11:21:51 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/10 16:42:01 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,15 @@ typedef struct s_fildes
 	char	*out_name;
 }				t_fildes;
 
+typedef struct s_parse
+{
+	int i;
+	int s;
+	int j;
+	char q;
+	char *line;
+}				t_parse;
+
 typedef struct s_msh
 {
 	t_env	env;
@@ -81,7 +90,7 @@ char    *get_unset_cmd(char *line);
 void    ft_unset(t_env *env, char *cmd);
 
 /* Expand */
-void	ft_expand(t_env *env, char *cmd);
+char	*ft_expand(t_env *env, char *cmd);
 char	*get_expand_cmd(char *str);
 
 /* builtins */

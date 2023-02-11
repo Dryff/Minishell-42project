@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/10 06:16:01 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/11 20:48:41 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,117 +35,192 @@ int	get_cmd_nbr(char *str)
 	return (count);
 }
 
-char	*getline_rm_quote(char const *s, unsigned int start, size_t end, char c)
+char	*get_expanded(t_msh *msh, t_parse *p)
 {
-	char		*str;
-	size_t		i;
-	size_t		j;
+	int count;
+	char *arg;
+	char *expanded;
 
-	i = 0;
+	count = 0;
+	p->i++;
+	p->j = p->i;
+	while (p->line[p->j] && p->line[p->j] != '"' &&  p->line[p->j] != '\'' && p->line[p->j] != 10 \
+	&& p->line[p->j] != ' ' && p->line[p->j] != '$')
+		p->j++;
+	arg = ft_substr(p->line, p->i, p->j - p->i);
+	//printf("arg : %s\n", arg);
+	expanded = ft_expand(&msh->env, arg);
+	free(arg);
+	p->j -= p->i;
+	//printf("p.i :: %d\n", p->i);
+	//printf("p.j :: %d\n", p->j);
+	return (expanded);
+}
+
+char	*copy_with_value(char *str, char *expanded, t_parse p)
+{
+	int i;
+	int j;
+
+	i = -1;
 	j = 0;
-	str = malloc(sizeof(char) * ft_strlen(s));
-	if (!str)
-		return (NULL);
-	while (j < start)
-	{
-		str[j] = s[j];
-		j++;
-	}
-	i = j;
-	while (s[j] && j <= end)
-	{
-		if (s[j] != c)
-			str[i++] = s[j];
-		j++;
-	}
-	while (s[j])
-		str[i++] = s[j++];
+	while (++i < p.i - 1)
+		str[i] = p.line[i];
+	while (j < (int)ft_strlen(expanded))
+		str[i++] = expanded[j++];
+	//printf("(i : %d, strlen : %zu)\n", p.j, ft_strlen(p.line) + ft_strlen(expanded));
+	while (i < (int)ft_strlen(p.line) + (int)ft_strlen(expanded) - p.j)
+		str[i++] = p.line[p.i++ + p.j];
 	str[i] = '\0';
+	//printf("|str : %s|\n", str);
 	return (str);
 }
 
-int	is_end_of_arg(char *s, int i, int start, int delim)
+char	*replace_env_arg(t_msh *msh, t_parse *p)
+{
+	char	*expanded;
+	char	*str;
+
+	expanded = get_expanded(msh, p);
+	//printf("expanded : %s\n", expanded);
+	//printf("p.i : %d\n", p->i);
+	str = malloc(sizeof(char) * (ft_strlen(p->line) - p->j + ft_strlen(expanded)));
+	if (!str)
+		return (NULL);
+	str = copy_with_value(str, expanded, *p);
+	p->i += ft_strlen(expanded) - 1;
+	return (str);
+}
+
+char	*get_dollar(t_msh *msh, t_parse *p)
+{
+	p->i = p->s + 1;
+	while (p->line[p->i] && p->line[p->i] != p->q)
+	{
+		if (p->line[p->i] == '$' && p->q == '"')
+			p->line = replace_env_arg(msh, p);
+		//printf("|%c:%d|", p->line[p->i], p->i);
+		p->i++;
+	}
+	return (p->line);
+}
+
+char	*getline_rm_quote(t_parse p)
+{
+	char		*str;
+	int			i;
+	int			j;
+
+	str = malloc(sizeof(char) * ft_strlen(p.line));
+	i = 0;
+	j = -1;
+	if (!str)
+		return (NULL);
+	while (++j < p.s)
+		str[j] = p.line[j];
+	i = j;
+	while (p.line[j] && j <= p.i)
+	{
+		if (p.line[j] != p.q)
+			str[i++] = p.line[j];
+		j++;
+	}
+	while (p.line[j])
+		str[i++] = p.line[j++];
+	return (str[i] = '\0', str);
+}
+
+int	is_end_of_arg(t_parse p)
 {
 	int	q_count;
 
 	q_count = 0;
-	if (!s[i + 1])
+	if (!p.line[p.i + 1])
 		return (1);
-	if (s[i + 1] != ' ')
+	if (p.line[p.i + 1] != ' ')
 		return (0);
-	while (i >= start)
+	while (p.i >= p.s)
 	{
-		if (s[i] == delim)
+		if (p.line[p.i] == p.q)
 			q_count++;
-		i--;
+		p.i--;
 	}
 	if (q_count % 2 == 1)
 		return (0);
 	return (1);
 }
 
-int	quote_rm_nbr(char *s, int start, int end, char delim)
+int	quote_rm_nbr(t_parse p)
 {
 	int	count;
 
 	count = 0;
-	while (start <= end)
+	while (p.s <= p.i)
 	{
-		if (s[start] == delim)
+		if (p.line[p.s] == p.q)
 			count ++;
-		start++;
+		p.s++;
 	}
 	return (count);
 }
 
-char	*replace_spaces(char *s, int i, char c)
+char	*replace_spaces(t_parse p)
 {
 	int	j;
 
-	while (s[i] && !is_white_space(s[i]))
+	while (p.line[p.i] && !is_white_space(p.line[p.i]))
 	{
-		if (s[i] == '\'' || s[i] == '"')
-			return (s);
-		i++;
+		if (p.line[p.i] == '\'' || p.line[p.i] == '"')
+			return (p.line);
+		p.i++;
 	}
-	j = i;
-	while (s[j] && s[j] != '\'' && s[j] != '"' && is_white_space(s[j]))
+	j = p.i;
+	while (p.line[j] && p.line[j] != '\'' && p.line[j] != '"' \
+	&& is_white_space(p.line[j]))
 		j++;
-	while (s[i] && i < j)
+	while (p.line[p.i] && p.i < j)
 	{
-		s[i] = c;
-		i++;
+		p.line[p.i] = 10;
+		p.i++;
 	}
-	return (s);
+	return (p.line);
 }
 
-char	*rm_quotes(char *str)
+int go_to_end_quote(t_parse p)
 {
-	int		i;
-	int		j;
-	int		start;
-	char	quote;
-	char	*line;
+	while (p.line[p.i] && !is_end_of_arg(p))
+		p.i++;
+	while (p.line[p.i] && p.line[p.i] != p.q)
+		p.i--;
+	return (p.i);
+}
 
-	i = -1;
-	line = str;
-	while (line[++i])
+char	*rm_quotes(t_msh msh, char *sub)
+{
+	int		q_nbr;
+	t_parse	p;
+
+	p.line = sub;
+	p.i = -1;
+	while (p.line[++p.i])
 	{
-		if (line[i] == '"' || line[i] == '\'')
+		//printf("%c.", p.line[p.i]);
+		if (p.line[p.i] == '"' || p.line[p.i] == '\'')
 		{
-			quote = line[i];
-			start = i;
-			while (line[i] && !is_end_of_arg(line, i, start, quote))
-				i++;
-			while (line[i] && line[i] != quote)
-				i--;
-			j = quote_rm_nbr(line, start, i, quote);
-			line = getline_rm_quote(line, start, i, quote);
-			i -= j;
-			line = replace_spaces(line, i, '|');
+			p.q = p.line[p.i];
+			p.s = p.i;
+			p.i = go_to_end_quote(p);
+			q_nbr = quote_rm_nbr(p);
+			//printf("\n----\n%d\n----\n", p.i);
+			p.line = get_dollar(&msh, &p);
+			p.line = getline_rm_quote(p);
+			p.i -= q_nbr;
 		}
+		else if (p.line[p.i] == '$')
+			p.line = replace_env_arg(&msh, &p);
+		p.line = replace_spaces(p);
 	}
-	return (line);
+	return (p.line);
 }
 
 int	go_after_fd_name(t_msh *msh, int i)
@@ -186,8 +261,8 @@ int	parse_line(t_msh *msh)
 		if (msh->line[i])
 		{
 			sub = ft_substr(msh->line, i, get_size(msh->line, i));
-			cmd = rm_quotes(sub);
-			msh->cmd[j++].param = ft_split(cmd, '|');
+			cmd = rm_quotes(*msh, sub);
+			msh->cmd[j++].param = ft_split(cmd, 10);
 		}
 		while (msh->line[i] && !is_delimiter(msh->line[i]))
 			i++;
