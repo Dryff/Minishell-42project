@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/11 20:48:41 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/13 01:14:05 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,19 @@ char	*copy_with_value(char *str, char *expanded, t_parse p)
 		str[i] = p.line[i];
 	while (j < (int)ft_strlen(expanded))
 		str[i++] = expanded[j++];
-	//printf("(i : %d, strlen : %zu)\n", p.j, ft_strlen(p.line) + ft_strlen(expanded));
+	// printf("(i : %d, strlen : %zu)\n", p.j, ft_strlen(p.line) + ft_strlen(expanded));
 	while (i < (int)ft_strlen(p.line) + (int)ft_strlen(expanded) - p.j)
 		str[i++] = p.line[p.i++ + p.j];
 	str[i] = '\0';
-	//printf("|str : %s|\n", str);
+	printf("|str : %s|\n", str);
 	return (str);
+}
+
+int is_alpha(char c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	return (0);
 }
 
 char	*replace_env_arg(t_msh *msh, t_parse *p)
@@ -81,14 +88,22 @@ char	*replace_env_arg(t_msh *msh, t_parse *p)
 	char	*expanded;
 	char	*str;
 
-	expanded = get_expanded(msh, p);
-	//printf("expanded : %s\n", expanded);
-	//printf("p.i : %d\n", p->i);
+	expanded = NULL;
+	if (is_alpha(p->line[p->i + 1]))
+		expanded = get_expanded(msh, p);
+	else
+	{
+		expanded = "$";
+		p->i++;
+		p->j = 0;
+	}
+	// printf("expanded : %s\n", expanded);
 	str = malloc(sizeof(char) * (ft_strlen(p->line) - p->j + ft_strlen(expanded)));
 	if (!str)
 		return (NULL);
 	str = copy_with_value(str, expanded, *p);
-	p->i += ft_strlen(expanded) - 1;
+	if (ft_strlen(expanded) - 1 >= 0)
+		p->i += ft_strlen(expanded) - 1;
 	return (str);
 }
 
@@ -99,7 +114,6 @@ char	*get_dollar(t_msh *msh, t_parse *p)
 	{
 		if (p->line[p->i] == '$' && p->q == '"')
 			p->line = replace_env_arg(msh, p);
-		//printf("|%c:%d|", p->line[p->i], p->i);
 		p->i++;
 	}
 	return (p->line);
@@ -204,15 +218,15 @@ char	*rm_quotes(t_msh msh, char *sub)
 	p.i = -1;
 	while (p.line[++p.i])
 	{
-		//printf("%c.", p.line[p.i]);
 		if (p.line[p.i] == '"' || p.line[p.i] == '\'')
 		{
 			p.q = p.line[p.i];
 			p.s = p.i;
 			p.i = go_to_end_quote(p);
 			q_nbr = quote_rm_nbr(p);
-			//printf("\n----\n%d\n----\n", p.i);
+			printf("\n----\n%d\n----\n", p.s);
 			p.line = get_dollar(&msh, &p);
+			printf("\n----\n%d\n----\n", p.s);
 			p.line = getline_rm_quote(p);
 			p.i -= q_nbr;
 		}
