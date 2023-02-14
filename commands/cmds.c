@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/02/07 15:40:35 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/13 17:32:55 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,24 @@ void	exec_last_cmd(t_msh msh, int cmd_id)
 		printf("Command not found : %s\n", msh.cmd[cmd_id].param[0]);
 }
 
+void	dup_inffd(t_msh *msh)
+{
+	if (msh->fildes.input == 1)
+	{
+		if (dup2(STDIN_FILENO, 4095) == -1)
+			printf("ERROR - yo\n");
+		if (dup2(msh->fildes.infd, STDIN_FILENO) == -1)
+			printf("ERROR - 1\n");
+	}
+	if (msh->fildes.input == 2)
+	{
+		if (dup2(STDIN_FILENO, 4095) == -1)
+			printf("ERROR - yo\n");
+		if (dup2(msh->fildes.heredoc_fd, STDIN_FILENO) == -1)
+			printf("ERROR - 1\n");
+	}
+}
+
 int commands(t_msh *msh)
 {
 	int i;
@@ -65,12 +83,7 @@ int commands(t_msh *msh)
 	// dprintf(2, "output : %d\n", msh->fildes.output);
 	// dprintf(2, "outfd : %d\n", msh->fildes.outfd);
 	// dprintf(2, "heredoc_fd : %d\n", msh->fildes.heredoc_fd);
-	if (msh->fildes.input == 1)
-		if (dup2(msh->fildes.infd, STDIN_FILENO) == -1)
-			printf("ERROR - 1\n");
-	if (msh->fildes.input == 2)
-		if (dup2(msh->fildes.heredoc_fd, STDIN_FILENO) == -1)
-			printf("ERROR - 1\n");
+	dup_inffd(msh);
 	msh->pid = fork();
 	if (msh->pid == -1)
 		printf("ERROR - 12\n");
@@ -82,6 +95,8 @@ int commands(t_msh *msh)
 		exec_last_cmd(*msh, i);
 	}
 	waitpid(msh->pid, NULL, 0);
-	msh->fildes.input = 0;
+	if (msh->fildes.input == 1 || msh->fildes.input == 2)
+		if (dup2(4095, STDIN_FILENO) == -1)
+				printf("ERROR - yo\n");
 	return (0);
 }

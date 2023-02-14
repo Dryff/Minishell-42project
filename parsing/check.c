@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/02/07 15:33:15 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/13 15:36:59 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	check_output(t_msh *msh)
 int	check_hub(t_msh *msh)
 {
 	check_input(msh);
-	// check_cmds_between(msh);
-	// check_output(msh);
+	check_cmds_between(msh);
+	check_output(msh);
 	return (1);
 }
