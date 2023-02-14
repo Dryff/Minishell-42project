@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/13 01:14:05 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/14 08:35:39 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ int	get_cmd_nbr(char *str)
 
 char	*get_expanded(t_msh *msh, t_parse *p)
 {
-	int count;
+	// int count;
 	char *arg;
 	char *expanded;
 
-	count = 0;
+	// count = 0;
 	p->i++;
 	p->j = p->i;
 	while (p->line[p->j] && p->line[p->j] != '"' &&  p->line[p->j] != '\'' && p->line[p->j] != 10 \
@@ -102,7 +102,7 @@ char	*replace_env_arg(t_msh *msh, t_parse *p)
 	if (!str)
 		return (NULL);
 	str = copy_with_value(str, expanded, *p);
-	if (ft_strlen(expanded) - 1 >= 0)
+	if (ft_strlen(expanded) - 1 > 0)
 		p->i += ft_strlen(expanded) - 1;
 	return (str);
 }
