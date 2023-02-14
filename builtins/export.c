@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/01/28 19:13:06 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/02/14 09:25:11 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ static	int	get_position(char **tab, char *cmd)
 	char	*temp;
 
 	i = 0;
-	temp = ft_substr(cmd, 0, ft_strlen_until(cmd, '='));
+	temp = ft_substr(cmd, 0, ft_strlen_until(cmd, '=') - 1);
+	if (!temp)
+	    return (0);
 	while (tab[i])
 	{
 		if (ft_strstr(tab[i], temp))
@@ -39,8 +41,6 @@ static	int	get_position(char **tab, char *cmd)
 
 static	int	is_valid_c(char c)
 {
-	if (c >= '0' && c <= '9')
-		return (0);
 	if (is_in_charset(c, "#%?!@/-+={}.,:"))
 		return (0);
 	return (1);
@@ -51,7 +51,9 @@ static	int	valid_export(char *cmd)
 	int	i;
 
 	i = 0;
-	while (i < ft_strlen_until(cmd, cmd[i]))
+	if (cmd[i] >= '0' && cmd[i] <= '9')
+		return (0);	
+	while (i < ft_strlen_until(cmd, '='))
 	{
 		if (!is_valid_c(cmd[i]))
 			return (WRONG_EXPORT);
@@ -69,7 +71,8 @@ void	add_export(t_env *env, char *cmd)
 	dup = add_comand_to_tab(env->tab, cmd);
 	env->tab = tab_dup(dup);
 	free(dup);
-	add_invisible_export(env, cmd);
+	if (get_position(env->sort_tab, cmd) < 0)
+		add_invisible_export(env, cmd);
 	sort_tab(env);
 }
 
@@ -106,9 +109,12 @@ void	add_invisible_export(t_env *env, char *cmd)
 {
 	char **dup;
 	
-	dup = add_comand_to_tab(env->sort_tab, cmd);
-	env->sort_tab = tab_dup(dup);
-	free(dup);
+	if (get_position(env->sort_tab, cmd) < 0)
+	{
+		dup = add_comand_to_tab(env->sort_tab, cmd);
+		env->sort_tab = tab_dup(dup);
+		free(dup);
+	}
 }
 
 int	ft_export(t_env *env, char *cmd)

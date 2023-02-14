@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:57:07 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/09 09:48:03 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/14 09:26:41 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void	ft_declare_print(t_env *env)
 	while (env->sort_tab[++i])
 	{
 		j = i + 1;
-		while (j < size - 1)
+		while (j < size)
 		{
 			if (ft_strcmp(env->sort_tab[i], env->sort_tab[j]) > 0)
 				ft_strswap(&env->sort_tab[i], &env->sort_tab[j]);
