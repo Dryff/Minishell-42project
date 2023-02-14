@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/09 11:18:28 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/14 10:25:20 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,8 @@ int	exec_builtin_cmd(t_msh *msh)
 		else
 			return (ft_echo(msh, 1), 1);
 	}
-	else if (search_cmd(msh->line, "cd"))
-	{	
-	}
+	else if (search_cmd(msh->line, "dvd"))
+		return (ft_dvd(msh, get_dvd_cmd(msh->line)), 1);
 	else if (search_cmd(msh->line, "env"))
 		return (ft_print_env(msh), 1);
 	else if (search_cmd(msh->line, "export"))

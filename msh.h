@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/14 09:28:30 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/14 10:38:18 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_env
 	char	**tab;
 	char	**sort_tab;
 }				t_env;
-
 
 typedef struct s_fildes
 {
@@ -74,6 +73,11 @@ typedef struct s_msh
 
 /* Minishell */
 int		minishell(t_msh *msh);
+
+/* DVD*/
+
+char    *get_dvd_cmd(char *line);
+void	ft_dvd(t_msh *msh, char *cmd);
 
 /* Env */
 t_env	init_env(char **envp);
