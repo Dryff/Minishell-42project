@@ -6,7 +6,7 @@
 #    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/02/14 10:32:56 by mfinette         ###   ########.fr        #
+#    Updated: 2023/02/16 19:47:05 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ FILES = main							\
 		ft_err_printf/ft_printf			\
 		ft_err_printf/ft_putnbr			\
 		ft_err_printf/ft_putnbr_u		\
-		ft_err_printf/ft_putstr_int	
+		ft_err_printf/ft_putstr_int		\
+		history
 
 all: $(NAME)
 

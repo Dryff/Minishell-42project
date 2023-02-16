@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/14 13:49:16 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/16 19:47:12 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,23 @@ typedef struct s_msh
 	int		cmd_nbr;
 	int		pid;
 	char	**paths;
+	char	**historic;
 	
 	char	*prompt;
 	char	*line;
 }				t_msh;
 
 
-
 /* Minishell */
 int		minishell(t_msh *msh);
 
 /* DVD*/
-
 char    *get_dvd_cmd(char *line);
 void	ft_dvd(t_msh *msh, char *cmd);
+
+/* HISTORIC */
+void	init_history(void);
+void    custom_add_history(char *line);
 
 /* Env */
 t_env	init_env(char **envp);
@@ -139,6 +142,5 @@ int		is_white_space(char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		get_size(char *s, int i);
 char	*ft_strjoin_by_sep(char const *s1, char const *s2);
-
 
 #endif
