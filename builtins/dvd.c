@@ -3,30 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   dvd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/14 11:21:06 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:33:12 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-char    *get_dvd_cmd(char *line)
-{
-    if (ft_strlen(line) == 3)
-        return (NULL);
-    return (ft_strnstr(line, "dvd", 100) + 4);
-}
-
-void    ft_dvd(t_msh *msh, char *cmd)
+void    ft_dvd(t_msh *msh, int cmd_id)
 {
     char    *actual_path;
     char    *new_path;
 
-    (void)msh;
-    printf("\ncmd = %s\n", cmd);
-    if (!cmd)
+    printf("\ncmd = %s\n", msh->cmd[cmd_id].param[1]);
+    if (!msh->cmd[cmd_id].param[1])
     {
         if (chdir(ft_expand(&msh->env, "HOME")) != 0)
         {
@@ -38,7 +30,7 @@ void    ft_dvd(t_msh *msh, char *cmd)
     {
         actual_path = getcwd(NULL, 0);
         new_path = ft_strjoin(actual_path, "/");
-        new_path = ft_strjoin(new_path, cmd);
+        new_path = ft_strjoin(new_path, msh->cmd[cmd_id].param[1]);
         if (chdir(new_path) != 0)
             perror("chdir");
     }

@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/02/13 15:36:59 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/16 18:59:10 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ void	check_cmds_between(t_msh *msh)
 	j = 1;
 	while (j < msh->cmd_nbr)
 	{
-		if (check_param(msh, msh->cmd[j].param[0]) == 1)
-			ft_err_printf("msh: command not found: %s\n", msh->cmd[j].param[0]);
+		if (!is_builtin(msh->cmd[0].param[0]))
+			if (check_param(msh, msh->cmd[j].param[0]) == 1)
+				ft_err_printf("msh: command not found: %s\n", msh->cmd[j].param[0]);
 		i++;
 		j++;
 	}
@@ -62,7 +63,7 @@ void	check_input(t_msh *msh)
 			ft_err_printf("msh: no such file or directory: %s\n", msh->fildes.in_name);
 		return ;
 	}
-	if (msh->cmd_nbr)
+	if (msh->cmd_nbr && !is_builtin(msh->cmd[0].param[0]))
 		if (check_param(msh, msh->cmd[0].param[0]) == 1)
 			ft_err_printf("msh: command not found: %s\n", msh->cmd->param[0]);
 }

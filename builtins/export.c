@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/14 11:22:21 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:53:20 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,20 +117,23 @@ void	add_invisible_export(t_env *env, char *cmd)
 	}
 }
 
-int	ft_export(t_env *env, char *cmd)
+int	ft_export(t_msh *msh, int cmd_id)
 {
+	char *cmd;
+
+	cmd = msh->cmd[cmd_id].param[0];
 	if (ft_strlen(cmd) < 1) // just export
-		ft_declare_print(env);
+		ft_declare_print(&msh->env);
 	else if (valid_export(cmd) == WRONG_EXPORT) //error export
 		printf("msh: export: '%s': not a valid identifier\n", cmd);
 	else if (valid_export(cmd) == EMPTY_EXPORT) // export without '='
-		add_invisible_export(env, cmd);
+		add_invisible_export(&msh->env, cmd);
 	else if (valid_export(cmd) == VALID_EXPORT) // real export
 	{
-		if (get_position(env->tab, cmd) < 0)
-			add_export(env, cmd);
+		if (get_position(msh->env.tab, cmd) < 0)
+			add_export(&msh->env, cmd);
 		else
-			replace_export(env, cmd);
+			replace_export(&msh->env, cmd);
 	}
 	return (0);
 }
