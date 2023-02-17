@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/14 13:52:58 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/17 14:37:25 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,42 +35,41 @@ int	get_cmd_nbr(char *str)
 	return (count);
 }
 
-char	*get_expanded(t_msh *msh, t_parse *p)
+char	*get_expanded(t_msh *msh, t_parse *p, int cursor)
 {
 	// int count;
 	char *arg;
 	char *expanded;
 
 	// count = 0;
-	p->i++;
-	p->j = p->i;
+	p->j = cursor;
 	while (p->line[p->j] && p->line[p->j] != '"' &&  p->line[p->j] != '\'' && p->line[p->j] != 10 \
 	&& p->line[p->j] != ' ' && p->line[p->j] != '$')
 		p->j++;
-	arg = ft_substr(p->line, p->i, p->j - p->i);
-	//printf("arg : %s\n", arg);
+	arg = ft_substr(p->line, cursor, p->j - cursor);
+	printf("arg : %s\n", arg);
 	expanded = ft_expand(&msh->env, arg);
 	free(arg);
-	p->j -= p->i;
+	p->j -= cursor;
 	//printf("p.i :: %d\n", p->i);
 	//printf("p.j :: %d\n", p->j);
 	return (expanded);
 }
 
-char	*copy_with_value(char *str, char *expanded, t_parse p)
+char	*copy_with_value(char *str, char *expanded, t_parse p, int cursor)
 {
 	int i;
 	int j;
 
 	i = -1;
 	j = 0;
-	while (++i < p.i - 1)
+	while (++i < cursor - 1)
 		str[i] = p.line[i];
 	while (j < (int)ft_strlen(expanded))
 		str[i++] = expanded[j++];
 	// printf("(i : %d, strlen : %zu)\n", p.j, ft_strlen(p.line) + ft_strlen(expanded));
 	while (i < (int)ft_strlen(p.line) + (int)ft_strlen(expanded) - p.j)
-		str[i++] = p.line[p.i++ + p.j];
+		str[i++] = p.line[cursor++ + p.j];
 	str[i] = '\0';
 	printf("|str : %s|\n", str);
 	return (str);
@@ -83,25 +82,26 @@ int is_alpha(char c)
 	return (0);
 }
 
-char	*replace_env_arg(t_msh *msh, t_parse *p)
+char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor)
 {
 	char	*expanded;
 	char	*str;
 
 	expanded = NULL;
-	if (is_alpha(p->line[p->i + 1]))
-		expanded = get_expanded(msh, p);
+	cursor++;
+	if (is_alpha(p->line[cursor]))
+		expanded = get_expanded(msh, p, cursor);
 	else
 	{
 		expanded = "$";
 		p->i++;
 		p->j = 0;
 	}
-	// printf("expanded : %s\n", expanded);
+	printf("expanded : %s\n", expanded);
 	str = malloc(sizeof(char) * (ft_strlen(p->line) - p->j + ft_strlen(expanded)));
 	if (!str)
 		return (NULL);
-	str = copy_with_value(str, expanded, *p);
+	str = copy_with_value(str, expanded, *p, cursor);
 	if (ft_strlen(expanded) - 1 > 0)
 		p->i += ft_strlen(expanded) - 1;
 	return (str);
@@ -109,12 +109,13 @@ char	*replace_env_arg(t_msh *msh, t_parse *p)
 
 char	*get_dollar(t_msh *msh, t_parse *p)
 {
-	p->i = p->s + 1;
-	while (p->line[p->i] && p->line[p->i] != p->q)
+	int cursor;
+	cursor = p->s + 1;
+	while (p->line[cursor] && p->line[cursor] != p->q)
 	{
-		if (p->line[p->i] == '$' && p->q == '"')
-			p->line = replace_env_arg(msh, p);
-		p->i++;
+		if (p->line[cursor] == '$' && p->q == '"')
+			p->line = replace_env_arg(msh, p, cursor);
+		cursor++;
 	}
 	return (p->line);
 }
@@ -224,14 +225,16 @@ char	*rm_quotes(t_msh msh, char *sub)
 			p.s = p.i;
 			p.i = go_to_end_quote(p);
 			q_nbr = quote_rm_nbr(p);
-			printf("\n----\n%d\n----\n", p.s);
 			p.line = get_dollar(&msh, &p);
-			printf("\n----\n%d\n----\n", p.s);
 			p.line = getline_rm_quote(p);
 			p.i -= q_nbr;
+			printf("if q : %d\n", p.i);
 		}
 		else if (p.line[p.i] == '$')
-			p.line = replace_env_arg(&msh, &p);
+		{
+			p.line = replace_env_arg(&msh, &p, p.i);
+			printf("if noq : %d\n", p.i);
+		}
 		p.line = replace_spaces(p);
 	}
 	return (p.line);
