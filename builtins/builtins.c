@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/16 18:59:36 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/17 09:08:24 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int is_builtin(char *cmd)
 		return (2);
 	else if (!ft_strncmp(cmd, "cd", 2))
 		return (3);
-	else if (!ft_strncmp(cmd, "env", 2))
-		return (4);
 	else if (!ft_strncmp(cmd, "export", 6))
+		return (4);
+	else if (!ft_strncmp(cmd, "env", 2))
 		return (5);
 	else if (!ft_strncmp(cmd, "unset", 5))
 		return (6);

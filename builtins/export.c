@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/16 18:53:20 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/17 09:02:06 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	ft_export(t_msh *msh, int cmd_id)
 {
 	char *cmd;
 
-	cmd = msh->cmd[cmd_id].param[0];
+	cmd = msh->cmd[cmd_id].param[1];
 	if (ft_strlen(cmd) < 1) // just export
 		ft_declare_print(&msh->env);
 	else if (valid_export(cmd) == WRONG_EXPORT) //error export
