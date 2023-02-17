@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:21:19 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/16 19:48:54 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/17 08:47:20 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void    custom_add_history(char *line)
 	while (line[i])
 	{
 		if (line[i] != ' ')
+		{
 			add_history(line);
+			return ;
+		}
 		i++;
 	}
 }
