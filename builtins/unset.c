@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:18:39 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/09 11:24:21 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/17 10:13:20 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,21 @@ int	get_cmd_index(char **tab, char *cmd)
     return (-1);
 }
 
-void    ft_unset(t_env *env, char *cmd)
+void    ft_unset(t_msh *msh, int cmd_id)
 {
     int i;
+    int j;
+    char    *cmd;
 
-    i = get_cmd_index(env->tab, cmd);
-    if (i >= 0)
-        remove_line_from_tab(env->tab, i);
-    i = get_cmd_index(env->sort_tab, cmd);
-    if (i >= 0)
-        remove_line_from_tab(env->sort_tab, i);
+    j = 0;
+    while (msh->cmd[cmd_id].param[j])
+    {
+        cmd = msh->cmd[cmd_id].param[j];
+        i = get_cmd_index(msh->env.tab, cmd);
+        if (i >= 0)
+            remove_line_from_tab(msh->env.tab, i);
+        i = get_cmd_index(msh->env.sort_tab, cmd);
+        if (i >= 0)
+            remove_line_from_tab(msh->env.sort_tab, i);
+    }
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/16 23:48:42 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/17 10:03:19 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	**add_comand_to_tab(char **tab, char *cmd);
 
 /* UNSET attention ca va chauffer sa mere*/
 char    *get_unset_cmd(char *line);
-void    ft_unset(t_env *env, char *cmd);
+void    ft_unset(t_msh *msh, int cmd_id);
 
 /* Expand */
 char	*ft_expand(t_env *env, char *cmd);
@@ -104,7 +104,7 @@ char	*get_expand_cmd(char *str);
 /* builtins */
 int		exec_builtin_cmd(t_msh *msh);
 int		is_builtin(char *cmd);
-int		exec_builtins(t_msh msh, int cmd_id, int builtin);
+int		exec_builtins(t_msh *msh, int cmd_id, int builtin);
 
 /* Cmd_utils */
 int		search_cmd(const char *hs, const char *nee);

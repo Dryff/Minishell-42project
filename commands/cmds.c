@@ -6,13 +6,13 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/02/17 09:07:49 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/02/17 10:06:57 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-void	exec_to_pipe(t_msh msh, int cmd_id, int *fd)
+void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 {
 	char	*pathing;
 	int		builtin;
@@ -21,17 +21,17 @@ void	exec_to_pipe(t_msh msh, int cmd_id, int *fd)
 	if (dup2(fd[1], STDOUT_FILENO) == -1)
 		printf("ERROR - 5\n");
 	close(fd[1]);
-	builtin = is_builtin(msh.cmd[cmd_id].param[0]);
+	builtin = is_builtin(msh->cmd[cmd_id].param[0]);
 	if (!builtin)
 	{
-		pathing = get_pathing(msh, cmd_id);
-		if (execve(pathing, msh.cmd[cmd_id].param, msh.env.tab) == -1)
-			printf("Command not found : %s\n", msh.cmd[cmd_id].param[0]);
+		pathing = get_pathing(*msh, cmd_id);
+		if (execve(pathing, msh->cmd[cmd_id].param, msh->env.tab) == -1)
+			printf("Command not found : %s\n", msh->cmd[cmd_id].param[0]);
 	}
-	// exec_builtins(msh, msh.cmd[cmd_id].param);
+	// exec_builtins(msh, msh->cmd[cmd_id].param);
 }
 
-void	exec_cmd(t_msh msh, int cmd_id)
+void	exec_cmd(t_msh *msh, int cmd_id)
 {
 	int	pid;
 	int fd[2];
@@ -50,20 +50,20 @@ void	exec_cmd(t_msh msh, int cmd_id)
 	close(fd[0]);
 }
 
-void	exec_last_cmd(t_msh msh, int cmd_id)
+void	exec_last_cmd(t_msh *msh, int cmd_id)
 {
 	char *pathing;
 	int	builtin;
 	
-	if (msh.fildes.output)
-		if (dup2(msh.fildes.outfd, STDOUT_FILENO) == -1)
+	if (msh->fildes.output)
+		if (dup2(msh->fildes.outfd, STDOUT_FILENO) == -1)
 			printf("ERROR - 2\n");
-	builtin = is_builtin(msh.cmd[cmd_id].param[0]);
+	builtin = is_builtin(msh->cmd[cmd_id].param[0]);
 	if (!builtin)
 	{
-		pathing = get_pathing(msh, cmd_id);
-		if (execve(pathing, msh.cmd[cmd_id].param, msh.env.tab) == -1)
-			printf("Command not found : %s\n", msh.cmd[cmd_id].param[0]);
+		pathing = get_pathing(*msh, cmd_id);
+		if (execve(pathing, msh->cmd[cmd_id].param, msh->env.tab) == -1)
+			printf("Command not found : %s\n", msh->cmd[cmd_id].param[0]);
 	}
 	exec_builtins(msh, cmd_id, builtin);
 }
@@ -103,8 +103,8 @@ int commands(t_msh *msh)
 	if (msh->pid == 0)
 	{	
 		while (i < msh->cmd_nbr - 1)
-			exec_cmd(*msh, i++);
-		exec_last_cmd(*msh, i);
+			exec_cmd(msh, i++);
+		exec_last_cmd(msh, i);
 	}
 	waitpid(msh->pid, NULL, 0);
 	if (msh->fildes.input == 1 || msh->fildes.input == 2)

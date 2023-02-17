@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/17 09:02:06 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/02/17 10:30:03 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static	int	valid_export(char *cmd)
 
 	i = 0;
 	if (cmd[i] >= '0' && cmd[i] <= '9')
-		return (0);	
+		return (WRONG_EXPORT);	
 	while (i < ft_strlen_until(cmd, '='))
 	{
 		if (!is_valid_c(cmd[i]))
@@ -120,20 +120,30 @@ void	add_invisible_export(t_env *env, char *cmd)
 int	ft_export(t_msh *msh, int cmd_id)
 {
 	char *cmd;
+	int i;
 
-	cmd = msh->cmd[cmd_id].param[1];
-	if (ft_strlen(cmd) < 1) // just export
+	i = 0;
+	while (msh->cmd[cmd_id].param[i])
+		i++;
+	if (i < 2) // just export
 		ft_declare_print(&msh->env);
-	else if (valid_export(cmd) == WRONG_EXPORT) //error export
-		printf("msh: export: '%s': not a valid identifier\n", cmd);
-	else if (valid_export(cmd) == EMPTY_EXPORT) // export without '='
-		add_invisible_export(&msh->env, cmd);
-	else if (valid_export(cmd) == VALID_EXPORT) // real export
+	i = 1;
+	while (msh->cmd[cmd_id].param[i])
 	{
-		if (get_position(msh->env.tab, cmd) < 0)
-			add_export(&msh->env, cmd);
-		else
-			replace_export(&msh->env, cmd);
+		cmd = msh->cmd[cmd_id].param[i];
+		printf("%s\n",cmd);
+		if (valid_export(cmd) == WRONG_EXPORT) //error export
+			printf("msh: export: '%s': not a valid identifier\n", cmd);
+		else if (valid_export(cmd) == EMPTY_EXPORT) // export without '='
+			add_invisible_export(&msh->env, cmd);
+		else if (valid_export(cmd) == VALID_EXPORT) // real export
+		{
+			if (get_position(msh->env.tab, cmd) < 0)
+				add_export(&msh->env, cmd);
+			else
+				replace_export(&msh->env, cmd);
+		}
+		i++;
 	}
 	return (0);
 }
