@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:53:02 by colas             #+#    #+#             */
-/*   Updated: 2023/02/02 14:14:15 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/19 14:20:12 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*get_pathing(t_msh msh, int j)
 {
 	char	*slashed;
 	char	*pathing;
-	int i;
+	int		i;
 
 	i = 0;
 	while (msh.paths[i])

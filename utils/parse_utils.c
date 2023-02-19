@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 09:07:58 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/02 10:30:34 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/19 14:51:14 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_delimiter(char c)
 
 int	get_size(char *s, int i)
 {
-	int size;
+	int	size;
 
 	size = 0;
 	while (s[i] && !is_delimiter(s[i++]))

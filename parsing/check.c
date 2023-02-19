@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/02/16 18:59:10 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/19 14:42:02 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_param(t_msh *msh, char *param)
 void	check_cmds_between(t_msh *msh)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 3;
 	j = 1;
@@ -53,7 +53,7 @@ void	check_cmds_between(t_msh *msh)
 
 void	check_input(t_msh *msh)
 {
-	if	(msh->fildes.input == 1)
+	if (msh->fildes.input == 1)
 		msh->fildes.infd = open(msh->fildes.in_name, O_RDONLY);
 	if (msh->fildes.infd == -1)
 	{

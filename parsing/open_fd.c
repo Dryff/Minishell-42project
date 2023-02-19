@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:05:21 by colas             #+#    #+#             */
-/*   Updated: 2023/02/08 11:45:33 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/02/19 14:23:56 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	get_fd_name(t_msh *msh, char c, int mode)
 {
-	int start;
-	int i;
-	int size;
-	int res;
+	int	start;
+	int	i;
+	int	size;
+	int	res;
 
 	start = 0;
 	i = 0;

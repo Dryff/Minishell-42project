@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   env2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 08:57:07 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/19 14:48:34 by mfinette         ###   ########.fr       */
+/*   Created: 2023/02/19 14:42:57 by mfinette          #+#    #+#             */
+/*   Updated: 2023/02/19 14:43:22 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-char	**tab_dup(char **tab)
+void	free_env(t_env *env)
+{
+	int	i;
+
+	i = 0;
+	while (env->tab[i])
+	{
+		free(env->tab[i]);
+		i++;
+	}
+	free(env->tab);
+}
+
+char	*get_export_cmd(char *line)
+{
+	return (ft_strnstr(line, "export", 100) + 7);
+}
+
+char	**envp_dup(char **tab)
 {
 	int		i;
 	int		count;
@@ -27,63 +45,27 @@ char	**tab_dup(char **tab)
 		return (NULL);
 	while (++i < count)
 		dup[i] = tab[i];
-	//free(tab);
 	dup[i] = NULL;
 	return (dup);
 }
 
-void	free_tab(char **tab)
+t_env	init_env(char **envp)
 {
-	int	i;
-	int	size;
+	t_env	env;
 
-	i = 0;
-	size = 0;
-	while (tab[size])
-		size++;
-	while (i < size)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
+	env.tab = envp_dup(envp);
+	env.sort_tab = tab_dup(env.tab);
+	return (env);
 }
 
-void	ft_strswap(char **str1, char **str2)
-{
-	char	*tmp;
-
-	tmp = *str1;
-	*str1 = *str2;
-	*str2 = tmp;
-}
-
-int	ft_strcmp(char *s1, char *s2)
+void	ft_print_env(t_msh *msh)
 {
 	int	i;
 
 	i = 0;
-	while (s1[i] == s2[i] && (s1[i] != '\0' || s2[i] != '\0'))
-		i++;
-	return (s1[i] - s2[i]);
-}
-
-void	ft_export_print(char *str)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	i = ft_strlen_until(str, '=');
-	write(1, "declare -x ", 11);
-	while (j <= i)
+	while (msh->env.tab[i])
 	{
-		write(1, &str[j], 1);
-		j++;
+		printf("%s\n", msh->env.tab[i]);
+		i++;
 	}
-	i++;
-	write(1, "\"", 1);
-	write(1, &str[i], ft_strlen(&str[i]));
-	write(1, "\"", 1);
-	write(1, "\n", 1);
 }

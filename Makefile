@@ -6,7 +6,7 @@
 #    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/02/16 19:47:05 by mfinette         ###   ########.fr        #
+#    Updated: 2023/02/19 14:49:23 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,15 @@ CYAN = \033[0;96m
 FILES = main							\
 		builtins/builtins				\
 		builtins/env					\
+		builtins/env2					\
 		builtins/expand					\
 		builtins/export					\
+		builtins/export2				\
 		builtins/unset					\
 		builtins/dvd					\
 		parsing/parsing					\
+		parsing/parsing2				\
+		parsing/parsing3				\
 		parsing/check					\
 		parsing/open_fd					\
 		utils/parse_utils				\

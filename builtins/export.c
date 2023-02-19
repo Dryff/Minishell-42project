@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/17 10:30:03 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/02/19 14:46:40 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #define EMPTY_EXPORT 3
 #define EXISTING_EXPORT 4
 
-static	int	get_position(char **tab, char *cmd)
+int	get_position(char **tab, char *cmd)
 {
 	int		i;
 	char	*temp;
@@ -25,7 +25,7 @@ static	int	get_position(char **tab, char *cmd)
 	i = 0;
 	temp = ft_substr(cmd, 0, ft_strlen_until(cmd, '=') - 1);
 	if (!temp)
-	    return (0);
+		return (0);
 	while (tab[i])
 	{
 		if (ft_strstr(tab[i], temp))
@@ -52,7 +52,7 @@ static	int	valid_export(char *cmd)
 
 	i = 0;
 	if (cmd[i] >= '0' && cmd[i] <= '9')
-		return (WRONG_EXPORT);	
+		return (WRONG_EXPORT);
 	while (i < ft_strlen_until(cmd, '='))
 	{
 		if (!is_valid_c(cmd[i]))
@@ -64,79 +64,50 @@ static	int	valid_export(char *cmd)
 	return (VALID_EXPORT);
 }
 
-void	add_export(t_env *env, char *cmd)
+void	ft_declare_print(t_env *env)
 {
-	char **dup;
-	
-	dup = add_comand_to_tab(env->tab, cmd);
-	env->tab = tab_dup(dup);
-	free(dup);
-	if (get_position(env->sort_tab, cmd) < 0)
-		add_invisible_export(env, cmd);
-	sort_tab(env);
-}
+	int	i;
+	int	j;
+	int	size;
 
-void	replace_export(t_env *env, char *cmd)
-{
-	//free(env->tab[get_position(env->tab, cmd)]);
-	//free(env->tab[get_position(env->sort_tab, cmd)]);
-	env->tab[get_position(env->tab, cmd)] = ft_strdup(cmd);
-	env->sort_tab[get_position(env->sort_tab, cmd)] = ft_strdup(cmd);
-}
-
-char	**add_comand_to_tab(char **tab, char *cmd)
-{
-	char	**dup;
-	int		i;
-	int		count;
-
-	count = 0;
-	i = 0;
-	while (tab[count])
-		count++;
-	dup = (char **)malloc((count + 2) * sizeof(char *));
-	while (i < count)
+	i = -1;
+	size = 0;
+	while (env->sort_tab[size])
+		size++;
+	while (env->sort_tab[++i])
 	{
-		dup[i] = ft_strdup(tab[i]);
-		i++;
+		j = i + 1;
+		while (j < size)
+		{
+			if (ft_strcmp(env->sort_tab[i], env->sort_tab[j]) > 0)
+				ft_strswap(&env->sort_tab[i], &env->sort_tab[j]);
+			j++;
+		}
 	}
-	dup[i] = ft_strdup(cmd);
-	dup[i + 1] = NULL;
-	return (dup);
-}
-
-void	add_invisible_export(t_env *env, char *cmd)
-{
-	char **dup;
-	
-	if (get_position(env->sort_tab, cmd) < 0)
-	{
-		dup = add_comand_to_tab(env->sort_tab, cmd);
-		env->sort_tab = tab_dup(dup);
-		free(dup);
-	}
+	i = -1;
+	while (env->sort_tab[++i])
+		ft_export_print(env->sort_tab[i]);
 }
 
 int	ft_export(t_msh *msh, int cmd_id)
 {
-	char *cmd;
-	int i;
+	char	*cmd;
+	int		i;
 
 	i = 0;
 	while (msh->cmd[cmd_id].param[i])
 		i++;
-	if (i < 2) // just export
+	if (i < 2)
 		ft_declare_print(&msh->env);
 	i = 1;
 	while (msh->cmd[cmd_id].param[i])
 	{
 		cmd = msh->cmd[cmd_id].param[i];
-		printf("%s\n",cmd);
-		if (valid_export(cmd) == WRONG_EXPORT) //error export
+		if (valid_export(cmd) == WRONG_EXPORT)
 			printf("msh: export: '%s': not a valid identifier\n", cmd);
-		else if (valid_export(cmd) == EMPTY_EXPORT) // export without '='
+		else if (valid_export(cmd) == EMPTY_EXPORT)
 			add_invisible_export(&msh->env, cmd);
-		else if (valid_export(cmd) == VALID_EXPORT) // real export
+		else if (valid_export(cmd) == VALID_EXPORT)
 		{
 			if (get_position(msh->env.tab, cmd) < 0)
 				add_export(&msh->env, cmd);

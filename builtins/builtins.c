@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/17 10:10:12 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/02/19 14:13:44 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_echo(t_msh *msh, int cmd_id)
 	cmd = msh->cmd[cmd_id].param[1];
 	i = 1;
 	if ((cmd[0] == '-' && !cmd[1]) \
-	|| (cmd[0] == '-' && cmd[1] == 'n'))
+			|| (cmd[0] == '-' && cmd[1] == 'n'))
 		i = 2;
 	arg_nbr = 0;
 	while (msh->cmd[cmd_id].param[arg_nbr])
@@ -55,39 +55,39 @@ int	ft_echo(t_msh *msh, int cmd_id)
 	return (0);
 }
 
-int is_builtin(char *cmd)
+int	is_builtin(char *cmd)
 {
-    if (!ft_strncmp(cmd, "pwd", 3))
-        return (PWD);
-    else if (!ft_strncmp(cmd, "echo", 4))
-        return (ECHO);
-    else if (!ft_strncmp(cmd, "cd", 2))
-        return (CD);
-    else if (!ft_strncmp(cmd, "export", 6))
-        return (EXPORT);
-    else if (!ft_strncmp(cmd, "env", 3))
-        return (ENV);
-    else if (!ft_strncmp(cmd, "unset", 5))
-        return (UNSET);
-    return (0);
+	if (!ft_strncmp(cmd, "pwd", 3))
+		return (PWD);
+	else if (!ft_strncmp(cmd, "echo", 4))
+		return (ECHO);
+	else if (!ft_strncmp(cmd, "cd", 2))
+		return (CD);
+	else if (!ft_strncmp(cmd, "export", 6))
+		return (EXPORT);
+	else if (!ft_strncmp(cmd, "env", 3))
+		return (ENV);
+	else if (!ft_strncmp(cmd, "unset", 5))
+		return (UNSET);
+	return (0);
 }
 
-int    exec_builtins(t_msh *msh, int cmd_id, int builtin)
+int	exec_builtins(t_msh *msh, int cmd_id, int builtin)
 {
-    printf("builtin : %d\n", builtin);
-    if (builtin == PWD)
-        return (ft_pwd(), 1);
-    if (builtin == ECHO)
-        return (ft_echo(msh, cmd_id), 1);
-    if (builtin == CD)
-        return (ft_dvd(msh, cmd_id), 1);
-    if (builtin == EXPORT)
-        return (ft_export(msh, cmd_id), 1);
-    if (builtin == ENV)
-        return (ft_print_env(msh), 1);
-    if (builtin == UNSET)
-        return (ft_unset(msh, cmd_id), 1);
-    return (0);
+	printf("builtin : %d\n", builtin);
+	if (builtin == PWD)
+		return (ft_pwd(), 1);
+	if (builtin == ECHO)
+		return (ft_echo(msh, cmd_id), 1);
+	if (builtin == CD)
+		return (ft_dvd(msh, cmd_id), 1);
+	if (builtin == EXPORT)
+		return (ft_export(msh, cmd_id), 1);
+	if (builtin == ENV)
+		return (ft_print_env(msh), 1);
+	if (builtin == UNSET)
+		return (ft_unset(msh, cmd_id), 1);
+	return (0);
 }
 
 // int	exec_builtin_cmd(t_msh *msh)

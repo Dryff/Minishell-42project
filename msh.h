@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/17 10:03:19 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/02/19 14:48:51 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <errno.h>
+# include "ft_err_printf/ft_printf.h"
 # include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
-# include "ft_err_printf/ft_printf.h"
 
 typedef struct s_cmd
 {
@@ -58,30 +58,27 @@ typedef struct s_parse
 
 typedef struct s_msh
 {
-	t_env	env;
-	t_fildes fildes;
-	t_cmd	*cmd;
-
-	int		cmd_nbr;
-	int		pid;
-	char	**paths;
-	char	**historic;
-	
-	char	*prompt;
-	char	*line;
+	t_env		env;
+	t_fildes	fildes;
+	t_cmd		*cmd;
+	int			cmd_nbr;
+	int			pid;
+	char		**paths;
+	char		**historic;
+	char		*prompt;
+	char		*line;
 }				t_msh;
-
 
 /* Minishell */
 int		minishell(t_msh *msh);
 
 /* DVD*/
-char    *get_dvd_cmd(char *line);
+char	*get_dvd_cmd(char *line);
 void	ft_dvd(t_msh *msh, int cmd_id);
 
 /* HISTORIC */
 void	init_history(void);
-void    custom_add_history(char *line);
+void	custom_add_history(char *line);
 
 /* Env */
 t_env	init_env(char **envp);
@@ -92,10 +89,19 @@ int		ft_export(t_msh *msh, int cmd_id);
 int		*ft_bool_strnstr(const char *haystack, const char *needle, size_t len);
 void	add_invisible_export(t_env *env, char *cmd);
 char	**add_comand_to_tab(char **tab, char *cmd);
+char	**envp_dup(char **tab);
+
+/* Export*/
+void	add_export(t_env *env, char *cmd);
+void	replace_export(t_env *env, char *cmd);
+int		get_position(char **tab, char *cmd);
+void	ft_export_print(char *str);
+void	ft_strswap(char **str1, char **str2);
+int		ft_strcmp(char *s1, char *s2);
 
 /* UNSET attention ca va chauffer sa mere*/
-char    *get_unset_cmd(char *line);
-void    ft_unset(t_msh *msh, int cmd_id);
+char	*get_unset_cmd(char *line);
+void	ft_unset(t_msh *msh, int cmd_id);
 
 /* Expand */
 char	*ft_expand(t_env *env, char *cmd);
@@ -125,7 +131,14 @@ void	free_all(char **strs);
 int		parse_line(t_msh *msh);
 int		open_fd(t_msh *msh);
 int		check_hub(t_msh *msh);
-
+char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor);
+int		get_cmd_nbr(char *str);
+int		is_end_of_arg(t_parse p);
+char	*rm_quotes(t_msh msh, char *sub);
+char	*get_dollar(t_msh *msh, t_parse *p);
+char	*getline_rm_quote(t_parse p);
+int		quote_rm_nbr(t_parse p);
+char	*replace_spaces(t_parse p);
 
 /* Basic utils */
 char	**ft_split(char const *str, char c);
@@ -136,7 +149,6 @@ int		is_in_charset(char c, char *str);
 void	sort_tab(t_env *env);
 char	**tab_dup(char **tab);
 void	free_tab(char **tab);
-
 
 /* Parse_utils */
 int		is_delimiter(char c);
