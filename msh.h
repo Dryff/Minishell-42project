@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/19 14:48:51 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/20 02:11:47 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,13 +132,15 @@ int		parse_line(t_msh *msh);
 int		open_fd(t_msh *msh);
 int		check_hub(t_msh *msh);
 char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor);
-int		get_cmd_nbr(char *str);
-int		is_end_of_arg(t_parse p);
+int		is_end_of_arg(int i, char *line, char q, int s);
 char	*rm_quotes(t_msh msh, char *sub);
 char	*get_dollar(t_msh *msh, t_parse *p);
+int		get_cmd_nbr(char *line);
+int		go_after_fd_name(t_msh *msh, int i);
 char	*getline_rm_quote(t_parse p);
 int		quote_rm_nbr(t_parse p);
 char	*replace_spaces(t_parse p);
+int		go_to_end_quote(int i, char *line, char q, int s);
 
 /* Basic utils */
 char	**ft_split(char const *str, char c);

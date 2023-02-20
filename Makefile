@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
+#    By: colas <colas@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/02/19 14:49:23 by mfinette         ###   ########.fr        #
+#    Updated: 2023/02/20 02:10:06 by colas            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ FILES = main							\
 		parsing/parsing					\
 		parsing/parsing2				\
 		parsing/parsing3				\
+		parsing/parsing4				\
 		parsing/check					\
 		parsing/open_fd					\
 		utils/parse_utils				\

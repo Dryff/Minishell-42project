@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/19 14:42:15 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/20 02:14:04 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 char	*get_dollar(t_msh *msh, t_parse *p)
 {
 	int	cursor;
+	int	end_quote_pos;
 
 	cursor = p->s + 1;
-	while (p->line[cursor] && p->line[cursor] != p->q)
+	end_quote_pos = go_to_end_quote(cursor, p->line, p->q, p->s);
+	printf("end_quote pos : %d\n", end_quote_pos);
+	while (p->line[cursor] && cursor != end_quote_pos)
 	{
 		if (p->line[cursor] == '$' && p->q == '"')
+		{
+			printf("avant : %s\n", &p->line[cursor]);
 			p->line = replace_env_arg(msh, p, cursor);
+		}
 		cursor++;
 	}
 	return (p->line);
@@ -51,20 +57,20 @@ char	*getline_rm_quote(t_parse p)
 	return (str[i] = '\0', str);
 }
 
-int	is_end_of_arg(t_parse p)
+int	is_end_of_arg(int i, char *line, char q, int s)
 {
 	int	q_count;
 
 	q_count = 0;
-	if (!p.line[p.i + 1])
+	if (!line[i + 1])
 		return (1);
-	if (p.line[p.i + 1] != ' ')
+	if (line[i + 1] != ' ')
 		return (0);
-	while (p.i >= p.s)
+	while (i >= s)
 	{
-		if (p.line[p.i] == p.q)
+		if (line[i] == q)
 			q_count++;
-		p.i--;
+		i--;
 	}
 	if (q_count % 2 == 1)
 		return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/02/19 14:42:02 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/20 02:50:20 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	check_cmds_between(t_msh *msh)
 	{
 		if (!is_builtin(msh->cmd[0].param[0]))
 			if (check_param(msh, msh->cmd[j].param[0]) == 1)
-				ft_err_printf("msh: command not found: %s\n", msh->cmd[j].param[0]);
+				ft_err_printf("msh: command not found: %s\n", \
+				msh->cmd[j].param[0]);
 		i++;
 		j++;
 	}
@@ -58,9 +59,11 @@ void	check_input(t_msh *msh)
 	if (msh->fildes.infd == -1)
 	{
 		if (access(msh->fildes.in_name, F_OK) == 0)
-			ft_err_printf("msh: permission denied: %s\n", msh->fildes.in_name);
+			ft_err_printf("msh: permission denied: %s\n", \
+			msh->fildes.in_name);
 		else
-			ft_err_printf("msh: no such file or directory: %s\n", msh->fildes.in_name);
+			ft_err_printf("msh: no such file or directory: %s\n", \
+			msh->fildes.in_name);
 		return ;
 	}
 	if (msh->cmd_nbr && !is_builtin(msh->cmd[0].param[0]))
@@ -71,9 +74,11 @@ void	check_input(t_msh *msh)
 void	check_output(t_msh *msh)
 {
 	if (msh->fildes.output == 1)
-		msh->fildes.outfd = open(msh->fildes.out_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		msh->fildes.outfd = open(msh->fildes.out_name, \
+		O_CREAT | O_RDWR | O_TRUNC, 0644);
 	else if (msh->fildes.output == 2)
-		msh->fildes.outfd = open(msh->fildes.out_name, O_RDWR | O_CREAT | O_APPEND, 0644);
+		msh->fildes.outfd = open(msh->fildes.out_name, \
+		O_RDWR | O_CREAT | O_APPEND, 0644);
 	else if (msh->fildes.outfd == -1)
 	{
 		ft_err_printf("msh: permission denied: %s\n", msh->fildes.out_name);
