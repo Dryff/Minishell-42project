@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/21 14:58:24 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:42:46 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	store_cmd(t_msh *msh, int i, int j)
 	sub = ft_substr(msh->line, i, get_size(msh->line, i));
 	cmd = rm_quotes(*msh, sub);
 	msh->cmd[j].param = ft_split(cmd, 10);
+	free(sub);
 }
 
 int	parse_line(t_msh *msh)

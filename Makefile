@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: colas <colas@student.42.fr>                +#+  +:+       +#+         #
+#    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/02/20 02:10:06 by colas            ###   ########.fr        #
+#    Updated: 2023/02/21 17:00:06 by cgelin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,8 @@ FILES = main							\
 		ft_err_printf/ft_putnbr			\
 		ft_err_printf/ft_putnbr_u		\
 		ft_err_printf/ft_putstr_int		\
-		history
+		history							\
+		free_things
 
 all: $(NAME)
 

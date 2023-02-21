@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/19 14:13:44 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:41:40 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #define EXPORT 4
 #define ENV 5
 #define UNSET 6
+#define EXIT 7
 
 int	ft_pwd(void)
 {
@@ -27,6 +28,13 @@ int	ft_pwd(void)
 	printf("%s\n", pwd);
 	free(pwd);
 	return (0);
+}
+
+int ft_exit(void)
+{
+	printf("exit\n");
+	exit(0);
+    return (0);
 }
 
 int	ft_echo(t_msh *msh, int cmd_id)
@@ -69,12 +77,14 @@ int	is_builtin(char *cmd)
 		return (ENV);
 	else if (!ft_strncmp(cmd, "unset", 5))
 		return (UNSET);
+	else if (!ft_strncmp(cmd, "exit", 4))
+		return (EXIT);
 	return (0);
 }
 
 int	exec_builtins(t_msh *msh, int cmd_id, int builtin)
 {
-	printf("builtin : %d\n", builtin);
+	// printf("builtin : %d\n", builtin);
 	if (builtin == PWD)
 		return (ft_pwd(), 1);
 	if (builtin == ECHO)
@@ -87,6 +97,8 @@ int	exec_builtins(t_msh *msh, int cmd_id, int builtin)
 		return (ft_print_env(msh), 1);
 	if (builtin == UNSET)
 		return (ft_unset(msh, cmd_id), 1);
+	if (builtin == EXIT)
+		return (ft_exit(), 1);
 	return (0);
 }
 
