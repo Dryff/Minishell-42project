@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/20 02:09:31 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/21 14:58:24 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,9 @@ void	quote_handling(t_msh *msh, t_parse *p)
 	p->s = p->i;
 	p->i = go_to_end_quote(p->i, p->line, p->q, p->s);
 	q_nbr = quote_rm_nbr(*p);
-	printf("p->iavant = %d\n", p->i);
 	p->line = get_dollar(msh, p);
-	printf("p->iapres = %d\n", p->i);
-	printf("p->line = %s\n", p->line);
 	p->line = getline_rm_quote(*p);
 	p->i -= q_nbr;
-	printf("if q : %d\n", p->i);
 }
 
 char	*rm_quotes(t_msh msh, char *sub)
@@ -47,8 +43,6 @@ char	*rm_quotes(t_msh msh, char *sub)
 	while (p.line[++p.i])
 	{
 		p.q = 0;
-		printf("\n----TOUR----\n");
-		printf("p->line = %s\n", p.line);
 		if (p.line[p.i] == '"' || p.line[p.i] == '\'')
 			quote_handling(&msh, &p);
 		else if (p.line[p.i] == '$')

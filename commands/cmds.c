@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/02/19 14:19:10 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:56:27 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 			printf("Command not found : %s\n", msh->cmd[cmd_id].param[0]);
 	}
 	// exec_builtins(msh, msh->cmd[cmd_id].param);
+	exit(1);
 }
 
 void	exec_cmd(t_msh *msh, int cmd_id)
@@ -66,6 +67,7 @@ void	exec_last_cmd(t_msh *msh, int cmd_id)
 			printf("Command not found : %s\n", msh->cmd[cmd_id].param[0]);
 	}
 	exec_builtins(msh, cmd_id, builtin);
+	exit(1);
 }
 
 void	dup_inffd(t_msh *msh)

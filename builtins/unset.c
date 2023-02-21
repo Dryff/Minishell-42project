@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:18:39 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/19 14:08:21 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:00:30 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ void	ft_unset(t_msh *msh, int cmd_id)
 	int		j;
 	char	*cmd;
 
-	j = 0;
+	j = 1;
 	while (msh->cmd[cmd_id].param[j])
 	{
+		printf("command = %s\n", msh->cmd[cmd_id].param[j]);
 		cmd = msh->cmd[cmd_id].param[j];
 		i = get_cmd_index(msh->env.tab, cmd);
 		if (i >= 0)
@@ -62,5 +63,6 @@ void	ft_unset(t_msh *msh, int cmd_id)
 		i = get_cmd_index(msh->env.sort_tab, cmd);
 		if (i >= 0)
 			remove_line_from_tab(msh->env.sort_tab, i);
+		j++;
 	}
 }
