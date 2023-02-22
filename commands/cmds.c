@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/02/22 16:35:47 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:03:58 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 	pathing = get_pathing(*msh, cmd_id);
 	if (execve(pathing, msh->cmd[cmd_id].param, msh->env.tab) == -1)
 		printf("Command not found : %s\n", msh->cmd[cmd_id].param[0]);
+
 }
 
 void	exec_cmd(t_msh *msh, int cmd_id)
@@ -64,7 +65,10 @@ void	exec_last_cmd(t_msh *msh, int cmd_id)
 		{
 			pathing = get_pathing(*msh, cmd_id);
 			if (execve(pathing, msh->cmd[cmd_id].param, msh->env.tab) == -1)
+			{
 				printf("Command not found : %s\n", msh->cmd[cmd_id].param[0]);
+				exit(1);
+			}
 		}
 	}
 	else
@@ -73,17 +77,16 @@ void	exec_last_cmd(t_msh *msh, int cmd_id)
 
 void	dup_inffd(t_msh *msh)
 {
+	if (dup2(STDIN_FILENO, 4095) == -1)
+		printf("ERROR - yo\n");
 	if (msh->fildes.input == 1)
 	{
-		if (dup2(STDIN_FILENO, 4095) == -1)
-			printf("ERROR - yo\n");
 		if (dup2(msh->fildes.infd, STDIN_FILENO) == -1)
 			printf("ERROR - 1\n");
 	}
 	if (msh->fildes.input == 2)
 	{
-		if (dup2(STDIN_FILENO, 4095) == -1)
-			printf("ERROR - yo\n");
+		
 		if (dup2(msh->fildes.heredoc_fd, STDIN_FILENO) == -1)
 			printf("ERROR - 1\n");
 	}
@@ -105,8 +108,7 @@ int	commands(t_msh *msh)
 	if (msh->cmd_nbr)
 		exec_last_cmd(msh, i);
 	waitpid(-1, NULL, 0);
-	if (msh->fildes.input == 1 || msh->fildes.input == 2)
-		if (dup2(4095, STDIN_FILENO) == -1)
-			printf("ERROR - yo\n");
+	if (dup2(4095, STDIN_FILENO) == -1)
+		printf("ERROR - yo\n");
 	return (0);
 }
