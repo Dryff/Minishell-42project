@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
+#    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/02/21 17:00:06 by cgelin           ###   ########.fr        #
+#    Updated: 2023/02/22 16:36:47 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,11 +65,11 @@ OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 %.o:%.c $(HEADER)
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-	@$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) $(FLAGS) -c $< -o $@ 
 
 $(NAME): $(OBJS)
 	@echo "$(GREEN)😳😎minishell compiled!😎😳$(DEF_COLOR)"
-	@${CC} ${FLAGS} ${SRCS} -o ${NAME} -l readline
+	@${CC} ${FLAGS} ${SRCS} -o ${NAME} -fsanitize=address -g3 -l readline
 	./minishell
 
 clean:

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_things.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:57:33 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/21 17:00:42 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/02/22 17:42:24 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 void	ft_free_tab(char **tab)
 {
 	int	i;
+	int	j;
 
+	j = 0;
 	i = 0;
-	while (tab[i])
+	while (tab[j])
+		j++;
+	while (i < j)
 	{
 		free(tab[i]);
 		i++;
@@ -36,5 +40,6 @@ void free_things(t_msh msh)
 			i++;
 		}
 		free(msh.cmd);
+	if (msh.paths)
 		ft_free_tab(msh.paths);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/02/22 14:22:37 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/22 16:35:47 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,16 @@
 void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 {
 	char	*pathing;
-	int		builtin;
+	// int		builtin;
 
 	close(fd[0]);
 	if (dup2(fd[1], STDOUT_FILENO) == -1)
 		printf("ERROR - 5\n");
 	close(fd[1]);
-	builtin = is_builtin(msh->cmd[cmd_id].param[0]);
+	// builtin = is_builtin(msh->cmd[cmd_id].param[0]);
 	pathing = get_pathing(*msh, cmd_id);
 	if (execve(pathing, msh->cmd[cmd_id].param, msh->env.tab) == -1)
 		printf("Command not found : %s\n", msh->cmd[cmd_id].param[0]);
-
 }
 
 void	exec_cmd(t_msh *msh, int cmd_id)

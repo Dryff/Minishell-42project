@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:53:02 by colas             #+#    #+#             */
-/*   Updated: 2023/02/19 14:20:12 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:48:49 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-char	*path_finder(char **envp)
+char	*path_finder(char **env)
 {
 	size_t	i;
 
 	i = 0;
-	while (ft_strncmp(envp[i], "PATH", 4))
+	while (env[i] && ft_strncmp(env[i], "PATH", 4))
 		i++;
-	return (&envp[i][5]);
+	if (!env[i])
+		return (NULL);
+	return (&env[i][5]);
 }
 
 char	**get_paths(char **envp)
@@ -28,6 +30,8 @@ char	**get_paths(char **envp)
 	char	**paths;
 
 	raw_paths = path_finder(envp);
+	if (raw_paths == NULL)
+		return (NULL);
 	paths = ft_split(raw_paths, ':');
 	if (!paths)
 		return (NULL);
