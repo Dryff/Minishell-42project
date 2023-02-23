@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/02/22 18:03:58 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/02/23 10:57:18 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 	// builtin = is_builtin(msh->cmd[cmd_id].param[0]);
 	pathing = get_pathing(*msh, cmd_id);
 	if (execve(pathing, msh->cmd[cmd_id].param, msh->env.tab) == -1)
-		printf("Command not found : %s\n", msh->cmd[cmd_id].param[0]);
+	{
+		ft_err_printf("msh: command not found : %s\n", msh->cmd[cmd_id].param[0]);
+		exit(1);
+	}
 
 }
 
@@ -40,6 +43,7 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 		printf("ERROR - 4\n");
 	if (pid == 0)
 		exec_to_pipe(msh, cmd_id, fd);
+	waitpid(pid, NULL, 0);
 	close(fd[1]);
 	if (dup2(fd[0], STDIN_FILENO) == -1)
 		printf("ERROR - 6\n");
@@ -66,7 +70,7 @@ void	exec_last_cmd(t_msh *msh, int cmd_id)
 			pathing = get_pathing(*msh, cmd_id);
 			if (execve(pathing, msh->cmd[cmd_id].param, msh->env.tab) == -1)
 			{
-				printf("Command not found : %s\n", msh->cmd[cmd_id].param[0]);
+				ft_err_printf("msh: command not found : %s\n", msh->cmd[cmd_id].param[0]);
 				exit(1);
 			}
 		}
@@ -77,19 +81,15 @@ void	exec_last_cmd(t_msh *msh, int cmd_id)
 
 void	dup_inffd(t_msh *msh)
 {
-	if (dup2(STDIN_FILENO, 4095) == -1)
-		printf("ERROR - yo\n");
+	if (msh->fildes.input == 0)
+		if (dup2(STDIN_FILENO, 4095) == -1)
+			printf("ERROR - yo\n");
 	if (msh->fildes.input == 1)
-	{
 		if (dup2(msh->fildes.infd, STDIN_FILENO) == -1)
 			printf("ERROR - 1\n");
-	}
 	if (msh->fildes.input == 2)
-	{
-		
 		if (dup2(msh->fildes.heredoc_fd, STDIN_FILENO) == -1)
 			printf("ERROR - 1\n");
-	}
 }
 
 int	commands(t_msh *msh)

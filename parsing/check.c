@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/02/20 02:50:20 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/23 10:56:09 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,6 @@ int	check_param(t_msh *msh, char *param)
 	return (1);
 }
 
-void	check_cmds_between(t_msh *msh)
-{
-	int	i;
-	int	j;
-
-	i = 3;
-	j = 1;
-	while (j < msh->cmd_nbr)
-	{
-		if (!is_builtin(msh->cmd[0].param[0]))
-			if (check_param(msh, msh->cmd[j].param[0]) == 1)
-				ft_err_printf("msh: command not found: %s\n", \
-				msh->cmd[j].param[0]);
-		i++;
-		j++;
-	}
-}
-
 void	check_input(t_msh *msh)
 {
 	if (msh->fildes.input == 1)
@@ -66,9 +48,6 @@ void	check_input(t_msh *msh)
 			msh->fildes.in_name);
 		return ;
 	}
-	if (msh->cmd_nbr && !is_builtin(msh->cmd[0].param[0]))
-		if (check_param(msh, msh->cmd[0].param[0]) == 1)
-			ft_err_printf("msh: command not found: %s\n", msh->cmd->param[0]);
 }
 
 void	check_output(t_msh *msh)
@@ -89,7 +68,6 @@ void	check_output(t_msh *msh)
 int	check_hub(t_msh *msh)
 {
 	check_input(msh);
-	check_cmds_between(msh);
 	check_output(msh);
 	return (1);
 }
