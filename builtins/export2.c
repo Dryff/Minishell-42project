@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:45:07 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/19 14:45:44 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/22 13:50:09 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-void	add_export(t_env *env, char *cmd)
+void	add_export(t_msh *msh, char *cmd)
 {
 	char	**dup;
 
-	dup = add_comand_to_tab(env->tab, cmd);
-	env->tab = tab_dup(dup);
+	dup = add_comand_to_tab(msh->env.tab, cmd);
+	msh->env.tab = tab_dup(dup);
 	free(dup);
-	if (get_position(env->sort_tab, cmd) < 0)
-		add_invisible_export(env, cmd);
-	sort_tab(env);
+	if (get_position(msh->env.sort_tab, cmd) < 0)
+		add_invisible_export(&msh->env, cmd);
+	sort_tab(&msh->env);
 }
 
 void	replace_export(t_env *env, char *cmd)

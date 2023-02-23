@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/21 16:59:40 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/02/22 13:49:57 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	**add_comand_to_tab(char **tab, char *cmd);
 char	**envp_dup(char **tab);
 
 /* Export*/
-void	add_export(t_env *env, char *cmd);
+void	add_export(t_msh *msh, char *cmd);
 void	replace_export(t_env *env, char *cmd);
 int		get_position(char **tab, char *cmd);
 void	ft_export_print(char *str);

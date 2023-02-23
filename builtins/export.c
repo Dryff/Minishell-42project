@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/19 14:46:40 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/22 13:58:29 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,13 @@ int	ft_export(t_msh *msh, int cmd_id)
 			add_invisible_export(&msh->env, cmd);
 		else if (valid_export(cmd) == VALID_EXPORT)
 		{
-			if (get_position(msh->env.tab, cmd) < 0)
-				add_export(&msh->env, cmd);
-			else
+			printf("%s\n", cmd);
+			add_export(msh, cmd);
+			if (1 == 2)
 				replace_export(&msh->env, cmd);
 		}
 		i++;
 	}
+	// ft_print_env(msh);
 	return (0);
 }
