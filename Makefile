@@ -6,7 +6,7 @@
 #    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/02/22 16:36:47 by mfinette         ###   ########.fr        #
+#    Updated: 2023/02/25 17:57:36 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ FILES = main							\
 		utils/env_utils					\
 		utils/ft_split					\
 		utils/ft_calloc					\
+		utils/itoa						\
 		commands/cmds					\
 		commands/paths					\
 		commands/here_doc				\
@@ -53,7 +54,8 @@ FILES = main							\
 		ft_err_printf/ft_putnbr_u		\
 		ft_err_printf/ft_putstr_int		\
 		history							\
-		free_things
+		free_things						\
+		signal							
 
 all: $(NAME)
 
@@ -69,7 +71,7 @@ OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 $(NAME): $(OBJS)
 	@echo "$(GREEN)😳😎minishell compiled!😎😳$(DEF_COLOR)"
-	@${CC} ${FLAGS} ${SRCS} -o ${NAME} -fsanitize=address -g3 -l readline
+	@${CC} ${FLAGS} ${SRCS} -o ${NAME} -l readline
 	./minishell
 
 clean:

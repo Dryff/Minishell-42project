@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 10:01:38 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/19 14:14:35 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/25 17:25:04 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,30 @@ char	*ft_expand(t_env *env, char *cmd)
 			{
 				pos = ft_strlen_until(env->tab[i], '=') + 1;
 				expanded = env->tab[i] + pos;
+				return (expanded);
+			}
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+char	*ft_expand_tab(char **tab, char *cmd)
+{
+	int		i;
+	int		pos;
+	char	*expanded;
+
+	i = 0;
+	expanded = NULL;
+	while (tab[i])
+	{
+		if (ft_strstr(tab[i], cmd))
+		{
+			if (tab[i][0] == cmd[0] && tab[i][ft_strlen(cmd)] == '=')
+			{
+				pos = ft_strlen_until(tab[i], '=') + 1;
+				expanded = tab[i] + pos;
 				return (expanded);
 			}
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/22 13:49:57 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/25 17:50:18 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,16 @@ void	ft_unset(t_msh *msh, int cmd_id);
 
 /* Expand */
 char	*ft_expand(t_env *env, char *cmd);
+char	*ft_expand_tab(char **tab, char *cmd);
 char	*get_expand_cmd(char *str);
 
 /* builtins */
 int		exec_builtin_cmd(t_msh *msh);
 int		is_builtin(char *cmd);
 int		exec_builtins(t_msh *msh, int cmd_id, int builtin);
+
+/* signal */
+void signal_handler(int signal_num);
 
 /* Cmd_utils */
 int		search_cmd(const char *hs, const char *nee);
@@ -122,6 +126,7 @@ int		commands(t_msh *msh);
 char	**get_paths(char **envp);
 char	*get_pathing(t_msh msh, int j);
 int		here_doc(t_msh *msh);
+char	*ft_itoa(int n);
 
 /* Msh_utils */
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

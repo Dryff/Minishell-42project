@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/23 10:46:47 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:52:00 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int	check_exit(t_msh msh)
 	return (1);
 }
 
+void signal_handler(int signal_num)
+{
+	printf("Received signal: %d\n", signal_num);
+}
+
 int	main(int argc, char **argv, char **old_env)
 {
 	t_msh	msh;
@@ -34,6 +39,7 @@ int	main(int argc, char **argv, char **old_env)
 	(void)old_env;
 	msh.env = init_env(old_env);
 	init_history();
+	signal(SIGINT, signal_handler);
 	while (1)
 	{
 		init_prompt(&msh);
