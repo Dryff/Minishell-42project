@@ -1,56 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_hub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/22 14:14:24 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/25 23:36:09 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
-
-int	go_to_end_quote(int i, char *line, char q, int s)
-{
-	while (line[i] && !is_end_of_arg(i, line, q, s))
-		i++;
-	while (line[i] && line[i] != q)
-		i--;
-	return (i);
-}
-
-void	quote_handling(t_msh *msh, t_parse *p)
-{
-	int	q_nbr;
-
-	p->q = p->line[p->i];
-	p->s = p->i;
-	p->i = go_to_end_quote(p->i, p->line, p->q, p->s);
-	q_nbr = quote_rm_nbr(*p);
-	p->line = get_dollar(msh, p);
-	p->line = getline_rm_quote(*p);
-	p->i -= q_nbr;
-}
-
-char	*rm_quotes(t_msh msh, char *sub)
-{
-	t_parse	p;
-
-	p.line = sub;
-	p.i = -1;
-	while (p.line[++p.i])
-	{
-		p.q = 0;
-		if (p.line[p.i] == '"' || p.line[p.i] == '\'')
-			quote_handling(&msh, &p);
-		else if (p.line[p.i] == '$')
-			p.line = replace_env_arg(&msh, &p, p.i);
-		p.line = replace_spaces(p);
-	}
-	return (p.line);
-}
 
 void	store_cmd(t_msh *msh, int i, int j)
 {
@@ -59,8 +19,47 @@ void	store_cmd(t_msh *msh, int i, int j)
 
 	sub = ft_substr(msh->line, i, get_size(msh->line, i));
 	cmd = rm_quotes(*msh, sub);
-	msh->cmd[j].param = ft_split(cmd, 10);
+	msh->cmd[j].param = ft_split(cmd, '|');
 	free(sub);
+}
+
+int	get_cmd_nbr(char *str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (!is_white_space(str[i]))
+			count = 1;
+		i++;
+	}
+	i = 0;
+	while (str[i])
+	{	
+		if (str[i] == '|')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+int	go_after_fd_name(t_msh *msh, int i)
+{
+	if (msh->line[i] == '>' || msh->line[i] == '<')
+	{
+		while (msh->line[i] && is_delimiter(msh->line[i]))
+			i++;
+		while (msh->line[i] && (is_white_space(msh->line[i]) \
+					|| is_delimiter(msh->line[i])))
+			i++;
+		while (msh->line[i] && !is_white_space(msh->line[i]) \
+				&& !is_delimiter(msh->line[i]))
+			i++;
+	}
+	return (i);
 }
 
 int	parse_line(t_msh *msh)

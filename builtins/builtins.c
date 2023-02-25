@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/21 16:41:40 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/02/26 00:31:54 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 #define PWD 1
 #define ECHO 2
-#define CD 3
-#define EXPORT 4
-#define ENV 5
+#define ENV 3
+#define CD 4
+#define EXPORT 5
 #define UNSET 6
 #define EXIT 7
 
@@ -71,10 +71,10 @@ int	is_builtin(char *cmd)
 		return (ECHO);
 	else if (!ft_strncmp(cmd, "cd", 2))
 		return (CD);
+	else if (!ft_strncmp(cmd, "env", 3))
+	return (ENV);
 	else if (!ft_strncmp(cmd, "export", 6))
 		return (EXPORT);
-	else if (!ft_strncmp(cmd, "env", 3))
-		return (ENV);
 	else if (!ft_strncmp(cmd, "unset", 5))
 		return (UNSET);
 	else if (!ft_strncmp(cmd, "exit", 4))
@@ -89,12 +89,12 @@ int	exec_builtins(t_msh *msh, int cmd_id, int builtin)
 		return (ft_pwd(), 1);
 	if (builtin == ECHO)
 		return (ft_echo(msh, cmd_id), 1);
+	if (builtin == ENV)
+		return (ft_print_env(msh), 1);
 	if (builtin == CD)
 		return (ft_dvd(msh, cmd_id), 1);
 	if (builtin == EXPORT)
 		return (ft_export(msh, cmd_id), 1);
-	if (builtin == ENV)
-		return (ft_print_env(msh), 1);
 	if (builtin == UNSET)
 		return (ft_unset(msh, cmd_id), 1);
 	if (builtin == EXIT)

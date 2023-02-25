@@ -1,36 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing3.c                                         :+:      :+:    :+:   */
+/*   rm_quotes2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/20 02:14:04 by colas            ###   ########.fr       */
+/*   Created: 2023/02/20 02:03:35 by colas             #+#    #+#             */
+/*   Updated: 2023/02/25 21:45:01 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
-
-char	*get_dollar(t_msh *msh, t_parse *p)
-{
-	int	cursor;
-	int	end_quote_pos;
-
-	cursor = p->s + 1;
-	end_quote_pos = go_to_end_quote(cursor, p->line, p->q, p->s);
-	printf("end_quote pos : %d\n", end_quote_pos);
-	while (p->line[cursor] && cursor != end_quote_pos)
-	{
-		if (p->line[cursor] == '$' && p->q == '"')
-		{
-			printf("avant : %s\n", &p->line[cursor]);
-			p->line = replace_env_arg(msh, p, cursor);
-		}
-		cursor++;
-	}
-	return (p->line);
-}
 
 char	*getline_rm_quote(t_parse p)
 {
@@ -43,7 +23,7 @@ char	*getline_rm_quote(t_parse p)
 	j = -1;
 	if (!str)
 		return (NULL);
-	while (++j < p.s)
+	while (++j < p.strt)
 		str[j] = p.line[j];
 	i = j;
 	while (p.line[j] && j <= p.i)
@@ -82,11 +62,11 @@ int	quote_rm_nbr(t_parse p)
 	int	count;
 
 	count = 0;
-	while (p.s <= p.i)
+	while (p.strt <= p.i)
 	{
-		if (p.line[p.s] == p.q)
+		if (p.line[p.strt] == p.q)
 			count ++;
-		p.s++;
+		p.strt++;
 	}
 	return (count);
 }
@@ -107,7 +87,7 @@ char	*replace_spaces(t_parse p)
 		j++;
 	while (p.line[p.i] && p.i < j)
 	{
-		p.line[p.i] = 10;
+		p.line[p.i] = '|';
 		p.i++;
 	}
 	return (p.line);

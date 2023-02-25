@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
+#    By: colas <colas@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/02/25 17:57:36 by mfinette         ###   ########.fr        #
+#    Updated: 2023/02/25 23:45:25 by colas            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,12 +32,12 @@ FILES = main							\
 		builtins/export2				\
 		builtins/unset					\
 		builtins/dvd					\
-		parsing/parsing					\
-		parsing/parsing2				\
-		parsing/parsing3				\
-		parsing/parsing4				\
-		parsing/check					\
-		parsing/open_fd					\
+		parsing/parsing_hub				\
+		parsing/dollar					\
+		parsing/rm_quotes				\
+		parsing/rm_quotes2				\
+		parsing/get_and_check_fd		\
+		parsing/parse_fd_data			\
 		utils/parse_utils				\
 		utils/msh_utils					\
 		utils/cmd_utils					\

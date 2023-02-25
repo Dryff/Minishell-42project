@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:42:57 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/25 17:57:24 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/25 19:50:41 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_env	init_env(char **envp)
 	// free(env.tab[position]);
 	env.tab[position] = ft_strdup(dup);
 	env.sort_tab = tab_dup(env.tab);
-	printf("\n\n\n %s\n\n\n", env.tab[position]);
+	// printf("\n\n\n %s\n\n\n", env.tab[position]);
 	return (env);
 }
 

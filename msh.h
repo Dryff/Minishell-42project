@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/25 17:50:18 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/25 23:58:43 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
+
+# define NT_VALID_ID 1
+# define SYNTAX_ERROR 2
+# define IS_DIRECTORY 126
+# define PERM_DENIED 126
+# define CMD_NT_FND 127
+# define CTRL_C 130
+# define CTRL_SLASH 131
 
 typedef struct s_cmd
 {
@@ -50,8 +58,8 @@ typedef struct s_fildes
 typedef struct s_parse
 {
 	int		i;
-	int		s;
-	int		j;
+	int		strt;
+	int		arg_sz;
 	char	q;
 	char	*line;
 }				t_parse;
@@ -67,8 +75,8 @@ typedef struct s_msh
 	char		**historic;
 	char		*prompt;
 	char		*line;
-}				t_msh;
-
+	char		*ex_val;
+} 				t_msh;
 /* Minishell */
 int		minishell(t_msh *msh);
 void	free_things(t_msh msh);
@@ -136,17 +144,18 @@ void	free_all(char **strs);
 /* Parsing */
 int		parse_line(t_msh *msh);
 int		open_fd(t_msh *msh);
-int		check_hub(t_msh *msh);
+int		get_and_check_fd(t_msh *msh);
 char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor);
 int		is_end_of_arg(int i, char *line, char q, int s);
 char	*rm_quotes(t_msh msh, char *sub);
 char	*get_dollar(t_msh *msh, t_parse *p);
-int		get_cmd_nbr(char *line);
 int		go_after_fd_name(t_msh *msh, int i);
 char	*getline_rm_quote(t_parse p);
 int		quote_rm_nbr(t_parse p);
 char	*replace_spaces(t_parse p);
 int		go_to_end_quote(int i, char *line, char q, int s);
+int		parse_fd_data(t_msh *msh);
+int		is_alpha(char c);
 
 /* Basic utils */
 char	**ft_split(char const *str, char c);

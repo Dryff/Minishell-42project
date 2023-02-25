@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/25 14:52:00 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/25 23:37:27 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ int	main(int argc, char **argv, char **old_env)
 	(void)old_env;
 	msh.env = init_env(old_env);
 	init_history();
-	signal(SIGINT, signal_handler);
+	// signal(SIGINT, signal_handler);
 	while (1)
 	{
 		init_prompt(&msh);
 		msh.line = readline(msh.prompt);
 		msh.paths = get_paths(msh.env.tab);
 		parse_line(&msh);
-		open_fd(&msh);
+		parse_fd_data(&msh);
 		commands(&msh);
 		custom_add_history(msh.line);
 		free_things(msh);

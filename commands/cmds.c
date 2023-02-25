@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/02/23 11:22:28 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/26 00:33:20 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ void	exec_last_cmd(t_msh *msh, int cmd_id)
 	char	*pathing;
 	int		builtin;
 	int		pid;
-
-	if (msh->fildes.output)
-		if (dup2(msh->fildes.outfd, STDOUT_FILENO) == -1)
-			printf("ERROR - 2\n");
+	
 	builtin = is_builtin(msh->cmd[cmd_id].param[0]);
 	if (!builtin)
 	{
@@ -67,6 +64,9 @@ void	exec_last_cmd(t_msh *msh, int cmd_id)
 			printf("ERROR - fork\n");
 		if (pid == 0)
 		{
+			if (msh->fildes.output)
+				if (dup2(msh->fildes.outfd, STDOUT_FILENO) == -1)
+					printf("ERROR - 2\n");
 			pathing = get_pathing(*msh, cmd_id);
 			if (execve(pathing, msh->cmd[cmd_id].param, msh->env.tab) == -1)
 			{
@@ -81,9 +81,8 @@ void	exec_last_cmd(t_msh *msh, int cmd_id)
 
 void	dup_inffd(t_msh *msh)
 {
-	if (msh->fildes.input == 0)
-		if (dup2(STDIN_FILENO, 4095) == -1)
-			printf("ERROR - yo\n");
+	if (dup2(STDIN_FILENO, 4095) == -1)
+		printf("ERROR - yo\n");
 	if (msh->fildes.input == 1)
 		if (dup2(msh->fildes.infd, STDIN_FILENO) == -1)
 			printf("ERROR - 1\n");
@@ -96,11 +95,11 @@ int	commands(t_msh *msh)
 {
 	int	i;
 
-	// dprintf(2, "input : %d\n", msh->fildes.input);
-	// dprintf(2, "infd : %d\n", msh->fildes.infd);
-	// dprintf(2, "output : %d\n", msh->fildes.output);
-	// dprintf(2, "outfd : %d\n", msh->fildes.outfd);
-	// dprintf(2, "heredoc_fd : %d\n", msh->fildes.heredoc_fd);
+	dprintf(2, "input : %d\n", msh->fildes.input);
+	dprintf(2, "infd : %d\n", msh->fildes.infd);
+	dprintf(2, "output : %d\n", msh->fildes.output);
+	dprintf(2, "outfd_name : %s\n", msh->fildes.out_name);
+	dprintf(2, "heredoc_fd : %d\n", msh->fildes.heredoc_fd);
 	dup_inffd(msh);
 	i = 0;
 	while (i < msh->cmd_nbr - 1)
