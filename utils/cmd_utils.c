@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:13:34 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/19 14:51:29 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/26 13:39:56 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,24 +68,22 @@ int	ft_strstr(const char *str, const char *to_find)
 	return (0);
 }
 
-int	search_cmd(const char *hs, const char *nee)
+char	*ft_strchr(const char *s, int c)
 {
-	size_t	i;
-	size_t	j;
+	char			*d;
+	unsigned char	u;
+	int				i;
 
 	i = 0;
-	j = 0;
-	while (hs[i])
+	u = (unsigned char)c;
+	d = (char *)s;
+	while (d[i])
 	{
-		j = 0;
-		while (nee[j] == hs[i + j])
-		{
-			if (nee[j + 1] == '\0' && (hs[i + j + 1] == ' ' \
-			|| hs[i + j + 1] == '=' || hs[i + j + 1] == '\0'))
-				return (1);
-			j++;
-		}
+		if (u == d[i])
+			return (&d[i]);
 		i++;
 	}
-	return (0);
+	if (d[i] == u)
+		return (&d[i]);
+	return (NULL);
 }

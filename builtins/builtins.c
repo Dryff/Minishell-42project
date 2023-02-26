@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/26 00:31:54 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/26 13:39:47 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,25 +101,3 @@ int	exec_builtins(t_msh *msh, int cmd_id, int builtin)
 		return (ft_exit(), 1);
 	return (0);
 }
-
-// int	exec_builtin_cmd(t_msh *msh)
-// {
-// 	if (search_cmd(msh->line, "pwd"))
-// 		return (ft_pwd(), 1);
-// 	else if (search_cmd(msh->line, "echo"))
-// 	{	
-// 		if (search_cmd(msh->line, "-n"))
-// 			return (ft_echo(msh, 0), 1);
-// 		else
-// 			return (ft_echo(msh, 1), 1);
-// 	}
-// 	else if (search_cmd(msh->line, "dvd"))
-// 		return (ft_dvd(msh, get_dvd_cmd(msh->line)), 1);
-// 	else if (search_cmd(msh->line, "export"))
-// 		return (ft_export(&msh->env, get_export_cmd(msh->line)), 1);
-// 	else if (search_cmd(msh->line, "unset"))
-// 		return (ft_unset(&msh->env, get_unset_cmd(msh->line)), 1);
-// 	else if (search_cmd(msh->line, "var"))
-// 		return (ft_expand(&msh->env, get_expand_cmd(msh->line)), 1);
-// 	return (0);
-// }

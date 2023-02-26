@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/26 13:14:17 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/26 13:40:40 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int		exec_builtins(t_msh *msh, int cmd_id, int builtin);
 void signal_handler(int signal_num);
 
 /* Cmd_utils */
-int		search_cmd(const char *hs, const char *nee);
+char	*ft_strchr(const char *s, int c);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_strstr(const char *str, const char *to_find);
 char	*ft_strjoin(char const *s1, char const *s2);

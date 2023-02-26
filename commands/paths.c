@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:53:02 by colas             #+#    #+#             */
-/*   Updated: 2023/02/22 16:48:49 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/26 13:43:38 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ char	*get_pathing(t_msh msh, int j)
 	int		i;
 
 	i = 0;
+	if (ft_strchr(msh.cmd[j].param[0], '/'))
+		pathing = msh.cmd[j].param[0];
+	if (access(pathing, 0) == 0)
+		return (pathing);
 	while (msh.paths[i])
 	{
 		slashed = ft_strjoin(msh.paths[i], "/");
