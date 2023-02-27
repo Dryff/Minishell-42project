@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/26 13:40:40 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/02/26 15:59:24 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ char	*get_expand_cmd(char *str);
 /* builtins */
 int		exec_builtin_cmd(t_msh *msh);
 int		is_builtin(char *cmd);
+int		is_not_builtin_fd(char *cmd);
 int		exec_builtins(t_msh *msh, int cmd_id, int builtin);
 
 /* signal */
