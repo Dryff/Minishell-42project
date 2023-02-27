@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:45:07 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/22 13:50:09 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/26 17:52:03 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@ void	add_export(t_msh *msh, char *cmd)
 	dup = add_comand_to_tab(msh->env.tab, cmd);
 	msh->env.tab = tab_dup(dup);
 	free(dup);
-	if (get_position(msh->env.sort_tab, cmd) < 0)
-		add_invisible_export(&msh->env, cmd);
+	add_invisible_export(&msh->env, cmd);
 	sort_tab(&msh->env);
 }
 
-void	replace_export(t_env *env, char *cmd)
+void	replace_export(t_env *env, char *cmd, int index)
 {
 	env->tab[get_position(env->tab, cmd)] = ft_strdup(cmd);
 	env->sort_tab[get_position(env->sort_tab, cmd)] = ft_strdup(cmd);

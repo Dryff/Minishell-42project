@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:18:39 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/21 15:00:30 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/02/26 15:12:53 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	get_cmd_index(char **tab, char *cmd)
 	{
 		if (ft_strstr(tab[i], cmd))
 		{
-			if (tab[i][0] == cmd[0] && (tab[i][sz] == '=' || !tab[i][sz]))
+			if (tab[i][0] == cmd[0])
 				return (i);
 		}
 		i++;

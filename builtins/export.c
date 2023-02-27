@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/22 13:58:29 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/26 17:54:20 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,20 @@ int	get_position(char **tab, char *cmd)
 	char	*temp;
 
 	i = 0;
-	temp = ft_substr(cmd, 0, ft_strlen_until(cmd, '=') - 1);
+	temp = ft_substr(cmd, 0, ft_strlen_until(cmd, '='));
+	printf("get_position cmd = %s\n", cmd);
 	if (!temp)
 		return (0);
 	while (tab[i])
 	{
 		if (ft_strstr(tab[i], temp))
 		{
-			free(temp);
-			return (i);
+			if (tab[i][ft_strlen(temp)] == '=')
+			{
+				free(temp);
+				printf("pos found = %d\n", i);
+				return (i);
+			}
 		}
 		i++;
 	}
@@ -88,6 +93,22 @@ void	ft_declare_print(t_env *env)
 	while (env->sort_tab[++i])
 		ft_export_print(env->sort_tab[i]);
 }
+int	complete_export(t_msh *msh, char *cmd)
+{
+	int		pos;
+	char	*purecmd;
+	
+	purecmd = ft_substr(cmd, 0, ft_strlen_until(cmd, '='));
+	if (!purecmd)
+		return (0);
+	pos = get_position(msh->env.tab, purecmd);
+	if (pos < 0)
+		add_export(msh, cmd);
+	else
+		replace_export(&msh->env, cmd, pos);
+	free(purecmd);
+	return (1);
+}
 
 int	ft_export(t_msh *msh, int cmd_id)
 {
@@ -109,13 +130,10 @@ int	ft_export(t_msh *msh, int cmd_id)
 			add_invisible_export(&msh->env, cmd);
 		else if (valid_export(cmd) == VALID_EXPORT)
 		{
-			printf("%s\n", cmd);
-			add_export(msh, cmd);
-			if (1 == 2)
-				replace_export(&msh->env, cmd);
+			if (!complete_export(msh, cmd))
+				return (1);
 		}
 		i++;
 	}
-	// ft_print_env(msh);
 	return (0);
 }

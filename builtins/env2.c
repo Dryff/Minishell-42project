@@ -3,26 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   env2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:42:57 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/25 19:50:41 by colas            ###   ########.fr       */
+/*   Updated: 2023/02/26 18:03:14 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-void	free_env(t_env *env)
+void	free_env(t_msh msh)
 {
 	int	i;
 
 	i = 0;
-	while (env->tab[i])
+	while (msh.env.tab[i])
 	{
-		free(env->tab[i]);
+		free(msh.env.tab[i]);
 		i++;
 	}
-	free(env->tab);
+	free(msh.env.tab);
+	i = 0;
+	while (msh.env.sort_tab[i])
+	{
+		free(msh.env.sort_tab[i]);
+		i++;
+	}
+	free(msh.env.sort_tab);	
 }
 
 char	*get_export_cmd(char *line)
@@ -44,7 +51,7 @@ char	**envp_dup(char **tab)
 	if (!dup)
 		return (NULL);
 	while (++i < count)
-		dup[i] = tab[i];
+		dup[i] = ft_strdup(tab[i]);
 	dup[i] = NULL;
 	return (dup);
 }
@@ -62,10 +69,9 @@ t_env	init_env(char **envp)
 	dup = ft_strjoin("SHLVL=", ft_itoa(shlvl + 1));
 	env.tab = envp_dup(envp);
 	position = get_position(env.tab, "SHLVL");
-	// free(env.tab[position]);
+	free(env.tab[position]);
 	env.tab[position] = ft_strdup(dup);
 	env.sort_tab = tab_dup(env.tab);
-	// printf("\n\n\n %s\n\n\n", env.tab[position]);
 	return (env);
 }
 
