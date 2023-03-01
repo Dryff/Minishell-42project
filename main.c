@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/25 23:37:27 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/01 18:33:28 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	main(int argc, char **argv, char **old_env)
 		msh.paths = get_paths(msh.env.tab);
 		parse_line(&msh);
 		parse_fd_data(&msh);
-		commands(&msh);
+		if (msh.cmd_nbr)
+			commands(&msh);
 		custom_add_history(msh.line);
 		free_things(msh);
 		if (!check_exit(msh))

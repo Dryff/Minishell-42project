@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/02/26 16:25:51 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/01 18:30:42 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,6 @@ void	dup_inffd(t_msh *msh)
 	if (msh->fildes.input == 1)
 		if (dup2(msh->fildes.infd, STDIN_FILENO) == -1)
 			printf("ERROR - 1\n");
-	if (msh->fildes.input == 2)
-		if (dup2(msh->fildes.heredoc_fd, STDIN_FILENO) == -1)
-			printf("ERROR - 1\n");
 }
 
 // dprintf(2, "input : %d\n", msh->fildes.input);
@@ -111,14 +108,12 @@ int	commands(t_msh *msh)
 		builtin = is_builtin(msh->cmd[i].param[0]);
 		if (!is_not_builtin_fd(msh->cmd[i].param[0]))
 			exec_cmd(msh, i);
-		else
-			exec_builtins(msh, i, builtin);
 		i++;
 	}
 	builtin = is_builtin(msh->cmd[i].param[0]);
-	if (msh->cmd_nbr && !is_not_builtin_fd(msh->cmd[i].param[0]))
+	if (!is_not_builtin_fd(msh->cmd[i].param[0]))
 		exec_last_cmd(msh, i);
-	else
+	else if (msh->cmd_nbr == 1 && is_not_builtin_fd(msh->cmd[i].param[0]))
 		exec_builtins(msh, i, builtin);
 	waitpid(-1, NULL, 0);
 	if (dup2(4095, STDIN_FILENO) == -1)

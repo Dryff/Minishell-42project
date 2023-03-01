@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/25 23:36:09 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/01 22:54:50 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,38 @@ int	get_cmd_nbr(char *str)
 	return (count);
 }
 
-int	go_after_fd_name(t_msh *msh, int i)
+int	is_redirects(t_msh *msh, int k)
 {
-	if (msh->line[i] == '>' || msh->line[i] == '<')
+	while (msh->line[k] && msh->line[k] != '|')
 	{
-		while (msh->line[i] && is_delimiter(msh->line[i]))
-			i++;
-		while (msh->line[i] && (is_white_space(msh->line[i]) \
-					|| is_delimiter(msh->line[i])))
-			i++;
-		while (msh->line[i] && !is_white_space(msh->line[i]) \
-				&& !is_delimiter(msh->line[i]))
-			i++;
+		if (msh->line[k] == '<' || msh->line[k] == '>')
+			return (k);
+		k++;
 	}
+	return (-1);
+}
+
+int	check_fd(t_msh *msh, int i, int j)
+{
+	int k;
+
+	msh->cmd[j].here_doc = 0;
+	k = is_redirects(msh, i);
+	printf("k = %d\n", k);
+	if (k == -1)
+		return (0);
+	(void)j;
+	if (msh->line[k] && msh->line[k] == '<' && msh->line[k + 1] == '<')
+		msh->cmd[j].here_doc = 1;
+	// while (msh->line[i] && is_delimiter(msh->line[i]))
+	// 	i++;
+	// while (msh->line[i] && (is_white_space(msh->line[i]) \
+	// 			|| is_delimiter(msh->line[i])))
+	// 	i++;
+	// while (msh->line[i] && !is_white_space(msh->line[i]) \
+	// 		&& !is_delimiter(msh->line[i]))
+	// 	i++;
+	// }
 	return (i);
 }
 
@@ -78,11 +97,27 @@ int	parse_line(t_msh *msh)
 		while (msh->line[i] && (msh->line[i] == '|' \
 					|| is_white_space(msh->line[i])))
 			i++;
-		i = go_after_fd_name(msh, i);
+		check_fd(msh, i, j);
 		if (msh->line[i])
 			store_cmd(msh, i, j++);
-		while (msh->line[i] && !is_delimiter(msh->line[i]))
+		while (msh->line[i] && msh->line[i] != '|')
 			i++;
+	}
+	i = 0;
+	j = 0;
+	printf("---\n");
+	printf("cmd nbr : %d\n", msh->cmd_nbr);
+	while (i < msh->cmd_nbr)
+	{
+		j = 0;
+		printf("heredoc[%d] = %d\n",i, msh->cmd[i].here_doc);
+		while (msh->cmd[i].param[j])
+		{
+			printf("cmd[%d].param[%d] = %s\n", i, j, msh->cmd[i].param[j]);
+			j++;
+		}
+		printf("------\n");
+		i++;
 	}
 	return (1);
 }

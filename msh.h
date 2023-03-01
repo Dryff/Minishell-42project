@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/26 15:59:24 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/01 18:06:26 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 typedef struct s_cmd
 {
 	char	**param;
+	int		here_doc;
 }				t_cmd;
 
 typedef struct s_env
@@ -50,9 +51,10 @@ typedef struct s_fildes
 	int		output;
 	int		infd;
 	int		outfd;
-	int		heredoc_fd;
-	char	*in_name;
+
+	char *in_name;
 	char	*out_name;
+
 }				t_fildes;
 
 typedef struct s_parse
@@ -102,7 +104,7 @@ char	**envp_dup(char **tab);
 
 /* Export*/
 void	add_export(t_msh *msh, char *cmd);
-void	replace_export(t_env *env, char *cmd);
+void	replace_export(t_env *env, char *cmd, int pos);
 int		get_position(char **tab, char *cmd);
 void	ft_export_print(char *str);
 void	ft_strswap(char **str1, char **str2);
@@ -150,7 +152,6 @@ char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor);
 int		is_end_of_arg(int i, char *line, char q, int s);
 char	*rm_quotes(t_msh msh, char *sub);
 char	*get_dollar(t_msh *msh, t_parse *p);
-int		go_after_fd_name(t_msh *msh, int i);
 char	*getline_rm_quote(t_parse p);
 int		quote_rm_nbr(t_parse p);
 char	*replace_spaces(t_parse p);
