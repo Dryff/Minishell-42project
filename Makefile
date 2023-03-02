@@ -6,7 +6,7 @@
 #    By: colas <colas@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/02/25 23:45:25 by colas            ###   ########.fr        #
+#    Updated: 2023/03/02 08:45:46 by colas            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,6 @@ FILES = main							\
 		utils/itoa						\
 		commands/cmds					\
 		commands/paths					\
-		commands/here_doc				\
 		ft_err_printf/ft_print_hexa		\
 		ft_err_printf/ft_printf			\
 		ft_err_printf/ft_putnbr			\
