@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/26 17:54:20 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/04 11:19:10 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,12 @@ void	ft_declare_print(t_env *env)
 	while (env->sort_tab[++i])
 		ft_export_print(env->sort_tab[i]);
 }
+
 int	complete_export(t_msh *msh, char *cmd)
 {
 	int		pos;
 	char	*purecmd;
-	
+
 	purecmd = ft_substr(cmd, 0, ft_strlen_until(cmd, '='));
 	if (!purecmd)
 		return (0);

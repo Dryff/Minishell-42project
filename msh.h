@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/01 18:06:26 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/04 10:57:27 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int		*ft_bool_strnstr(const char *haystack, const char *needle, size_t len);
 void	add_invisible_export(t_env *env, char *cmd);
 char	**add_comand_to_tab(char **tab, char *cmd);
 char	**envp_dup(char **tab);
+void	free_env(t_msh msh);
 
 /* Export*/
 void	add_export(t_msh *msh, char *cmd);
