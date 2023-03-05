@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/04 11:19:10 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/05 13:27:59 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,14 @@ int	complete_export(t_msh *msh, char *cmd)
 	if (!purecmd)
 		return (0);
 	pos = get_position(msh->env.tab, purecmd);
-	if (pos < 0)
+	if (get_position(msh->env.tab, purecmd) < 0)
 		add_export(msh, cmd);
 	else
-		replace_export(&msh->env, cmd, pos);
+		replace_export(msh, cmd, pos);
+	// if (get_position(msh->env.sort_tab, purecmd) < 0)
+	// 	add_invisible_export(msh, cmd);
+	// else
+	// 	replace_secret_export(msh, cmd, pos);
 	free(purecmd);
 	return (1);
 }
@@ -128,7 +132,7 @@ int	ft_export(t_msh *msh, int cmd_id)
 		if (valid_export(cmd) == WRONG_EXPORT)
 			printf("msh: export: '%s': not a valid identifier\n", cmd);
 		else if (valid_export(cmd) == EMPTY_EXPORT)
-			add_invisible_export(&msh->env, cmd);
+			add_invisible_export(msh, cmd);
 		else if (valid_export(cmd) == VALID_EXPORT)
 		{
 			if (!complete_export(msh, cmd))

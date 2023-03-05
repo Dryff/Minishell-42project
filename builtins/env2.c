@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:42:57 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/04 10:17:35 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/05 10:54:39 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,30 @@ t_env	init_env(char **envp)
 	free(level);
 	env.tab[position] = ft_strdup(dup);
 	free(dup);
-	env.sort_tab = tab_dup(env.tab);
+	env.sort_tab = init_secret_env(envp);
 	return (env);
+}
+
+char **init_secret_env(char **envp)
+{
+	char	**tab;
+	char	*level;
+	char	*dup;
+	int		shlvl;
+	int		position;
+
+	shlvl = 0;
+	if (ft_expand_tab(envp, "SHLVL"))
+		shlvl = atoi(ft_expand_tab(envp, "SHLVL"));
+	level = ft_itoa(shlvl + 1);
+	dup = ft_strjoin("SHLVL=", level);
+	tab = envp_dup(envp);
+	position = get_position(tab, "SHLVL");
+	free(tab[position]);
+	free(level);
+	tab[position] = ft_strdup(dup);
+	free(dup);
+	return (tab);
 }
 
 void	ft_print_env(t_msh *msh)
