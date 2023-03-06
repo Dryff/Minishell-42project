@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_hub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/03 18:50:42 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/06 11:40:42 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,11 @@ int	go_to_arg_start(char *line, int i)
 	return (i);
 }
 
-int	store_cmds_between_pipes(t_msh *msh, t_parse *p)
+int	store_cmds_between_pipes(t_msh *msh)
 {
 	int		i;
 	int		j;
 
-	(void)p;
 	i = 0;
 	j = 0;
 	while (msh->line[i])
@@ -58,7 +57,8 @@ int	store_cmds_between_pipes(t_msh *msh, t_parse *p)
 			get_cmd_place_i_after_pipe(msh, &i, j);
 			j++;
 		}
-		i++;
+		if (msh->line[i])
+			i++;
 	}
 	return (1);
 }
@@ -88,16 +88,13 @@ void	print_cmds(t_msh msh)
 
 int	parse_line(t_msh *msh)
 {
-	t_parse *p;
-
-	p = NULL;
 	msh->cmd_nbr = get_cmd_nbr(msh->line);
 	if (!msh->cmd_nbr)
 		return (0);
 	msh->cmd = malloc(sizeof(t_cmd) * msh->cmd_nbr);
 	if (!msh->cmd)
 		return (0);
-	store_cmds_between_pipes(msh, p);
+	store_cmds_between_pipes(msh);
 	print_cmds(*msh);
 	return (1);
 }
