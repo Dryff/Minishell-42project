@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_things.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:57:33 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/04 11:30:40 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/06 11:07:34 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void free_things(t_msh msh)
 			ft_free_tab(msh.cmd[i].param);
 			i++;
 		}
+	if (msh.cmd_nbr)
 		free(msh.cmd);
 	if (msh.paths)
 		ft_free_tab(msh.paths);

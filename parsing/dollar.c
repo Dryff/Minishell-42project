@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/25 22:24:11 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/03 18:12:17 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ char *copy_with_value(char *str, char *expanded, t_parse p, int cursor)
 		str[i++] = expanded[j++];
 	while (i < (int)ft_strlen(p.line) + (int)ft_strlen(expanded) - p.arg_sz)
 		str[i++] = p.line[cursor++ + p.arg_sz];
+	// printf("%d\n", i);
 	str[i] = '\0';
-	// printf("stage 3 : %s\n", str);
 	return (str);
 }
 
@@ -75,8 +75,9 @@ char *replace_env_arg(t_msh *msh, t_parse *p, int cursor)
 			expanded = "$";
 	}
 	// printf("expanded : %s\n", expanded);
-	str = malloc(sizeof(char) * \
-	(ft_strlen(p->line) - p->arg_sz + ft_strlen(expanded)));
+	// printf("somme : %lu\n", ft_strlen(p->line) - p->arg_sz + ft_strlen(expanded));
+	str = malloc(sizeof(char) *
+	(ft_strlen(p->line) - p->arg_sz + ft_strlen(expanded) + 1));
 	if (!str)
 		return (NULL);
 	str = copy_with_value(str, expanded, *p, cursor);

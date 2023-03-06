@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 02:03:35 by colas             #+#    #+#             */
-/*   Updated: 2023/02/25 21:45:01 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/05 14:34:06 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*getline_rm_quote(t_parse p)
 
 int	is_end_of_arg(int i, char *line, char q, int s)
 {
-	int	q_count;
+	int q_count;
 
 	q_count = 0;
 	if (!line[i + 1])
@@ -87,7 +87,7 @@ char	*replace_spaces(t_parse p)
 		j++;
 	while (p.line[p.i] && p.i < j)
 	{
-		p.line[p.i] = '|';
+		p.line[p.i] = 10;
 		p.i++;
 	}
 	return (p.line);

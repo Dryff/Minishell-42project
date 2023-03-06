@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
+#    By: colas <colas@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/03/04 10:59:25 by mfinette         ###   ########.fr        #
+#    Updated: 2023/03/06 11:06:29 by colas            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,8 @@ FILES = main							\
 		builtins/dvd					\
 		parsing/parsing_hub				\
 		parsing/dollar					\
+		parsing/get_cmd_nbr				\
+		parsing/parse_arrows			\
 		parsing/rm_quotes				\
 		parsing/rm_quotes2				\
 		parsing/get_and_check_fd		\

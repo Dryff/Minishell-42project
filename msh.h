@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/05 11:07:15 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/06 11:07:50 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,8 +149,12 @@ void	free_all(char **strs);
 
 /* Parsing */
 int		parse_line(t_msh *msh);
-int		open_fd(t_msh *msh);
-int		get_and_check_fd(t_msh *msh);
+int 	get_cmd_nbr(char *str);
+int 	open_fd(t_msh *msh);
+int 	check_fd(t_msh *msh, int i, int j);
+int 	get_quote(char *s, int i);
+int 	is_in_quote(char *s, int i, char quote, int start);
+int 	get_and_check_fd(t_msh *msh);
 char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor);
 int		is_end_of_arg(int i, char *line, char q, int s);
 char	*rm_quotes(t_msh msh, char *sub);
@@ -161,6 +165,10 @@ char	*replace_spaces(t_parse p);
 int		go_to_end_quote(int i, char *line, char q, int s);
 int		parse_fd_data(t_msh *msh);
 int		is_alpha(char c);
+
+int		is_name_before_arrow(t_msh *msh, int i);
+int		get_cmd_is_after_arrow(t_msh *msh, int i);
+int		get_size_until_arrow(t_msh *msh, int i);
 
 /* Basic utils */
 char	**ft_split(char const *str, char c);
