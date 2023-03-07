@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/07 13:39:35 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/07 14:31:57 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	ft_export_print(char *str);
 void	ft_strswap(char **str1, char **str2);
 int		ft_strcmp(char *s1, char *s2);
 void	replace_secret_export(t_msh *msh, char *cmd, int index);
+int	complete_export(t_msh *msh, char *cmd);
 
 /* UNSET attention ca va chauffer sa mere*/
 char	*get_unset_cmd(char *line);
