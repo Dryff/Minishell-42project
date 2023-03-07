@@ -1,0 +1,5 @@
+FIX CD
+FIX EXPORT SANS =
+FIX EXAPND $ (export salut="echo salut") puis $salut
+FIX HERE_DOC
+DO SIGNALS

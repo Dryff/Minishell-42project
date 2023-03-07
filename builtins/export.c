@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/05 13:27:59 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:43:09 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	get_position(char **tab, char *cmd)
 
 	i = 0;
 	temp = ft_substr(cmd, 0, ft_strlen_until(cmd, '='));
-	printf("get_position cmd = %s\n", cmd);
+	// printf("get_position cmd = %s\n", cmd);
 	if (!temp)
 		return (0);
 	while (tab[i])
@@ -34,7 +34,7 @@ int	get_position(char **tab, char *cmd)
 			if (tab[i][ft_strlen(temp)] == '=')
 			{
 				free(temp);
-				printf("pos found = %d\n", i);
+				// printf("pos found = %d\n", i);
 				return (i);
 			}
 		}
@@ -107,10 +107,10 @@ int	complete_export(t_msh *msh, char *cmd)
 		add_export(msh, cmd);
 	else
 		replace_export(msh, cmd, pos);
-	// if (get_position(msh->env.sort_tab, purecmd) < 0)
-	// 	add_invisible_export(msh, cmd);
-	// else
-	// 	replace_secret_export(msh, cmd, pos);
+	if (get_position(msh->env.sort_tab, purecmd) < 0)
+		add_invisible_export(msh, cmd);
+	else
+		replace_secret_export(msh, cmd, pos);
 	free(purecmd);
 	return (1);
 }

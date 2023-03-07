@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dvd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/19 14:12:38 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/07 14:11:24 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_dvd(t_msh *msh, int cmd_id)
 	char	*actual_path;
 	char	*new_path;
 
-	printf("\ncmd = %s\n", msh->cmd[cmd_id].param[1]);
 	if (!msh->cmd[cmd_id].param[1])
 	{
 		if (chdir(ft_expand(&msh->env, "HOME")) != 0)
