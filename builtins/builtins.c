@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/26 16:10:46 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/07 14:09:04 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	is_not_builtin_fd(char *cmd)
 {
 	if (!ft_strncmp(cmd, "export", 6))
 		return (EXPORT);
+	else if (!ft_strncmp(cmd, "cd", 2))
+		return (CD);
 	else if (!ft_strncmp(cmd, "unset", 5))
 		return (UNSET);
 	else if (!ft_strncmp(cmd, "exit", 4))
