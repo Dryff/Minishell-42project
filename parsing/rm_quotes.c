@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rm_quotes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/03 18:02:42 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/16 14:08:58 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,20 @@ int	go_to_end_of_arg(int i, char *line, char q, int s)
 }
 
 void	quote_handling(t_msh *msh, t_parse *p, int *q_nbr)
-{
+{	
 	p->i = go_to_end_of_arg(p->i, p->line, p->q, p->strt);
 	*q_nbr = quote_rm_nbr(*p);
 	p->line = get_dollar(msh, p);
 	p->line = getline_rm_quote(*p);
 }
 
-char	*rm_quotes(t_msh msh, char *sub)
+char	*rm_quotes(t_msh *msh, char *sub)
 {
 	t_parse	p;
 	int	q_nbr;
 
-	p.line = sub;
+	p.line = ft_substr(sub, 0, ft_strlen(sub));
+	free(sub);
 	p.i = 0;
 	while (p.line[p.i])
 	{
@@ -50,11 +51,11 @@ char	*rm_quotes(t_msh msh, char *sub)
 		{
 			p.q = p.line[p.i];
 			p.strt = p.i;
-			quote_handling(&msh, &p, &q_nbr);
+			quote_handling(msh, &p, &q_nbr);
 			p.i -= q_nbr;
 		}
 		else if (p.line[p.i] == '$')
-			p.line = replace_env_arg(&msh, &p, p.i);
+			p.line = replace_env_arg(msh, &p, p.i);
 		p.line = replace_spaces(p);
 		p.i++;
 	}

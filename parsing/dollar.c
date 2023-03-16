@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/03 18:12:17 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/16 14:09:14 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,18 @@ char *get_expanded(t_msh *msh, t_parse *p, int cursor)
 	return (expanded);
 }
 
-char *copy_with_value(char *str, char *expanded, t_parse p, int cursor)
+char *copy_with_value(char *expanded, t_parse p, int cursor)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
+	char	*str;
 
 	i = -1;
 	j = 0;
+	str = malloc(sizeof(char) *
+	(ft_strlen(p.line) - p.arg_sz + ft_strlen(expanded) + 1));
+	if (!str)
+		return (NULL);
 	while (++i < cursor - 1)
 		str[i] = p.line[i];
 	while (j < (int)ft_strlen(expanded))
@@ -76,13 +81,11 @@ char *replace_env_arg(t_msh *msh, t_parse *p, int cursor)
 	}
 	// printf("expanded : %s\n", expanded);
 	// printf("somme : %lu\n", ft_strlen(p->line) - p->arg_sz + ft_strlen(expanded));
-	str = malloc(sizeof(char) *
-	(ft_strlen(p->line) - p->arg_sz + ft_strlen(expanded) + 1));
-	if (!str)
-		return (NULL);
-	str = copy_with_value(str, expanded, *p, cursor);
+	str = copy_with_value(expanded, *p, cursor);
 	p->i += ft_strlen(expanded) - p->arg_sz - 1;
-	return (str);
+	if (p->i < 0)
+		p->i = 0;
+	return (free(p->line), str);
 }
 
 char	*get_dollar(t_msh *msh, t_parse *p)

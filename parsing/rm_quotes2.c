@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rm_quotes2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 02:03:35 by colas             #+#    #+#             */
-/*   Updated: 2023/03/05 14:34:06 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/16 14:11:54 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	*getline_rm_quote(t_parse p)
 	}
 	while (p.line[j])
 		str[i++] = p.line[j++];
+	free(p.line);
 	return (str[i] = '\0', str);
 }
 
@@ -44,8 +45,6 @@ int	is_end_of_arg(int i, char *line, char q, int s)
 	q_count = 0;
 	if (!line[i + 1])
 		return (1);
-	if (line[i + 1] != ' ')
-		return (0);
 	while (i >= s)
 	{
 		if (line[i] == q)

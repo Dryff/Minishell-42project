@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/07 14:31:57 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/16 13:58:09 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ int 	is_in_quote(char *s, int i, char quote, int start);
 int 	get_and_check_fd(t_msh *msh);
 char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor);
 int		is_end_of_arg(int i, char *line, char q, int s);
-char	*rm_quotes(t_msh msh, char *sub);
+char	*rm_quotes(t_msh *msh, char *sub);
 char	*get_dollar(t_msh *msh, t_parse *p);
 char	*getline_rm_quote(t_parse p);
 int		quote_rm_nbr(t_parse p);

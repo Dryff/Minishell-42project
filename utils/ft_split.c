@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:16:26 by cgelin            #+#    #+#             */
-/*   Updated: 2023/01/26 09:30:35 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/16 13:27:26 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = 0;
 	if (len + start > ft_strlen((char *)s))
 		len = ft_strlen((char *)s) - start;
-	str = malloc(sizeof(char) * len + 1);
+	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
 	if (start >= ft_strlen((char *)s))
