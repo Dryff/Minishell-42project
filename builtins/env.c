@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:57:07 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/16 09:36:01 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/16 12:49:21 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,12 @@ void	ft_export_print(char *str)
 	j = 0;
 	i = ft_strlen_until(str, '=');
 	write(1, "declare -x ", 11);
+	if (i == ft_strlen(str))
+	{
+		write(1, str, ft_strlen(str));
+		write(1, "\n", 1);
+		return ;
+	}
 	while (j <= i)
 	{
 		write(1, &str[j], 1);
