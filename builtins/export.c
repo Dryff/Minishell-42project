@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/07 13:43:09 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/16 13:38:55 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,15 @@ int	get_position(char **tab, char *cmd)
 
 	i = 0;
 	temp = ft_substr(cmd, 0, ft_strlen_until(cmd, '='));
-	// printf("get_position cmd = %s\n", cmd);
 	if (!temp)
 		return (0);
 	while (tab[i])
 	{
 		if (ft_strstr(tab[i], temp))
 		{
-			if (tab[i][ft_strlen(temp)] == '=')
+			if (tab[i][ft_strlen(temp)] == '=' || !tab[i][ft_strlen(temp)])
 			{
 				free(temp);
-				// printf("pos found = %d\n", i);
 				return (i);
 			}
 		}
@@ -93,6 +91,18 @@ void	ft_declare_print(t_env *env)
 	while (env->sort_tab[++i])
 		ft_export_print(env->sort_tab[i]);
 }
+
+// void	ft_declare_print(t_env *env)
+// {
+// 	int	i;
+	
+// 	i = 0;
+// 	while (env->sort_tab[i])
+// 	{
+// 		printf("(EXPORT) %s\n", env->sort_tab[i]);
+// 		i++;
+// 	}
+// }
 
 int	complete_export(t_msh *msh, char *cmd)
 {

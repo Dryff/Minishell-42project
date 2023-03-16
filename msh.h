@@ -6,7 +6,11 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/03/16 13:58:09 by cgelin           ###   ########.fr       */
+=======
+/*   Updated: 2023/03/16 13:04:22 by mfinette         ###   ########.fr       */
+>>>>>>> refs/remotes/origin/master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +106,7 @@ int		*ft_bool_strnstr(const char *haystack, const char *needle, size_t len);
 char	**add_comand_to_tab(char **tab, char *cmd);
 char	**envp_dup(char **tab);
 void	free_env(t_msh msh);
-char **init_secret_env(char **envp);
+char	**init_secret_env(char **envp);
 
 /* Export*/
 void	add_export(t_msh *msh, char *cmd);
@@ -113,7 +117,7 @@ void	ft_export_print(char *str);
 void	ft_strswap(char **str1, char **str2);
 int		ft_strcmp(char *s1, char *s2);
 void	replace_secret_export(t_msh *msh, char *cmd, int index);
-int	complete_export(t_msh *msh, char *cmd);
+int		complete_export(t_msh *msh, char *cmd);
 
 /* UNSET attention ca va chauffer sa mere*/
 char	*get_unset_cmd(char *line);
@@ -131,7 +135,7 @@ int		is_not_builtin_fd(char *cmd);
 int		exec_builtins(t_msh *msh, int cmd_id, int builtin);
 
 /* signal */
-void signal_handler(int signal_num);
+void	signal_handler(int signal_num);
 
 /* Cmd_utils */
 char	*ft_strchr(const char *s, int c);
