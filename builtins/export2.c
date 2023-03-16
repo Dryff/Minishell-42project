@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:45:07 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/05 13:32:24 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/16 10:03:41 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	add_export(t_msh *msh, char *cmd)
 		return ;
 	free(msh->env.tab);
 	msh->env.tab = tab_dup(dup);
-	free(dup);
+	// free(dup);
 	sort_tab(&msh->env);
 }
 
@@ -34,8 +34,9 @@ void	add_invisible_export(t_msh *msh, char *cmd)
 		dup = add_comand_to_tab(msh->env.sort_tab, cmd);
 		if (!dup)
 			return ;
+		free(msh->env.sort_tab);
 		msh->env.sort_tab = tab_dup(dup);
-		free(dup);
+		// free(dup);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:18:39 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/26 15:12:53 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/16 10:07:45 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,16 @@ char	*get_unset_cmd(char *line)
 
 void	remove_line_from_tab(char **tab, int index)
 {
+	int	i;
+
+	i = 0;
 	while (tab[index])
 	{
+		if (i == 0)
+			free(tab[index]);
 		tab[index] = tab[index + 1];
 		index++;
+		i++;
 	}
 	tab[index - 1] = NULL;
 }
@@ -55,7 +61,6 @@ void	ft_unset(t_msh *msh, int cmd_id)
 	j = 1;
 	while (msh->cmd[cmd_id].param[j])
 	{
-		printf("command = %s\n", msh->cmd[cmd_id].param[j]);
 		cmd = msh->cmd[cmd_id].param[j];
 		i = get_cmd_index(msh->env.tab, cmd);
 		if (i >= 0)

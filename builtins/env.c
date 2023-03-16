@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:57:07 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/04 14:22:10 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/16 09:36:01 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**tab_dup(char **tab)
 	while (++i < count)
 		dup[i] = tab[i];
 	dup[i] = NULL;
-	// free(tab);
+	free(tab);
 	return (dup);
 }
 
