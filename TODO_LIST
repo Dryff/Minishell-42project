@@ -1,5 +1,8 @@
 FIX CD
 FIX EXPORT SANS =
-FIX EXAPND $ (export salut="echo salut") puis $salut
-FIX HERE_DOC
+FIX EXAPND $ (export salut="echo salut") puis $salut <3
+FAIRE HERE_DOC
 DO SIGNALS
+FIX /bin/ls quand path unseted
+PARSING DES CHEVRONS
+PARSING POUR LE HEREDOC
