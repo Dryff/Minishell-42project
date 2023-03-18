@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:42:57 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/16 09:57:21 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:23:54 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ void	free_env(t_msh msh)
 char	*get_export_cmd(char *line)
 {
 	return (ft_strnstr(line, "export", 100) + 7);
+}
+
+static int	tab_len(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }
 
 char	**envp_dup(char **tab)
@@ -71,10 +81,14 @@ t_env	init_env(char **envp)
 	shlvl = 0;
 	if (ft_expand_tab(envp, "SHLVL"))
 		shlvl = atoi(ft_expand_tab(envp, "SHLVL"));
+	else
+		shlvl = 0;
 	level = ft_itoa(shlvl + 1);
 	dup = ft_strjoin("SHLVL=", level);
 	env.tab = envp_dup(envp);
 	position = get_position(env.tab, "SHLVL");
+	if (position == -1)
+		position = tab_len(env.tab);
 	free(env.tab[position]);
 	free(level);
 	env.tab[position] = ft_strdup(dup);
@@ -94,10 +108,14 @@ char **init_secret_env(char **envp)
 	shlvl = 0;
 	if (ft_expand_tab(envp, "SHLVL"))
 		shlvl = atoi(ft_expand_tab(envp, "SHLVL"));
+	else
+		shlvl = 0;
 	level = ft_itoa(shlvl + 1);
 	dup = ft_strjoin("SHLVL=", level);
 	tab = envp_dup(envp);
 	position = get_position(tab, "SHLVL");
+	if (position == -1)
+		position = tab_len(tab);
 	free(tab[position]);
 	free(level);
 	tab[position] = ft_strdup(dup);

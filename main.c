@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/04 14:05:29 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/16 14:28:38 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,9 @@ int	main(int argc, char **argv, char **old_env)
 
 	(void)argc;
 	(void)argv;
-	(void)old_env;
 	msh.env = init_env(old_env);
+	ft_print_env(&msh);
 	init_history();
-	// signal(SIGINT, signal_handler);
 	while (1)
 	{
 		init_prompt(&msh);
@@ -52,11 +51,7 @@ int	main(int argc, char **argv, char **old_env)
 		custom_add_history(msh.line);
 		free_things(msh);
 		if (!check_exit(msh))
-		{
 			exit(1);
-			free_env(msh);
-		}
-			// break ;
 		free(msh.line);
 	}
 	free_env(msh);

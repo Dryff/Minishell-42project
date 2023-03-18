@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/16 13:38:55 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/18 11:14:50 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,19 @@ int	get_position(char **tab, char *cmd)
 
 static	int	is_valid_c(char c)
 {
+	int	value;
+
+	value = 0;
 	if (is_in_charset(c, "#%?!@/-+={}.,:"))
 		return (0);
+	if (!is_in_charset(c, "0123456789"))
+	{
+		if (!is_in_charset(c, "abcdefghijklmnopqrstuvwxyz"))
+		{
+			if (!is_in_charset(c, "ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+				return (0);
+		}
+	}
 	return (1);
 }
 
@@ -91,18 +102,6 @@ void	ft_declare_print(t_env *env)
 	while (env->sort_tab[++i])
 		ft_export_print(env->sort_tab[i]);
 }
-
-// void	ft_declare_print(t_env *env)
-// {
-// 	int	i;
-	
-// 	i = 0;
-// 	while (env->sort_tab[i])
-// 	{
-// 		printf("(EXPORT) %s\n", env->sort_tab[i]);
-// 		i++;
-// 	}
-// }
 
 int	complete_export(t_msh *msh, char *cmd)
 {
