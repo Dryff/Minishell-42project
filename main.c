@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/19 14:41:12 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/19 15:01:34 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void signal_handler(int signal_num)
 	}
 }
 
-
-
 int	main(int argc, char **argv, char **old_env)
 {
 	t_msh	msh;
@@ -46,10 +44,9 @@ int	main(int argc, char **argv, char **old_env)
 	(void)argc;
 	(void)argv;
 	msh.env = init_env(old_env);
-	init_signals_history();
-	// init_history();
 	while (1)
 	{
+		init_signals_history();
 		init_prompt(&msh);
 		msh.line = readline(msh.prompt);
 		if (!msh.line)

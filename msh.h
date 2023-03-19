@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/19 14:41:17 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/19 15:14:29 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ int		exec_builtins(t_msh *msh, int cmd_id, int builtin);
 /* signal */
 void	in_exec_signal_handler(int signal_num);
 void	init_signals_history(void);
+void	reset_default_signal(void);
 
 /* Cmd_utils */
 char	*ft_strchr(const char *s, int c);

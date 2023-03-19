@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/03/01 18:30:42 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/19 15:16:20 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 	if (pipe(fd) == -1)
 		printf("ERROR - 3\n");
 	pid = fork();
+	reset_default_signal();
 	if (pid == -1)
 		printf("ERROR - 4\n");
 	if (pid == 0)
@@ -60,6 +61,7 @@ void	exec_last_cmd(t_msh *msh, int cmd_id)
 	int		builtin;
 
 	pid = fork();
+	reset_default_signal();
 	if (pid == -1)
 		printf("ERROR - fork\n");
 	if (pid == 0)
