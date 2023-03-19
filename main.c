@@ -6,11 +6,12 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/16 14:28:38 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/19 14:41:12 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
+#include <signal.h>
 
 int	init_prompt(t_msh *msh)
 {
@@ -27,8 +28,16 @@ int	check_exit(t_msh msh)
 
 void signal_handler(int signal_num)
 {
-	printf("Received signal: %d\n", signal_num);
+	if (signal_num == SIGINT)
+	{
+		rl_replace_line("", 0);
+		printf("\n");
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
+
+
 
 int	main(int argc, char **argv, char **old_env)
 {
@@ -37,12 +46,17 @@ int	main(int argc, char **argv, char **old_env)
 	(void)argc;
 	(void)argv;
 	msh.env = init_env(old_env);
-	ft_print_env(&msh);
-	init_history();
+	init_signals_history();
+	// init_history();
 	while (1)
 	{
 		init_prompt(&msh);
 		msh.line = readline(msh.prompt);
+		if (!msh.line)
+		{
+			printf("exit\n");
+			exit(1);
+		}
 		msh.paths = get_paths(msh.env.tab);
 		parse_line(&msh);
 		parse_fd_data(&msh);

@@ -6,30 +6,28 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:21:19 by mfinette          #+#    #+#             */
-/*   Updated: 2023/02/25 14:33:26 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/19 14:46:01 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
 
-void	init_history(void)
-{
-	rl_bind_key('\t', rl_complete);
-	using_history();
-}
-
 void	custom_add_history(char *line)
 {
-	int	i;
+	static	char	*last;
+	int		i;
 
 	i = 0;
 	if (ft_strlen(line) == 0)
 		return ;
+	last = last ? last : ft_strdup("");
 	while (line[i])
 	{
-		if (line[i] != ' ')
+		if (line[i] != ' ' && ft_strcmp(line, last) != 0)
 		{
 			add_history(line);
+			free(last);
+			last = ft_strdup(line);
 			return ;
 		}
 		i++;
