@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/03/19 15:16:20 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:27:26 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 	{
 		pathing = get_pathing(*msh, cmd_id);
 		if (execve(pathing, msh->cmd[cmd_id].param, msh->env.tab) == -1)
-			ft_err_printf("msh: command not found : %s\n"\
-			, msh->cmd[cmd_id].param[0]);
+			perror(msh->cmd[cmd_id].param[0]);
 	}
 	else
 		exec_builtins(msh, cmd_id, builtin);

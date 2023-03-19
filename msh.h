@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/19 15:14:29 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/19 16:57:56 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <fcntl.h>
 # include <signal.h>
 
+// RETURN VALUES //
 # define NT_VALID_ID 1
 # define SYNTAX_ERROR 2
 # define IS_DIRECTORY 126
@@ -33,6 +34,10 @@
 # define CMD_NT_FND 127
 # define CTRL_C 130
 # define CTRL_SLASH 131
+
+// CD //
+#define OLD 1
+#define HOME 2
 
 typedef struct s_cmd
 {
@@ -74,12 +79,14 @@ typedef struct s_msh
 	t_cmd		*cmd;
 	int			cmd_nbr;
 	int			pid;
+	int			status;
 	char		**paths;
 	char		**historic;
 	char		*prompt;
 	char		*line;
 	char		*ex_val;
 } 				t_msh;
+
 /* Minishell */
 int		minishell(t_msh *msh);
 void	free_things(t_msh msh);
@@ -87,6 +94,8 @@ void	free_things(t_msh msh);
 /* DVD*/
 char	*get_dvd_cmd(char *line);
 void	ft_dvd(t_msh *msh, int cmd_id);
+void	chdir_home_old(t_msh *msh, int code);
+void	update_old_pwd(t_msh *msh, char *actual_path);
 
 /* HISTORIC */
 void	init_history(void);

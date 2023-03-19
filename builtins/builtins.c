@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/07 14:09:04 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/19 17:11:21 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ int	ft_echo(t_msh *msh, int cmd_id)
 	char	*cmd;
 
 	cmd = msh->cmd[cmd_id].param[1];
+	if (!cmd)
+	{
+		printf("\n");
+		return (0);
+	}
 	i = 1;
 	if ((cmd[0] == '-' && !cmd[1]) \
 			|| (cmd[0] == '-' && cmd[1] == 'n'))
