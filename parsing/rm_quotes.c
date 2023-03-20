@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rm_quotes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/16 14:08:58 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/20 12:37:13 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	go_to_end_quote(int i, char *line, char q, int s)
 
 int	go_to_end_of_arg(int i, char *line, char q, int s)
 {
+	while (line[i] && line[i] == q)
+		i++;
 	while (line[i] && !is_end_of_arg(i, line, q, s))
 		i++;
 	return (i);
@@ -31,6 +33,7 @@ int	go_to_end_of_arg(int i, char *line, char q, int s)
 void	quote_handling(t_msh *msh, t_parse *p, int *q_nbr)
 {	
 	p->i = go_to_end_of_arg(p->i, p->line, p->q, p->strt);
+	printf("end of arg : %d\n", p->i);
 	*q_nbr = quote_rm_nbr(*p);
 	p->line = get_dollar(msh, p);
 	p->line = getline_rm_quote(*p);
@@ -57,8 +60,9 @@ char	*rm_quotes(t_msh *msh, char *sub)
 		else if (p.line[p.i] == '$')
 			p.line = replace_env_arg(msh, &p, p.i);
 		p.line = replace_spaces(p);
-		p.i++;
+		if (p.line[p.i])
+			p.i++;
 	}
-	printf("p.line = %s\n", p.line);
+	printf("p.line : %d\n", p.line[0]);
 	return (p.line);
 }

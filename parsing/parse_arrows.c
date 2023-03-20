@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 14:52:35 by colas             #+#    #+#             */
-/*   Updated: 2023/03/05 18:54:10 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/16 17:02:32 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ int	is_between_quotes(t_msh *msh, int k)
 			quote = msh->line[j];
 			i = j;
 			count = 0;
+			printf("i egal : %d\n", i);
 			while (i >= 0)
 			{
 				if (msh->line[i] == quote)
 					count++;
 				i--;
 			}
-			printf("count = %d\n", count);
 			if (count % 2 == 1)
 				return (1);
 		}

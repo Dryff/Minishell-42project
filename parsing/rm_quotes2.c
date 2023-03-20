@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rm_quotes2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 02:03:35 by colas             #+#    #+#             */
-/*   Updated: 2023/03/16 14:11:54 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/20 11:58:38 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,13 @@ int	is_end_of_arg(int i, char *line, char q, int s)
 	int q_count;
 
 	q_count = 0;
+	if (q)
+		if (line[i] != q)
+			return (0);
 	if (!line[i + 1])
 		return (1);
+	if (line[i + 1] != ' ')
+		return (0);
 	while (i >= s)
 	{
 		if (line[i] == q)

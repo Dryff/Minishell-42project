@@ -1,6 +1,7 @@
 FIX CD <3
 FIX EXPORT SANS = <3
-FIX EXPAND $ (export salut="echo salut") puis $salut <3
+FIX EXPAND $ (export test="echo salut") puis $test
+FIX $variablequiexistepas 8===>
 FAIRE HERE_DOC
 PIPES QUI CASSENT <3
 EXPORT AVEC EXPAND <3
@@ -8,6 +9,7 @@ ls | ls <3
 DO SIGNALS <3
 FIX /bin/ls quand path unseted
 PARSING DES CHEVRONS
-PARSING POUR LE HEREDOC
+PARSING POUR LE HEREDOC <3
 CTRL + \
 urandom
+GERER ERREURS EN CAS DE MALLOC FOIRÉ

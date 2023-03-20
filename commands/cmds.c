@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/03/19 17:27:26 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:57:10 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,15 @@ int	commands(t_msh *msh)
 	i = 0;
 	while (i < msh->cmd_nbr - 1)
 	{
-		builtin = is_builtin(msh->cmd[i].param[0]);
-		if (!is_not_builtin_fd(msh->cmd[i].param[0]))
-			exec_cmd(msh, i);
+		if (msh->cmd[i].param[0])
+			builtin = is_builtin(msh->cmd[i].param[0]);
+		if (msh->cmd[i].param[0])
+			if (!is_not_builtin_fd(msh->cmd[i].param[0]))
+				exec_cmd(msh, i);
 		i++;
 	}
+	if (!msh->cmd[i].param[0])
+		return (0);
 	builtin = is_builtin(msh->cmd[i].param[0]);
 	if (!is_not_builtin_fd(msh->cmd[i].param[0]))
 		exec_last_cmd(msh, i);
