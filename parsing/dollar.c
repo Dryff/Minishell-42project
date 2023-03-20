@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/16 14:09:14 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/20 14:35:30 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,10 @@ char *replace_env_arg(t_msh *msh, t_parse *p, int cursor)
 	// printf("expanded : %s\n", expanded);
 	// printf("somme : %lu\n", ft_strlen(p->line) - p->arg_sz + ft_strlen(expanded));
 	str = copy_with_value(expanded, *p, cursor);
+	printf("str : %s\n", str);
+	printf("p.i : %d\n", p->i);
+	str = replace_spaces_of_expanded(*p, str);
+	printf("str mec : %s\n", str);
 	p->i += ft_strlen(expanded) - p->arg_sz - 1;
 	if (p->i < 0)
 		p->i = 0;

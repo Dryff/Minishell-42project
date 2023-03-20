@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/19 16:57:56 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/20 14:34:52 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,8 +174,9 @@ char	*rm_quotes(t_msh *msh, char *sub);
 char	*get_dollar(t_msh *msh, t_parse *p);
 char	*getline_rm_quote(t_parse p);
 int		quote_rm_nbr(t_parse p);
-char	*replace_spaces(t_parse p);
-int		go_to_end_quote(int i, char *line, char q, int s);
+char	*replace_spaces(t_parse p, char *line);
+char *replace_spaces_of_expanded(t_parse p, char *line);
+int go_to_end_quote(int i, char *line, char q, int s);
 int		parse_fd_data(t_msh *msh);
 int		is_alpha(char c);
 

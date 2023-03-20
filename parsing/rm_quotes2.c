@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 02:03:35 by colas             #+#    #+#             */
-/*   Updated: 2023/03/20 11:58:38 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/20 14:40:11 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,24 +75,37 @@ int	quote_rm_nbr(t_parse p)
 	return (count);
 }
 
-char	*replace_spaces(t_parse p)
+char	*replace_spaces_of_expanded(t_parse p, char *line)
+{
+	int j;
+
+	while (line[p.i])
+	{
+		if (is_white_space(line[p.i]))
+			line[p.i] = 10;
+		p.i++;
+	}
+	return (line);
+}
+
+char	*replace_spaces(t_parse p, char *line)
 {
 	int	j;
 
-	while (p.line[p.i] && !is_white_space(p.line[p.i]))
+	while (line[p.i] && !is_white_space(line[p.i]))
 	{
-		if (p.line[p.i] == '\'' || p.line[p.i] == '"')
-			return (p.line);
+		if (line[p.i] == '\'' || line[p.i] == '"')
+			return (line);
 		p.i++;
 	}
 	j = p.i;
-	while (p.line[j] && p.line[j] != '\'' && p.line[j] != '"' \
-			&& is_white_space(p.line[j]))
+	while (line[j] && line[j] != '\'' && line[j] != '"' \
+			&& is_white_space(line[j]))
 		j++;
-	while (p.line[p.i] && p.i < j)
+	while (line[p.i] && p.i < j)
 	{
-		p.line[p.i] = 10;
+		line[p.i] = 10;
 		p.i++;
 	}
-	return (p.line);
+	return (line);
 }

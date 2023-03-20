@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/20 12:37:13 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/20 14:32:06 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,14 @@ char	*rm_quotes(t_msh *msh, char *sub)
 			p.strt = p.i;
 			quote_handling(msh, &p, &q_nbr);
 			p.i -= q_nbr;
+			p.line = replace_spaces(p, p.line);
 		}
 		else if (p.line[p.i] == '$')
 			p.line = replace_env_arg(msh, &p, p.i);
-		p.line = replace_spaces(p);
+		else
+			p.line = replace_spaces(p, p.line);
 		if (p.line[p.i])
 			p.i++;
 	}
-	printf("p.line : %d\n", p.line[0]);
 	return (p.line);
 }
