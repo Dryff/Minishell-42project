@@ -6,53 +6,23 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 14:52:35 by colas             #+#    #+#             */
-/*   Updated: 2023/03/20 16:32:37 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/21 20:30:26 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-int	get_cmd_is_before_arrow(t_msh *msh, int i)
-{
-	while (msh->line[i] && !is_alpha(msh->line[i]))
-		i--;
-	while (i >= 0 && msh->line[i] != '|')
-		i--;
-	i++;
-	return (i);
-}
 
-int	get_cmd_is_after_arrow(t_msh *msh, int i)
-{
-	while (msh->line[i] && msh->line[i] != '>' && msh->line[i] != '<')
-		i++;
-	while (msh->line[i] && (msh->line[i] == '>' || msh->line[i] == '<'))
-		i++;
-	while (msh->line[i] && (is_white_space(msh->line[i])))
-		i++;
-	while (msh->line[i] && is_alpha(msh->line[i]))
-		i++;
-	while (msh->line[i] && (is_white_space(msh->line[i])))
-		i++;
-	return (i);
-}
 
-int	is_name_before_arrow(t_msh *msh, int i)
+int	is_name_before_arrow(t_msh *msh, t_parse p)
 {
-	while (msh->line[i] && msh->line[i] != '>' && msh->line[i] != '<')
+	while (p.i > p.strt)
 	{
-		if (!is_white_space(msh->line[i]))
+		if (!is_white_space(msh->line[p.i]))
 			return (1);
-		i++;
+		p.i--;
 	}
 	return (0);
-}
-
-int	get_size_until_arrow(t_msh *msh, int i)
-{
-	while (msh->line[i] && msh->line[i] != '<' && msh->line[i] != '>')
-		i++;
-	return (i);
 }
 
 int	is_between_quotes(t_msh *msh, int k)

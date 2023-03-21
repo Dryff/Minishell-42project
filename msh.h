@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/20 14:34:52 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/21 20:00:15 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 # include <fcntl.h>
 # include <signal.h>
 
+// ERROR CODES //
+# define MALLOC_ERR 1
+
 // RETURN VALUES //
 # define NT_VALID_ID 1
 # define SYNTAX_ERROR 2
@@ -39,11 +42,7 @@
 #define OLD 1
 #define HOME 2
 
-typedef struct s_cmd
-{
-	char	**param;
-	int		here_doc;
-}				t_cmd;
+
 
 typedef struct s_env
 {
@@ -58,10 +57,17 @@ typedef struct s_fildes
 	int		infd;
 	int		outfd;
 
-	char *in_name;
+	char 	*in_name;
 	char	*out_name;
 
 }				t_fildes;
+
+typedef struct s_cmd
+{
+	char	**param;
+	int		here_doc;
+	t_fildes fd;
+}				t_cmd;
 
 typedef struct s_parse
 {
@@ -89,7 +95,8 @@ typedef struct s_msh
 
 /* Minishell */
 int		minishell(t_msh *msh);
-void	free_things(t_msh msh);
+void	free_things(t_msh *msh);
+void	error_manager(int err_num);
 
 /* DVD*/
 char	*get_dvd_cmd(char *line);
@@ -166,22 +173,21 @@ int 	get_cmd_nbr(char *str);
 int 	open_fd(t_msh *msh);
 int 	check_fd(t_msh *msh, int i, int j);
 int 	get_quote(char *s, int i);
-int 	is_in_quote(char *s, int i, char quote, int start);
+int 	is_in_quote(char *s, int *start_quote, int i, int is_in_quotes);
 int 	get_and_check_fd(t_msh *msh);
 char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor);
 int		is_end_of_arg(int i, char *line, char q, int s);
-char	*rm_quotes(t_msh *msh, char *sub);
+char	*quotes_dollars_and_redir(t_msh *msh, char *sub, int j, int i);
 char	*get_dollar(t_msh *msh, t_parse *p);
-char	*getline_rm_quote(t_parse p);
+char	*getline_rm_quote(t_msh *msh, t_parse p);
 int		quote_rm_nbr(t_parse p);
 char	*replace_spaces(t_parse p, char *line);
-char *replace_spaces_of_expanded(t_parse p, char *line);
-int go_to_end_quote(int i, char *line, char q, int s);
+char 	*replace_spaces_of_expanded(t_parse p, char *line);
+int 	go_to_end_quote(int i, char *line, char q, int s);
 int		parse_fd_data(t_msh *msh);
 int		is_alpha(char c);
 
-int		is_name_before_arrow(t_msh *msh, int i);
-int		get_cmd_is_after_arrow(t_msh *msh, int i);
+int		is_name_before_arrow(t_msh *msh, t_parse p);
 int		get_size_until_arrow(t_msh *msh, int i);
 
 /* Basic utils */
@@ -198,6 +204,8 @@ void	free_tab(char **tab);
 int		is_delimiter(char c);
 int		is_white_space(char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		get_cmd_size(char *s, int i);
+int		is_end_quote(char *str, int start_quote, int i);
 int		get_size(char *s, int i);
 char	*ft_strjoin_by_sep(char const *s1, char const *s2);
 

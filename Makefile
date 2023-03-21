@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
+#    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/03/19 17:30:14 by mfinette         ###   ########.fr        #
+#    Updated: 2023/03/21 10:44:36 by cgelin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ FILES = main							\
 		ft_err_printf/ft_putstr_int		\
 		history							\
 		free_things						\
+		error							\
 		signal							
 
 all: $(NAME)

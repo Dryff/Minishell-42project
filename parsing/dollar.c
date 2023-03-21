@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/20 14:35:30 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/21 21:28:37 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char *get_expanded(t_msh *msh, t_parse *p, int cursor)
 	return (expanded);
 }
 
-char *copy_with_value(char *expanded, t_parse p, int cursor)
+char *copy_with_value(t_msh *msh, char *expanded, t_parse p, int cursor)
 {
 	int		i;
 	int		j;
@@ -46,10 +46,10 @@ char *copy_with_value(char *expanded, t_parse p, int cursor)
 
 	i = -1;
 	j = 0;
-	str = malloc(sizeof(char) *
-	(ft_strlen(p.line) - p.arg_sz + ft_strlen(expanded) + 1));
+	str = malloc(sizeof(char) * (ft_strlen(expanded) + \
+	ft_strlen(p.line) - p.arg_sz) + 1);
 	if (!str)
-		return (NULL);
+		return (error_manager(MALLOC_ERR), NULL);
 	while (++i < cursor - 1)
 		str[i] = p.line[i];
 	while (j < (int)ft_strlen(expanded))
@@ -81,11 +81,8 @@ char *replace_env_arg(t_msh *msh, t_parse *p, int cursor)
 	}
 	// printf("expanded : %s\n", expanded);
 	// printf("somme : %lu\n", ft_strlen(p->line) - p->arg_sz + ft_strlen(expanded));
-	str = copy_with_value(expanded, *p, cursor);
-	printf("str : %s\n", str);
-	printf("p.i : %d\n", p->i);
+	str = copy_with_value(msh, expanded, *p, cursor);
 	str = replace_spaces_of_expanded(*p, str);
-	printf("str mec : %s\n", str);
 	p->i += ft_strlen(expanded) - p->arg_sz - 1;
 	if (p->i < 0)
 		p->i = 0;

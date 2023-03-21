@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   rm_quotes2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 02:03:35 by colas             #+#    #+#             */
-/*   Updated: 2023/03/20 14:40:11 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/21 20:54:02 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-char	*getline_rm_quote(t_parse p)
+char	*getline_rm_quote(t_msh *msh, t_parse p)
 {
 	char		*str;
 	int			i;
 	int			j;
 
-	str = malloc(sizeof(char) * ft_strlen(p.line));
+	str = malloc(sizeof(char) * ft_strlen(p.line) + 1);
+	if (!str)
+		return (error_manager(MALLOC_ERR), NULL);
 	i = 0;
 	j = -1;
-	if (!str)
-		return (NULL);
 	while (++j < p.strt)
 		str[j] = p.line[j];
 	i = j;

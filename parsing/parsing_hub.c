@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/20 15:44:40 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/21 19:51:45 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,17 @@ void	get_cmd(t_msh *msh, int *i, int j)
 {
 	char	*cmd;
 	char	*sub;
-	// int		start;
 	int		size;
 	
-	size = get_size(msh->line, *i);
-	if (check_fd(msh, *i, j))
-	{
-		if (is_name_before_arrow(msh, *i))
-			size = get_size_until_arrow(msh, *i);
-		else
-			*i = get_cmd_is_after_arrow(msh, *i);
-	}
+	size = get_cmd_size(msh->line, *i);
+	printf("size = %d\n", size);
 	sub = ft_substr(msh->line, *i, size);
-	printf("size = %s\n", sub);
-	cmd = rm_quotes(msh, sub);
-	printf("size = %s\n", cmd);
+	printf("sub = %s\n", sub);
+	cmd = quotes_dollars_and_redir(msh, sub, j, *i);
+	printf("cmd = %s\n", cmd);
 	msh->cmd[j].param = ft_split(cmd, 10);
 	free(cmd);
-	*i += get_size(msh->line, *i);
+	*i += size;
 }
 
 int	go_to_arg_start(char *line, int i)
@@ -102,7 +95,7 @@ int	parse_line(t_msh *msh)
 		return (0);
 	msh->cmd = malloc(sizeof(t_cmd) * msh->cmd_nbr);
 	if (!msh->cmd)
-		return (0);
+		return (error_manager(MALLOC_ERR), 1);
 	store_cmds_between_pipes(msh);
 	print_cmds(*msh);
 	return (1);

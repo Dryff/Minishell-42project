@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_nbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 14:54:19 by colas             #+#    #+#             */
-/*   Updated: 2023/03/03 18:17:31 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/21 22:09:20 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,36 @@ static int	if_no_pipe(char *str, int i)
 
 int	get_cmd_nbr(char *str)
 {
+	int		is_in_quotes;
+	int		start_quote;
+	int		i;
 	int		count;
-	int end_quote;
-	int quote;
-	int start;
-	int i;
-	
-	i = 0;
-	start = 0;
+	//go to end_of_arg
 	count = 0;
-	count = if_no_pipe(str, i);
-	quote = get_quote(str, i);
-	end_quote = go_to_end_quote(i, str, quote, i);
-	if (count == 0)
-		return (0);
+	if (str[0] == '\n')
+		count = 1;
 	i = 0;
+	is_in_quotes = 0;
+	start_quote = 0;
 	while (str[i])
 	{
-		if (str[i] == '|' && !is_in_quote(str, i, quote, start))
+		if (str[i] == '|' && !is_in_quotes)
 			count++;
+		if (str[i] == '"' || str[i] == '\'')
+		{
+			if (!is_in_quotes)
+			{
+				is_in_quotes = 1;
+				start_quote = i;
+				while (str[i] && str[i] == '"' || str[i] == '\'')
+					i++;
+			}
+			else if (is_in_quotes)
+			{
+				if (is_end_quote(str, start_quote, i))
+					is_in_quotes = 0;
+			}	
+		}
 		i++;
 	}
 	return (count);
