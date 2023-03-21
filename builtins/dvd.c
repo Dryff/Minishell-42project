@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/21 18:46:45 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:34:34 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	chdir_home_old(t_msh *msh, int code)
 		{
 			error = 1;
 			perror("chdir");
-			msh->status = 1;
+			update_msh_status(msh, 1);
 		}
 	}
 	else if (code == OLD)
@@ -54,7 +54,7 @@ void	chdir_home_old(t_msh *msh, int code)
 		{
 			error = 1;
 			perror("chdir");
-			msh->status = 1;
+			update_msh_status(msh, 1);
 		}
 	}
 	if (!error)
@@ -80,7 +80,7 @@ void	ft_dvd(t_msh *msh, int cmd_id)
 		{
 			perror("chdir");
 			free(actual_path);
-			msh->status = 1;
+			update_msh_status(msh, 1);
 		}
 		else
 			update_pwd_env(msh, actual_path);

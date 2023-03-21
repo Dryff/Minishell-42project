@@ -6,12 +6,18 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/19 16:56:44 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:27:34 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
 #include <signal.h>
+
+void	update_msh_status(t_msh *msh, int status)
+{
+	free(msh->status);
+	msh->status = ft_strdup(ft_itoa(status));
+}
 
 int	init_prompt(t_msh *msh)
 {
@@ -43,7 +49,6 @@ int	main(int argc, char **argv, char **old_env)
 
 	(void)argc;
 	(void)argv;
-	msh.status = 0;
 	msh.env = init_env(old_env);
 	while (1)
 	{
