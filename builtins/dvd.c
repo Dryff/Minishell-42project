@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/19 16:57:23 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:46:45 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,19 @@
 #define OLD 1
 #define HOME 2
 
-void	update_old_pwd(t_msh *msh, char *actual_path)
+void	update_pwd_env(t_msh *msh, char *actual_path)
 {
 	char	*oldpwd;
+	char	*pwd;
+	char	*tmp;
 
 	oldpwd = ft_strjoin("OLDPWD=", actual_path);
+	tmp = getcwd(NULL, 0);
+	pwd = ft_strjoin("PWD=", tmp);
+	complete_export(msh, pwd);
 	complete_export(msh, oldpwd);
+	free(pwd);
+	free(tmp);
 	free(oldpwd);
 	free(actual_path);
 }
@@ -51,7 +58,7 @@ void	chdir_home_old(t_msh *msh, int code)
 		}
 	}
 	if (!error)
-		update_old_pwd(msh, actual_path);
+		update_pwd_env(msh, actual_path);
 }
 
 void	ft_dvd(t_msh *msh, int cmd_id)
@@ -76,7 +83,7 @@ void	ft_dvd(t_msh *msh, int cmd_id)
 			msh->status = 1;
 		}
 		else
-			update_old_pwd(msh, actual_path);
+			update_pwd_env(msh, actual_path);
 		free(new_path);
 		free(tmp);
 	}
