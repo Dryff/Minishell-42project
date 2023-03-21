@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_fd_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:05:21 by colas             #+#    #+#             */
-/*   Updated: 2023/02/25 23:44:44 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/20 16:44:49 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,14 @@ int get_fd_name(t_msh *msh, char c, int mode)
 
 int open_fd(t_msh *msh)
 {
-	msh->fildes.input = get_fd_name(msh, '<', 0);
-	msh->fildes.output = get_fd_name(msh, '>', 1);
+	if (msh->fildes.input >= 0)
+		msh->fildes.input = get_fd_name(msh, '<', 0);
+	else
+		msh->fildes.input = 0;
+	if (msh->fildes.output >= 0)
+		msh->fildes.output = get_fd_name(msh, '>', 1);
+	else
+		msh->fildes.output = 0;
 	msh->fildes.infd = 0;
 	msh->fildes.outfd = 0;
 	if (msh->fildes.input || msh->fildes.output)

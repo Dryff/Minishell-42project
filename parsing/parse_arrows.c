@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_arrows.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 14:52:35 by colas             #+#    #+#             */
-/*   Updated: 2023/03/16 17:02:32 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/20 16:32:37 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,32 @@ int	is_redirect(t_msh *msh, int k)
 	return (-1);
 }
 
+int	reset_fds(t_msh *msh)
+{
+	int j;
+
+	j = 0;
+	while (msh->line[j] && msh->line[j] != '|')
+	{
+		if (msh->line[j] == '<' || msh->line[j] == '>')
+		{
+			if (msh->line[j] && msh->line[j + 1] != msh->line[j])
+			{
+				if (msh->line[j] == '>')
+					msh->fildes.output = -1;
+				if (msh->line[j] == '<')
+					msh->fildes.input = -1;
+			}
+			else if (msh->line[j] && msh->line[j + 1] && msh->line[j] == '>' && msh->line[j + 1] == '>')
+				msh->fildes.input = -1;
+			else if (msh->line[j] && msh->line[j + 1] && msh->line[j] == '<' && msh->line[j + 1] == '<')
+				msh->fildes.output = -1;
+		}
+		j++;
+	}
+	
+}
+
 int	check_fd(t_msh *msh, int i, int j)
 {
 	int k;
@@ -110,7 +136,7 @@ int	check_fd(t_msh *msh, int i, int j)
 	k = is_redirect(msh, i);
 	printf("k = %d\n", k);
 	if (k == -1)
-		return (0);
+		return (reset_fds(msh), 0);
 	if (msh->line[k] && msh->line[k + 1] && msh->line[k] == '<' && msh->line[k + 1] == '<')
 		msh->cmd[j].here_doc = 1;
 	return (1);

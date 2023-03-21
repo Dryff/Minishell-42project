@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   get_and_check_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/02/25 23:43:44 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/20 16:43:31 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ void check_input(t_msh *msh)
 		else
 			ft_err_printf("msh: no such file or directory: %s\n", \
 			msh->fildes.in_name);
-		return;
 	}
+	if (msh->fildes.input)
+		free(msh->fildes.in_name);
 }
 
 void check_output(t_msh *msh)
@@ -41,6 +42,8 @@ void check_output(t_msh *msh)
 		ft_err_printf("msh: permission denied: %s\n", msh->fildes.out_name);
 		return;
 	}
+	if (msh->fildes.output)
+		free(msh->fildes.out_name);
 }
 
 int get_and_check_fd(t_msh *msh)
