@@ -1,41 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rm_quotes2.c                                       :+:      :+:    :+:   */
+/*   quotes_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 02:03:35 by colas             #+#    #+#             */
-/*   Updated: 2023/03/21 20:54:02 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 10:47:49 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-char	*getline_rm_quote(t_msh *msh, t_parse p)
+int	go_to_end_of_arg(int i, char *line, char q, int s)
 {
-	char		*str;
-	int			i;
-	int			j;
-
-	str = malloc(sizeof(char) * ft_strlen(p.line) + 1);
-	if (!str)
-		return (error_manager(MALLOC_ERR), NULL);
-	i = 0;
-	j = -1;
-	while (++j < p.strt)
-		str[j] = p.line[j];
-	i = j;
-	while (p.line[j] && j <= p.i)
-	{
-		if (p.line[j] != p.q)
-			str[i++] = p.line[j];
-		j++;
-	}
-	while (p.line[j])
-		str[i++] = p.line[j++];
-	free(p.line);
-	return (str[i] = '\0', str);
+	while (line[i] && line[i] == q)
+		i++;
+	while (line[i] && !is_end_of_arg(i, line, q, s))
+		i++;
+	return (i);
 }
 
 int	is_end_of_arg(int i, char *line, char q, int s)
@@ -61,18 +44,13 @@ int	is_end_of_arg(int i, char *line, char q, int s)
 	return (1);
 }
 
-int	quote_rm_nbr(t_parse p)
+int	go_to_end_quote(int i, char *line, char q, int s)
 {
-	int	count;
-
-	count = 0;
-	while (p.strt <= p.i)
-	{
-		if (p.line[p.strt] == p.q)
-			count ++;
-		p.strt++;
-	}
-	return (count);
+	while (line[i] && !is_end_of_arg(i, line, q, s))
+		i++;
+	while (i > 0 && line[i] != q)
+		i--;
+	return (i);
 }
 
 char	*replace_spaces_of_expanded(t_parse p, char *line)

@@ -1,33 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rm_quotes.c                                        :+:      :+:    :+:   */
+/*   quotes_dollars_and_redir.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/21 22:06:26 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 10:47:47 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-int	go_to_end_quote(int i, char *line, char q, int s)
+char	*getline_rm_quote(t_msh *msh, t_parse p)
 {
-	while (line[i] && !is_end_of_arg(i, line, q, s))
-		i++;
-	while (i > 0 && line[i] != q)
-		i--;
-	return (i);
+	char		*str;
+	int			i;
+	int			j;
+
+	str = malloc(sizeof(char) * ft_strlen(p.line) + 1);
+	if (!str)
+		return (error_manager(MALLOC_ERR), NULL);
+	i = 0;
+	j = -1;
+	while (++j < p.strt)
+		str[j] = p.line[j];
+	i = j;
+	while (p.line[j] && j <= p.i)
+	{
+		if (p.line[j] != p.q)
+			str[i++] = p.line[j];
+		j++;
+	}
+	while (p.line[j])
+		str[i++] = p.line[j++];
+	free(p.line);
+	return (str[i] = '\0', str);
 }
 
-int	go_to_end_of_arg(int i, char *line, char q, int s)
+int	quote_rm_nbr(t_parse p)
 {
-	while (line[i] && line[i] == q)
-		i++;
-	while (line[i] && !is_end_of_arg(i, line, q, s))
-		i++;
-	return (i);
+	int	count;
+
+	count = 0;
+	while (p.strt <= p.i)
+	{
+		if (p.line[p.strt] == p.q)
+			count ++;
+		p.strt++;
+	}
+	return (count);
 }
 
 void	quote_handling(t_msh *msh, t_parse *p)
@@ -36,43 +58,11 @@ void	quote_handling(t_msh *msh, t_parse *p)
 	
 	p->q = p->line[p->i];
 	p->i = go_to_end_of_arg(p->i, p->line, p->q, p->strt);
-	printf("end of arg : %d\n", p->i);
 	q_nbr = quote_rm_nbr(*p);
 	p->line = get_dollar(msh, p);
 	p->line = getline_rm_quote(msh, *p);
 	p->i -= q_nbr;
 	p->i++;
-	printf("p.i bro : %d, pstrt : %d, p.line : %s\n", p->i, p->strt, p->line);
-}
-
-void get_name(t_msh *msh, t_parse p, int mode)
-{
-	int end;
-	
-	while (msh->line[p.i] == '<' || msh->line[p.i] == '>')
-		p.i--;
-	while (msh->line[p.i] && is_white_space(msh->line[p.i]))
-		p.i--;
-	end = p.i;
-	while (msh->line[end] && !is_white_space(msh->line[end]))
-		end++;
-	if (mode == 0)
-		msh->fildes.in_name = ft_substr(msh->line, p.i, end - p.i);
-	else
-		msh->fildes.out_name = ft_substr(msh->line, p.i, end - p.i);
-}
-
-void	get_redir(t_msh *msh, t_parse *p, int cmd_index)
-{
-	if (p->line[p->i] == '>' && p->line[p->i + 1] != '>')
-		msh->cmd[cmd_index].fd.input = 1;
-	else if (p->line[p->i] == '<' && p->line[p->i + 1] != '<')
-		msh->cmd[cmd_index].fd.output = 2;
-	else if (p->line[p->i] == '>' && p->line[p->i + 1] == '>')
-		msh->cmd[cmd_index].fd.input = 3;
-	else if (p->line[p->i] == '<' && p->line[p->i + 1] == '<')
-		msh->cmd[cmd_index].fd.output = 4;
-	get_name(msh, *p, msh->cmd[cmd_index].fd.output % 2);
 }
 
 char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_index, int i)

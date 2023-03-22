@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/21 20:00:15 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 13:28:56 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,9 @@ int		is_alpha(char c);
 
 int		is_name_before_arrow(t_msh *msh, t_parse p);
 int		get_size_until_arrow(t_msh *msh, int i);
+void	get_redir(t_msh *msh, t_parse *p, int cmd_index);
+int		go_to_end_of_arg(int i, char *line, char q, int s);
+int		quote_check(char *str, int i, int *start_quote, int *is_in_quotes);
 
 /* Basic utils */
 char	**ft_split(char const *str, char c);

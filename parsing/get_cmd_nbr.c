@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 14:54:19 by colas             #+#    #+#             */
-/*   Updated: 2023/03/21 22:09:20 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 11:52:55 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,26 @@ static int	if_no_pipe(char *str, int i)
 	return (count);
 }
 
+int	quote_check(char *str, int i, int *start_quote, int *is_in_quotes)
+{
+	if (str[i] == '"' || str[i] == '\'')
+	{
+		if (!*is_in_quotes)
+		{
+			*is_in_quotes = 1;
+			*start_quote = i;
+			while (str[i] && (str[i] == '"' || str[i] == '\''))
+				i++;
+		}
+		else if (is_in_quotes)
+		{
+			if (is_end_quote(str, *start_quote, i))
+				*is_in_quotes = 0;
+		}	
+	}
+	return (i);
+}
+
 int	get_cmd_nbr(char *str)
 {
 	int		is_in_quotes;
@@ -33,9 +53,9 @@ int	get_cmd_nbr(char *str)
 	int		i;
 	int		count;
 	//go to end_of_arg
-	count = 0;
-	if (str[0] == '\n')
-		count = 1;
+	count = 1;
+	if (str[0] == '\0')
+		count = 0;
 	i = 0;
 	is_in_quotes = 0;
 	start_quote = 0;
@@ -43,22 +63,10 @@ int	get_cmd_nbr(char *str)
 	{
 		if (str[i] == '|' && !is_in_quotes)
 			count++;
-		if (str[i] == '"' || str[i] == '\'')
-		{
-			if (!is_in_quotes)
-			{
-				is_in_quotes = 1;
-				start_quote = i;
-				while (str[i] && str[i] == '"' || str[i] == '\'')
-					i++;
-			}
-			else if (is_in_quotes)
-			{
-				if (is_end_quote(str, start_quote, i))
-					is_in_quotes = 0;
-			}	
-		}
+		quote_check(str, i, &start_quote, &is_in_quotes);
+		printf("isin : %d, %d\n", i, is_in_quotes);
 		i++;
 	}
+	printf("count = %d\n", count);
 	return (count);
 }
