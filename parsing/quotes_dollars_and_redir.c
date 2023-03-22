@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/22 10:47:47 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 16:45:52 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_index, int i)
 	p.line = str;
 	p.i = 0;
 	p.strt = 0;
-	printf("p.ay = %d\n", p.i);
 	while (p.line[p.i])
 	{
 		if (p.line[p.i] == '"' || p.line[p.i] == '\'')
@@ -81,7 +80,7 @@ char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_index, int i)
 			quote_handling(msh, &p);
 			p.line = replace_spaces(p, p.line);
 		}
-		else if (p.line[p.i] == '>' || p.line[p.i] == '<')
+		if (p.line[p.i] == '>' || p.line[p.i] == '<')
 			get_redir(msh, &p, cmd_index);
 		else if (p.line[p.i] == '$')
 			p.line = replace_env_arg(msh, &p, p.i);

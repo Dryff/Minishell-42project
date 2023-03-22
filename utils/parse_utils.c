@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 09:07:58 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/22 10:47:32 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 17:00:31 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	is_end_quote(char *str, int start_quote, int i)
 	count = 0;
 	while (i >= start_quote)
 	{
+		// dprintf(2, "in end_quote : i = %d, start_quote = %d\n", i, start_quote);
 		if (str[i] == str[start_quote])
 			count++;
 		i--;

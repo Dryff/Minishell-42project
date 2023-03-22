@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 14:54:19 by colas             #+#    #+#             */
-/*   Updated: 2023/03/22 11:52:55 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 17:00:00 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,8 @@ int	get_cmd_nbr(char *str)
 		if (str[i] == '|' && !is_in_quotes)
 			count++;
 		quote_check(str, i, &start_quote, &is_in_quotes);
-		printf("isin : %d, %d\n", i, is_in_quotes);
 		i++;
 	}
-	printf("count = %d\n", count);
+	// printf("count = %d\n", count);
 	return (count);
 }
