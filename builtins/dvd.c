@@ -44,8 +44,8 @@ void	chdir_home_old(t_msh *msh, int code)
 		if (chdir(ft_expand(&msh->env, "HOME")) != 0)
 		{
 			error = 1;
-			perror("chdir");
-			update_msh_status(msh, 1);
+			ft_err_printf("cd: HOME not set\n");
+			update_msh_status(1);
 		}
 	}
 	else if (code == OLD)
@@ -53,8 +53,8 @@ void	chdir_home_old(t_msh *msh, int code)
 		if (chdir(ft_expand(&msh->env, "OLDPWD")) != 0)
 		{
 			error = 1;
-			perror("chdir");
-			update_msh_status(msh, 1);
+			ft_err_printf("cd: OLDPWD not set\n");
+			update_msh_status(1);
 		}
 	}
 	if (!error)
@@ -78,9 +78,9 @@ void	ft_dvd(t_msh *msh, int cmd_id)
 		tmp = ft_strjoin(new_path, msh->cmd[cmd_id].param[1]);
 		if (chdir(tmp) != 0)
 		{
-			perror("chdir");
+			ft_err_printf("cd: %s: No such file or directory\n", msh->cmd[cmd_id].param[1]);
 			free(actual_path);
-			update_msh_status(msh, 1);
+			update_msh_status(1);
 		}
 		else
 			update_pwd_env(msh, actual_path);

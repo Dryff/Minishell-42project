@@ -13,15 +13,19 @@
 #include "msh.h"
 #include <signal.h>
 
-void	update_msh_status(t_msh *msh, int status)
+int	msh_status = 0;
+
+void	update_msh_status(int status)
 {
-	free(msh->status);
-	msh->status = ft_strdup(ft_itoa(status));
+	msh_status = status;
 }
 
 int	init_prompt(t_msh *msh)
 {
-	msh->prompt = "\e[0;34mmsh -> \e[0m";
+	if (msh_status == 0)
+		msh->prompt = "\e[0;32mmsh -> \e[0m";
+	else
+		msh->prompt = "\e[0;31mmsh -> \e[0m";
 	return (0);
 }
 
@@ -43,6 +47,11 @@ void signal_handler(int signal_num)
 	}
 }
 
+void ft_print_status(void)
+{
+	printf("%d\n", msh_status);
+}
+
 int	main(int argc, char **argv, char **old_env)
 {
 	t_msh	msh;
@@ -50,11 +59,11 @@ int	main(int argc, char **argv, char **old_env)
 	(void)argc;
 	(void)argv;
 	msh.env = init_env(old_env);
-	msh.status = ft_strdup("0");
 	while (1)
 	{
 		init_signals_history();
 		init_prompt(&msh);
+		update_msh_status(0);
 		msh.line = readline(msh.prompt);
 		if (!msh.line)
 		{
@@ -67,7 +76,7 @@ int	main(int argc, char **argv, char **old_env)
 		if (msh.cmd_nbr)
 			commands(&msh);
 		custom_add_history(msh.line);
-		free_things(msh);
+		free_things(&msh);
 		if (!check_exit(msh))
 			exit(1);
 		free(msh.line);

@@ -19,6 +19,7 @@
 #define EXPORT 5
 #define UNSET 6
 #define EXIT 7
+#define VAR 8
 
 int	ft_pwd(void)
 {
@@ -84,6 +85,8 @@ int	is_builtin(char *cmd)
 		return (UNSET);
 	else if (!ft_strncmp(cmd, "exit", 4))
 		return (EXIT);
+	else if (!ft_strncmp(cmd, "var", 3))
+		return (VAR);
 	return (0);
 }
 
@@ -116,5 +119,7 @@ int	exec_builtins(t_msh *msh, int cmd_id, int builtin)
 		return (ft_unset(msh, cmd_id), 1);
 	if (builtin == EXIT)
 		return (ft_exit(), 1);
+	if (builtin == VAR)
+		return (ft_print_status(), 1);
 	return (0);
 }

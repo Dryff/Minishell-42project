@@ -43,7 +43,6 @@
 #define HOME 2
 
 
-
 typedef struct s_env
 {
 	char	**tab;
@@ -97,6 +96,8 @@ typedef struct s_msh
 int		minishell(t_msh *msh);
 void	free_things(t_msh *msh);
 void	error_manager(int err_num);
+void	ft_print_status(void);
+void	update_msh_status(int status);
 
 /* DVD*/
 char	*get_dvd_cmd(char *line);

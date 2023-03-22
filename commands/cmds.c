@@ -26,7 +26,10 @@ void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 	{
 		pathing = get_pathing(*msh, cmd_id);
 		if (execve(pathing, msh->cmd[cmd_id].param, msh->env.tab) == -1)
+		{
+			update_msh_status(1);
 			perror(msh->cmd[cmd_id].param[0]);
+		}
 	}
 	else
 		exec_builtins(msh, cmd_id, builtin);
@@ -73,8 +76,11 @@ void	exec_last_cmd(t_msh *msh, int cmd_id)
 		{
 			pathing = get_pathing(*msh, cmd_id);
 			if (execve(pathing, msh->cmd[cmd_id].param, msh->env.tab) == -1)
+			{
+				update_msh_status(1);
 				ft_err_printf("msh: command not found : %s\n"\
 				, msh->cmd[cmd_id].param[0]);
+			}
 		}
 		else
 			exec_builtins(msh, cmd_id, builtin);

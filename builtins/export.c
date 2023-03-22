@@ -139,7 +139,10 @@ int	ft_export(t_msh *msh, int cmd_id)
 	{
 		cmd = msh->cmd[cmd_id].param[i];
 		if (valid_export(cmd) == WRONG_EXPORT)
+		{
 			printf("msh: export: '%s': not a valid identifier\n", cmd);
+			update_msh_status(1);
+		}
 		else if (valid_export(cmd) == EMPTY_EXPORT)
 			add_invisible_export(msh, cmd);
 		else if (valid_export(cmd) == VALID_EXPORT)
