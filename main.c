@@ -50,6 +50,7 @@ int	main(int argc, char **argv, char **old_env)
 	(void)argc;
 	(void)argv;
 	msh.env = init_env(old_env);
+	msh.status = ft_strdup("0");
 	while (1)
 	{
 		init_signals_history();
