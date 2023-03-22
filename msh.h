@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/22 13:28:56 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 20:56:32 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ typedef struct s_msh
 /* Minishell */
 int		minishell(t_msh *msh);
 void	free_things(t_msh *msh);
-void	error_manager(int err_num);
+void	error_manager(t_msh *msh, int err_num);
 void	ft_print_status(void);
 void	update_msh_status(int status);
 

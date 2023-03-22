@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/03/20 12:57:10 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/22 21:03:27 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 		{
 			update_msh_status(1);
 			perror(msh->cmd[cmd_id].param[0]);
+			free(pathing);
 		}
 	}
 	else
@@ -80,6 +81,7 @@ void	exec_last_cmd(t_msh *msh, int cmd_id)
 				update_msh_status(1);
 				ft_err_printf("msh: command not found : %s\n"\
 				, msh->cmd[cmd_id].param[0]);
+				free(pathing);
 			}
 		}
 		else

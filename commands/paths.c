@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:53:02 by colas             #+#    #+#             */
-/*   Updated: 2023/03/21 10:03:52 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 21:02:44 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,11 @@ char	*get_pathing(t_msh msh, int j)
 	while (msh.paths[i])
 	{
 		slashed = ft_strjoin(msh.paths[i], "/");
+		if (!slashed)
+			return (NULL);
 		pathing = ft_strjoin(slashed, msh.cmd[j].param[0]);
+		if (!slashed)
+			return (NULL);
 		free(slashed);
 		if (access(pathing, 0) == 0)
 			return (pathing);

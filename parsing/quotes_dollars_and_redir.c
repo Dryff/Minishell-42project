@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/22 20:16:13 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 20:59:05 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*getline_rm_quote(t_msh *msh, t_parse p)
 
 	str = malloc(sizeof(char) * ft_strlen(p.line) + 1);
 	if (!str)
-		return (error_manager(MALLOC_ERR), NULL);
+		return (error_manager(msh, MALLOC_ERR), NULL);
 	i = 0;
 	j = -1;
 	while (++j < p.strt)

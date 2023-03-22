@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/22 20:34:44 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 20:58:40 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void get_name(t_msh *msh, t_parse p, int mode, int cmd_index)
     }
 }
 
-char    *remove_fd_name_and_arrow(t_parse *p)
+char    *remove_fd_name_and_arrow(t_msh *msh, t_parse *p)
 {
     char *str;
     int j;
@@ -54,7 +54,7 @@ char    *remove_fd_name_and_arrow(t_parse *p)
     printf("mysize : %d\n", p->i);
     str = malloc(sizeof(char) * p->i + 1);
     if (!str)
-        return (error_manager(MALLOC_ERR), NULL);
+        return (error_manager(msh, MALLOC_ERR), NULL);
     i = 0;
     j = 0;
     while (i < p->i)
@@ -91,5 +91,5 @@ void	get_redir(t_msh *msh, t_parse *p, int cmd_index)
 		msh->cmd[cmd_index].fd.input = 2;
 	    get_name(msh, *p, 0, cmd_index);
     }
-    p->line = remove_fd_name_and_arrow(p);
+    p->line = remove_fd_name_and_arrow(msh, p);
 }

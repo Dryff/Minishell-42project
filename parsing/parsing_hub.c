@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/22 20:33:17 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 20:57:50 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@ void	get_cmd(t_msh *msh, int *i, int j)
 	size = get_cmd_size(msh->line, *i);
 	printf("size = %d\n", size);
 	sub = ft_substr(msh->line, *i, size);
+	if (!sub)
+		return (error_manager(msh, MALLOC_ERR + 1));
 	printf("sub = %s\n", sub);
 	cmd = quotes_dollars_and_redir(msh, sub, j, *i);
 	printf("cmd = %s\n", cmd);
 	msh->cmd[j].param = ft_split(cmd, 10);
+	if (!msh->cmd[j].param)
+		return (error_manager(msh, MALLOC_ERR + 2));
 	free(cmd);
 	*i += size;
 }
@@ -110,7 +114,7 @@ int	parse_line(t_msh *msh)
 		return (0);	
 	msh->cmd = malloc(sizeof(t_cmd) * msh->cmd_nbr);
 	if (!msh->cmd)
-		return (error_manager(MALLOC_ERR), 1);
+		return (error_manager(msh, MALLOC_ERR), 1);
 	init_fds(msh);
 	store_cmds_between_pipes(msh);
 	print_cmds(*msh);

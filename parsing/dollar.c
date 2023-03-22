@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/21 21:28:37 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 20:58:07 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char *copy_with_value(t_msh *msh, char *expanded, t_parse p, int cursor)
 	str = malloc(sizeof(char) * (ft_strlen(expanded) + \
 	ft_strlen(p.line) - p.arg_sz) + 1);
 	if (!str)
-		return (error_manager(MALLOC_ERR), NULL);
+		return (error_manager(msh, MALLOC_ERR), NULL);
 	while (++i < cursor - 1)
 		str[i] = p.line[i];
 	while (j < (int)ft_strlen(expanded))

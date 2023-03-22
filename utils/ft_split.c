@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 10:16:26 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/21 10:45:04 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 21:04:12 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = ft_strlen((char *)s) - start;
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
-		return (error_manager(MALLOC_ERR), NULL);
+		return (NULL);
 	if (start >= ft_strlen((char *)s))
 		return (str);
-	if (str == NULL)
-		return (NULL);
 	while (i < len && s[i])
 	{
 		str[i] = s[start + i];
@@ -83,7 +81,7 @@ char	**ft_split(char const *s, char c)
 	word = ft_count_word(s, c);
 	strs = malloc((word + 1) * sizeof(char *));
 	if (!strs)
-		return (error_manager(MALLOC_ERR), NULL);
+		return (NULL);
 	while (++j < word)
 	{
 		while (s[i] == c)
@@ -91,7 +89,7 @@ char	**ft_split(char const *s, char c)
 		size = ft_size_word(s, c, i);
 		strs[j] = ft_substr(s, i, size);
 		if (!strs[j])
-			return (free_all(strs), error_manager(MALLOC_ERR), NULL);
+			return (free_all(strs), NULL);
 		i += size;
 	}
 	return (strs[j] = 0, strs);
