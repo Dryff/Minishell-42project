@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/22 16:45:52 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 20:16:13 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ void	quote_handling(t_msh *msh, t_parse *p)
 	int q_nbr;
 	
 	p->q = p->line[p->i];
-	p->i = go_to_end_of_arg(p->i, p->line, p->q, p->strt);
+	p->i = go_to_end_quote(p->i, p->line, p->q, p->strt);
 	q_nbr = quote_rm_nbr(*p);
 	p->line = get_dollar(msh, p);
 	p->line = getline_rm_quote(msh, *p);
 	p->i -= q_nbr;
-	p->i++;
+	printf("exit : %d\n", p->i);
 }
 
 char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_index, int i)
@@ -80,7 +80,7 @@ char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_index, int i)
 			quote_handling(msh, &p);
 			p.line = replace_spaces(p, p.line);
 		}
-		if (p.line[p.i] == '>' || p.line[p.i] == '<')
+		else if (p.line[p.i] == '>' || p.line[p.i] == '<')
 			get_redir(msh, &p, cmd_index);
 		else if (p.line[p.i] == '$')
 			p.line = replace_env_arg(msh, &p, p.i);

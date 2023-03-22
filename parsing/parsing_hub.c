@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/22 10:18:44 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/22 20:33:17 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ void	print_cmds(t_msh msh)
 	while (i < msh.cmd_nbr)
 	{
 		j = 0;
-		printf("heredoc[%d] = %d\n",i, msh.cmd[i].here_doc);
+		printf("i = %d\n", i);
+		printf("in = %s\n", msh.cmd[i].fd.in_name);
+		printf("out = %s\n", msh.cmd[i].fd.out_name);
 		while (msh.cmd[i].param[j])
 		{
 			printf("cmd[%d].param[%d] = %s\n", i, j, msh.cmd[i].param[j]);
@@ -88,14 +90,28 @@ void	print_cmds(t_msh msh)
 	}
 }
 
+void	init_fds(t_msh *msh)
+{
+	int i;
+
+	i = 0;
+	while (i < msh->cmd_nbr)
+	{
+		msh->cmd[i].fd.in_name = NULL;
+		msh->cmd[i].fd.out_name = NULL;
+		i++;
+	}
+}
+
 int	parse_line(t_msh *msh)
 {
 	msh->cmd_nbr = get_cmd_nbr(msh->line);
 	if (!msh->cmd_nbr)
-		return (0);
+		return (0);	
 	msh->cmd = malloc(sizeof(t_cmd) * msh->cmd_nbr);
 	if (!msh->cmd)
 		return (error_manager(MALLOC_ERR), 1);
+	init_fds(msh);
 	store_cmds_between_pipes(msh);
 	print_cmds(*msh);
 	return (1);
