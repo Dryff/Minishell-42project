@@ -2,14 +2,15 @@ FIX CD <3
 FIX EXPORT SANS = <3
 FIX EXPAND $ (export test="echo salut") puis $test 8===> <3
 FIX $variablequiexistepas 8===> <3
-FAIRE HERE_DOC
 PIPES QUI CASSENT <3
 EXPORT AVEC EXPAND <3
 ls | ls <3
 DO SIGNALS <3
 FIX /bin/ls quand path unseted 8===> <3
+PARSING POUR LE HEREDOC 8===> <3
+----------------------------------------------------------------
 PARSING DES CHEVRONS
-PARSING POUR LE HEREDOC
+FAIRE HERE_DOC
 CTRL + \
 urandom
 GERER ERREURS EN CAS DE MALLOC FOIRÉ COLAS (j'ai fait mais ca leaks surement)
