@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_utils_and_replace_spaces.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 02:03:35 by colas             #+#    #+#             */
-/*   Updated: 2023/03/22 20:16:25 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/24 17:31:43 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ char	*replace_spaces_of_expanded(t_parse p, char *line)
 {
 	int j;
 
+	printf("%d\n", p.i);
+	printf("%s\n", line);
 	while (line[p.i])
 	{
 		if (is_white_space(line[p.i]))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_hub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/22 20:57:50 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/24 17:28:29 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	get_cmd(t_msh *msh, int *i, int j)
 	if (!sub)
 		return (error_manager(msh, MALLOC_ERR + 1));
 	printf("sub = %s\n", sub);
-	cmd = quotes_dollars_and_redir(msh, sub, j, *i);
+	cmd = quotes_dollars_and_redir(msh, sub, j);
 	printf("cmd = %s\n", cmd);
 	msh->cmd[j].param = ft_split(cmd, 10);
 	if (!msh->cmd[j].param)

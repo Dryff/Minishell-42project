@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_dollars_and_redir.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/22 20:59:05 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/24 13:09:36 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	quote_handling(t_msh *msh, t_parse *p)
 	printf("exit : %d\n", p->i);
 }
 
-char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_index, int i)
+char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_index)
 {
 	t_parse	p;
 
