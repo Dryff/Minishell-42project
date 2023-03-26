@@ -6,24 +6,24 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 02:03:35 by colas             #+#    #+#             */
-/*   Updated: 2023/03/24 17:31:43 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/26 13:07:40 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-int	go_to_end_of_arg(int i, char *line, char q, int s)
+int	go_after_pipe(char *line, int i)
 {
-	while (line[i] && line[i] == q)
+	while (line[i] && is_white_space(line[i]))
 		i++;
-	while (line[i] && !is_end_of_arg(i, line, q, s))
+	while (line[i] && line[i] == '|')
 		i++;
 	return (i);
 }
 
 int	is_end_of_arg(int i, char *line, char q, int s)
 {
-	int q_count;
+	int	q_count;
 
 	q_count = 0;
 	if (q)
@@ -31,7 +31,8 @@ int	is_end_of_arg(int i, char *line, char q, int s)
 			return (0);
 	if (!line[i + 1])
 		return (1);
-	if (line[i + 1] != ' ')
+	if (line[i + 1] != ' ' && line[i + 1] != '>' && \
+	line[i + 1] != '<' && line[i + 1] != '|')
 		return (0);
 	while (i >= s)
 	{
@@ -55,7 +56,7 @@ int	go_to_end_quote(int i, char *line, char q, int s)
 
 char	*replace_spaces_of_expanded(t_parse p, char *line)
 {
-	int j;
+	int	j;
 
 	printf("%d\n", p.i);
 	printf("%s\n", line);
@@ -72,6 +73,7 @@ char	*replace_spaces(t_parse p, char *line)
 {
 	int	j;
 
+	printf("p.i = %d\n", p.i);
 	while (line[p.i] && !is_white_space(line[p.i]))
 	{
 		if (line[p.i] == '\'' || line[p.i] == '"')

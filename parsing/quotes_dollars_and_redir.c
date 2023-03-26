@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/24 13:09:36 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/26 13:04:51 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,16 @@ int	quote_rm_nbr(t_parse p)
 
 void	quote_handling(t_msh *msh, t_parse *p)
 {	
-	int q_nbr;
-	
+	int	q_nbr;
+
 	p->q = p->line[p->i];
 	p->i = go_to_end_quote(p->i, p->line, p->q, p->strt);
 	q_nbr = quote_rm_nbr(*p);
 	p->line = get_dollar(msh, p);
 	p->line = getline_rm_quote(msh, *p);
 	p->i -= q_nbr;
+	if (p->i <= 0)
+		p->i = 0;
 	printf("exit : %d\n", p->i);
 }
 
@@ -91,8 +93,3 @@ char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_index)
 	}
 	return (p.line);
 }
-	
-
-
-
-

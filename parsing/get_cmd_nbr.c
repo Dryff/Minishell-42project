@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_nbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 14:54:19 by colas             #+#    #+#             */
-/*   Updated: 2023/03/22 17:00:00 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/26 12:54:30 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	if_no_pipe(char *str, int i)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (str[i])
@@ -52,7 +52,7 @@ int	get_cmd_nbr(char *str)
 	int		start_quote;
 	int		i;
 	int		count;
-	//go to end_of_arg
+
 	count = 1;
 	if (str[0] == '\0')
 		count = 0;

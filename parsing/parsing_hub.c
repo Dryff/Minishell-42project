@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/24 17:28:29 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/26 13:07:32 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	get_cmd(t_msh *msh, int *i, int j)
 	char	*cmd;
 	char	*sub;
 	int		size;
-	
+
 	size = get_cmd_size(msh->line, *i);
 	printf("size = %d\n", size);
 	sub = ft_substr(msh->line, *i, size);
@@ -33,22 +33,6 @@ void	get_cmd(t_msh *msh, int *i, int j)
 	*i += size;
 }
 
-int	go_to_arg_start(char *line, int i)
-{
-	while (line[i] && is_white_space(line[i]))
-		i++;
-	return (i);
-}
-
-int	go_after_pipe(char *line, int i)
-{
-	while (line[i] && is_white_space(line[i]))
-		i++;
-	while (line[i] && line[i] == '|')
-		i++;
-	return (i);
-}
-
 int	store_cmds_between_pipes(t_msh *msh)
 {
 	int		i;
@@ -58,7 +42,8 @@ int	store_cmds_between_pipes(t_msh *msh)
 	j = 0;
 	while (msh->line[i])
 	{
-		i = go_to_arg_start(msh->line, i);
+		while (line[i] && is_white_space(line[i]))
+			i++;
 		if (msh->line[i])
 		{
 			get_cmd(msh, &i, j);
@@ -96,7 +81,7 @@ void	print_cmds(t_msh msh)
 
 void	init_fds(t_msh *msh)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < msh->cmd_nbr)
@@ -111,7 +96,7 @@ int	parse_line(t_msh *msh)
 {
 	msh->cmd_nbr = get_cmd_nbr(msh->line);
 	if (!msh->cmd_nbr)
-		return (0);	
+		return (0);
 	msh->cmd = malloc(sizeof(t_cmd) * msh->cmd_nbr);
 	if (!msh->cmd)
 		return (error_manager(msh, MALLOC_ERR), 1);

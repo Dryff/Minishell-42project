@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 09:07:58 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/22 17:00:31 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/26 12:47:34 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ int	get_cmd_size(char *str, int start)
 			{
 				is_in_quotes = 1;
 				start_quote = i;
-				while (str[i] && str[i] == '"' || str[i] == '\'')
+				while (str[i] && (str[i] == '"' || str[i] == '\'' ) && !is_end_quote(str, start_quote, i))
 					i++;
+				if (is_end_quote(str, start_quote, i))
+					is_in_quotes = 0;
 			}
 			else if (is_in_quotes)
 				if (is_end_quote(str, start_quote, i))

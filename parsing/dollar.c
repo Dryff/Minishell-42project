@@ -6,24 +6,24 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/24 17:34:02 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/26 12:52:41 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-int is_alpha(char c)
+int	is_alpha(char c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
 	return (0);
 }
 
-char *get_expanded(t_msh *msh, t_parse *p, int cursor)
+char	*get_expanded(t_msh *msh, t_parse *p, int cursor)
 {
-	char *arg;
-	char *expanded;
-	int k;
+	char	*arg;
+	char	*expanded;
+	int		k;
 
 	k = cursor;
 	while (p->line[k] && p->line[k] != '"' && p->line[k] != '\'' \
@@ -38,7 +38,7 @@ char *get_expanded(t_msh *msh, t_parse *p, int cursor)
 	return (expanded);
 }
 
-char *copy_with_value(t_msh *msh, char *expanded, t_parse p, int cursor)
+char	*copy_with_value(t_msh *msh, char *expanded, t_parse p, int cursor)
 {
 	int		i;
 	int		j;
@@ -61,10 +61,10 @@ char *copy_with_value(t_msh *msh, char *expanded, t_parse p, int cursor)
 	return (str);
 }
 
-char *replace_env_arg(t_msh *msh, t_parse *p, int cursor)
+char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor)
 {
-	char *expanded;
-	char *str;
+	char	*expanded;
+	char	*str;
 
 	expanded = NULL;
 	cursor++;
@@ -108,5 +108,3 @@ char	*get_dollar(t_msh *msh, t_parse *p)
 	}
 	return (p->line);
 }
-
-

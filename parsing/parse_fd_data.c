@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parse_fd_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:05:21 by colas             #+#    #+#             */
-/*   Updated: 2023/03/20 16:44:49 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/26 13:04:01 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-int get_start_of_fd_name(t_msh *msh, char c, int *res)
+int	get_start_of_fd_name(t_msh *msh, char c, int *res)
 {
-	int start;
+	int	start;
 
 	start = 0;
 	while (msh->line[start] && msh->line[start] != c)
@@ -29,7 +29,7 @@ int get_start_of_fd_name(t_msh *msh, char c, int *res)
 	return (start);
 }
 
-void get_names(t_msh *msh, int start, int size, int mode)
+void	get_names(t_msh *msh, int start, int size, int mode)
 {
 	if (mode == 0)
 		msh->fildes.in_name = ft_substr(msh->line, start, size);
@@ -37,12 +37,12 @@ void get_names(t_msh *msh, int start, int size, int mode)
 		msh->fildes.out_name = ft_substr(msh->line, start, size);
 }
 
-int get_fd_name(t_msh *msh, char c, int mode)
+int	get_fd_name(t_msh *msh, char c, int mode)
 {
-	int start;
-	int i;
-	int size;
-	int res;
+	int	start;
+	int	i;
+	int	size;
+	int	res;
 
 	i = 0;
 	size = 0;
@@ -53,7 +53,8 @@ int get_fd_name(t_msh *msh, char c, int mode)
 		while (msh->line[start] && is_white_space(msh->line[start]))
 			start++;
 		i = start;
-		while (msh->line[i] && !is_white_space(msh->line[i]) && !is_delimiter(msh->line[i]))
+		while (msh->line[i] && !is_white_space(msh->line[i]) \
+		&& !is_delimiter(msh->line[i]))
 		{
 			i++;
 			size++;
@@ -63,7 +64,7 @@ int get_fd_name(t_msh *msh, char c, int mode)
 	return (0);
 }
 
-int open_fd(t_msh *msh)
+int	open_fd(t_msh *msh)
 {
 	if (msh->fildes.input >= 0)
 		msh->fildes.input = get_fd_name(msh, '<', 0);
@@ -80,9 +81,9 @@ int open_fd(t_msh *msh)
 	return (0);
 }
 
-int parse_fd_data(t_msh *msh)
+int	parse_fd_data(t_msh *msh)
 {
 	//si ya pas des trucs bizarre genre >>>> ou <<<<<< ou >>>> 
-	/*->*/open_fd(msh);
+	open_fd(msh);
 	return (0);
 }

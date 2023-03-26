@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_and_check_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/03/20 16:43:31 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/26 12:53:36 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-void check_input(t_msh *msh)
+void	check_input(t_msh *msh)
 {
 	if (msh->fildes.input == 1)
 		msh->fildes.infd = open(msh->fildes.in_name, O_RDONLY);
@@ -29,7 +29,7 @@ void check_input(t_msh *msh)
 		free(msh->fildes.in_name);
 }
 
-void check_output(t_msh *msh)
+void	check_output(t_msh *msh)
 {
 	if (msh->fildes.output == 1)
 		msh->fildes.outfd = open(msh->fildes.out_name, \
@@ -40,13 +40,13 @@ void check_output(t_msh *msh)
 	if (msh->fildes.outfd == -1)
 	{
 		ft_err_printf("msh: permission denied: %s\n", msh->fildes.out_name);
-		return;
+		return ;
 	}
 	if (msh->fildes.output)
 		free(msh->fildes.out_name);
 }
 
-int get_and_check_fd(t_msh *msh)
+int	get_and_check_fd(t_msh *msh)
 {
 	check_input(msh);
 	check_output(msh);
