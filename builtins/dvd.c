@@ -14,6 +14,7 @@
 
 #define OLD 1
 #define HOME 2
+#define PWD 3
 
 void	update_pwd_env(t_msh *msh, char *actual_path)
 {

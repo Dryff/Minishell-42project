@@ -42,7 +42,7 @@ int	store_cmds_between_pipes(t_msh *msh)
 	j = 0;
 	while (msh->line[i])
 	{
-		while (line[i] && is_white_space(line[i]))
+		while (msh->line[i] && is_white_space(msh->line[i]))
 			i++;
 		if (msh->line[i])
 		{

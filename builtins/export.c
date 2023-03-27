@@ -16,6 +16,7 @@
 #define WRONG_EXPORT 2
 #define EMPTY_EXPORT 3
 #define EXISTING_EXPORT 4
+#define NO_EXPORT 5
 
 int	get_position(char **tab, char *cmd)
 {

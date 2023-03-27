@@ -51,11 +51,11 @@ void	free_tab(char **tab)
 
 void	ft_strswap(char **str1, char **str2)
 {
-	char	*tmp;
+	char	*temp;
 
-	tmp = *str1;
+	temp = *str1;
 	*str1 = *str2;
-	*str2 = tmp;
+	*str2 = temp;
 }
 
 int	ft_strcmp(char *s1, char *s2)

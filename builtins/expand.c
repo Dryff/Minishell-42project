@@ -64,4 +64,3 @@ char	*ft_expand_tab(char **tab, char *cmd)
 	}
 	return (NULL);
 }
-////////'ec'"ho" "'l'"

@@ -69,7 +69,7 @@ char	**envp_dup(char **tab)
 	dup[i] = NULL;
 	return (dup);
 }
-
+//NEED TO SECURE ENV -I
 t_env	init_env(char **envp)
 {
 	t_env	env;

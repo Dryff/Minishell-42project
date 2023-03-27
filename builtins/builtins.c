@@ -20,6 +20,7 @@
 #define UNSET 6
 #define EXIT 7
 #define VAR 8
+#define EXPORT_VAR 9
 
 int	ft_pwd(void)
 {
