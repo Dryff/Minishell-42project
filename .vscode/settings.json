@@ -1,4 +1,21 @@
 {
 	"C_Cpp.errorSquiggles": "disabled",
-	"terminal.integrated.shell.osx": "/bin/zsh"
+	"terminal.integrated.shell.osx": "/bin/zsh",
+	"files.associations": {
+		"__bit_reference": "c",
+		"__hash_table": "c",
+		"__split_buffer": "c",
+		"array": "c",
+		"initializer_list": "c",
+		"ios": "c",
+		"iterator": "c",
+		"string": "c",
+		"string_view": "c",
+		"unordered_map": "c",
+		"vector": "c",
+		"sstream": "c",
+		"algorithm": "c",
+		"bitset": "c",
+		"chrono": "c"
+	}
 }

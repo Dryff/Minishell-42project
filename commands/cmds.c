@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/03/22 21:03:27 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/27 15:49:27 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,6 @@ int	commands(t_msh *msh)
 	i = 0;
 	while (i < msh->cmd_nbr - 1)
 	{
-		if (msh->cmd[i].param[0])
-			builtin = is_builtin(msh->cmd[i].param[0]);
 		if (msh->cmd[i].param[0])
 			if (!is_not_builtin_fd(msh->cmd[i].param[0]))
 				exec_cmd(msh, i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_hub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/27 14:40:18 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/27 20:11:16 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,30 +66,23 @@ void	print_cmds(t_msh msh)
 	while (i < msh.cmd_nbr)
 	{
 		j = 0;
-		printf("i = %d\n", i);
-		printf("in = %s\n", msh.cmd[i].fd.in_name);
-		printf("input : = %d\n", msh.cmd[i].fd.input);
-		printf("out = %s\n", msh.cmd[i].fd.out_name);
-		printf("output : %d\n", msh.cmd[i].fd.output);
+		// printf("in = %s\n", msh.cmd[i].ip.in_name);
+		// printf("input : = %d\n", msh.cmd[i].ip.input);
+		while (j < msh.cmd[i].redir_nbr)
+		{
+			printf("---OUTPUT INFO---\n");
+			printf("out = %s\n", msh.cmd[i].op[j].out_name);
+			printf("outfd : %d\n", msh.cmd[i].op[j].outfd);
+			printf("output : %d\n", msh.cmd[i].op[j++].output);
+		}
+		j = 0;
+		j = 0;
 		while (msh.cmd[i].param[j])
 		{
 			printf("cmd[%d].param[%d] = %s\n", i, j, msh.cmd[i].param[j]);
 			j++;
 		}
 		printf("------\n");
-		i++;
-	}
-}
-
-void	init_fds(t_msh *msh)
-{
-	int	i;
-
-	i = 0;
-	while (i < msh->cmd_nbr)
-	{
-		msh->cmd[i].fd.in_name = NULL;
-		msh->cmd[i].fd.out_name = NULL;
 		i++;
 	}
 }
@@ -102,8 +95,8 @@ int	parse_line(t_msh *msh)
 	msh->cmd = malloc(sizeof(t_cmd) * msh->cmd_nbr);
 	if (!msh->cmd)
 		return (error_manager(msh, MALLOC_ERR), 1);
-	init_fds(msh);
 	store_cmds_between_pipes(msh);
+	get_and_check_fd(msh);
 	print_cmds(*msh);
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_dollars_and_redir.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/27 15:07:47 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/27 20:05:22 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,44 @@ void	quote_handling(t_msh *msh, t_parse *p)
 	printf("exit : %d\n", p->i);
 }
 
-char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_index)
+t_outputs	*get_op_array(t_msh *msh, char *str, int cmd_id)
+{
+	int 	i;
+	int 	count;
+	int		is_in_quotes;
+	int		start_quote;
+	t_outputs	*new;
+
+	is_in_quotes = 0;
+	start_quote = 0;
+	i = -1;
+	count = 0;
+	while (str[++i])
+	{
+		if (str[i] == '>' && !is_in_quotes)
+		{
+			while (str[i] == '>')
+				i++;
+			count++;
+		}
+		quote_check(str, i, &start_quote, &is_in_quotes);
+	}
+	new = malloc((count + 1) * sizeof(t_outputs));
+	if (!new)
+		return (NULL);
+	msh->cmd[cmd_id].redir_nbr = count;
+	return (new);
+}
+
+char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_id)
 {
 	t_parse	p;
 
 	p.line = str;
 	p.i = 0;
 	p.strt = 0;
+	msh->cmd[cmd_id].op = get_op_array(msh, str, cmd_id);
+	msh->redir_id = 0;
 	while (p.line[p.i])
 	{
 		if (p.line[p.i] == '"' || p.line[p.i] == '\'')
@@ -83,10 +114,7 @@ char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_index)
 			p.line = replace_spaces(p, p.line);
 		}
 		else if (p.line[p.i] == '>' || p.line[p.i] == '<')
-		{
-			get_redir(msh, &p, cmd_index);
-			printf("sortie : %d, %s\n", p.i, p.line);
-		}
+			get_redir(msh, &p, cmd_id);
 		else if (p.line[p.i] == '$')
 			p.line = replace_env_arg(msh, &p, p.i);
 		else

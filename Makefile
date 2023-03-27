@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
+#    By: colas <colas@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/03/27 10:28:26 by cgelin           ###   ########.fr        #
+#    Updated: 2023/03/27 20:18:06 by colas            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,6 @@ FILES = main							\
 		utils/ft_split					\
 		utils/ft_calloc					\
 		utils/itoa						\
-		commands/cmds					\
 		commands/paths					\
 		ft_err_printf/ft_print_hexa		\
 		ft_err_printf/ft_printf			\
