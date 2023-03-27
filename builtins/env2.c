@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:42:57 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/27 15:21:07 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:56:35 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,6 @@ t_env init_env_i(void)
 		return (env.error = 1, env);
 	free(dup);
 	return (env);
-}
-void	add_shlvl(t_env *env)
-{
-	if (ft_expand_tab(env-))
 }
 
 t_env	init_env(char **envp)
