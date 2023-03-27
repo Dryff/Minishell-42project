@@ -1,6 +1,5 @@
 FIX CD <3
 FIX EXPORT SANS = <3
-FIX EXPAND $ (export test="echo salut") puis $test 8===> <3
 FIX $variablequiexistepas 8===> <3
 PIPES QUI CASSENT <3
 EXPORT AVEC EXPAND <3
@@ -9,6 +8,7 @@ DO SIGNALS <3
 FIX /bin/ls quand path unseted 8===> <3
 PARSING POUR LE HEREDOC 8===> <3
 ----------------------------------------------------------------
+FIX EXPAND $ (export test="echo salut") puis $test 8===> <3 (a revoir)
 PARSING DES CHEVRONS
 FAIRE HERE_DOC
 CTRL + \
@@ -16,3 +16,8 @@ urandom
 GERER ERREURS EN CAS DE MALLOC FOIRÉ COLAS (j'ai fait mais ca leaks surement)
 GERER ERREURS EN CAS DE MALLOC FOIRÉ MAX
 SORTIE DERREUR DANS $?
+echo $USER-$USER
+echo -nnnn -nnnn -na
+env -i ./minishell 
+unset SHLVL into grep --> SHLVL=0
+si negatif, dans env = 0 et dans export = la valeur negative
