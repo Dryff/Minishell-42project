@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/18 11:14:50 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/27 11:19:31 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	get_position(char **tab, char *cmd)
 	i = 0;
 	temp = ft_substr(cmd, 0, ft_strlen_until(cmd, '='));
 	if (!temp)
-		return (0);
+		return (-2);
 	while (tab[i])
 	{
 		if (ft_strstr(tab[i], temp))
@@ -107,18 +107,24 @@ void	ft_declare_print(t_env *env)
 int	complete_export(t_msh *msh, char *cmd)
 {
 	int		pos;
+	int		sort_pos;
 	char	*purecmd;
 
 	purecmd = ft_substr(cmd, 0, ft_strlen_until(cmd, '='));
 	if (!purecmd)
-		return (0);
+		return (msh->error = 1, 0);
 	pos = get_position(msh->env.tab, purecmd);
-	if (get_position(msh->env.tab, purecmd) < 0)
+	sort_pos = get_position(msh->env.sort_tab, purecmd);
+	if (pos == -1)
 		add_export(msh, cmd);
+	else if (pos == -2)
+		return (msh->error = 1, 0);
 	else
 		replace_export(msh, cmd, pos);
-	if (get_position(msh->env.sort_tab, purecmd) < 0)
+	if (sort_pos == -1)
 		add_invisible_export(msh, cmd);
+	else if (sort_pos == -2)
+		return (msh->error = 1, 0);
 	else
 		replace_secret_export(msh, cmd, pos);
 	free(purecmd);
@@ -147,10 +153,9 @@ int	ft_export(t_msh *msh, int cmd_id)
 		else if (valid_export(cmd) == EMPTY_EXPORT)
 			add_invisible_export(msh, cmd);
 		else if (valid_export(cmd) == VALID_EXPORT)
-		{
-			if (!complete_export(msh, cmd))
-				return (1);
-		}
+			complete_export(msh, cmd);
+		if (msh->error)
+			exit(1);
 		i++;
 	}
 	return (0);

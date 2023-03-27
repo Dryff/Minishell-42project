@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/25 11:30:19 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/27 15:19:18 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	update_msh_status(int status)
 int	init_prompt(t_msh *msh)
 {
 	if (msh_status == 0)
-		msh->prompt = "\e[0;32mmsh -> \e[0m";
+		msh->prompt = "msh 🤑-> ";
 	else
-		msh->prompt = "\e[0;31mmsh -> \e[0m";
+		msh->prompt = "msh 😡-> ";
 	return (0);
 }
 
@@ -57,9 +57,12 @@ int	main(int argc, char **argv, char **old_env)
 
 	(void)argc;
 	(void)argv;
+	msh.error = 0;
 	msh.env = init_env(old_env);
 	while (1)
 	{
+		if (msh.env.error)
+			exit(1);
 		init_signals_history();
 		init_prompt(&msh);
 		update_msh_status(0);

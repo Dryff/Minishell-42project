@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 14:40:35 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/19 15:13:59 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/27 13:11:48 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	init_signals_history(void)
 {
 	struct sigaction	sa;
 
-	rl_bind_key('\t', rl_complete);
 	using_history();
+	rl_bind_key('\t', rl_complete);
 	sa.sa_handler = in_exec_signal_handler;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;

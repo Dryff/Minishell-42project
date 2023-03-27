@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/26 13:07:53 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/27 15:42:58 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_env
 {
 	char	**tab;
 	char	**sort_tab;
+	int		error;
 }				t_env;
 
 typedef struct s_fildes
@@ -80,10 +81,10 @@ typedef struct s_parse
 typedef struct s_msh
 {
 	t_env		env;
-	t_fildes	fildes;
 	t_cmd		*cmd;
 	int			cmd_nbr;
 	int			pid;
+	int			error;
 	int			status;
 	char		**paths;
 	char		**historic;
@@ -120,6 +121,7 @@ char	**add_comand_to_tab(char **tab, char *cmd);
 char	**envp_dup(char **tab);
 void	free_env(t_msh msh);
 char	**init_secret_env(char **envp);
+void	update_SHLVL(t_msh *msh);
 
 /* Export*/
 void	add_export(t_msh *msh, char *cmd);
