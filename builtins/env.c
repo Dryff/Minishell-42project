@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:57:07 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/16 12:49:21 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/27 10:12:46 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	ft_export_print(char *str)
 	int	j;
 
 	j = 0;
+	if (str[0] == '_' && str[1] == '=')
+		return ;
 	i = ft_strlen_until(str, '=');
 	write(1, "declare -x ", 11);
 	if (i == ft_strlen(str))

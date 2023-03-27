@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:42:57 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/16 15:23:54 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/27 10:10:29 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,23 @@ char	**envp_dup(char **tab)
 	dup[i] = NULL;
 	return (dup);
 }
+
+t_env init_env_i(char **envp)
+{
+	t_env	env;
+	char	*dup;
+	char	*level;
+
+	env.tab = malloc(sizeof(char *) * 4);	
+	dup = getcwd(NULL, 0);
+	env.tab[0] = ft_strdup("SHLVL=1");
+	env.tab[1] = ft_strjoin("PWD=", dup);
+	env.tab[2] = ft_strdup("_=/usr/bin/env");
+	env.tab[3] = NULL;
+	env.sort_tab = init_secret_env(env.tab);
+	free(dup);
+	return (env);
+}
 //NEED TO SECURE ENV -I
 t_env	init_env(char **envp)
 {
@@ -79,6 +96,8 @@ t_env	init_env(char **envp)
 	int		position;
 	
 	shlvl = 0;
+	if (tab_len(envp) == 0)
+		return (init_env_i(envp));
 	if (ft_expand_tab(envp, "SHLVL"))
 		shlvl = atoi(ft_expand_tab(envp, "SHLVL"));
 	else
