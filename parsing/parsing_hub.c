@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_hub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/26 13:07:32 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/27 14:40:18 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	get_cmd(t_msh *msh, int *i, int j)
 	int		size;
 
 	size = get_cmd_size(msh->line, *i);
-	printf("size = %d\n", size);
+	// printf("size = %d\n", size);
 	sub = ft_substr(msh->line, *i, size);
 	if (!sub)
 		return (error_manager(msh, MALLOC_ERR + 1));
-	printf("sub = %s\n", sub);
+	// printf("sub = %s\n", sub);
 	cmd = quotes_dollars_and_redir(msh, sub, j);
-	printf("cmd = %s\n", cmd);
+	// printf("cmd = %s\n", cmd);
 	msh->cmd[j].param = ft_split(cmd, 10);
 	if (!msh->cmd[j].param)
 		return (error_manager(msh, MALLOC_ERR + 2));
@@ -68,7 +68,9 @@ void	print_cmds(t_msh msh)
 		j = 0;
 		printf("i = %d\n", i);
 		printf("in = %s\n", msh.cmd[i].fd.in_name);
+		printf("input : = %d\n", msh.cmd[i].fd.input);
 		printf("out = %s\n", msh.cmd[i].fd.out_name);
+		printf("output : %d\n", msh.cmd[i].fd.output);
 		while (msh.cmd[i].param[j])
 		{
 			printf("cmd[%d].param[%d] = %s\n", i, j, msh.cmd[i].param[j]);

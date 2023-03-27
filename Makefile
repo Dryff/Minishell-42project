@@ -6,7 +6,7 @@
 #    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/03/22 20:30:13 by cgelin           ###   ########.fr        #
+#    Updated: 2023/03/27 10:28:26 by cgelin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,6 @@ FILES = main							\
 		parsing/quotes_dollars_and_redir\
 		parsing/quotes_utils_and_replace_spaces				\
 		parsing/get_and_check_fd		\
-		parsing/parse_fd_data			\
 		utils/parse_utils				\
 		utils/msh_utils					\
 		utils/cmd_utils					\

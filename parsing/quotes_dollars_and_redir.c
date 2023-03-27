@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_dollars_and_redir.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/26 13:04:51 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/27 15:07:47 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_index)
 			p.line = replace_spaces(p, p.line);
 		}
 		else if (p.line[p.i] == '>' || p.line[p.i] == '<')
+		{
 			get_redir(msh, &p, cmd_index);
+			printf("sortie : %d, %s\n", p.i, p.line);
+		}
 		else if (p.line[p.i] == '$')
 			p.line = replace_env_arg(msh, &p, p.i);
 		else
