@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/03/27 20:15:08 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/28 11:59:27 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	check_input(t_msh *msh, int cmd_id)
 			ft_err_printf("msh: no such file or directory: %s\n", \
 			msh->cmd[cmd_id].ip.in_name);
 	}
-	if (msh->cmd[cmd_id].ip.input)
-		free(msh->cmd[cmd_id].ip.in_name);
 }
 
 void	check_output(t_msh *msh, int cmd_id, int op_id)
@@ -57,7 +55,6 @@ int	get_and_check_fd(t_msh *msh)
 	{
 		check_input(msh, i);
 		j = 0;
-		printf("%dbjr\n", msh->cmd[i].redir_nbr);
 		while (j < msh->cmd[i].redir_nbr)
 		{
 			check_output(msh, i, j);

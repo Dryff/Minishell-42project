@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/27 20:11:16 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/28 12:04:11 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,20 @@ void	print_cmds(t_msh msh)
 	while (i < msh.cmd_nbr)
 	{
 		j = 0;
-		// printf("in = %s\n", msh.cmd[i].ip.in_name);
-		// printf("input : = %d\n", msh.cmd[i].ip.input);
+		printf("///CMD |%d|\\\\\\\n", i);
+		printf("---INPUT INFO---\n");
+		printf("in = %s\n", msh.cmd[i].ip.in_name);
+		printf("input : = %d\n", msh.cmd[i].ip.input);
 		while (j < msh.cmd[i].redir_nbr)
 		{
-			printf("---OUTPUT INFO---\n");
+			printf("---OUTPUT |%d| INFO---\n", j);
 			printf("out = %s\n", msh.cmd[i].op[j].out_name);
 			printf("outfd : %d\n", msh.cmd[i].op[j].outfd);
 			printf("output : %d\n", msh.cmd[i].op[j++].output);
 		}
 		j = 0;
 		j = 0;
+		printf("---ARGS---\n");
 		while (msh.cmd[i].param[j])
 		{
 			printf("cmd[%d].param[%d] = %s\n", i, j, msh.cmd[i].param[j]);
