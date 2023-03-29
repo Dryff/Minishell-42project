@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/27 11:19:31 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:47:18 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ int	get_position(char **tab, char *cmd)
 
 static	int	is_valid_c(char c)
 {
-	int	value;
 
-	value = 0;
 	if (is_in_charset(c, "#%?!@/-+={}.,:"))
 		return (0);
 	if (!is_in_charset(c, "0123456789"))
