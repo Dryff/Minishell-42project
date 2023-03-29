@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_nbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 14:54:19 by colas             #+#    #+#             */
-/*   Updated: 2023/03/27 11:03:36 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/29 10:22:59 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
-
-static int	if_no_pipe(char *str, int i)
-{
-	int	count;
-
-	count = 0;
-	while (str[i])
-	{
-		if (!is_white_space(str[i]) && !is_delimiter(str[i]))
-			count = 1;
-		i++;
-	}
-	return (count);
-}
 
 int	quote_check(char *str, int i, int *start_quote, int *is_in_quotes)
 {

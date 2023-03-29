@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:42:57 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/27 15:56:35 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:22:26 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ t_env init_env_i(void)
 {
 	t_env	env;
 	char	*dup;
-	char	*level;
 
 	env.error = 0;
 	env.tab = malloc(sizeof(char *) * 4);	

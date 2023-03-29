@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:57:07 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/27 10:12:46 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:22:02 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_export_print(char *str)
 		return ;
 	i = ft_strlen_until(str, '=');
 	write(1, "declare -x ", 11);
-	if (i == ft_strlen(str))
+	if (i == (int)ft_strlen(str))
 	{
 		write(1, str, ft_strlen(str));
 		write(1, "\n", 1);

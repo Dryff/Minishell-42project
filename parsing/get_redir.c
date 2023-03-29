@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/27 20:05:40 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/29 10:24:55 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*rm_ten(t_msh *msh, char *str)
 	int	i;
 
 	i = 0;
+	(void)msh;
 	while (str[i])
 	{
 		if (str[i] == 10)
@@ -28,6 +29,7 @@ char	*rm_ten(t_msh *msh, char *str)
 
 int	arrow_is_at_start(t_msh *msh, t_parse p)
 {
+	(void)msh;
 	while (p.i > 0 && (p.line[p.i] == '>' || p.line[p.i] == '<'))
 		p.i--;
 	while (p.i > 0  && p.line[p.i] != '|')
@@ -45,6 +47,7 @@ int	get_name_after_arrow(t_msh *msh, t_parse *p)
 	int	is_in_quotes;
 	int	start_quote;
 	
+	(void)msh;
 	start_quote = 0;
 	is_in_quotes = 0;
 	while (p->line[p->i] == '<' || p->line[p->i] == '>')
@@ -87,6 +90,7 @@ void	go_after_fd_name(t_msh *msh, t_parse *p)
 	int	is_in_quotes;
 	int	start_quote;
 
+	(void)msh;
 	is_in_quotes = 0;
 	start_quote = 0;
 	while (p->line[p->i] && (p->line[p->i] == '>' || p->line[p->i] == '<'))
@@ -119,7 +123,7 @@ char	*remove_fd_name_and_arrow(t_msh *msh, t_parse p)
 		i++;
 	}
 	go_after_fd_name(msh, &p);
-	while (p.i < ft_strlen(p.line))
+	while (p.i < (int)ft_strlen(p.line))
 	{
 		str[j] = p.line[p.i];
 		j++;
@@ -134,7 +138,8 @@ int	go_to_end_of_name_and_arrow(t_msh *msh, t_parse p)
 	int end;
 	int	is_in_quotes;
 	int	start_quote;
-	
+
+	(void)msh;
 	is_in_quotes = 0;
 	start_quote = 0;
 	end = p.i;
