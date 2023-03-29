@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:18:39 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/16 10:09:53 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:47:44 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,8 @@ void	remove_line_from_tab(char **tab, int index)
 int	get_cmd_index(char **tab, char *cmd)
 {
 	int	i;
-	int	sz;
 
 	i = 0;
-	sz = ft_strlen(cmd);
 	while (tab[i])
 	{
 		if (ft_strstr(tab[i], cmd))
