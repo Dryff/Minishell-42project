@@ -6,14 +6,14 @@
 #    By: colas <colas@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/03/27 20:18:06 by colas            ###   ########.fr        #
+#    Updated: 2023/03/29 10:19:52 by colas            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC		= cc
-FLAGS	= -fsanitize=address -g3 # -Wall -Wextra -Werror
+FLAGS	= -fsanitize=address -g3 -Wall -Wextra -Werror
 AR		= ar rcs
 RM		= @rm -f
 HEADER	= msh.h
@@ -46,6 +46,7 @@ FILES = main							\
 		utils/ft_split					\
 		utils/ft_calloc					\
 		utils/itoa						\
+		commands/cmds					\
 		commands/paths					\
 		ft_err_printf/ft_print_hexa		\
 		ft_err_printf/ft_printf			\

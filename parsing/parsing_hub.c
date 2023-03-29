@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/28 12:04:11 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/29 10:16:04 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	print_cmds(t_msh msh)
 		j = 0;
 		printf("///CMD |%d|\\\\\\\n", i);
 		printf("---INPUT INFO---\n");
-		printf("in = %s\n", msh.cmd[i].ip.in_name);
-		printf("input : = %d\n", msh.cmd[i].ip.input);
+		// printf("in = %s\n", msh.cmd[i].ip.in_name);
+		// printf("input : = %d\n", msh.cmd[i].ip.input);
 		while (j < msh.cmd[i].redir_nbr)
 		{
 			printf("---OUTPUT |%d| INFO---\n", j);

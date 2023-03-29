@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/03/27 15:49:27 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/29 10:18:06 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,6 @@ void	exec_last_cmd(t_msh *msh, int cmd_id)
 		printf("ERROR - fork\n");
 	if (pid == 0)
 	{
-		if (msh->fildes.output)
-			if (dup2(msh->fildes.outfd, STDOUT_FILENO) == -1)
-				printf("ERROR - 2\n");
 		builtin = is_builtin(msh->cmd[cmd_id].param[0]);
 		if (!builtin)
 		{
@@ -94,9 +91,6 @@ void	dup_inffd(t_msh *msh)
 {
 	if (dup2(STDIN_FILENO, 4095) == -1)
 		printf("ERROR - yo\n");
-	if (msh->fildes.input == 1)
-		if (dup2(msh->fildes.infd, STDIN_FILENO) == -1)
-			printf("ERROR - 1\n");
 }
 
 // dprintf(2, "input : %d\n", msh->fildes.input);
