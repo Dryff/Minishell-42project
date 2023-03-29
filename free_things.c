@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:57:33 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/21 10:27:27 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/03/29 11:06:08 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void free_things(t_msh *msh)
     while (i < msh->cmd_nbr)
 	{
 		ft_free_tab(msh->cmd[i].param);
+		free(msh->cmd[i].op);
 		i++;
 	}
 	if (msh->cmd_nbr)
