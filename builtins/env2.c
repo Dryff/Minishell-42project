@@ -6,7 +6,7 @@
 /*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:42:57 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/30 16:29:25 by laquarium        ###   ########.fr       */
+/*   Updated: 2023/03/30 18:31:15 by laquarium        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void	check_env(t_msh *msh)
 {
 	check_pwd(msh);
 	check_shlvl(msh);
+	complete_export(msh, "_=/usr/bin/env");
 }
 
 void	check_pwd(t_msh *msh)
