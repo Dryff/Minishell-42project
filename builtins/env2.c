@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:42:57 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/29 10:22:26 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/30 16:29:25 by laquarium        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,74 +102,68 @@ t_env init_env_i(void)
 t_env	init_env(char **envp)
 {
 	t_env	env;
-	char	*dup;
-	char	*level;
-	int		shlvl;
-	int		position;
 	
-	shlvl = 0;
 	env.error = 0;
 	if (tab_len(envp) == 0)
 		return (init_env_i());
-	if (ft_expand_tab(envp, "SHLVL"))
-		shlvl = atoi(ft_expand_tab(envp, "SHLVL"));
-	else
-		shlvl = 0;
-	level = ft_itoa(shlvl + 1);
-	if (!level)
-		return (env.error = 1, env);
-	dup = ft_strjoin("SHLVL=", level);
-	if (!dup)
-		return (env.error = 1, env);
 	env.tab = envp_dup(envp);
 	if (!env.tab)
 		return (env.error = 1, env);
-	position = get_position(env.tab, "SHLVL");
-	if (position == -1)
-		position = tab_len(env.tab);
-	free(env.tab[position]);
-	free(level);
-	env.tab[position] = ft_strdup(dup);
-	if (!env.tab[position])
-		return (env.error = 1, env);
-	free(dup);
-	env.sort_tab = init_secret_env(envp);
+	env.sort_tab = init_secret_env(env.tab);
 	if (!env.sort_tab)
 		return (env.error = 1, env);
 	return (env);
 }
 
-char **init_secret_env(char **envp)
+void	check_env(t_msh *msh)
+{
+	check_pwd(msh);
+	check_shlvl(msh);
+}
+
+void	check_pwd(t_msh *msh)
+{
+	if (!ft_expand_tab(msh->env.sort_tab, "OLDPWD"))
+		add_invisible_export(msh, "OLDPWD");
+}
+
+void	check_shlvl(t_msh *msh)
+{
+	int		shlvl;
+	char	*dup;
+	char	*joined;
+	
+	if (!ft_expand_tab(msh->env.tab, "SHLVL"))
+		complete_export(msh, "SHLVL=1");
+	else
+	{
+		shlvl = atoi(ft_expand_tab(msh->env.tab, "SHLVL"));
+		if (shlvl < 0)
+			complete_export(msh, "SHLVL=0");
+		if (shlvl >= 999)
+		{
+			printf("resetting SHLVL to 1, limit exceeded(1000)\n");
+			complete_export(msh, "SHLVL=1");
+		}
+		if (shlvl >=0 && shlvl < 999)
+		{
+			shlvl++;
+			dup = ft_itoa(shlvl);
+			joined = ft_strjoin("SHLVL=", dup);
+			complete_export(msh, joined);
+			free(dup);
+			free(joined);
+		}
+	}
+}
+
+char	**init_secret_env(char **envp)
 {
 	char	**tab;
-	char	*level;
-	char	*dup;
-	int		shlvl;
-	int		position;
-
-	shlvl = 0;
-	if (ft_expand_tab(envp, "SHLVL"))
-		shlvl = atoi(ft_expand_tab(envp, "SHLVL"));
-	else
-		shlvl = 0;
-	level = ft_itoa(shlvl + 1);
-	if (!level)
-		return (NULL);
-	dup = ft_strjoin("SHLVL=", level);
-	if (!dup)
-		return (NULL);
+	
 	tab = envp_dup(envp);
 	if (!tab)
 		return (NULL);
-	position = get_position(tab, "SHLVL");
-	if (position == -1)
-		position = tab_len(tab);
-	free(tab[position]);
-	free(level);
-	tab[position] = ft_strdup(dup);
-	if (!tab[position])
-		return (NULL);
-	free(dup);
 	return (tab);
 }
 

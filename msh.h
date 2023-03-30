@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/30 14:07:00 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/30 16:30:06 by laquarium        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,9 @@ char	**envp_dup(char **tab);
 void	free_env(t_msh msh);
 char	**init_secret_env(char **envp);
 void	update_SHLVL(t_msh *msh);
+void	check_env(t_msh *msh);
+void	check_shlvl(t_msh *msh);
+void	check_pwd(t_msh *msh);
 
 /* Export*/
 void	add_export(t_msh *msh, char *cmd);
