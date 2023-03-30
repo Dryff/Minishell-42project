@@ -21,3 +21,4 @@ echo -nnnn -nnnn -na
 env -i ./minishell 
 unset SHLVL into grep --> SHLVL=0
 si negatif, dans env = 0 et dans export = la valeur negative
+gerer >| et quand le chevron est au debut de la commande

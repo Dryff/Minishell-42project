@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/29 13:24:28 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/30 15:34:49 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,18 @@ t_outputs	*get_op_array(t_msh *msh, char *str, int cmd_id)
 	msh->cmd[cmd_id].redir_nbr = count;
 	return (new);
 }
+void	init_output_input(t_msh *msh, char *str, int cmd_id)
+{
+	int i;
+
+	i = 0;
+	msh->cmd[cmd_id].op = get_op_array(msh, str, cmd_id);
+	msh->cmd[cmd_id].ip.input = 0;
+	msh->cmd[cmd_id].ip.in_name = NULL;
+	i++;
+
+	msh->redir_id = 0;
+}	
 
 char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_id)
 {
@@ -103,8 +115,7 @@ char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_id)
 	p.line = str;
 	p.i = 0;
 	p.strt = 0;
-	msh->cmd[cmd_id].op = get_op_array(msh, str, cmd_id);
-	msh->redir_id = 0;
+	init_output_input(msh, str, cmd_id);
 	while (p.line[p.i])
 	{
 		if (p.line[p.i] == '"' || p.line[p.i] == '\'')

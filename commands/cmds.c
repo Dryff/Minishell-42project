@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/03/29 10:25:29 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/30 15:33:00 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,24 @@ void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 	char	*pathing;
 	int		builtin;
 
+	if (msh->cmd[cmd_id].ip.input)
+		if (dup2(msh->cmd[cmd_id].ip.infd, STDIN_FILENO) == -1)
+			printf("ERROR - yo1\n");
+	
 	close(fd[0]);
-	if (dup2(fd[1], STDOUT_FILENO) == -1)
+	if (msh->cmd[cmd_id].redir_nbr == 0)
+	{
+		if (cmd_id == msh->cmd_nbr - 1)
+		{
+			if (dup2(4094, STDOUT_FILENO) == -1)
+				printf("ERROR - 5\n");
+		}
+		else 
+			if (dup2(fd[1], STDOUT_FILENO) == -1)
+				printf("ERROR - 5\n");
+		
+	}
+	else if (dup2(msh->cmd[cmd_id].op[msh->cmd[cmd_id].redir_nbr - 1].outfd, STDOUT_FILENO) == -1) 
 		printf("ERROR - 5\n");
 	close(fd[1]);
 	builtin = is_builtin(msh->cmd[cmd_id].param[0]);
@@ -57,72 +73,37 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 	close(fd[0]);
 }
 
-void	exec_last_cmd(t_msh *msh, int cmd_id)
+void	dup_inffd(void)
 {
-	char	*pathing;
-	int		pid;
-	int		builtin;
-
-	pid = fork();
-	reset_default_signal();
-	if (pid == -1)
-		printf("ERROR - fork\n");
-	if (pid == 0)
-	{
-		builtin = is_builtin(msh->cmd[cmd_id].param[0]);
-		if (!builtin)
-		{
-			pathing = get_pathing(*msh, cmd_id);
-			if (execve(pathing, msh->cmd[cmd_id].param, msh->env.tab) == -1)
-			{
-				update_msh_status(1);
-				ft_err_printf("msh: command not found : %s\n"\
-				, msh->cmd[cmd_id].param[0]);
-				free(pathing);
-			}
-		}
-		else
-			exec_builtins(msh, cmd_id, builtin);
-		exit(1);
-	}
-}
-
-void	dup_inffd(t_msh *msh)
-{
-	(void)msh;
 	if (dup2(STDIN_FILENO, 4095) == -1)
-		printf("ERROR - yo\n");
+		printf("ERROR - yo2\n");
+	if (dup2(STDOUT_FILENO, 4094) == -1)
+		printf("ERROR - yo3\n");
 }
-
-// dprintf(2, "input : %d\n", msh->fildes.input);
-// dprintf(2, "infd : %d\n", msh->fildes.infd);
-// dprintf(2, "output : %d\n", msh->fildes.output);
-// dprintf(2, "outfd : %s\n", msh->fildes.outfd);
-// dprintf(2, "heredoc_fd : %d\n", msh->fildes.heredoc_fd);
 
 int	commands(t_msh *msh)
 {
 	int	i;
 	int	builtin;
 
-	dup_inffd(msh);
+	dup_inffd();
 	i = 0;
-	while (i < msh->cmd_nbr - 1)
+	while (i < msh->cmd_nbr)
 	{
 		if (msh->cmd[i].param[0])
 			if (!is_not_builtin_fd(msh->cmd[i].param[0]))
 				exec_cmd(msh, i);
 		i++;
 	}
-	if (!msh->cmd[i].param[0])
-		return (0);
-	builtin = is_builtin(msh->cmd[i].param[0]);
-	if (!is_not_builtin_fd(msh->cmd[i].param[0]))
-		exec_last_cmd(msh, i);
-	else if (msh->cmd_nbr == 1 && is_not_builtin_fd(msh->cmd[i].param[0]))
-		exec_builtins(msh, i, builtin);
+	if (msh->cmd_nbr == 1 && is_not_builtin_fd(msh->cmd[0].param[0]))
+	{
+		builtin = is_builtin(msh->cmd[0].param[0]);
+		exec_builtins(msh, 0, builtin);
+	}
 	waitpid(-1, NULL, 0);
 	if (dup2(4095, STDIN_FILENO) == -1)
-		printf("ERROR - yo\n");
+		printf("ERROR - yo4\n");
+	if (dup2(4094, STDOUT_FILENO) == -1)
+		printf("ERROR - yo5\n");
 	return (0);
 }

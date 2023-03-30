@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/27 19:31:55 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/30 14:07:00 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ char 	*replace_spaces_of_expanded(t_parse p, char *line);
 int 	go_to_end_quote(int i, char *line, char q, int s);
 int		parse_fd_data(t_msh *msh);
 int		is_alpha(char c);
+void 	quote_handling(t_msh *msh, t_parse *p);
 
 int		is_name_before_arrow(t_msh *msh, t_parse p);
 int		get_size_until_arrow(t_msh *msh, int i);

@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/29 10:24:55 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/30 15:15:58 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	get_name_after_arrow(t_msh *msh, t_parse *p)
 	while (p->line[end])
 	{
 		if ((p->line[end] == '|' || p->line[end] == '>' || \
-		p->line[end] == '<') && !is_in_quotes)
+		p->line[end] == '<' || p->line[end] == ' ') && !is_in_quotes)
 			break ;
 		quote_check(p->line, end, &start_quote, &is_in_quotes);
 		end++;
@@ -66,21 +66,46 @@ int	get_name_after_arrow(t_msh *msh, t_parse *p)
 	return (end - p->i);
 }
 
+char *develop_name(t_msh *msh, char *sub)
+{
+	t_parse	p;
 
+	p.line = sub;
+	p.i = 0;
+	p.strt = 0;
+	while (p.line[p.i])
+	{	
+		if (p.line[p.i] == '"' || p.line[p.i] == '\'')
+		{
+			p.strt = p.i;
+			quote_handling(msh, &p);
+		}
+		else if (p.line[p.i] == '$')
+			p.line = replace_env_arg(msh, &p, p.i);
+		if (p.line[p.i])
+			p.i++;
+	}
+	return (p.line);
+}
 
 void	get_name(t_msh *msh, t_parse p, int mode, int cmd_ind)
 {
 	int	size;
+	char *sub;
 
 	// if (!arrow_is_at_start(msh, *p))
 	size = get_name_after_arrow(msh, &p);
-	// printf("size : %d, %s\n",size, &p.line[p.i]);
+	printf("size : %d, %s\n",size, &p.line[p.i]);
 	if (mode == 0)
-		msh->cmd[cmd_ind].ip.in_name = ft_substr(p.line, p.i, size);
+	{
+		sub = ft_substr(p.line, p.i, size);
+		msh->cmd[cmd_ind].ip.in_name = develop_name(msh, sub);
+	}
 	else
 	{
+		sub = ft_substr(p.line, p.i, size);
 		msh->cmd[cmd_ind].op[msh->redir_id].out_name \
-		= ft_substr(p.line, p.i, size);
+		= develop_name(msh, sub);
 		msh->redir_id++;
 	}
 }
@@ -95,10 +120,12 @@ void	go_after_fd_name(t_msh *msh, t_parse *p)
 	start_quote = 0;
 	while (p->line[p->i] && (p->line[p->i] == '>' || p->line[p->i] == '<'))
 		p->i++;
+	while (p->line[p->i] && is_white_space(p->line[p->i]))
+		p->i++;
 	while (p->line[p->i])
 	{
 		if ((p->line[p->i] == '|' || p->line[p->i] == '>' \
-		|| p->line[p->i] == '<') && !is_in_quotes)
+		|| p->line[p->i] == '<' || p->line[p->i] == ' ') && !is_in_quotes)
 			break ;
 		quote_check(p->line, p->i, &start_quote, &is_in_quotes);
 		p->i++;
@@ -171,4 +198,6 @@ void	get_redir(t_msh *msh, t_parse *p, int cmd_index)
 	}
 	p->line = remove_fd_name_and_arrow(msh, *p);
 	p->i--;
+	if (p->i < 0)
+		p->i = 0;
 }
