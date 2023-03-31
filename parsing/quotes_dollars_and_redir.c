@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/31 09:28:13 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/31 14:54:19 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ void	init_output_input(t_msh *msh, char *str, int cmd_id)
 	msh->cmd[cmd_id].ip.infd = 0;
 	msh->cmd[cmd_id].ip.in_name = NULL;
 	i++;
-
 	msh->redir_id = 0;
+	msh->cmd[cmd_id].here_doc_nbr = 0;
 }	
 
 char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_id)

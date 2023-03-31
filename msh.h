@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/31 11:17:14 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/31 15:00:29 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 #define OLD 1
 #define HOME 2
 
+extern int msh_status;
 
 typedef struct s_env
 {
@@ -62,12 +63,13 @@ typedef struct s_inputs
 	int		input;
 	int		infd;
 	char 	*in_name;
-}				t_inputs;
+	char 	**here_doc_delim;
+} t_inputs;
 
 typedef struct s_cmd
 {
 	char		**param;
-	int			here_doc;
+	int			here_doc_nbr;
 	int 		redir_nbr;
 	t_outputs	*op;
 	t_inputs	ip;

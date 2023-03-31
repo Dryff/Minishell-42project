@@ -13,12 +13,13 @@ echo $USER-$USER 8====> <3
 FAIRE HERE_DOC | colas
 gerer >| et quand le chevron est au debut de la commande | colas
 urandom | colas
+QUOTE SEULE QUI SEGFAULT | colas
 CTRL + \ | Max
 GERER ERREURS EN CAS DE MALLOC FOIRÉ MAX | Max
 echo -nnnn -nnnn -na | Max
 env -i ./minishell | Max
 unset SHLVL into grep --> SHLVL=0 | Max
 si negatif, dans env = 0 et dans export = la valeur negative | Max
-SORTIE DERREUR DANS $? | ?
+SORTIE DERREUR DANS $? | Max
 GERER ERREURS EN CAS DE MALLOC FOIRÉ COLAS | ?
 PARSING DES CHEVRONS | ?

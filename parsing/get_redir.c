@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/30 15:15:58 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/31 14:36:04 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void	get_name(t_msh *msh, t_parse p, int mode, int cmd_ind)
 	if (mode == 0)
 	{
 		sub = ft_substr(p.line, p.i, size);
+		// if (msh->cmd[cmd_ind].ip.input = 2)
+		// 	msh->cmd[cmd_ind].ip.here_doc_delim[hd_nbr] = develop_name(msh, sub);
 		msh->cmd[cmd_ind].ip.in_name = develop_name(msh, sub);
 	}
 	else

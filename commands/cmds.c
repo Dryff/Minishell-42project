@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/03/31 09:42:56 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/31 14:47:16 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 		if (execve(pathing, msh->cmd[cmd_id].param, msh->env.tab) == -1)
 		{
 			update_msh_status(1);
-			perror(msh->cmd[cmd_id].param[0]);
+			ft_err_printf("msh: %s: command not found\n"\
+			, msh->cmd[cmd_id].param[0]);
 			free(pathing);
 		}
 	}

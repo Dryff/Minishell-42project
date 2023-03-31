@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/31 10:58:11 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/31 15:01:13 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*get_expanded(t_msh *msh, t_parse *p, int cursor)
 	int		k;
 
 	k = cursor;
+	printf("start : %d\n", p->line[k]);
 	while (p->line[k] && is_alpha(p->line[k]))
 		k++;
 	arg = ft_substr(p->line, cursor, k - cursor);
@@ -73,7 +74,7 @@ char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor)
 		p->arg_sz = 1;
 		p->i++;
 		if (p->line[cursor] == '?')
-			expanded = msh->ex_val;
+			expanded = ft_itoa(msh_status);
 		else if (!is_alpha(p->line[cursor]))
 			expanded = "$";
 	}
