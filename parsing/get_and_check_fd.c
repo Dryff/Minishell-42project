@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/03/30 12:17:40 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/31 09:45:15 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_input(t_msh *msh, int cmd_id)
 	return (1);
 }
 
-void	check_output(t_msh *msh, int cmd_id, int op_id)
+int	check_output(t_msh *msh, int cmd_id, int op_id)
 {
 	if (msh->cmd[cmd_id].op[op_id].output == 1)
 		msh->cmd[cmd_id].op[op_id].outfd = \
@@ -43,8 +43,9 @@ void	check_output(t_msh *msh, int cmd_id, int op_id)
 	{
 		ft_err_printf("msh: permission denied: %s\n", \
 		msh->cmd[cmd_id].op[op_id].out_name);
-		return ;
+		return (0);
 	}
+	return (1);
 }
 
 int	get_and_check_fd(t_msh *msh)
@@ -60,7 +61,8 @@ int	get_and_check_fd(t_msh *msh)
 		j = 0;
 		while (j < msh->cmd[i].redir_nbr)
 		{
-			check_output(msh, i, j);
+			if (!check_output(msh, i, j))
+				break ;
 			j++;
 		}
 		i++;

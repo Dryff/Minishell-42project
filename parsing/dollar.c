@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/26 12:52:41 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/31 10:58:11 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ char	*get_expanded(t_msh *msh, t_parse *p, int cursor)
 	int		k;
 
 	k = cursor;
-	while (p->line[k] && p->line[k] != '"' && p->line[k] != '\'' \
-	&& p->line[k] != '|' && p->line[k] != ' ' && p->line[k] != '$')
+	while (p->line[k] && is_alpha(p->line[k]))
 		k++;
 	arg = ft_substr(p->line, cursor, k - cursor);
 	// printf("arg : %s\n", arg);
@@ -56,7 +55,6 @@ char	*copy_with_value(t_msh *msh, char *expanded, t_parse p, int cursor)
 		str[i++] = expanded[j++];
 	while (i < (int)ft_strlen(p.line) + (int)ft_strlen(expanded) - p.arg_sz)
 		str[i++] = p.line[cursor++ + p.arg_sz];
-	// printf("%d\n", i);
 	str[i] = '\0';
 	return (str);
 }
@@ -86,6 +84,7 @@ char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor)
 	if (p->i < 0)
 		p->i = 0;
 	str = replace_spaces_of_expanded(*p, str);
+	printf("p.i : %d, %s\n", p->i, p->line);
 	return (free(p->line), str);
 }
 

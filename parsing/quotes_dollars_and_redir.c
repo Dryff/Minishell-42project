@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/30 15:34:49 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/31 09:28:13 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,20 @@ t_outputs	*get_op_array(t_msh *msh, char *str, int cmd_id)
 void	init_output_input(t_msh *msh, char *str, int cmd_id)
 {
 	int i;
+	int j;
 
+	j = 0;
 	i = 0;
 	msh->cmd[cmd_id].op = get_op_array(msh, str, cmd_id);
+	while (j < msh->cmd[cmd_id].redir_nbr)
+	{
+		msh->cmd[cmd_id].op[j].output = 0;
+		msh->cmd[cmd_id].op[j].outfd = 0;
+		msh->cmd[cmd_id].op[j].out_name = NULL;
+		j++;
+	}
 	msh->cmd[cmd_id].ip.input = 0;
+	msh->cmd[cmd_id].ip.infd = 0;
 	msh->cmd[cmd_id].ip.in_name = NULL;
 	i++;
 

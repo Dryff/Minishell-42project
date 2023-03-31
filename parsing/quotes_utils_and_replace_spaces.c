@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 02:03:35 by colas             #+#    #+#             */
-/*   Updated: 2023/03/29 10:25:05 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/31 10:47:23 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int	go_to_end_quote(int i, char *line, char q, int s)
 
 char	*replace_spaces_of_expanded(t_parse p, char *line)
 {
-	printf("%d\n", p.i);
-	printf("%s\n", line);
 	while (line[p.i])
 	{
 		if (is_white_space(line[p.i]))
