@@ -6,7 +6,7 @@
 #    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/03/29 10:58:48 by mfinette         ###   ########.fr        #
+#    Updated: 2023/03/31 11:35:17 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ FILES = main							\
 		builtins/export2				\
 		builtins/unset					\
 		builtins/dvd					\
+		builtins/echo					\
 		parsing/parsing_hub				\
 		parsing/dollar					\
 		parsing/get_cmd_nbr				\

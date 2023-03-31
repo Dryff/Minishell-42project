@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/19 17:11:21 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/31 11:17:30 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,37 +37,6 @@ int ft_exit(void)
 	printf("exit\n");
 	exit(0);
     return (0);
-}
-
-int	ft_echo(t_msh *msh, int cmd_id)
-{
-	int		i;
-	int		arg_nbr;
-	char	*cmd;
-
-	cmd = msh->cmd[cmd_id].param[1];
-	if (!cmd)
-	{
-		printf("\n");
-		return (0);
-	}
-	i = 1;
-	if ((cmd[0] == '-' && !cmd[1]) \
-			|| (cmd[0] == '-' && cmd[1] == 'n'))
-		i = 2;
-	arg_nbr = 0;
-	while (msh->cmd[cmd_id].param[arg_nbr])
-		arg_nbr++;
-	while (msh->cmd[cmd_id].param[i])
-	{
-		printf("%s", msh->cmd[cmd_id].param[i]);
-		if (i != arg_nbr - 1)
-			printf(" ");
-		i++;
-	}
-	if (!(cmd[0] == '-' && cmd[1] == 'n'))
-		printf("\n");
-	return (0);
 }
 
 int	is_builtin(char *cmd)
