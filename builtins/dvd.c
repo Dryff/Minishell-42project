@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/22 13:38:58 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/03/31 15:19:31 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	update_pwd_env(t_msh *msh, char *actual_path)
 	free(pwd);
 	free(tmp);
 	free(oldpwd);
-	free(actual_path);
 }
 
 void	chdir_home_old(t_msh *msh, int code)
@@ -57,6 +56,8 @@ void	chdir_home_old(t_msh *msh, int code)
 			ft_err_printf("cd: OLDPWD not set\n");
 			update_msh_status(1);
 		}
+		else
+			printf("%s\n", ft_expand(&msh->env, "OLDPWD"));
 	}
 	if (!error)
 		update_pwd_env(msh, actual_path);

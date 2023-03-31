@@ -9,17 +9,17 @@ FIX /bin/ls quand path unseted 8===> <3
 PARSING POUR LE HEREDOC 8===> <3
 FIX EXPAND $ (export test="echo salut") puis $test 8===> <3
 echo $USER-$USER 8====> <3
+env -i ./minishell | Max <3
+echo -nnnn -nnnn -na | Max <3
+SEGFAULT CD - | Max <3
 ----------------------------------------------------------------
 FAIRE HERE_DOC | colas
 gerer >| et quand le chevron est au debut de la commande | colas
 urandom | colas
 QUOTE SEULE QUI SEGFAULT | colas
 CTRL + \ | Max
+CTRL + C dans plusieurs minishells | Max
 GERER ERREURS EN CAS DE MALLOC FOIRÉ MAX | Max
-echo -nnnn -nnnn -na | Max
-env -i ./minishell | Max
-unset SHLVL into grep --> SHLVL=0 | Max
-si negatif, dans env = 0 et dans export = la valeur negative | Max
 SORTIE DERREUR DANS $? | Max
+PARSING DES CHEVRONS | Max
 GERER ERREURS EN CAS DE MALLOC FOIRÉ COLAS | ?
-PARSING DES CHEVRONS | ?
