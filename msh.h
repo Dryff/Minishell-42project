@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/31 15:00:29 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/31 17:40:01 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ typedef struct s_inputs
 typedef struct s_cmd
 {
 	char		**param;
-	int			here_doc_nbr;
+	int			hd_nbr;
+	int			hd_id;
 	int 		redir_nbr;
 	t_outputs	*op;
 	t_inputs	ip;

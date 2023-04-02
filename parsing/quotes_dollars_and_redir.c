@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/31 14:54:19 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/31 17:39:43 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,37 @@ t_outputs	*get_op_array(t_msh *msh, char *str, int cmd_id)
 	msh->cmd[cmd_id].redir_nbr = count;
 	return (new);
 }
+
+char	**get_hd_array(t_msh *msh, char *str, int cmd_id)
+{
+	int 	i;
+	int 	count;
+	int		is_in_quotes;
+	int		start_quote;
+	char	**new;
+
+	is_in_quotes = 0;
+	start_quote = 0;
+	i = -1;
+	count = 0;
+	while (str[++i])
+	{
+		if (str[i] == '<' && !is_in_quotes)
+		{
+			while (str[i] == '<')
+				i++;
+			count++;
+		}
+		quote_check(str, i, &start_quote, &is_in_quotes);
+	}
+	new = malloc((count + 1) * sizeof(char *));
+	if (!new)
+		return (NULL);
+	msh->cmd[cmd_id].hd_nbr = count;
+	printf("hd :%d\n", count);
+	return (new);
+}
+
 void	init_output_input(t_msh *msh, char *str, int cmd_id)
 {
 	int i;
@@ -110,12 +141,16 @@ void	init_output_input(t_msh *msh, char *str, int cmd_id)
 		msh->cmd[cmd_id].op[j].out_name = NULL;
 		j++;
 	}
+	j = -1;
+	msh->cmd[cmd_id].ip.here_doc_delim = get_hd_array(msh, str, cmd_id);
+	while (++j < msh->cmd[cmd_id].hd_nbr)
+		msh->cmd[cmd_id].ip.here_doc_delim[0] = NULL;
 	msh->cmd[cmd_id].ip.input = 0;
 	msh->cmd[cmd_id].ip.infd = 0;
 	msh->cmd[cmd_id].ip.in_name = NULL;
-	i++;
 	msh->redir_id = 0;
-	msh->cmd[cmd_id].here_doc_nbr = 0;
+	msh->cmd[cmd_id].hd_id = 0;
+	i++;
 }	
 
 char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_id)

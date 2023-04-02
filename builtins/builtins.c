@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/31 11:17:30 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/02 14:20:40 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,34 +41,34 @@ int ft_exit(void)
 
 int	is_builtin(char *cmd)
 {
-	if (!ft_strncmp(cmd, "pwd", 3))
+	if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
 		return (PWD);
-	else if (!ft_strncmp(cmd, "echo", 4))
+	else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
 		return (ECHO);
-	else if (!ft_strncmp(cmd, "cd", 2))
+	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
 		return (CD);
-	else if (!ft_strncmp(cmd, "env", 3))
+	else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
 		return (ENV);
-	else if (!ft_strncmp(cmd, "export", 6))
+	else if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
 		return (EXPORT);
-	else if (!ft_strncmp(cmd, "unset", 5))
+	else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
 		return (UNSET);
-	else if (!ft_strncmp(cmd, "exit", 4))
+	else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
 		return (EXIT);
-	else if (!ft_strncmp(cmd, "var", 3))
+	else if (!ft_strncmp(cmd, "var", ft_strlen(cmd)))
 		return (VAR);
 	return (0);
 }
 
 int	is_not_builtin_fd(char *cmd)
 {
-	if (!ft_strncmp(cmd, "export", 6))
+	if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
 		return (EXPORT);
-	else if (!ft_strncmp(cmd, "cd", 2))
+	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
 		return (CD);
-	else if (!ft_strncmp(cmd, "unset", 5))
+	else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
 		return (UNSET);
-	else if (!ft_strncmp(cmd, "exit", 4))
+	else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
 		return (EXIT);
 	return (0);
 }

@@ -12,11 +12,11 @@ echo $USER-$USER 8====> <3
 env -i ./minishell | Max <3
 echo -nnnn -nnnn -na | Max <3
 SEGFAULT CD - | Max <3
+QUOTE SEULE QUI SEGFAULT | colas
 ----------------------------------------------------------------
 FAIRE HERE_DOC | colas
 gerer >| et quand le chevron est au debut de la commande | colas
 urandom | colas
-QUOTE SEULE QUI SEGFAULT | colas
 CTRL + \ | Max
 CTRL + C dans plusieurs minishells | Max
 GERER ERREURS EN CAS DE MALLOC FOIRÉ MAX | Max

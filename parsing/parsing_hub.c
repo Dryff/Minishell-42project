@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/31 09:41:01 by colas            ###   ########.fr       */
+/*   Updated: 2023/03/31 17:41:39 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ void	print_cmds(t_msh msh)
 	printf("--------------------------\n");
 	while (i < msh.cmd_nbr)
 	{
-		j = 0;
-		printf("        (CMD |%d|)\n", i);
+		printf("        (CMD [%d])\n", i);
 		if (msh.cmd[i].ip.input)
 		{
 			printf("---INPUT INFO---\n");
@@ -75,9 +74,16 @@ void	print_cmds(t_msh msh)
 			printf("input : = %d\n", msh.cmd[i].ip.input);
 			printf("infd : = %d\n", msh.cmd[i].ip.infd);
 		}
+		j = 0;
+		while (j < msh.cmd[i].hd_nbr)
+		{
+			printf("---HD [%d] INFO---\n", j);
+			printf("hd = %s\n", msh.cmd[i].ip.here_doc_delim[j++]);
+		}
+		j = 0;
 		while (j < msh.cmd[i].redir_nbr)
 		{
-			printf("---OUTPUT |%d| INFO---\n", j);
+			printf("---OUTPUT [%d] INFO---\n", j);
 			printf("out = %s\n", msh.cmd[i].op[j].out_name);
 			printf("outfd : %d\n", msh.cmd[i].op[j].outfd);
 			printf("output : %d\n", msh.cmd[i].op[j++].output);
