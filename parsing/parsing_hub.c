@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_hub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/03 13:16:33 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/03 14:35:31 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	print_cmds(t_msh msh)
 
 int	parse_line(t_msh *msh)
 {
-	// check_arrows(msh);s
 	msh->cmd_nbr = get_cmd_nbr(msh->line);
 	if (!msh->cmd_nbr)
 		return (0);

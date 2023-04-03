@@ -3,37 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   check_arrows.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 10:51:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/03 13:16:56 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/03 14:08:57 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-int check_pipes_symbols(t_msh *msh, int i)
+int check_arrow_symbols(t_msh *msh, int i, char c)
 {
     int count;
 
     count = 0;
-    if (msh->line[i] == '<')
-    {   
-        while (msh->line[i] == '<')
-        {
-            count++;
-            i++;
-        }
-        while (msh->line[i] && is_white_space(msh->line[i]))
-            i++;
-        if (msh->line[i] == '|')
-            return (printf("msh: syntax error near unexpected token `|'\n"), \
-            msh_status = 2, 1);
-        if (msh->line[i] == '\0')
-            return (printf("msh: syntax error near unexpected token `newline'\n"), \
-            msh_status = 2, 1);
-        exit(1);
+    while (msh->line[i] == c)
+    {
+        count++;
+        i++;
     }
+    while (msh->line[i] && is_white_space(msh->line[i]))
+        i++;
+    if (count == 3)
+        return (printf("msh: syntax error near unexpected token `%c'\n", c), -1);
+    else if (count == 4)
+        return (printf("msh: syntax error near unexpected token `%c%c'\n", c, c), -1);
+    else if (count >= 5)
+        return (printf("msh: syntax error near unexpected token `%c%c%c'\n", c, c, c), -1);
+    else if (msh->line[i] == '|')
+        return (printf("msh: syntax error near unexpected token `|'\n"), -1);
+    if (msh->line[i] == '\0')
+        return (printf("msh: syntax error near unexpected token `newline'\n"), -1);
     return (i);
 }
 
@@ -49,10 +49,17 @@ int check_arrows(t_msh *msh)
 	start_quote = 0;
 	while (msh->line[i])
 	{
-        if (!is_in_quotes && (msh->line[i] == '>' || msh->line[i] == '<' || msh->line[i] == '|'))
-            i = check_pipes_symbols(msh, i);
-		quote_check(msh->line, i, &start_quote, &is_in_quotes);
+        if (!is_in_quotes && (msh->line[i] == '>' || msh->line[i] == '<'))
+        {
+            i = check_arrow_symbols(msh, i, msh->line[i]);
+            if (i == -1)
+                return (0);
+        }
+        if (!is_in_quotes && msh->line[i] == '|')
+            if (msh->line[i + 1] == '|')
+                 return (printf("msh: syntax error near unexpected token `|'\n"), 0);
+        quote_check(msh->line, i, &start_quote, &is_in_quotes);
 		i++;
 	}
-    return (0);
+    return (1);
 }
