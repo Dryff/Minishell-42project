@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/31 15:19:31 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:19:02 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ void	ft_dvd(t_msh *msh, int cmd_id)
 			update_pwd_env(msh, actual_path);
 		free(new_path);
 		free(tmp);
+		free(actual_path);
 	}
 }
