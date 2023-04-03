@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/03 14:35:31 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/03 15:17:08 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	print_cmds(t_msh msh)
 	printf("--------------------------\n");
 	while (i < msh.cmd_nbr)
 	{
-		printf("        (CMD [%d])\n", i);
+		printf("(CMD [%d])\n", i);
 		if (msh.cmd[i].ip.input)
 		{
 			printf("---INPUT INFO---\n");
@@ -112,6 +112,6 @@ int	parse_line(t_msh *msh)
 		return (error_manager(msh, MALLOC_ERR), 1);
 	store_cmds_between_pipes(msh);
 	get_and_check_fd(msh);
-	print_cmds(*msh);
+	// print_cmds(*msh);
 	return (1);
 }

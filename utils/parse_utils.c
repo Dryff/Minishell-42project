@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 09:07:58 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/03 14:33:34 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/03 15:08:24 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	get_cmd_size(char *str, int start)
 				if (is_end_quote(str, start_quote, i))
 					is_in_quotes = 0;
 		}
-		i++;
+		if (str[i])
+			i++;
 	}
 	return (i - start);
 }

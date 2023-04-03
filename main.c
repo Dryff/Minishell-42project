@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/03 14:33:41 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/03 15:05:34 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	main(int argc, char **argv, char **old_env)
 	msh.error = 0;
 	msh.env = init_env(old_env);
 	check_env(&msh);
+	msh.cmd_nbr = 0;
 	while (1)
 	{
 		if (msh.env.error)
