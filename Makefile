@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
+#    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/03/31 11:35:17 by mfinette         ###   ########.fr        #
+#    Updated: 2023/04/03 10:55:19 by cgelin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ FILES = main							\
 		parsing/quotes_dollars_and_redir\
 		parsing/quotes_utils_and_replace_spaces				\
 		parsing/get_and_check_fd		\
+		parsing/check_arrows		\
 		utils/parse_utils				\
 		utils/msh_utils					\
 		utils/cmd_utils					\
@@ -48,6 +49,7 @@ FILES = main							\
 		utils/ft_calloc					\
 		utils/itoa						\
 		commands/cmds					\
+		commands/here_doc					\
 		commands/paths					\
 		ft_err_printf/ft_print_hexa		\
 		ft_err_printf/ft_printf			\

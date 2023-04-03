@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/31 17:40:01 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/03 10:51:32 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int		commands(t_msh *msh);
 char	**get_paths(char **envp);
 char	*get_pathing(t_msh msh, int j);
-int		here_doc(t_msh *msh);
+void	here_doc(t_msh *msh, int cmd_id, int fd);
 char	*ft_itoa(int n);
 
 /* Msh_utils */
@@ -202,6 +202,8 @@ int 	go_to_end_quote(int i, char *line, char q, int s);
 int		parse_fd_data(t_msh *msh);
 int		is_alpha(char c);
 void 	quote_handling(t_msh *msh, t_parse *p);
+int		check_arrows(t_msh *msh);
+
 
 int		is_name_before_arrow(t_msh *msh, t_parse p);
 int		get_size_until_arrow(t_msh *msh, int i);

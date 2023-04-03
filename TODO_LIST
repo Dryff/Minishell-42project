@@ -8,15 +8,16 @@ FIX $variablequiexistepas 8===> <3
 FIX /bin/ls quand path unseted 8===> <3
 PARSING POUR LE HEREDOC 8===> <3
 FIX EXPAND $ (export test="echo salut") puis $test 8===> <3
-echo $USER-$USER 8====> <3
+echo $USER-$USER | colas
 env -i ./minishell | Max <3
 echo -nnnn -nnnn -na | Max <3
 SEGFAULT CD - | Max <3
 QUOTE SEULE QUI SEGFAULT | colas
+gerer quand le chevron est au debut de la commande | colas
 ----------------------------------------------------------------
 FAIRE HERE_DOC | colas
-gerer >| et quand le chevron est au debut de la commande | colas
 urandom | colas
+gerer ">|" | colas
 CTRL + \ | Max
 CTRL + C dans plusieurs minishells | Max
 GERER ERREURS EN CAS DE MALLOC FOIRÉ MAX | Max

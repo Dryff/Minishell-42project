@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/31 17:34:01 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/03 11:13:08 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	arrow_is_at_start(t_msh *msh, t_parse p)
 	(void)msh;
 	while (p.i > 0 && (p.line[p.i] == '>' || p.line[p.i] == '<'))
 		p.i--;
-	while (p.i > 0  && p.line[p.i] != '|')
+	while (p.i > 0)
 	{
 		if (!is_white_space(p.line[p.i]))
 			return (0);
@@ -74,7 +74,7 @@ char *develop_name(t_msh *msh, char *sub)
 	p.i = 0;
 	p.strt = 0;
 	while (p.line[p.i])
-	{	
+	{
 		if (p.line[p.i] == '"' || p.line[p.i] == '\'')
 		{
 			p.strt = p.i;
@@ -93,17 +93,14 @@ void	get_name(t_msh *msh, t_parse p, int mode, int cmd_ind)
 	int	size;
 	char *sub;
 
-	// if (!arrow_is_at_start(msh, *p))
 	size = get_name_after_arrow(msh, &p);
 	printf("size : %d, %s\n",size, &p.line[p.i]);
 	if (mode == 0)
 	{
 		sub = ft_substr(p.line, p.i, size);
 		if (msh->cmd[cmd_ind].ip.input == 2)
-		{
-			printf("yo :%d\n", msh->cmd[cmd_ind].hd_nbr);
-			msh->cmd[cmd_ind].ip.here_doc_delim[msh->cmd[cmd_ind].hd_id] = develop_name(msh, sub);
-		}
+			msh->cmd[cmd_ind].ip.here_doc_delim[msh->cmd[cmd_ind].hd_id] \
+			 = develop_name(msh, sub);
 		msh->cmd[cmd_ind].hd_id++;
 		msh->cmd[cmd_ind].ip.in_name = develop_name(msh, sub);
 	}
@@ -136,6 +133,8 @@ void	go_after_fd_name(t_msh *msh, t_parse *p)
 		quote_check(p->line, p->i, &start_quote, &is_in_quotes);
 		p->i++;
 	}
+	while (p->line[p->i] && is_white_space(p->line[p->i]))
+		p->i++;
 }
 
 char	*remove_fd_name_and_arrow(t_msh *msh, t_parse p)
@@ -163,6 +162,7 @@ char	*remove_fd_name_and_arrow(t_msh *msh, t_parse p)
 		p.i++;
 	}
 	str[j] = '\0';
+	free(p.line);
 	return (str);
 }
 

@@ -3,24 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/03/31 14:47:16 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/03 11:02:32 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
+void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 {
-	char	*pathing;
-	int		builtin;
 
-	if (msh->cmd[cmd_id].ip.input)
+	if (msh->cmd[cmd_id].ip.input == 1)
 		if (dup2(msh->cmd[cmd_id].ip.infd, STDIN_FILENO) == -1)
 			printf("ERROR - yo1\n");
-	
+	// if (msh->cmd[cmd_id].ip.input == 2)
+	// {
+	// 	here_doc(msh, cmd_id, fd[0]);
+	// 	if (dup2(fd[0], STDIN_FILENO) == -1)
+	// 		printf("ERROR - yo12\n");
+	// }
 	close(fd[0]);
 	if (msh->cmd[cmd_id].redir_nbr == 0)
 	{
@@ -29,14 +32,22 @@ void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 			if (dup2(4094, STDOUT_FILENO) == -1)
 				printf("ERROR - 5\n");
 		}
-		else 
+		else
 			if (dup2(fd[1], STDOUT_FILENO) == -1)
 				printf("ERROR - 5\n");
-		
 	}
-	else if (dup2(msh->cmd[cmd_id].op[msh->cmd[cmd_id].redir_nbr - 1].outfd, STDOUT_FILENO) == -1) 
+	else if (dup2(msh->cmd[cmd_id].op[msh->cmd[cmd_id].redir_nbr - 1] \
+	.outfd, STDOUT_FILENO) == -1)
 		printf("ERROR - 5\n");
 	close(fd[1]);
+}
+
+void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
+{
+	char	*pathing;
+	int		builtin;
+	
+	get_op_ip_and_hd(msh, cmd_id, fd);
 	builtin = is_builtin(msh->cmd[cmd_id].param[0]);
 	if (!builtin)
 	{

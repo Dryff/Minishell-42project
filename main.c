@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/31 15:00:22 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/03 12:18:21 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int	main(int argc, char **argv, char **old_env)
 		}
 		msh.paths = get_paths(msh.env.tab);
 		parse_line(&msh);
-		if (msh.cmd_nbr)
-			commands(&msh);
+		// if (msh.cmd_nbr)
+		// 	commands(&msh);
 		custom_add_history(msh.line);
 		free_things(&msh);
 		if (!check_exit(msh))

@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:53:02 by colas             #+#    #+#             */
-/*   Updated: 2023/03/22 21:02:44 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/03 08:52:50 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@ char	**get_paths(char **envp)
 	return (paths);
 }
 
+char	*check_slash(t_msh msh, int j)
+{
+	char *pathing;
+	
+	if (ft_strchr(msh.cmd[j].param[0], '/'))
+	{
+		pathing = msh.cmd[j].param[0];
+		if (access(pathing, 0) == 0)
+			return (pathing);
+	}
+	return (NULL);
+}
+
 char	*get_pathing(t_msh msh, int j)
 {
 	char	*slashed;
@@ -45,12 +58,9 @@ char	*get_pathing(t_msh msh, int j)
 	int		i;
 
 	i = 0;
-	if (ft_strchr(msh.cmd[j].param[0], '/'))
-	{
-		pathing = msh.cmd[j].param[0];
-		if (access(pathing, 0) == 0)
-			return (pathing);
-	}
+	pathing = check_slash(msh, j);
+	if (pathing)
+		return (pathing);
 	if (!msh.paths)
 		return (NULL);
 	while (msh.paths[i])

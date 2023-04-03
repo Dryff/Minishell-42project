@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_dollars_and_redir.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/31 17:39:43 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/03 10:20:10 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char	**get_hd_array(t_msh *msh, char *str, int cmd_id)
 	count = 0;
 	while (str[++i])
 	{
-		if (str[i] == '<' && !is_in_quotes)
+		if (str[i] == '<' && str[i + 1] == '<' && !is_in_quotes)
 		{
 			while (str[i] == '<')
 				i++;

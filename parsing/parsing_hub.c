@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_hub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/31 17:41:39 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/03 13:16:33 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	get_cmd(t_msh *msh, int *i, int j)
 		return (error_manager(msh, MALLOC_ERR + 1));
 	// printf("sub = %s\n", sub);
 	cmd = quotes_dollars_and_redir(msh, sub, j);
-	// printf("cmd = %s\n", cmd);
 	msh->cmd[j].param = ft_split(cmd, 10);
 	if (!msh->cmd[j].param)
 		return (error_manager(msh, MALLOC_ERR + 2));
@@ -93,7 +92,7 @@ void	print_cmds(t_msh msh)
 		printf("---ARGS---\n");
 		while (msh.cmd[i].param[j])
 		{
-			printf("cmd[%d].param[%d] = %s\n", i, j, msh.cmd[i].param[j]);
+			printf("cmd[%d].param[%d] = [%s]\n", i, j, msh.cmd[i].param[j]);
 			j++;
 		}
 		printf("--------------------------\n");
@@ -105,6 +104,7 @@ void	print_cmds(t_msh msh)
 
 int	parse_line(t_msh *msh)
 {
+	// check_arrows(msh);s
 	msh->cmd_nbr = get_cmd_nbr(msh->line);
 	if (!msh->cmd_nbr)
 		return (0);

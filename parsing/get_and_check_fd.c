@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_and_check_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/03/31 09:45:15 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/03 09:42:32 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_input(t_msh *msh, int cmd_id)
 {
 	if (msh->cmd[cmd_id].ip.input == 1)
 		msh->cmd[cmd_id].ip.infd = open(msh->cmd[cmd_id].ip.in_name, O_RDONLY);
-	if (msh->cmd[cmd_id].ip.infd == -1)
+	if (msh->cmd[cmd_id].ip.infd == -1 && msh->cmd[cmd_id].ip.input == 1)
 	{
 		if (access(msh->cmd[cmd_id].ip.in_name, F_OK) == 0)
 			ft_err_printf("msh: %s: Permission denied\n", \

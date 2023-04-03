@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/02 14:20:40 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/03 11:00:26 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int ft_exit(void)
 
 int	is_builtin(char *cmd)
 {
+	if (cmd == NULL)
+		return (0);
 	if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
 		return (PWD);
 	else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_things.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:57:33 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/30 18:22:04 by laquarium        ###   ########.fr       */
+/*   Updated: 2023/04/03 10:33:51 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,15 @@ void free_things(t_msh *msh)
 			free(msh->cmd[i].op[j].out_name);
 			j++;
 		}
+		j = 0;
+		if (!msh->cmd[i].hd_nbr)
+			free(msh->cmd[i].ip.in_name);
+		while (j < msh->cmd[i].hd_nbr)
+		{
+			free(msh->cmd[i].ip.here_doc_delim[j]);
+			j++;
+		}
+		free(msh->cmd[i].ip.here_doc_delim);
 		free(msh->cmd[i].op);
 		i++;
 	}
