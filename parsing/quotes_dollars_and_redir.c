@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_dollars_and_redir.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/03 10:20:10 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/03 15:57:07 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ t_outputs	*get_op_array(t_msh *msh, char *str, int cmd_id)
 		}
 		quote_check(str, i, &start_quote, &is_in_quotes);
 	}
+	if (is_in_quotes)
+		return (NULL);
 	new = malloc((count + 1) * sizeof(t_outputs));
 	if (!new)
 		return (NULL);
@@ -122,7 +124,6 @@ char	**get_hd_array(t_msh *msh, char *str, int cmd_id)
 	if (!new)
 		return (NULL);
 	msh->cmd[cmd_id].hd_nbr = count;
-	printf("hd :%d\n", count);
 	return (new);
 }
 

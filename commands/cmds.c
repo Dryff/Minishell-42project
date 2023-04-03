@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/03 15:13:41 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/03 15:56:24 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 			if (dup2(fd[1], STDOUT_FILENO) == -1)
 				printf("ERROR - 5\n");
 	}
-	else if (dup2(msh->cmd[cmd_id].op[msh->cmd[cmd_id].redir_nbr - 1] \
+	else if (msh->cmd[cmd_id].op)
+		if (dup2(msh->cmd[cmd_id].op[msh->cmd[cmd_id].redir_nbr - 1] \
 	.outfd, STDOUT_FILENO) == -1)
 		printf("ERROR - 5\n");
 	close(fd[1]);

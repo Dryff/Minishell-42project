@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/03 11:13:08 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/03 15:52:56 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,8 @@ void	get_redir(t_msh *msh, t_parse *p, int cmd_index)
 {
 	if (p->line[p->i] == '>')
 	{
-		msh->cmd[cmd_index].op[msh->redir_id].output = 1;
+		if (msh->cmd[cmd_index].op)
+			msh->cmd[cmd_index].op[msh->redir_id].output = 1;
 		if (p->line[p->i + 1] == '>')
 			msh->cmd[cmd_index].op[msh->redir_id].output = 2;
 		get_name(msh, *p, 1, cmd_index);

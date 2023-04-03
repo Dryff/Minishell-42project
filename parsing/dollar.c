@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/31 15:01:13 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/03 15:57:09 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor)
 	if (p->i < 0)
 		p->i = 0;
 	str = replace_spaces_of_expanded(*p, str);
-	printf("p.i : %d, %s\n", p->i, p->line);
 	return (free(p->line), str);
 }
 
