@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 10:51:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/03 14:08:57 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/04 19:02:53 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ int check_arrow_symbols(t_msh *msh, int i, char c)
     return (i);
 }
 
+int check_pipe_symbols(t_msh *msh, int i)
+{
+    i++;
+    while (msh->line[i] && is_white_space(msh->line[i]))
+        i++;
+    if (msh->line[i] == '\0')
+        return (printf("msh: syntax error near unexpected token `|'\n"), 0);
+    return(1);
+}
+
 int check_arrows(t_msh *msh)
 {
     int i;
@@ -56,8 +66,11 @@ int check_arrows(t_msh *msh)
                 return (0);
         }
         if (!is_in_quotes && msh->line[i] == '|')
+        {
             if (msh->line[i + 1] == '|')
                  return (printf("msh: syntax error near unexpected token `|'\n"), 0);
+            check_pipe_symbols(msh, i);
+        }
         quote_check(msh->line, i, &start_quote, &is_in_quotes);
 		i++;
 	}

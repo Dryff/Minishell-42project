@@ -14,10 +14,10 @@ echo -nnnn -nnnn -na | Max <3
 SEGFAULT CD - | Max <3
 QUOTE SEULE QUI SEGFAULT | colas
 gerer quand le chevron est au debut de la commande | colas
+urandom | colas (presque)
+gerer ">|" | colas
 ----------------------------------------------------------------
 FAIRE HERE_DOC | colas
-urandom | colas
-gerer ">|" | colas
 CTRL + \ | Max
 CTRL + C dans plusieurs minishells | Max
 GERER ERREURS EN CAS DE MALLOC FOIRÉ MAX | Max

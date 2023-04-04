@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/03 15:57:09 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/04 18:48:11 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*get_expanded(t_msh *msh, t_parse *p, int cursor)
 	int		k;
 
 	k = cursor;
-	printf("start : %d\n", p->line[k]);
+	// printf("start : %d\n", p->line[k]);
 	while (p->line[k] && is_alpha(p->line[k]))
 		k++;
 	arg = ft_substr(p->line, cursor, k - cursor);

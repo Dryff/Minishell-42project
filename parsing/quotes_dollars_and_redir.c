@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/03 15:57:07 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/04 15:26:03 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,18 @@ t_outputs	*get_op_array(t_msh *msh, char *str, int cmd_id)
 	start_quote = 0;
 	i = -1;
 	count = 0;
-	while (str[++i])
+	if (i <= (int)ft_strlen(str))
 	{
-		if (str[i] == '>' && !is_in_quotes)
+		while (str[++i])
 		{
-			while (str[i] == '>')
-				i++;
-			count++;
+			if (str[i] == '>' && !is_in_quotes)
+			{
+				while (str[i] == '>')
+					i++;
+				count++;
+			}
+			quote_check(str, i, &start_quote, &is_in_quotes);
 		}
-		quote_check(str, i, &start_quote, &is_in_quotes);
 	}
 	if (is_in_quotes)
 		return (NULL);

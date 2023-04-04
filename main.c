@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main.c 19-03-57-736.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/03 15:05:34 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/04 19:05:29 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int	main(int argc, char **argv, char **old_env)
 	msh.error = 0;
 	msh.env = init_env(old_env);
 	check_env(&msh);
-	msh.cmd_nbr = 0;
 	while (1)
 	{
+		msh.cmd_nbr = 0;
 		if (msh.env.error)
 			exit(1);
 		init_signals_history();

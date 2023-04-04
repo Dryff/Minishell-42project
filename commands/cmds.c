@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/03 15:56:24 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/04 14:43:09 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,20 @@ int	commands(t_msh *msh)
 	int	i;
 	int	builtin;
 
+	printf("nbrcmd = %s\n", msh->line);
 	dup_inffd();
 	i = 0;
 	while (i < msh->cmd_nbr)
 	{
-		if (msh->cmd[i].param[0] && msh->cmd[i].ip.infd != -1)
-			if (!is_not_builtin_fd(msh->cmd[i].param[0]))
-				exec_cmd(msh, i);
+		if (msh->cmd[i].param)
+		{
+			if (msh->cmd[i].param[0])
+			{
+				if (msh->cmd[i].ip.infd != -1)
+					if (!is_not_builtin_fd(msh->cmd[i].param[0]))
+						exec_cmd(msh, i);
+			}
+		}
 		i++;
 	}
 	if (msh->cmd_nbr == 1 && is_not_builtin_fd(msh->cmd[0].param[0]))
