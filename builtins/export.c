@@ -16,7 +16,7 @@
 #define WRONG_EXPORT 2
 #define EMPTY_EXPORT 3
 #define EXISTING_EXPORT 4
-#define NO_EXPORT 5
+#define PLUS_EXPORT 5
 
 int	get_position(char **tab, char *cmd)
 {
@@ -66,12 +66,16 @@ static	int	valid_export(char *cmd)
 	i = 0;
 	if (cmd[i] >= '0' && cmd[i] <= '9')
 		return (WRONG_EXPORT);
-	while (i < ft_strlen_until(cmd, '='))
+	while (i < ft_strlen_until(cmd, '=') - 1)
 	{
 		if (!is_valid_c(cmd[i]))
 			return (WRONG_EXPORT);
 		i++;
 	}
+	if (cmd[i] == '+' && cmd[i + 1] == '=')
+		return (PLUS_EXPORT);
+	else if (!is_valid_c(cmd[i]))
+		return (WRONG_EXPORT);
 	if (!is_in_charset('=', cmd))
 		return (EMPTY_EXPORT);
 	return (VALID_EXPORT);
@@ -129,6 +133,40 @@ int	complete_export(t_msh *msh, char *cmd)
 	return (1);
 }
 
+int	plus_export(t_msh *msh, char *cmd)
+{
+	char *purecmd;
+	char *dup;
+	char *dup2;
+	char *dup3;
+
+	printf("plus_export\n");
+	dup = ft_substr(cmd, 0, ft_strlen_until(cmd, '=') - 1);
+	if (!dup)
+		return (msh->error = 1, 0);
+	purecmd = ft_expand(&msh->env, dup);
+	printf("purecmd = %s\n", purecmd);
+	printf("dup = %s\n", dup);
+	if (!purecmd)
+		complete_export(msh, cmd);
+	else
+	{
+		dup2 = ft_strjoin(dup, "=");
+		free(dup);
+		dup = ft_strjoin(dup2, purecmd);
+		dup3 = ft_substr(cmd, ft_strlen_until(cmd, '=') + 1, ft_strlen(cmd));
+		printf("dup3 = %s\n", dup3);
+		printf("final export = %s\n", dup);
+		free(dup2);
+		dup2 = ft_strjoin(dup, dup3);
+		complete_export(msh, dup2);
+		free(dup2);
+		free(dup3);
+	}
+	free(dup);
+	return (1);
+}
+
 int	ft_export(t_msh *msh, int cmd_id)
 {
 	char	*cmd;
@@ -152,6 +190,8 @@ int	ft_export(t_msh *msh, int cmd_id)
 			add_invisible_export(msh, cmd);
 		else if (valid_export(cmd) == VALID_EXPORT)
 			complete_export(msh, cmd);
+		else if (valid_export(cmd) == PLUS_EXPORT)
+			plus_export(msh, cmd);
 		if (msh->error)
 			exit(1);
 		i++;
