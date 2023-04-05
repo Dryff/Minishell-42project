@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/05 10:49:14 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/05 12:37:13 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,9 @@
 
 void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 {
-
-	if (msh->cmd[cmd_id].ip.input == 1)
+	if (msh->cmd[cmd_id].ip.input)
 		if (dup2(msh->cmd[cmd_id].ip.infd, STDIN_FILENO) == -1)
 			printf("ERROR - yo1\n");
-	if (msh->cmd[cmd_id].ip.input == 2)
-	{
-		here_doc(msh, cmd_id, fd[0]);
-		if (dup2(fd[0], STDIN_FILENO) == -1)
-			printf("ERROR - yo12\n");
-	}
 	close(fd[0]);
 	if (msh->cmd[cmd_id].redir_nbr == 0)
 	{
@@ -82,7 +75,7 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 	if (pid == 0)
 		exec_to_pipe(msh, cmd_id, fd);
 	waitpid(pid, &exit_status, 0);
-	if (exit_status == 256)
+	if (exit_status == 1)
 		msh_status = 127;
 	else
 		msh_status = 0;

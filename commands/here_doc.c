@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:31:40 by colas             #+#    #+#             */
-/*   Updated: 2023/04/05 09:52:48 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/05 12:34:59 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ void	ft_putendl_fd(char *str, int fd)
 	write(fd, "\n", 1);
 }
 
-void	here_doc(t_msh *msh, int cmd_id, int fd)
+void	here_doc(t_msh *msh, int cmd_id)
 {
 	char	*line;
-	// pid_t 	pid;
 	int 	i;
 
 	i = 0;
@@ -37,9 +36,10 @@ void	here_doc(t_msh *msh, int cmd_id, int fd)
 			if (!line)
 				break ;
 			if (ft_strncmp(line, msh->cmd[cmd_id].ip.here_doc_delim[i], \
-						ft_strlen(line)) == 0)
+						ft_strlen(msh->cmd[cmd_id].ip.here_doc_delim[i])) == 0)
 				break ;
-			ft_putendl_fd(line, fd);
+			if (i == msh->cmd[cmd_id].hd_nbr - 1)
+				ft_putendl_fd(line, msh->cmd[cmd_id].ip.infd);
 			free(line);
 		}
 		i++;

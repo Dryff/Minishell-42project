@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/03 10:51:32 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/05 12:13:04 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_cmd
 	char		**param;
 	int			hd_nbr;
 	int			hd_id;
+	int			hd_tmp;
 	int 		redir_nbr;
 	t_outputs	*op;
 	t_inputs	ip;
@@ -174,7 +175,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int		commands(t_msh *msh);
 char	**get_paths(char **envp);
 char	*get_pathing(t_msh msh, int j);
-void	here_doc(t_msh *msh, int cmd_id, int fd);
+void	here_doc(t_msh *msh, int cmd_id);
 char	*ft_itoa(int n);
 
 /* Msh_utils */

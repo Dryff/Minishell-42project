@@ -6,11 +6,23 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/04/05 10:54:05 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/05 12:43:28 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
+
+void	hd_exec(t_msh *msh, int cmd_id)
+{
+	if (msh->cmd[cmd_id].hd_nbr)
+	{
+		msh->cmd[cmd_id].ip.infd = open("hd_tmp", \
+		O_CREAT | O_RDWR | O_TRUNC, 0644);
+		here_doc(msh, cmd_id);
+		close(msh->cmd[cmd_id].ip.infd);
+		msh->cmd[cmd_id].ip.infd = open("hd_tmp", O_RDONLY);
+	}
+}
 
 int	check_input(t_msh *msh, int cmd_id)
 {
@@ -56,6 +68,7 @@ int	get_and_check_fd(t_msh *msh)
 	i = 0;
 	while (i < msh->cmd_nbr)
 	{
+		hd_exec(msh, i);
 		if (!check_input(msh, i))
 			break ;
 		j = 0;
