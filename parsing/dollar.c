@@ -85,6 +85,7 @@ char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor)
 	if (p->i < 0)
 		p->i = 0;
 	str = replace_spaces_of_expanded(*p, str);
+	free(expanded);
 	return (free(p->line), str);
 }
 
