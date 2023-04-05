@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_and_check_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/04/03 09:42:32 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/05 10:54:05 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@ int	check_input(t_msh *msh, int cmd_id)
 	if (msh->cmd[cmd_id].ip.infd == -1 && msh->cmd[cmd_id].ip.input == 1)
 	{
 		if (access(msh->cmd[cmd_id].ip.in_name, F_OK) == 0)
-			ft_err_printf("msh: %s: Permission denied\n", \
-			msh->cmd[cmd_id].ip.in_name);
+			return (ft_err_printf("msh: %s: Permission denied\n", \
+			msh->cmd[cmd_id].ip.in_name), msh_status = 1, 0);
 		else
-			ft_err_printf("msh: %s: No such file or directory\n", \
-			msh->cmd[cmd_id].ip.in_name);
-		return (0);
+			return (ft_err_printf("msh: %s: No such file or directory\n", \
+			msh->cmd[cmd_id].ip.in_name), msh_status = 1, 0);
 	}
 	return (1);
 }
@@ -43,6 +42,7 @@ int	check_output(t_msh *msh, int cmd_id, int op_id)
 	{
 		ft_err_printf("msh: permission denied: %s\n", \
 		msh->cmd[cmd_id].op[op_id].out_name);
+		msh_status = 1;
 		return (0);
 	}
 	return (1);
