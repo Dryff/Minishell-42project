@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:31:40 by colas             #+#    #+#             */
-/*   Updated: 2023/04/03 09:49:43 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/05 09:52:48 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ void	ft_putendl_fd(char *str, int fd)
 	i = 0;
 	while (str[i])
 		write(fd, &str[i++], 1);
-	write (fd, "\n", 1);
+	write(fd, "\n", 1);
 }
 
 void	here_doc(t_msh *msh, int cmd_id, int fd)
 {
 	char	*line;
-	int i;
+	// pid_t 	pid;
+	int 	i;
 
 	i = 0;
 	while (i < msh->cmd[cmd_id].hd_nbr)

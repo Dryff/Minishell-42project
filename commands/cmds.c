@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/04 14:43:09 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/05 10:26:37 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 	if (msh->cmd[cmd_id].ip.input == 1)
 		if (dup2(msh->cmd[cmd_id].ip.infd, STDIN_FILENO) == -1)
 			printf("ERROR - yo1\n");
-	// if (msh->cmd[cmd_id].ip.input == 2)
-	// {
-	// 	here_doc(msh, cmd_id, fd[0]);
-	// 	if (dup2(fd[0], STDIN_FILENO) == -1)
-	// 		printf("ERROR - yo12\n");
-	// }
+	if (msh->cmd[cmd_id].ip.input == 2)
+	{
+		here_doc(msh, cmd_id, fd[0]);
+		if (dup2(fd[0], STDIN_FILENO) == -1)
+			printf("ERROR - yo12\n");
+	}
 	close(fd[0]);
 	if (msh->cmd[cmd_id].redir_nbr == 0)
 	{
@@ -59,17 +59,19 @@ void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 			ft_err_printf("msh: %s: command not found\n"\
 			, msh->cmd[cmd_id].param[0]);
 			free(pathing);
+			exit(1);
 		}
 	}
 	else
 		exec_builtins(msh, cmd_id, builtin);
-	exit(1);
+	exit(0);
 }
 
 void	exec_cmd(t_msh *msh, int cmd_id)
 {
-	int		pid;
-	int		fd[2];
+	pid_t	pid;
+	int 	exit_status;
+	int 	fd[2];
 
 	if (pipe(fd) == -1)
 		printf("ERROR - 3\n");
@@ -79,7 +81,11 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 		printf("ERROR - 4\n");
 	if (pid == 0)
 		exec_to_pipe(msh, cmd_id, fd);
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &exit_status, 0);
+	if (exit_status == 256)
+		msh_status = 127;
+	else
+		msh_status = 0;
 	close(fd[1]);
 	if (dup2(fd[0], STDIN_FILENO) == -1)
 		printf("ERROR - 6\n");
@@ -104,15 +110,9 @@ int	commands(t_msh *msh)
 	i = 0;
 	while (i < msh->cmd_nbr)
 	{
-		if (msh->cmd[i].param)
-		{
-			if (msh->cmd[i].param[0])
-			{
-				if (msh->cmd[i].ip.infd != -1)
-					if (!is_not_builtin_fd(msh->cmd[i].param[0]))
-						exec_cmd(msh, i);
-			}
-		}
+		if (msh->cmd[i].param[0] && msh->cmd[i].ip.infd != -1)
+			if (!is_not_builtin_fd(msh->cmd[i].param[0]))
+				exec_cmd(msh, i);
 		i++;
 	}
 	if (msh->cmd_nbr == 1 && is_not_builtin_fd(msh->cmd[0].param[0]))
@@ -120,7 +120,6 @@ int	commands(t_msh *msh)
 		builtin = is_builtin(msh->cmd[0].param[0]);
 		exec_builtins(msh, 0, builtin);
 	}
-	waitpid(-1, NULL, 0);
 	if (dup2(4095, STDIN_FILENO) == -1)
 		printf("ERROR - yo4\n");
 	if (dup2(4094, STDOUT_FILENO) == -1)

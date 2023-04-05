@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/04 21:42:18 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/05 10:20:42 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	main(int argc, char **argv, char **old_env)
 			exit(1);
 		init_signals_history();
 		init_prompt(&msh);
-		update_msh_status(0);
 		msh.line = readline(msh.prompt);
 		if (!msh.line)
 		{
