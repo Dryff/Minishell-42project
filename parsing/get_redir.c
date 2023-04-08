@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/04 21:47:01 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/08 15:55:54 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ char *develop_name(t_msh *msh, char *sub)
 	p.line = sub;
 	p.i = 0;
 	p.strt = 0;
+	if (p.line == NULL)
+		return (NULL);
 	while (p.line[p.i])
 	{
 		if (p.line[p.i] == '"' || p.line[p.i] == '\'')
