@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/29 10:47:18 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:48:50 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,18 +135,15 @@ int	complete_export(t_msh *msh, char *cmd)
 
 int	plus_export(t_msh *msh, char *cmd)
 {
-	char *purecmd;
-	char *dup;
-	char *dup2;
-	char *dup3;
+	char	*purecmd;
+	char	*dup;
+	char	*dup2;
+	char	*dup3;
 
-	printf("plus_export\n");
 	dup = ft_substr(cmd, 0, ft_strlen_until(cmd, '=') - 1);
 	if (!dup)
 		return (msh->error = 1, 0);
 	purecmd = ft_expand(&msh->env, dup);
-	printf("purecmd = %s\n", purecmd);
-	printf("dup = %s\n", dup);
 	if (!purecmd)
 		complete_export(msh, cmd);
 	else
@@ -155,8 +152,6 @@ int	plus_export(t_msh *msh, char *cmd)
 		free(dup);
 		dup = ft_strjoin(dup2, purecmd);
 		dup3 = ft_substr(cmd, ft_strlen_until(cmd, '=') + 1, ft_strlen(cmd));
-		printf("dup3 = %s\n", dup3);
-		printf("final export = %s\n", dup);
 		free(dup2);
 		dup2 = ft_strjoin(dup, dup3);
 		complete_export(msh, dup2);

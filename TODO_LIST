@@ -29,3 +29,49 @@ PARSING DES CHEVRONS | Max
 NE PAS OUBLIER !!!!
 ---------------------
 Ya un exit dans get_redir qu'il faudra gerer car il sert a regler le cas suivant : ���Xc5�0)\o.7}1L�G�n�=�k�De�~��$!¹ň�ЍzȽ~33�`(%�h�'X,�i;�Ldݤ�ȍ4𮣚̝jn��)d#�x�߹�>@;5�Gy^�⁪a�0� �G&��Џ��ޤ�n�*�گSɳҐ0RX^�_Ȱ�4⪌�'+|^U���Z�^O���H�/ݝmw�"�*�� 괰h�>J2咯`,7,��oͬB~+_>ͣK*{��7�MܯZ2�j�paXͫ�5Z���D�Y�2��⯡$*\�!H�so
+
+echo -n salut > > out5
+msh 🤑-> export a=12 B=15
+    msh 🤑-> echo $a $B
+echo$a
+msh 🤑-> cd /s
+cd: /s: No such file or directory
+msh 🤑-> cd /bin
+cd: /bin: No such file or directory
+
+msh 😡-> cd commands/ parsing/
+
+msh 😡-> export OLDPWD=CACA
+msh 😡-> cd -
+
+/bin
+msh: /bin: command not found
+msh 🤑-> /bin/
+msh: /bin/: command not found
+
+<< end cat delimiter stric
+
+msh 🤑-> cat
+^C
+
+msh 🤑-> << end
+size : 3, end
+> asd
+> ^C
+> ^C
+> ^C
+> ^C
+> ^C
+
+msh 🤑-> echo ""'sdfsdfd'"''"
+exit : 15
+'sdfsdfd'''
+
+"l"s''""
+
+sh-5.1$ env -i ./minishell 
+msh 🤑-> env
+SHLVL=2
+
+msh 🤑-> *
+msh: *: command not found

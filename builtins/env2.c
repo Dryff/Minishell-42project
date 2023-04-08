@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:42:57 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/30 18:31:15 by laquarium        ###   ########.fr       */
+/*   Updated: 2023/04/07 17:23:07 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_env init_env_i(void)
 	dup = getcwd(NULL, 0);
 	if (!dup)
 		return (env.error = 1, env);
-	env.tab[0] = ft_strdup("SHLVL=1");
+	env.tab[0] = ft_strdup("SHLVL=0");
 	if (!env.tab[0])
 		return (env.error = 1, env);
 	env.tab[1] = ft_strjoin("PWD=", dup);
