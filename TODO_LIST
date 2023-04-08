@@ -16,14 +16,14 @@ QUOTE SEULE QUI SEGFAULT | colas
 gerer quand le chevron est au debut de la commande | colas
 urandom | colas (presque)
 gerer ">|" | colas
-----------------------------------------------------------------
 FAIRE HERE_DOC | colas
+GERER ERREURS EN CAS DE MALLOC FOIRÉ COLAS | colas
+----------------------------------------------------------------
 CTRL + \ | Max
 CTRL + C dans plusieurs minishells | Max
 GERER ERREURS EN CAS DE MALLOC FOIRÉ MAX | Max
 SORTIE DERREUR DANS $? | Max
 PARSING DES CHEVRONS | Max
-GERER ERREURS EN CAS DE MALLOC FOIRÉ COLAS | ?
 
 
 NE PAS OUBLIER !!!!

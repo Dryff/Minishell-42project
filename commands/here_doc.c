@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:31:40 by colas             #+#    #+#             */
-/*   Updated: 2023/04/05 12:34:59 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/08 15:46:14 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	here_doc(t_msh *msh, int cmd_id)
 {
 	char	*line;
 	int 	i;
+	int len;
 
 	i = 0;
 	while (i < msh->cmd[cmd_id].hd_nbr)
@@ -35,8 +36,10 @@ void	here_doc(t_msh *msh, int cmd_id)
 			line = readline("> ");
 			if (!line)
 				break ;
-			if (ft_strncmp(line, msh->cmd[cmd_id].ip.here_doc_delim[i], \
-						ft_strlen(msh->cmd[cmd_id].ip.here_doc_delim[i])) == 0)
+			len = ft_strlen(msh->cmd[cmd_id].ip.here_doc_delim[i]);
+			if (len < (int)ft_strlen(line))
+				len = ft_strlen(line);
+			if (!ft_strncmp(line, msh->cmd[cmd_id].ip.here_doc_delim[i], len))
 				break ;
 			if (i == msh->cmd[cmd_id].hd_nbr - 1)
 				ft_putendl_fd(line, msh->cmd[cmd_id].ip.infd);

@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/04 15:26:03 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/05 14:58:28 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	quote_handling(t_msh *msh, t_parse *p)
 	p->i -= q_nbr;
 	if (p->i <= 0)
 		p->i = 0;
-	printf("exit : %d\n", p->i);
+	if (p->i >= (int)ft_strlen(p->line))
+		p->i = (int)ft_strlen(p->line);
 }
 
 t_outputs	*get_op_array(t_msh *msh, char *str, int cmd_id)

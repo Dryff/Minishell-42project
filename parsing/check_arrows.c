@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 10:51:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/04 21:40:21 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/05 14:55:32 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@ int check_arrow_symbols(t_msh *msh, int i, char c)
         return (printf("msh: syntax error near unexpected token `%c%c%c'\n", c, c, c), -1);
     else if (msh->line[i] == '|')
         return (printf("msh: syntax error near unexpected token `|'\n"), -1);
-    if (msh->line[i] == '\0')
+    else if (msh->line[i] == '\0')
         return (printf("msh: syntax error near unexpected token `newline'\n"), -1);
+    else if (msh->line[i] == 60 && msh->line[i - 1] == 62)
+        return (printf("msh: syntax error near unexpected token `>'\n"), -1);
+    else if (msh->line[i] == 62 && msh->line[i - 1] == 60)
+        return (printf("msh: syntax error near unexpected token `<'\n"), -1);
     return (i);
 }
 

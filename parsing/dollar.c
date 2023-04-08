@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/04 18:48:11 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/05 14:32:46 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,13 @@ char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor)
 		else if (!is_alpha(p->line[cursor]))
 			expanded = "$";
 	}
-	// printf("expanded : %s\n", expanded);
-	// printf("somme : %lu\n", ft_strlen(p->line) - p->arg_sz + ft_strlen(expanded));
 	str = copy_with_value(msh, expanded, *p, cursor);
 	p->i += ft_strlen(expanded) - p->arg_sz - 1;
 	if (p->i < 0)
 		p->i = 0;
-	str = replace_spaces_of_expanded(*p, str);
-	free(expanded);
-	return (free(p->line), str);
+	if (p->line[cursor] == '?')
+		free(expanded);
+	return (str = replace_spaces_of_expanded(*p, str), free(p->line), str);
 }
 
 char	*get_dollar(t_msh *msh, t_parse *p)
