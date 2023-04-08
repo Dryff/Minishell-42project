@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/09 00:04:56 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/09 00:06:15 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,12 @@ void	ft_dvd(t_msh *msh, int cmd_id)
 	char	*cmd;
 
 	cmd = msh->cmd[cmd_id].param[1];
+	if (msh->cmd[cmd_id].param[2])
+	{
+		ft_err_printf("cd: too many arguments\n");
+		update_msh_status(1);
+		return ;
+	}
 	if (!cmd)
 		chdir_home(msh);
 	else if (cmd[0] == '-' && !cmd[1])
