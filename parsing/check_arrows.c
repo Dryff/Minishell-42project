@@ -6,11 +6,22 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 10:51:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/05 14:55:32 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/09 17:46:08 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
+
+int check_arrow_after_arrow(t_msh *msh, int i)
+{
+    while (msh->line[i] && is_white_space(msh->line[i]))
+        i++;
+    if (msh->line[i] == '>')
+        return (printf("msh: syntax error near unexpected token `>'\n"), -1);
+    else if (msh->line[i] == '<')
+        return (printf("msh: syntax error near unexpected token `<'\n"), -1);
+    return (0);
+}
 
 int check_arrow_symbols(t_msh *msh, int i, char c)
 {
@@ -34,10 +45,12 @@ int check_arrow_symbols(t_msh *msh, int i, char c)
         return (printf("msh: syntax error near unexpected token `|'\n"), -1);
     else if (msh->line[i] == '\0')
         return (printf("msh: syntax error near unexpected token `newline'\n"), -1);
-    else if (msh->line[i] == 60 && msh->line[i - 1] == 62)
+    if (msh->line[i] == 60 && msh->line[i - 1] == 62)
         return (printf("msh: syntax error near unexpected token `>'\n"), -1);
     else if (msh->line[i] == 62 && msh->line[i - 1] == 60)
         return (printf("msh: syntax error near unexpected token `<'\n"), -1);
+    if (check_arrow_after_arrow(msh, i) == -1)
+        return (-1);
     return (i);
 }
 
