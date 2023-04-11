@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/11 17:36:14 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/11 17:38:54 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	init_history(void);
 void	custom_add_history(char *line);
 
 /* EXIT */
-int ft_exit(void);
+int ft_exit(t_msh *msh, int cmd_id);
 
 /* Env */
 t_env	init_env(char **envp);

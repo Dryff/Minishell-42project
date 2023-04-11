@@ -6,14 +6,16 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:35:31 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/11 17:35:43 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/11 17:39:08 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-int ft_exit(void)
+int ft_exit(t_msh *msh, int cmd_id)
 {
+    (void)cmd_id;
+    (void)msh;
 	printf("exit\n");
 	exit(0);
     return (0);
