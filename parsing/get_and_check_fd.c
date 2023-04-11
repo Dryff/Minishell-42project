@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/04/05 12:43:28 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/10 19:27:01 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	check_output(t_msh *msh, int cmd_id, int op_id)
 {
 	if (msh->cmd[cmd_id].op[op_id].output == 1)
 		msh->cmd[cmd_id].op[op_id].outfd = \
-		open(msh->cmd[cmd_id].op[op_id].out_name,\
+		open(msh->cmd[cmd_id].op[op_id].out_name, \
 		O_CREAT | O_RDWR | O_TRUNC, 0644);
 	else if (msh->cmd[cmd_id].op[op_id].output == 2)
 		msh->cmd[cmd_id].op[op_id].outfd = \
@@ -62,8 +62,8 @@ int	check_output(t_msh *msh, int cmd_id, int op_id)
 
 int	get_and_check_fd(t_msh *msh)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < msh->cmd_nbr)

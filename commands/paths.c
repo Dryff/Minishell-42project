@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:53:02 by colas             #+#    #+#             */
-/*   Updated: 2023/04/03 08:52:50 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/11 10:40:46 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ char	**get_paths(char **envp)
 
 char	*check_slash(t_msh msh, int j)
 {
-	char *pathing;
-	
+	char	*pathing;
+
 	if (ft_strchr(msh.cmd[j].param[0], '/'))
 	{
 		pathing = msh.cmd[j].param[0];

@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:31:40 by colas             #+#    #+#             */
-/*   Updated: 2023/04/08 15:46:14 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/11 10:40:29 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putendl_fd(char *str, int fd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -25,8 +25,8 @@ void	ft_putendl_fd(char *str, int fd)
 void	here_doc(t_msh *msh, int cmd_id)
 {
 	char	*line;
-	int 	i;
-	int len;
+	int		i;
+	int		len;
 
 	i = 0;
 	while (i < msh->cmd[cmd_id].hd_nbr)

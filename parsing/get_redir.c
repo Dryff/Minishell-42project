@@ -6,47 +6,18 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/08 15:55:54 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/10 18:51:40 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-char	*rm_ten(t_msh *msh, char *str)
-{
-	int	i;
-
-	i = 0;
-	(void)msh;
-	while (str[i])
-	{
-		if (str[i] == 10)
-			str[i] = ' ';
-		i++;
-	}
-	return (str);
-}
-
-int	arrow_is_at_start(t_msh *msh, t_parse p)
-{
-	(void)msh;
-	while (p.i > 0 && (p.line[p.i] == '>' || p.line[p.i] == '<'))
-		p.i--;
-	while (p.i > 0)
-	{
-		if (!is_white_space(p.line[p.i]))
-			return (0);
-		p.i--;
-	}
-	return (1);
-}
-
 int	get_name_after_arrow(t_msh *msh, t_parse *p)
 {
-	int end;
+	int	end;
 	int	is_in_quotes;
 	int	start_quote;
-	
+
 	(void)msh;
 	start_quote = 0;
 	is_in_quotes = 0;
@@ -66,43 +37,18 @@ int	get_name_after_arrow(t_msh *msh, t_parse *p)
 	return (end - p->i);
 }
 
-char *develop_name(t_msh *msh, char *sub)
-{
-	t_parse	p;
-
-	p.line = sub;
-	p.i = 0;
-	p.strt = 0;
-	if (p.line == NULL)
-		return (NULL);
-	while (p.line[p.i])
-	{
-		if (p.line[p.i] == '"' || p.line[p.i] == '\'')
-		{
-			p.strt = p.i;
-			quote_handling(msh, &p);
-		}
-		else if (p.line[p.i] == '$')
-			p.line = replace_env_arg(msh, &p, p.i);
-		if (p.line[p.i])
-			p.i++;
-	}
-	return (p.line);
-}
-
 void	get_name(t_msh *msh, t_parse p, int mode, int cmd_ind)
 {
-	int	size;
-	char *sub;
+	int		size;
+	char	*sub;
 
 	size = get_name_after_arrow(msh, &p);
-	printf("size : %d, %s\n",size, &p.line[p.i]);
 	if (mode == 0)
 	{
 		sub = ft_substr(p.line, p.i, size);
 		if (msh->cmd[cmd_ind].ip.input == 2)
 			msh->cmd[cmd_ind].ip.here_doc_delim[msh->cmd[cmd_ind].hd_id] \
-			 = develop_name(msh, sub);
+			= develop_name(msh, sub);
 		msh->cmd[cmd_ind].hd_id++;
 		msh->cmd[cmd_ind].ip.in_name = develop_name(msh, sub);
 	}
@@ -144,7 +90,7 @@ char	*remove_fd_name_and_arrow(t_msh *msh, t_parse p)
 	char	*str;
 	int		j;
 	int		i;
-	
+
 	str = malloc(sizeof(char) * ft_strlen(p.line) + 1);
 	if (!str)
 		return (error_manager(msh, MALLOC_ERR), NULL);
@@ -166,26 +112,6 @@ char	*remove_fd_name_and_arrow(t_msh *msh, t_parse p)
 	str[j] = '\0';
 	free(p.line);
 	return (str);
-}
-
-int	go_to_end_of_name_and_arrow(t_msh *msh, t_parse p)
-{
-	int end;
-	int	is_in_quotes;
-	int	start_quote;
-
-	(void)msh;
-	is_in_quotes = 0;
-	start_quote = 0;
-	end = p.i;
-	while (p.line[end])
-	{
-		if ((p.line[end] == '>' || p.line[end] == '|') && !is_in_quotes)
-			break ;
-		quote_check(p.line, end, &start_quote, &is_in_quotes);
-		end++;
-	}
-	return (end);
 }
 
 void	get_redir(t_msh *msh, t_parse *p, int cmd_index)
