@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/11 19:45:40 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/11 20:59:51 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,53 @@
 // CD //
 #define OLD 1
 #define HOME 2
+
+#define GOOD_PROMPT_1 "😃 msh-> 😃 "
+#define GOOD_PROMPT_2 "😎 msh-> 😎 "
+#define GOOD_PROMPT_3 "😍 msh-> 😍 "
+#define GOOD_PROMPT_4 "😘 msh-> 😘 "
+#define GOOD_PROMPT_5 "😜 msh-> 😜 "
+#define GOOD_PROMPT_6 "😝 msh-> 😝 "
+#define GOOD_PROMPT_7 "😆 msh-> 😆 "
+#define GOOD_PROMPT_8 "😇 msh-> 😇 "
+#define GOOD_PROMPT_9 "😉 msh-> 😉 "
+#define GOOD_PROMPT_10 "😋 msh-> 😋 "
+#define GOOD_PROMPT_11 "🤯 msh-> 🤯 "
+#define GOOD_PROMPT_12 "😏 msh-> 😏 "
+#define GOOD_PROMPT_13 "😚 msh-> 😚 "
+#define GOOD_PROMPT_14 "🤑 msh-> 🤑 "
+#define GOOD_PROMPT_15 "🤗 msh-> 🤗 "
+#define GOOD_PROMPT_16 "🤓 msh-> 🤓 "
+#define GOOD_PROMPT_17 "🤠 msh-> 🤠 "
+#define GOOD_PROMPT_18 "💪 msh-> 💪 "
+#define GOOD_PROMPT_19 "🥳 msh-> 🥳 "
+#define GOOD_PROMPT_20 "🤩 msh-> 🤩 "
+#define GOOD_PROMPT_21 "🤪 msh-> 🤪 "
+
+
+
+#define BAD_PROMPT_1 "😡 msh-> 😡 "
+#define BAD_PROMPT_2 "😠 msh-> 😠 "
+#define BAD_PROMPT_3 "😤 msh-> 😤 "
+#define BAD_PROMPT_4 "😖 msh-> 😖 "
+#define BAD_PROMPT_5 "😞 msh-> 😞 "
+#define BAD_PROMPT_6 "😟 msh-> 😟 "
+#define BAD_PROMPT_7 "😢 msh-> 😢 "
+#define BAD_PROMPT_8 "👿 msh-> 👿 "
+#define BAD_PROMPT_9 "👹 msh-> 👹 "
+#define BAD_PROMPT_10 "👺 msh-> 👺 "
+#define BAD_PROMPT_11 "🤡 msh-> 🤡 "
+#define BAD_PROMPT_12 "😱 msh-> 😱 "
+#define BAD_PROMPT_13 "💀 msh-> 💀 "
+#define BAD_PROMPT_14 "💩 msh-> 💩 "
+#define BAD_PROMPT_15 "🤢 msh-> 🤢 "
+#define BAD_PROMPT_16 "🤮 msh-> 🤮 "
+#define BAD_PROMPT_17 "🤧 msh-> 🤧 "
+#define BAD_PROMPT_18 "🥶 msh-> 🥶 "
+#define BAD_PROMPT_19 "🤬 msh-> 🤬 "
+#define BAD_PROMPT_20 "🤨 msh-> 🤨 "
+#define BAD_PROMPT_21 "👎 msh-> 👎 "
+
 
 extern int msh_status;
 
@@ -121,6 +168,13 @@ void	custom_add_history(char *line);
 
 /* EXIT */
 int ft_exit(t_msh *msh, int cmd_id);
+void    actually_exit(int status);
+
+/* EMOJI */
+char	*select_good_prompt_1(void);
+char	*select_good_prompt_2(void);
+char	*select_bad_prompt_1(void);
+char    *select_bad_prompt_2(void);
 
 /* Env */
 t_env	init_env(char **envp);

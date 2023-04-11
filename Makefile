@@ -6,7 +6,7 @@
 #    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/04/11 17:36:39 by mfinette         ###   ########.fr        #
+#    Updated: 2023/04/11 20:26:09 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,8 @@ FILES = main							\
 		history							\
 		free_things						\
 		error							\
-		signal							
+		signal							\
+		emoji							
 
 all: $(NAME)
 

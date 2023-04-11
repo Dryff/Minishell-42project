@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/11 19:38:56 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/11 20:53:14 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void update_msh_status(int status)
 int init_prompt(t_msh *msh)
 {
 	if (msh_status == 0)
-		msh->prompt = "msh 🤑-> ";
+		msh->prompt = select_good_prompt_1();
 	else
-		msh->prompt = "msh 😡-> ";
+		msh->prompt = select_bad_prompt_1();
 	return (0);
 }
 
@@ -90,10 +90,7 @@ int main(int argc, char **argv, char **old_env)
 		init_prompt(&msh);
 		msh.line = readline(msh.prompt);
 		if (!msh.line)
-		{
-			printf("exit\n");
-			exit(1);
-		}
+			actually_exit(0);
 		if (!ft_strncmp(msh.line, "\n", ft_strlen(msh.line)))
 		{
 			msh_status = 0;
