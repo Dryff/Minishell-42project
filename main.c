@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/11 17:26:26 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/11 19:38:56 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int msh_status = 0;
 
-void	update_msh_status(int status)
+void update_msh_status(int status)
 {
 	msh_status = status;
 }
 
-int	init_prompt(t_msh *msh)
+int init_prompt(t_msh *msh)
 {
 	if (msh_status == 0)
 		msh->prompt = "msh 🤑-> ";
@@ -28,7 +28,7 @@ int	init_prompt(t_msh *msh)
 	return (0);
 }
 
-int	check_exit(t_msh msh)
+int check_exit(t_msh msh)
 {
 	if (ft_strncmp(msh.line, "exit", 4) == 0)
 		return (0);
@@ -40,9 +40,41 @@ void ft_print_status(void)
 	printf("%d\n", msh_status);
 }
 
-int	main(int argc, char **argv, char **old_env)
+int check_builtins(t_msh *msh)
 {
-	t_msh	msh;
+	int i;
+	int j;
+	char **cmd;
+
+	i = 0;
+	while (i < msh->cmd_nbr)
+	{
+		cmd = msh->cmd[i].param;
+		j = 1;
+		if (!ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])))
+		{
+			while (cmd[j])
+			{
+				if (valid_export(cmd[j]) == 2)
+				{
+					printf("msh: export: '%s': not a valid identifier\n", cmd[j]);
+					if (msh->cmd_nbr == 1)
+					{
+						update_msh_status(1);
+						return (1);
+					}
+				}
+				j++;
+			}
+		}
+		i++;
+	}
+	return (1);
+}
+
+int main(int argc, char **argv, char **old_env)
+{
+	t_msh msh;
 
 	(void)argc;
 	(void)argv;
@@ -62,15 +94,18 @@ int	main(int argc, char **argv, char **old_env)
 			printf("exit\n");
 			exit(1);
 		}
+		if (!ft_strncmp(msh.line, "\n", ft_strlen(msh.line)))
+		{
+			msh_status = 0;
+			continue;
+		}
 		msh.paths = get_paths(msh.env.tab);
 		if (check_arrows(&msh))
 			parse_line(&msh);
-		if (msh.cmd_nbr)
+		if (msh.cmd_nbr && check_builtins(&msh))
 			commands(&msh);
 		custom_add_history(msh.line);
 		free_things(&msh);
-		if (!check_exit(msh))
-			exit(1);
 		free(msh.line);
 	}
 	free_env(msh);

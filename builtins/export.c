@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/04 18:48:50 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/11 19:08:49 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static	int	is_valid_c(char c)
 	return (1);
 }
 
-static	int	valid_export(char *cmd)
+int	valid_export(char *cmd)
 {
 	int	i;
 
@@ -176,12 +176,7 @@ int	ft_export(t_msh *msh, int cmd_id)
 	while (msh->cmd[cmd_id].param[i])
 	{
 		cmd = msh->cmd[cmd_id].param[i];
-		if (valid_export(cmd) == WRONG_EXPORT)
-		{
-			printf("msh: export: '%s': not a valid identifier\n", cmd);
-			update_msh_status(1);
-		}
-		else if (valid_export(cmd) == EMPTY_EXPORT)
+		if (valid_export(cmd) == EMPTY_EXPORT)
 			add_invisible_export(msh, cmd);
 		else if (valid_export(cmd) == VALID_EXPORT)
 			complete_export(msh, cmd);
@@ -191,5 +186,6 @@ int	ft_export(t_msh *msh, int cmd_id)
 			exit(1);
 		i++;
 	}
+	write(1, "", 1);
 	return (0);
 }
