@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: colas <colas@student.42.fr>                +#+  +:+       +#+         #
+#    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/04/11 10:39:51 by colas            ###   ########.fr        #
+#    Updated: 2023/04/11 17:36:39 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ FILES = main							\
 		builtins/unset					\
 		builtins/dvd					\
 		builtins/echo					\
+		builtins/exit					\
 		parsing/parsing_hub				\
 		parsing/dollar					\
 		parsing/get_cmd_nbr				\

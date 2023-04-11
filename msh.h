@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/10 19:32:16 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/11 17:36:14 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,9 @@ void	update_old_pwd(t_msh *msh, char *actual_path);
 void	init_history(void);
 void	custom_add_history(char *line);
 
+/* EXIT */
+int ft_exit(void);
+
 /* Env */
 t_env	init_env(char **envp);
 void	ft_print_env(t_msh *msh);
@@ -158,7 +161,7 @@ char	*get_expand_cmd(char *str);
 /* builtins */
 int		exec_builtin_cmd(t_msh *msh);
 int		is_builtin(char *cmd);
-int		is_not_builtin_fd(char *cmd);
+int		is_not_builtin_fd(t_msh *msh, char *cmd, int i);
 int		exec_builtins(t_msh *msh, int cmd_id, int builtin);
 int		ft_echo(t_msh *msh, int cmd_id);
 
@@ -166,6 +169,11 @@ int		ft_echo(t_msh *msh, int cmd_id);
 void	in_exec_signal_handler(int signal_num);
 void	init_signals_history(void);
 void	reset_default_signal(void);
+
+/* exec */
+void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd);
+void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd);
+
 
 /* Cmd_utils */
 char	*ft_strchr(const char *s, int c);

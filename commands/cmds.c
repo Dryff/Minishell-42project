@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/11 10:39:08 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/11 17:15:33 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 	if (pipe(fd) == -1)
 		printf("ERROR - 3\n");
 	pid = fork();
-	reset_default_signal();
+	// reset_default_signal();
 	if (pid == -1)
 		printf("ERROR - 4\n");
 	if (pid == 0)
@@ -107,14 +107,14 @@ int	commands(t_msh *msh)
 		if (msh->cmd[i].param[0] && msh->cmd[i].ip.infd != -1 \
 		&& check_out(*msh, i))
 		{	
-			if (!is_not_builtin_fd(msh->cmd[i].param[0]))
+			if (!is_not_builtin_fd(msh, msh->cmd[i].param[0], i))
 				exec_cmd(msh, i);
 		}
 		else
 			error = 1;
 	}
 	builtin = is_builtin(msh->cmd[0].param[0]);
-	if (msh->cmd_nbr == 1 && is_not_builtin_fd(msh->cmd[0].param[0]))
+	if (msh->cmd_nbr == 1 && is_not_builtin_fd(msh, msh->cmd[0].param[0], 0))
 		exec_builtins(msh, 0, builtin);
 	if (error != 0)
 		return (0);

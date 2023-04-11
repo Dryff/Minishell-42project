@@ -25,11 +25,9 @@ msh 🤑-> echo $a $B
 ----------------------------------------------------------------
 CTRL + \ | Max
 CTRL + C dans plusieurs minishells | Max
+
 GERER ERREURS EN CAS DE MALLOC FOIRÉ MAX | Max
 SORTIE DERREUR DANS $? | Max
-
-
-
 msh 🤑-> cd /s
 cd: /s: No such file or directory
 msh 🤑-> cd /bin
@@ -63,10 +61,6 @@ exit : 15
 'sdfsdfd'''
 
 "l"s''""
-
-sh-5.1$ env -i ./minishell 
-msh 🤑-> env
-SHLVL=2
 
 msh 🤑-> *
 msh: *: command not found

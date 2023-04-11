@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/05 11:16:21 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/11 17:35:24 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ int	ft_pwd(void)
 	return (0);
 }
 
-int ft_exit(void)
-{
-	printf("exit\n");
-	exit(0);
-    return (0);
-}
-
 int	is_builtin(char *cmd)
 {
 	if (cmd == NULL)
@@ -60,12 +53,10 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-int	is_not_builtin_fd(char *cmd)
+int	is_not_builtin_fd(t_msh *msh, char *cmd, int i)
 {
-	if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
+	if (!ft_strncmp(cmd, "export", ft_strlen(cmd)) && msh->cmd[i].param[1])
 		return (EXPORT);
-	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
-		return (CD);
 	else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
 		return (UNSET);
 	else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))

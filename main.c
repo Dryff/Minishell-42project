@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/07 17:11:06 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/11 17:26:26 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,6 @@ int	check_exit(t_msh msh)
 		return (0);
 	return (1);
 }
-
-// void signal_handler(int signal_num)
-// {
-// 	if (signal_num == SIGINT)
-// 	{
-// 		rl_replace_line("", 0);
-// 		printf("\n");
-// 		rl_on_new_line();
-// 		rl_redisplay();
-// 	}
-// }
 
 void ft_print_status(void)
 {
