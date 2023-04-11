@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/11 19:45:22 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/11 20:23:45 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 	if (pid == 0)
 		exec_to_pipe(msh, cmd_id, fd);
 	waitpid(pid, &exit_status, 0);
-	if (exit_status == 1)
+	if (exit_status == 256)
 		msh_status = 127;
 	else
 		msh_status = 0;
