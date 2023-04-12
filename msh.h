@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/12 10:38:37 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/12 16:17:58 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	custom_add_history(char *line);
 
 /* EXIT */
 int ft_exit(t_msh *msh, int cmd_id);
-void    actually_exit(int status);
+void    actually_exit(t_msh *msh, int status);
 
 /* EMOJI */
 char	*select_good_prompt_1(void);

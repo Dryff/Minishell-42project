@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:18:39 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/29 10:47:44 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/12 16:00:01 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,5 @@ void	ft_unset(t_msh *msh, int cmd_id)
 			remove_line_from_tab(msh->env.sort_tab, i);
 		j++;
 	}
+	update_msh_status(0);
 }

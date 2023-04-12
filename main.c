@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/11 20:53:14 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/12 16:19:55 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int main(int argc, char **argv, char **old_env)
 		init_prompt(&msh);
 		msh.line = readline(msh.prompt);
 		if (!msh.line)
-			actually_exit(0);
+			actually_exit(&msh, 0);
 		if (!ft_strncmp(msh.line, "\n", ft_strlen(msh.line)))
 		{
 			msh_status = 0;

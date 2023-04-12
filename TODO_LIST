@@ -37,10 +37,6 @@ cd: /bin: No such file or directory
 
 msh 😡-> cd commands/ parsing/
 
-msh 😡-> export OLDPWD=CACA
-msh 😡-> cd -
-
-
 msh 🤑-> cat
 ^C
 

@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/11 19:21:46 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/12 15:48:20 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	update_pwd_env(t_msh *msh, char *actual_path)
 	pwd = ft_strjoin("PWD=", tmp);
 	complete_export(msh, pwd);
 	complete_export(msh, oldpwd);
+	update_msh_status(0);
 	free(pwd);
 	free(tmp);
 	free(oldpwd);

@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/11 19:08:49 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/12 15:58:11 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,6 @@ int	ft_export(t_msh *msh, int cmd_id)
 			exit(1);
 		i++;
 	}
-	write(1, "", 1);
+	update_msh_status(0);
 	return (0);
 }
