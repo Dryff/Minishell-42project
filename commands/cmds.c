@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/11 20:23:45 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/12 10:34:24 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,17 @@ void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 void	exec_cmd(t_msh *msh, int cmd_id)
 {
 	pid_t	pid;
-	int		exit_status;
 	int		fd[2];
 
 	if (pipe(fd) == -1)
 		printf("ERROR - 3\n");
 	pid = fork();
-	// reset_default_signal();
 	if (pid == -1)
 		printf("ERROR - 4\n");
 	if (pid == 0)
 		exec_to_pipe(msh, cmd_id, fd);
-	waitpid(pid, &exit_status, 0);
-	if (exit_status == 256)
-		msh_status = 127;
-	else
-		msh_status = 0;
+	waitpid(pid, &msh_status, 0);
+	// msh_status = msh_status % 256;
 	close(fd[1]);
 	if (dup2(fd[0], STDIN_FILENO) == -1)
 		printf("ERROR - 6\n");

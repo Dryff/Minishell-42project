@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:35:31 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/11 19:39:59 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/12 10:06:58 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int ft_exit(t_msh *msh, int cmd_id)
     while (msh->cmd[cmd_id].param[i])
         i++;
     if (i == 1)
-        actually_exit(1);
+        actually_exit(0);
     if (i ==2)
     {
         if (ft_str_is_numeric(msh->cmd[cmd_id].param[1]))
