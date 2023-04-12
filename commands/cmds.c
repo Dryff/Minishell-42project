@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/12 10:34:24 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/12 10:48:02 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 	if (pid == 0)
 		exec_to_pipe(msh, cmd_id, fd);
 	waitpid(pid, &msh_status, 0);
-	// msh_status = msh_status % 256;
+	if (msh_status > 255)
+		msh_status = msh_status / 256;
+	else
+		msh_status = msh_status % 256;
 	close(fd[1]);
 	if (dup2(fd[0], STDIN_FILENO) == -1)
 		printf("ERROR - 6\n");
