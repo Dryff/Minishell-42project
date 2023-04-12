@@ -6,14 +6,14 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 14:40:35 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/27 13:11:48 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:24:59 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
 
 
-void	in_exec_signal_handler(int signal_num)
+void	no_exec_signal_handler(int signal_num)
 {
 	if (signal_num == SIGINT)
 	{
@@ -26,22 +26,24 @@ void	in_exec_signal_handler(int signal_num)
 
 void	init_signals_history(void)
 {
-	struct sigaction	sa;
 
-	using_history();
-	rl_bind_key('\t', rl_complete);
-	sa.sa_handler = in_exec_signal_handler;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGINT, &sa, NULL);
+	signal(SIGINT, &no_exec_signal_handler);
+	signal(SIGQUIT, SIG_IGN);
 }
 
-void	reset_default_signal(void)
+void	in_exec_signal_handler(int signal_num)
 {
-	struct sigaction	sa;
-
-	sa.sa_handler = SIG_DFL;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGINT, &sa, NULL);
+	printf("here\n");
+	if (signal_num == SIGQUIT)
+	{
+		printf("core dumped\n");
+		update_msh_status(CTRL_BACKSLASH);
+		// actually_exit(3);
+	}
+	if (signal_num == SIGINT)
+	{
+		printf("here\n");
+		update_msh_status(CTRL_C);
+		// actually_exit(3);
+	}
 }

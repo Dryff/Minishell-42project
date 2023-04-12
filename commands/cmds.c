@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/12 10:48:02 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:32:22 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,26 @@ void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 	close(fd[1]);
 }
 
+void	print_something(int nb)
+{
+	if (nb == SIGQUIT)
+	{
+		printf("core dumped\n");
+		update_msh_status(CTRL_BACKSLASH);
+	}
+	if (nb == SIGINT)
+	{
+		printf("\n");
+		update_msh_status(CTRL_C);
+	}
+}
+
+void	run_signal(void)
+{
+	signal(SIGINT, &no_exec_signal_handler);
+	signal(SIGQUIT, &print_something);
+}
+
 void	exec_cmd(t_msh *msh, int cmd_id)
 {
 	pid_t	pid;
@@ -43,11 +63,17 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 
 	if (pipe(fd) == -1)
 		printf("ERROR - 3\n");
+	run_signal();
 	pid = fork();
 	if (pid == -1)
 		printf("ERROR - 4\n");
 	if (pid == 0)
+	{
+		// in_exec_signal();
+		//signal(SIGINT, &in_exec_signal_handler);
 		exec_to_pipe(msh, cmd_id, fd);
+	}
+	signal(SIGINT, &print_something);
 	waitpid(pid, &msh_status, 0);
 	if (msh_status > 255)
 		msh_status = msh_status / 256;

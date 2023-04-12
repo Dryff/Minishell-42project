@@ -6,7 +6,11 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:35:31 by mfinette          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/04/12 16:20:56 by cgelin           ###   ########.fr       */
+=======
+/*   Updated: 2023/04/12 15:17:18 by mfinette         ###   ########.fr       */
+>>>>>>> refs/remotes/origin/master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +56,11 @@ int ft_exit(t_msh *msh, int cmd_id)
         else
         {
             printf("exit: %s: numeric argument required\n", msh->cmd[cmd_id].param[1]);
+<<<<<<< HEAD
             actually_exit(msh, 2);
+=======
+            actually_exit(7);
+>>>>>>> refs/remotes/origin/master
         }
     }
     if (i > 2)
@@ -63,7 +71,11 @@ int ft_exit(t_msh *msh, int cmd_id)
         else
         {
             printf("exit: %s: numeric argument required\n", msh->cmd[cmd_id].param[1]);
+<<<<<<< HEAD
             actually_exit(msh, 2);
+=======
+            actually_exit(7);
+>>>>>>> refs/remotes/origin/master
         }
     }
     update_msh_status(0);
