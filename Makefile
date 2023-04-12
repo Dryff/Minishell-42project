@@ -6,14 +6,14 @@
 #    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/04/11 20:26:09 by mfinette         ###   ########.fr        #
+#    Updated: 2023/04/12 10:50:54 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC		= cc
-FLAGS	= -fsanitize=address -g3 -Wall -Wextra -Werror
+FLAGS	= -g3 -Wall -Wextra -Werror
 AR		= ar rcs
 RM		= @rm -f
 HEADER	= msh.h
@@ -24,47 +24,47 @@ BLUE = \033[0;94m
 CYAN = \033[0;96m
 
 FILES = main							\
-		builtins/builtins				\
-		builtins/env					\
-		builtins/env2					\
-		builtins/expand					\
-		builtins/export					\
-		builtins/export2				\
-		builtins/unset					\
-		builtins/dvd					\
-		builtins/echo					\
-		builtins/exit					\
-		parsing/parsing_hub				\
-		parsing/dollar					\
-		parsing/get_cmd_nbr				\
-		parsing/get_redir				\
-		parsing/get_arrays				\
-		parsing/develop_name			\
-		parsing/quotes_dollars_and_redir\
-		parsing/quotes_utils_and_replace_spaces				\
-		parsing/get_and_check_fd		\
-		parsing/check_arrows			\
-		utils/parse_utils				\
-		utils/msh_utils					\
-		utils/cmd_utils					\
-		utils/env_utils					\
-		utils/ft_split					\
-		utils/ft_calloc					\
-		utils/itoa						\
-		commands/cmds					\
-		commands/exec_to_pipe			\
-		commands/here_doc				\
-		commands/paths					\
-		ft_err_printf/ft_print_hexa		\
-		ft_err_printf/ft_printf			\
-		ft_err_printf/ft_putnbr			\
-		ft_err_printf/ft_putnbr_u		\
-		ft_err_printf/ft_putstr_int		\
-		history							\
-		free_things						\
-		error							\
-		signal							\
-		emoji							
+	builtins/builtins				\
+	builtins/env					\
+	builtins/env2					\
+	builtins/expand					\
+	builtins/export					\
+	builtins/export2				\
+	builtins/unset					\
+	builtins/dvd					\
+	builtins/echo					\
+	builtins/exit					\
+	parsing/parsing_hub				\
+	parsing/dollar					\
+	parsing/get_cmd_nbr				\
+	parsing/get_redir				\
+	parsing/get_arrays				\
+	parsing/develop_name			\
+	parsing/quotes_dollars_and_redir\
+	parsing/quotes_utils_and_replace_spaces				\
+	parsing/get_and_check_fd		\
+	parsing/check_arrows			\
+	utils/parse_utils				\
+	utils/msh_utils					\
+	utils/cmd_utils					\
+	utils/env_utils					\
+	utils/ft_split					\
+	utils/ft_calloc					\
+	utils/itoa						\
+	commands/cmds					\
+	commands/exec_to_pipe			\
+	commands/here_doc				\
+	commands/paths					\
+	ft_err_printf/ft_print_hexa		\
+	ft_err_printf/ft_printf			\
+	ft_err_printf/ft_putnbr			\
+	ft_err_printf/ft_putnbr_u		\
+	ft_err_printf/ft_putstr_int		\
+	history							\
+	free_things						\
+	error							\
+	signal							\
+	emoji							
 
 all: $(NAME)
 
@@ -97,6 +97,21 @@ fclean: clean
 	@echo "$(GREEN)minishell executable files cleaned!$(DEF_COLOR)"
 
 
+leaks:  all
+	echo { > valgrind_ignore_leaks.txt
+	echo  leak readline >> valgrind_ignore_leaks.txt
+	echo  Memcheck:Leak >> valgrind_ignore_leaks.txt
+	echo  ... >> valgrind_ignore_leaks.txt
+	echo  fun:readline >> valgrind_ignore_leaks.txt
+	echo } >> valgrind_ignore_leaks.txt
+	echo { >> valgrind_ignore_leaks.txt
+	echo  leak add_history >> valgrind_ignore_leaks.txt
+	echo  Memcheck:Leak >> valgrind_ignore_leaks.txt
+	echo  ... >> valgrind_ignore_leaks.txt
+	echo  fun:add_history >> valgrind_ignore_leaks.txt
+	echo } >> valgrind_ignore_leaks.txt
+	valgrind --suppressions=valgrind_ignore_leaks.txt --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --show-mismatched-frees=yes --read-var-info=yes ./${NAME}
+
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re leaks
