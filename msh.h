@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/12 09:29:11 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:22:27 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define CMD_NT_FND 127
 # define CTRL_C 130
 # define CTRL_SLASH 131
+# define CTRL_BACKSLASH 131
 
 // CD //
 #define OLD 1
@@ -178,6 +179,8 @@ int		ft_echo(t_msh *msh, int cmd_id);
 void	in_exec_signal_handler(int signal_num);
 void	init_signals_history(void);
 void	reset_default_signal(void);
+void	in_exec_signal(void);
+void	no_exec_signal_handler(int signal_num);
 
 /* exec */
 void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd);
