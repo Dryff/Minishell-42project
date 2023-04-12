@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/11 20:03:52 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/12 09:05:52 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	is_not_builtin_fd(t_msh *msh, char *cmd, int i)
 {
 	if (!ft_strncmp(cmd, "export", ft_strlen(cmd)) && msh->cmd[i].param[1])
 		return (EXPORT);
-	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)) && msh->cmd_nbr == 1 && !ft_strncmp(msh->cmd[i].param[1], "-", ft_strlen(msh->cmd[i].param[1])))
+	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)) && msh->cmd_nbr == 1)
 		return (CD);
 	else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
 		return (UNSET);

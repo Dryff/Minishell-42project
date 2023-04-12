@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/12 09:29:11 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/12 10:38:37 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <errno.h>
 # include "ft_err_printf/ft_printf.h"
 # include <limits.h>
