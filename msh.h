@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/12 15:22:27 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:36:04 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <errno.h>
 # include "ft_err_printf/ft_printf.h"
 # include <limits.h>

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:53:02 by colas             #+#    #+#             */
-/*   Updated: 2023/04/11 10:40:46 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/12 11:02:45 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,20 @@ char	**get_paths(char **envp)
 
 char	*check_slash(t_msh msh, int j)
 {
-	char	*pathing;
+	struct stat	path_stat;
 
 	if (ft_strchr(msh.cmd[j].param[0], '/'))
 	{
-		pathing = msh.cmd[j].param[0];
-		if (access(pathing, 0) == 0)
-			return (pathing);
+		path_stat.st_mode = 0;
+		stat(msh.cmd[j].param[0], &path_stat);
+		if (S_ISDIR(path_stat.st_mode))
+		{
+			ft_err_printf("msh: %s: Is a directory\n", msh.cmd[j].param[0]);
+			msh_status = 126;
+			return (msh.cmd[j].param[0]);
+		}
+		if (access(msh.cmd[j].param[0], 0) == 0)
+			return (msh.cmd[j].param[0]);
 	}
 	return (NULL);
 }
