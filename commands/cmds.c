@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/13 16:44:50 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:16:44 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,6 @@ void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 	.outfd, STDOUT_FILENO) == -1)
 			printf("ERROR - 5\n");
 	close(fd[1]);
-}
-
-void	print_something(int nb)
-{
-	if (nb == SIGQUIT)
-	{
-		printf("core dumped\n");
-		update_msh_status(CTRL_BACKSLASH);
-	}
-	if (nb == SIGINT)
-	{
-		printf("\n");
-		update_msh_status(CTRL_C);
-	}
-}
-
-void	run_signal(void)
-{
-	signal(SIGINT, &no_exec_signal_handler);
-	signal(SIGQUIT, &print_something);
 }
 
 void	exec_cmd(t_msh *msh, int cmd_id)

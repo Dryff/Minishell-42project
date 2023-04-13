@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 17:09:07 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:21:50 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void		custom_add_history(char *line);
 /* EXIT */
 int			ft_exit(t_msh *msh, int cmd_id);
 void		actually_exit(t_msh *msh, int status);
+void		ctrl_d_exit(t_msh *msh);
 
 /* EMOJI */
 char		*select_good_prompt_1(void);
@@ -186,6 +187,8 @@ void		init_signals_history(void);
 void		reset_default_signal(void);
 void		in_exec_signal(void);
 void		no_exec_signal_handler(int signal_num);
+void		run_signal(void);
+void		print_something(int nb);
 
 /* exec */
 void		exec_to_pipe(t_msh *msh, int cmd_id, int *fd);

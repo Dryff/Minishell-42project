@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 14:40:35 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 16:49:43 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:17:14 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	no_exec_signal_handler(int signal_num)
 
 void	init_signals_history(void)
 {
-
 	signal(SIGINT, &no_exec_signal_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
@@ -37,12 +36,30 @@ void	in_exec_signal_handler(int signal_num)
 	{
 		printf("core dumped\n");
 		update_msh_status(CTRL_BACKSLASH);
-		// actually_exit(3);
 	}
 	if (signal_num == SIGINT)
 	{
 		printf("here\n");
 		update_msh_status(CTRL_C);
-		// actually_exit(3);
 	}
+}
+
+void	print_something(int nb)
+{
+	if (nb == SIGQUIT)
+	{
+		printf("core dumped\n");
+		update_msh_status(CTRL_BACKSLASH);
+	}
+	if (nb == SIGINT)
+	{
+		printf("\n");
+		update_msh_status(CTRL_C);
+	}
+}
+
+void	run_signal(void)
+{
+	signal(SIGINT, &no_exec_signal_handler);
+	signal(SIGQUIT, &print_something);
 }
