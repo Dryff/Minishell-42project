@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 14:40:35 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 17:51:46 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 22:21:55 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,13 @@ void	backslash_handler(int nb)
 
 void	child_signal(void)
 {
-	// signal(SIGINT, SIG_IGN);
-	// signal(SIGINT, &no_exec_signal_handler);
 	signal(SIGQUIT, &backslash_handler);
+}
+
+void	only_update_signal(int nb)
+{
+	if (nb == SIGINT)
+		update_msh_status(CTRL_C);
+	if (nb == SIGQUIT)
+		update_msh_status(CTRL_BACKSLASH);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 10:09:00 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 16:47:25 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 22:02:40 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,9 @@ void	error_manager(t_msh *msh, int err_num)
 	(void)msh;
 	if (err_num == MALLOC_ERR)
 		return (printf("Malloc error, stopping the program.\n"), exit(1));
+}
+
+void	ft_print_status(void)
+{
+	printf("%d\n", g_status);
 }

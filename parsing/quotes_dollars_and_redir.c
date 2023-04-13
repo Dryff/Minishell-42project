@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_dollars_and_redir.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 18:30:29 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 22:42:57 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,6 @@ int	quote_rm_nbr(t_parse p)
 		p.strt++;
 	}
 	return (count);
-}
-
-void	secure(t_parse *p)
-{
-	if (p->i <= 0)
-		p->i = 0;
-	if (p->i > (int)ft_strlen(p->line))
-		p->i = (int)ft_strlen(p->line);
 }
 
 void	quote_handling(t_msh *msh, t_parse *p)

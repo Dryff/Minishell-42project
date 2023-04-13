@@ -6,14 +6,14 @@
 #    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/04/13 21:16:41 by mfinette         ###   ########.fr        #
+#    Updated: 2023/04/13 22:36:00 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC		= cc
-FLAGS	= -g3 -Wall -Wextra -Werror
+FLAGS	= -fsanitize=address -g3 -Wall -Wextra -Werror
 AR		= ar rcs
 RM		= @rm -f
 HEADER	= msh.h
@@ -51,6 +51,7 @@ FILES = main							\
 	utils/cmd_utils					\
 	utils/env_utils					\
 	utils/ft_split					\
+	utils/basic_utils				\
 	utils/ft_calloc					\
 	utils/itoa						\
 	commands/cmds					\

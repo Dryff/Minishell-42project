@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 21:13:32 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 22:03:31 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,6 @@ int	init_prompt(t_msh *msh)
 	return (0);
 }
 
-int	check_exit(t_msh msh)
-{
-	if (ft_strncmp(msh.line, "exit", 4) == 0)
-		return (0);
-	return (1);
-}
-
-void	ft_print_status(void)
-{
-	printf("%d\n", g_status);
-}
-
 int	check_builtins(t_msh *msh)
 {
 	int		i;
@@ -55,14 +43,13 @@ int	check_builtins(t_msh *msh)
 		{
 			while (cmd[j])
 			{
-				if (valid_export(cmd[j]) == 2)
+				if (valid_export(cmd[j]) == WRONG_EXPORT)
 				{
-					printf("msh: export: '%s': not a valid identifier\n", cmd[j]);
+					update_msh_status(1);
+					printf("msh: export: '%s': not a valid \
+					identifier\n", cmd[j]);
 					if (msh->cmd_nbr == 1)
-					{
-						update_msh_status(1);
-						return (1);
-					}
+						return (0);
 				}
 				j++;
 			}
@@ -70,6 +57,26 @@ int	check_builtins(t_msh *msh)
 		i++;
 	}
 	return (1);
+}
+
+void	main_loop(t_msh *msh)
+{
+	msh->cmd_nbr = 0;
+	if (msh->env.error)
+		exit(1);
+	init_signals();
+	init_prompt(msh);
+	msh->line = readline(msh->prompt);
+	if (!msh->line)
+		ctrl_d_exit(msh);
+	msh->paths = get_paths(msh, msh->env.tab);
+	if (check_arrows(msh))
+		parse_line(msh);
+	if (msh->cmd_nbr && check_builtins(msh))
+		commands(msh);
+	custom_add_history(msh->line, NOFREE);
+	free_things(msh);
+	free(msh->line);
 }
 
 int	main(int argc, char **argv, char **old_env)
@@ -85,22 +92,7 @@ int	main(int argc, char **argv, char **old_env)
 	rl_bind_key('\t', rl_complete);
 	while (1)
 	{
-		msh.cmd_nbr = 0;
-		if (msh.env.error)
-			exit(1);
-		init_signals();
-		init_prompt(&msh);
-		msh.line = readline(msh.prompt);
-		if (!msh.line)
-			ctrl_d_exit(&msh);
-		msh.paths = get_paths(&msh, msh.env.tab);
-		if (check_arrows(&msh))
-			parse_line(&msh);
-		if (msh.cmd_nbr && check_builtins(&msh))
-			commands(&msh);
-		custom_add_history(msh.line, NOFREE);
-		free_things(&msh);
-		free(msh.line);
+		main_loop(&msh);
 	}
 	free_env(&msh);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_hub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 18:30:30 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 22:38:18 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,10 @@ void	get_cmd(t_msh *msh, int *i, int j)
 	int		size;
 
 	size = get_cmd_size(msh->line, *i);
-	// printf("size = %d\n", size);
 	sub = ft_substr(msh->line, *i, size);
 	if (!sub)
 		return (error_manager(msh, MALLOC_ERR + 1));
-	// printf("sub = %s\n", sub);
 	cmd = quotes_dollars_and_redir(msh, sub, j);
-	// printf("cmd = %s\n", cmd);
 	msh->cmd[j].param = ft_split(cmd, 10);
 	if (!msh->cmd[j].param)
 		return (error_manager(msh, MALLOC_ERR + 2));
@@ -108,7 +105,6 @@ int	parse_line(t_msh *msh)
 	msh->cmd_nbr = get_cmd_nbr(msh->line);
 	if (!msh->cmd_nbr)
 		return (0);
-	// printf("sat : %d\n", msh->cmd_nbr);
 	msh->cmd = malloc(sizeof(t_cmd) * msh->cmd_nbr);
 	if (!msh->cmd)
 		return (error_manager(msh, MALLOC_ERR), 1);

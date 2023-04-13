@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 21:34:55 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 22:43:22 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,16 @@
 # define NOFLAG 0
 # define TOO_MANY 1
 # define NOT_NUMERIC 2
+
+// EXPORT //
+# define VALID_EXPORT 1
+# define WRONG_EXPORT 2
+# define EMPTY_EXPORT 3
+# define EXISTING_EXPORT 4
+# define PLUS_EXPORT 5
+
+// PARSING ERROR //
+# define ERR_MESS "msh: syntax error near unexpected token"
 
 extern int	g_status;
 
@@ -117,6 +127,7 @@ typedef struct s_msh
 /* Minishell */
 int			minishell(t_msh *msh);
 void		free_things(t_msh *msh);
+void		free_more_things(t_msh *msh, int i);
 void		error_manager(t_msh *msh, int err_num);
 void		ft_print_status(void);
 void		update_msh_status(int status);
@@ -197,6 +208,7 @@ void		in_exec_signal(void);
 void		no_exec_signal_handler(int signal_num);
 void		child_signal(void);
 void		backslash_handler(int nb);
+void		only_update_signal(int nb);
 
 /* exec */
 void		exec_to_pipe(t_msh *msh, int cmd_id, int *fd);
@@ -247,6 +259,9 @@ int			get_size_until_arrow(t_msh *msh, int i);
 void		get_redir(t_msh *msh, t_parse *p, int cmd_index);
 int			quote_check(char *str, int i, int *start_quote, int *is_in_quotes);
 int			go_after_pipe(char *line, int i);
+char		*get_expanded(t_msh *msh, t_parse *p, int cursor);
+void		actualize_ind(t_parse *p, char *expanded, char *str);
+void		secure(t_parse *p);
 
 /* Basic utils */
 char		**ft_split(char const *str, char c);
@@ -258,6 +273,9 @@ void		sort_tab(t_env *env);
 char		**tab_dup(char **tab);
 void		free_tab(char **tab);
 int			tab_len(char **tab);
+int			ft_str_is_numeric(char *str);
+int			is_alpha(char c);
+int			is_num(char c);
 
 /* Parse_utils */
 int			is_delimiter(char c);

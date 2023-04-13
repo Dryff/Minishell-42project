@@ -6,17 +6,11 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 11:09:56 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 21:53:10 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
-
-#define VALID_EXPORT 1
-#define WRONG_EXPORT 2
-#define EMPTY_EXPORT 3
-#define EXISTING_EXPORT 4
-#define PLUS_EXPORT 5
 
 int	valid_export(char *cmd)
 {
@@ -24,17 +18,17 @@ int	valid_export(char *cmd)
 
 	i = 0;
 	if (cmd[i] >= '0' && cmd[i] <= '9')
-		return (WRONG_EXPORT);
+		return (update_msh_status(1), WRONG_EXPORT);
 	while (i < ft_strlen_until(cmd, '=') - 1)
 	{
 		if (!is_valid_c(cmd[i]))
-			return (WRONG_EXPORT);
+			return (update_msh_status(1), WRONG_EXPORT);
 		i++;
 	}
 	if (cmd[i] == '+' && cmd[i + 1] == '=')
 		return (PLUS_EXPORT);
 	else if (!is_valid_c(cmd[i]))
-		return (WRONG_EXPORT);
+		return (update_msh_status(1), WRONG_EXPORT);
 	if (!is_in_charset('=', cmd))
 		return (EMPTY_EXPORT);
 	return (VALID_EXPORT);

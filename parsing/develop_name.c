@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 18:40:05 by colas             #+#    #+#             */
-/*   Updated: 2023/04/13 21:07:05 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 22:33:53 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,10 @@
 char	*develop_name(t_msh *msh, char *sub)
 {
 	t_parse	p;
-	int flag;
 
-	(void)(flag);
 	p.line = sub;
 	p.i = 0;
 	p.strt = 0;
-	flag = 0;
 	if (p.line == NULL)
 		return (NULL);
 	while (p.line[p.i])
