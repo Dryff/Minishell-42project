@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 17:43:39 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:11:37 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@
 
 # define OLD 1
 # define HOME 2
+
+# define FREE 0
+# define NOFREE 1
 
 extern int	g_status;
 
@@ -121,7 +124,7 @@ void		update_old_pwd(t_msh *msh, char *actual_path);
 
 /* HISTORIC */
 void		init_history(void);
-void		custom_add_history(char *line);
+void		custom_add_history(char *line, int status);
 
 /* EXIT */
 int			ft_exit(t_msh *msh, int cmd_id);

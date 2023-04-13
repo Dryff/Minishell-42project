@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 17:38:54 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:11:23 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	main(int argc, char **argv, char **old_env)
 			parse_line(&msh);
 		if (msh.cmd_nbr && check_builtins(&msh))
 			commands(&msh);
-		custom_add_history(msh.line);
+		custom_add_history(msh.line, NOFREE);
 		free_things(&msh);
 		free(msh.line);
 	}

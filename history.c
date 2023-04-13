@@ -3,20 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:21:19 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 15:49:59 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 18:10:48 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
 
-void	custom_add_history(char *line)
+#define FREE 0
+#define NOFREE 1
+
+void	custom_add_history(char *line, int status)
 {
 	static char	*last;
 	int			i;
 
+	if (status == FREE)
+	{
+		free (last);
+		return ;
+	}
 	i = 0;
 	if (ft_strlen(line) == 0)
 		return ;
