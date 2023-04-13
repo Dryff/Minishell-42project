@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 16:45:58 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:21:48 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ char	*get_expanded(t_msh *msh, t_parse *p, int cursor)
 	int		k;
 
 	k = cursor;
-	// printf("start : %d\n", p->line[k]);
 	while (p->line[k] && (is_num(p->line[k]) || is_alpha(p->line[k])))
 		k++;
 	arg = ft_substr(p->line, cursor, k - cursor);
-	// printf("arg : %s\n", arg);
 	expanded = ft_expand(&msh->env, arg);
 	free(arg);
 	k -= cursor;
@@ -69,13 +67,25 @@ char	*copy_with_value(t_msh *msh, char *expanded, t_parse p, int cursor)
 
 char	*expanded_if_isnt_num(t_parse *p, int cur, char *expanded)
 {
-	p->arg_sz = 0;
+	p->arg_sz = 1;
 	p->i++;
 	if (p->line[cur] == '?')
 		expanded = ft_itoa(g_status);
 	else if (!is_alpha(p->line[cur]))
+	{
+		p->arg_sz = 0;
 		expanded = "$";
+	}
 	return (expanded);
+}
+
+void	actualize_ind(t_parse *p, char *expanded, char *str)
+{
+	p->i += ft_strlen(expanded) - p->arg_sz - 1;
+	if (p->i < 0)
+		p->i = 0;
+	else if (p->i > (int)ft_strlen(str))
+		p->i = ft_strlen(str);
 }
 
 char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor, int mode)
@@ -95,15 +105,14 @@ char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor, int mode)
 	}
 	else if (!is_num(p->line[cursor]))
 		expanded = expanded_if_isnt_num(p, cursor, expanded);
-	else
+	else if (is_num(p->line[cursor]))
 		p->arg_sz = 1;
 	str = copy_with_value(msh, expanded, *p, cursor);
-	p->i += ft_strlen(expanded) - p->arg_sz - 1;
-	if (p->i < 0)
-		p->i = 0;
+	str = replace_spaces_of_expanded(*p, str);
+	actualize_ind(p, expanded, str);
 	if (p->line[cursor] == '?')
 		free(expanded);
-	return (str = replace_spaces_of_expanded(*p, str), free(p->line), str);
+	return (free(p->line), str);
 }
 
 char	*get_dollar(t_msh *msh, t_parse *p)

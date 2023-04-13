@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/05 12:45:11 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 18:30:30 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,6 @@ int	parse_line(t_msh *msh)
 		return (error_manager(msh, MALLOC_ERR), 1);
 	store_cmds_between_pipes(msh);
 	get_and_check_fd(msh);
-	// print_cmds(*msh);
+	print_cmds(*msh);
 	return (1);
 }

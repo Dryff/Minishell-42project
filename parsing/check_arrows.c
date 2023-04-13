@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 10:51:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/10 19:42:58 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 18:47:22 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	check_arrow_after_arrow(t_msh *msh, int i)
 {
-	if (msh->line[i] == 60 && msh->line[i - 1] == 62)
-		return (printf("msh: syntax error near unexpected token `>'\n"), -1);
-	else if (msh->line[i] == 62 && msh->line[i - 1] == 60)
-		return (printf("msh: syntax error near unexpected token `<'\n"), -1);
 	while (msh->line[i] && is_white_space(msh->line[i]))
 		i++;
-	if (msh->line[i] == '>')
+	if (msh->line[i] == '>' && msh->line[i + 1] == '>')
+		return (printf("msh: syntax error near unexpected token `>>'\n"), -1);
+	else if (msh->line[i] == '>')
 		return (printf("msh: syntax error near unexpected token `>'\n"), -1);
+	else if (msh->line[i] == '<' && msh->line[i + 1] == '<')
+		return (printf("msh: syntax error near unexpected token `<<'\n"), -1);
 	else if (msh->line[i] == '<')
 		return (printf("msh: syntax error near unexpected token `<'\n"), -1);
 	return (0);

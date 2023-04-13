@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/10 18:51:40 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 18:38:31 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	get_name_after_arrow(t_msh *msh, t_parse *p)
 	int	start_quote;
 
 	(void)msh;
+	printf("p.line : %s\n", p->line);
 	start_quote = 0;
 	is_in_quotes = 0;
 	while (p->line[p->i] == '<' || p->line[p->i] == '>')
@@ -26,6 +27,7 @@ int	get_name_after_arrow(t_msh *msh, t_parse *p)
 	while (p->line[p->i] && is_white_space(p->line[p->i]))
 		p->i++;
 	end = p->i;
+	printf("p.line : %s\n", &p->line[p->i]);
 	while (p->line[end])
 	{
 		if ((p->line[end] == '|' || p->line[end] == '>' || \
@@ -46,11 +48,13 @@ void	get_name(t_msh *msh, t_parse p, int mode, int cmd_ind)
 	if (mode == 0)
 	{
 		sub = ft_substr(p.line, p.i, size);
+		printf("sub:%s\n", sub);
 		if (msh->cmd[cmd_ind].ip.input == 2)
 			msh->cmd[cmd_ind].ip.here_doc_delim[msh->cmd[cmd_ind].hd_id] \
 			= develop_name(msh, sub);
 		msh->cmd[cmd_ind].hd_id++;
-		msh->cmd[cmd_ind].ip.in_name = develop_name(msh, sub);
+		if (msh->cmd[cmd_ind].ip.input == 1)
+			msh->cmd[cmd_ind].ip.in_name = develop_name(msh, sub);
 	}
 	else
 	{
