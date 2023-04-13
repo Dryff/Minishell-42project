@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/12 15:58:11 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/13 11:09:56 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,47 +17,6 @@
 #define EMPTY_EXPORT 3
 #define EXISTING_EXPORT 4
 #define PLUS_EXPORT 5
-
-int	get_position(char **tab, char *cmd)
-{
-	int		i;
-	char	*temp;
-
-	i = 0;
-	temp = ft_substr(cmd, 0, ft_strlen_until(cmd, '='));
-	if (!temp)
-		return (-2);
-	while (tab[i])
-	{
-		if (ft_strstr(tab[i], temp))
-		{
-			if (tab[i][ft_strlen(temp)] == '=' || !tab[i][ft_strlen(temp)])
-			{
-				free(temp);
-				return (i);
-			}
-		}
-		i++;
-	}
-	free(temp);
-	return (-1);
-}
-
-static	int	is_valid_c(char c)
-{
-
-	if (is_in_charset(c, "#%?!@/-+={}.,:"))
-		return (0);
-	if (!is_in_charset(c, "0123456789"))
-	{
-		if (!is_in_charset(c, "abcdefghijklmnopqrstuvwxyz"))
-		{
-			if (!is_in_charset(c, "ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
-				return (0);
-		}
-	}
-	return (1);
-}
 
 int	valid_export(char *cmd)
 {

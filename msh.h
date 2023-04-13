@@ -6,11 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/04/12 16:17:58 by cgelin           ###   ########.fr       */
-=======
-/*   Updated: 2023/04/12 15:36:04 by mfinette         ###   ########.fr       */
->>>>>>> refs/remotes/origin/master
+/*   Updated: 2023/04/13 11:45:30 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +127,9 @@ int ft_exit(t_msh *msh, int cmd_id);
 void    actually_exit(t_msh *msh, int status);
 
 /* EMOJI */
-char	*select_good_prompt_1(void);
-char	*select_good_prompt_2(void);
+char	*select_good_prompt(t_msh *msh);
+char	*select_good_prompt_1(int value);
+char	*select_good_prompt_2(int value);
 char	*select_bad_prompt_1(void);
 char    *select_bad_prompt_2(void);
 
@@ -151,6 +148,8 @@ void	update_SHLVL(t_msh *msh);
 void	check_env(t_msh *msh);
 void	check_shlvl(t_msh *msh);
 void	check_pwd(t_msh *msh);
+void	reset_shlvl(t_msh *msh);
+int		is_valid_c(char c);
 
 /* Export*/
 void	add_export(t_msh *msh, char *cmd);
@@ -249,6 +248,7 @@ int		is_in_charset(char c, char *str);
 void	sort_tab(t_env *env);
 char	**tab_dup(char **tab);
 void	free_tab(char **tab);
+int		tab_len(char **tab);
 
 /* Parse_utils */
 int		is_delimiter(char c);

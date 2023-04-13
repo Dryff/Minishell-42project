@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dvd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/12 15:48:20 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/13 10:56:59 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	chdir_home(t_msh *msh)
 	int		error;
 	char	*actual_path;
 	char	*tmp;
-	
+
 	error = 0;
 	tmp = ft_expand(&msh->env, "HOME");
 	actual_path = getcwd(NULL, 0);
@@ -64,7 +64,7 @@ void	chdir_old(t_msh *msh)
 	int		error;
 	char	*actual_path;
 	char	*tmp;
-	
+
 	error = 0;
 	actual_path = getcwd(NULL, 0);
 	tmp = ft_expand(&msh->env, "OLDPWD");
@@ -105,7 +105,7 @@ void	real_pwd(t_msh *msh, char *cmd)
 		update_pwd_env(msh, actual_path);
 	free(new_path);
 	free(tmp);
-	free(actual_path);	
+	free(actual_path);
 }
 
 void	ft_dvd(t_msh *msh, int cmd_id)

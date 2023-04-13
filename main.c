@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/12 17:14:26 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/13 11:45:41 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void update_msh_status(int status)
 int init_prompt(t_msh *msh)
 {
 	if (msh_status == 0)
-		msh->prompt = select_good_prompt_1();
+		msh->prompt = select_good_prompt(msh);
 	else
 		msh->prompt = select_bad_prompt_1();
 	return (0);

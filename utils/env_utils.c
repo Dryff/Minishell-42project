@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 19:20:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/21 14:53:31 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:55:47 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,14 @@ char	*ft_strdup(const char *src)
 	}
 	cpy[i] = 0;
 	return (cpy);
+}
+
+int	tab_len(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

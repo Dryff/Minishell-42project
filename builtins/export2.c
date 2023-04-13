@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:45:07 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/27 11:32:36 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:09:07 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	add_export(t_msh *msh, char *cmd)
 
 	dup = add_comand_to_tab(msh->env.tab, cmd);
 	if (!dup)
-		return((void)(msh->error = 1));
+		return ((void)(msh->error = 1));
 	free(msh->env.tab);
 	msh->env.tab = tab_dup(dup);
 	if (!msh->env.tab)
-		return((void)(msh->error = 1));
+		return ((void)(msh->error = 1));
 	sort_tab(&msh->env);
 }
 
@@ -33,45 +33,45 @@ void	add_invisible_export(t_msh *msh, char *cmd)
 
 	pos = get_position(msh->env.sort_tab, cmd);
 	if (pos == -2)
-		return((void)(msh->error = 1));
+		return ((void)(msh->error = 1));
 	if (pos < 0)
 	{
 		dup = add_comand_to_tab(msh->env.sort_tab, cmd);
 		if (!dup)
-			return((void)(msh->error = 1));
+			return ((void)(msh->error = 1));
 		free(msh->env.sort_tab);
 		msh->env.sort_tab = tab_dup(dup);
 		if (!msh->env.sort_tab)
-			return((void)(msh->error = 1));
+			return ((void)(msh->error = 1));
 	}
 }
 
 void	replace_export(t_msh *msh, char *cmd, int index)
 {
 	int	pos;
-	
+
 	(void)index;
 	pos = get_position(msh->env.tab, cmd);
 	if (pos == -2)
-		return((void)(msh->error = 1));
+		return ((void)(msh->error = 1));
 	free(msh->env.tab[pos]);
 	msh->env.tab[pos] = ft_strdup(cmd);
 	if (!msh->env.tab[pos])
-		return((void)(msh->error = 1));
+		return ((void)(msh->error = 1));
 }
 
 void	replace_secret_export(t_msh *msh, char *cmd, int index)
 {
 	int	pos;
-	
+
 	(void)index;
 	pos = get_position(msh->env.sort_tab, cmd);
 	if (pos == -2)
-		return((void)(msh->error = 1));
+		return ((void)(msh->error = 1));
 	free(msh->env.sort_tab[pos]);
 	msh->env.sort_tab[pos] = ft_strdup(cmd);
 	if (!msh->env.sort_tab[pos])
-		return((void)(msh->error = 1));
+		return ((void)(msh->error = 1));
 }
 
 char	**add_comand_to_tab(char **tab, char *cmd)

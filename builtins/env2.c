@@ -6,77 +6,19 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:42:57 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/07 17:23:07 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:56:26 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-void	free_env(t_msh msh)
-{
-	int	i;
-
-	i = 0;
-	while (msh.env.tab[i])
-	{
-		free(msh.env.tab[i]);
-		i++;
-	}
-	free(msh.env.tab);
-	i = 0;
-	while (msh.env.sort_tab[i])
-	{
-		free(msh.env.sort_tab[i]);
-		i++;
-	}
-	free(msh.env.sort_tab);	
-}
-
-char	*get_export_cmd(char *line)
-{
-	return (ft_strnstr(line, "export", 100) + 7);
-}
-
-static int	tab_len(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
-}
-
-char	**envp_dup(char **tab)
-{
-	int		i;
-	int		count;
-	char	**dup;
-
-	i = -1;
-	count = 0;
-	while (tab[count])
-		count++;
-	dup = (char **)malloc((count + 1) * sizeof(char *));
-	if (!dup)
-		return (NULL);
-	while (++i < count)
-	{
-		dup[i] = ft_strdup(tab[i]);
-		if (!dup[i])
-			return (NULL);
-	}
-	dup[i] = NULL;
-	return (dup);
-}
-
-t_env init_env_i(void)
+t_env	init_env_i(void)
 {
 	t_env	env;
 	char	*dup;
 
 	env.error = 0;
-	env.tab = malloc(sizeof(char *) * 4);	
+	env.tab = malloc(sizeof(char *) * 4);
 	if (!env.tab)
 		return (env.error = 1, env);
 	dup = getcwd(NULL, 0);
@@ -102,7 +44,7 @@ t_env init_env_i(void)
 t_env	init_env(char **envp)
 {
 	t_env	env;
-	
+
 	env.error = 0;
 	if (tab_len(envp) == 0)
 		return (init_env_i());
@@ -115,25 +57,12 @@ t_env	init_env(char **envp)
 	return (env);
 }
 
-void	check_env(t_msh *msh)
-{
-	check_pwd(msh);
-	check_shlvl(msh);
-	complete_export(msh, "_=/usr/bin/env");
-}
-
-void	check_pwd(t_msh *msh)
-{
-	if (!ft_expand_tab(msh->env.sort_tab, "OLDPWD"))
-		add_invisible_export(msh, "OLDPWD");
-}
-
 void	check_shlvl(t_msh *msh)
 {
 	int		shlvl;
 	char	*dup;
 	char	*joined;
-	
+
 	if (!ft_expand_tab(msh->env.tab, "SHLVL"))
 		complete_export(msh, "SHLVL=1");
 	else
@@ -142,11 +71,8 @@ void	check_shlvl(t_msh *msh)
 		if (shlvl < 0)
 			complete_export(msh, "SHLVL=0");
 		if (shlvl >= 999)
-		{
-			printf("resetting SHLVL to 1, limit exceeded(1000)\n");
-			complete_export(msh, "SHLVL=1");
-		}
-		if (shlvl >=0 && shlvl < 999)
+			reset_shlvl(msh);
+		if (shlvl >= 0 && shlvl < 999)
 		{
 			shlvl++;
 			dup = ft_itoa(shlvl);
@@ -161,7 +87,7 @@ void	check_shlvl(t_msh *msh)
 char	**init_secret_env(char **envp)
 {
 	char	**tab;
-	
+
 	tab = envp_dup(envp);
 	if (!tab)
 		return (NULL);

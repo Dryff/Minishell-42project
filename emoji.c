@@ -6,17 +6,40 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 20:23:26 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/11 21:01:44 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:51:43 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
 
-char	*select_good_prompt_1(void)
+int	get_value(char *str)
 {
-	static	int	i = 0;
+	int	value;
+
+	value = 0;
+	while (*str)
+	{
+		value += *str;
+		str++;
+	}
+	return (value);
+}
+
+char	*select_good_prompt(t_msh *msh)
+{
+	int	value;
+	
+	value = get_value(msh->line);
+	printf("value = %d\n", value);
+	return (select_good_prompt_1(value));
+}
+
+char	*select_good_prompt_1(int value)
+{
+	static int	i = 0;
 
 	i++;
+	i += value;
 	if (i % 20 == 0)
 		return (GOOD_PROMPT_1);
 	else if (i % 20 == 1)
@@ -37,14 +60,15 @@ char	*select_good_prompt_1(void)
 		return (GOOD_PROMPT_9);
 	else if (i % 20 == 9)
 		return (GOOD_PROMPT_10);
-	return (select_good_prompt_2());
+	return (select_good_prompt_2(i));
 }
 
-char    *select_good_prompt_2(void)
+char	*select_good_prompt_2(int value)
 {
-	static  int i = 0;
-
-	i++;
+	// static int	i;
+	int	i;
+	i = value;
+	// i++;
 	if (i % 20 == 0)
 		return (GOOD_PROMPT_11);
 	else if (i % 20 == 1)
@@ -65,12 +89,12 @@ char    *select_good_prompt_2(void)
 		return (GOOD_PROMPT_19);
 	else if (i % 20 == 9)
 		return (GOOD_PROMPT_20);
-	return (select_good_prompt_1());
+	return (select_good_prompt_1(i));
 }
 
 char	*select_bad_prompt_1(void)
 {
-	static	int	i = 0;
+	static int	i = 0;
 
 	i++;
 	if (i % 20 == 0)
@@ -96,9 +120,9 @@ char	*select_bad_prompt_1(void)
 	return (select_bad_prompt_2());
 }
 
-char    *select_bad_prompt_2(void)
+char	*select_bad_prompt_2(void)
 {
-	static  int i = 0;
+	static int	i = 0;
 
 	i++;
 	if (i % 20 == 0)

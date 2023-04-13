@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:21:19 by mfinette          #+#    #+#             */
-/*   Updated: 2023/03/19 14:46:01 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:26:11 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	custom_add_history(char *line)
 	i = 0;
 	if (ft_strlen(line) == 0)
 		return ;
-	last = last ? last : ft_strdup("");
+	if (!last)
+		last = ft_strdup("");
 	while (line[i])
 	{
 		if (line[i] != ' ' && ft_strcmp(line, last) != 0)

@@ -6,7 +6,7 @@
 #    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/04/12 10:50:54 by mfinette         ###   ########.fr        #
+#    Updated: 2023/04/13 11:26:46 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,11 @@ FILES = main							\
 	builtins/builtins				\
 	builtins/env					\
 	builtins/env2					\
+	builtins/env3					\
 	builtins/expand					\
 	builtins/export					\
 	builtins/export2				\
+	builtins/export3				\
 	builtins/unset					\
 	builtins/dvd					\
 	builtins/echo					\
