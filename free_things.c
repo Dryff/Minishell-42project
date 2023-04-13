@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:57:33 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 16:48:53 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:55:29 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_free_tab(char **tab)
 
 void	free_things(t_msh *msh)
 {
-    int	i;
+	int	i;
 	int	j;
 
 	j = 0;

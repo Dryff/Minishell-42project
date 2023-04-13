@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:35:31 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 16:40:53 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:22:46 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,11 @@ int	ft_exit(t_msh *msh, int cmd_id)
 	if (i > 2)
 		exit_multiple_parameters(msh, msh->cmd[cmd_id].param[1]);
 	return (0);
+}
+
+void	ctrl_d_exit(t_msh *msh)
+{
+	(void)msh;
+	printf("exit\n");
+	exit(g_status);
 }
