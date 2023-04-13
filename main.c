@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 17:22:01 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:38:54 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,11 @@ int	main(int argc, char **argv, char **old_env)
 		msh.cmd_nbr = 0;
 		if (msh.env.error)
 			exit(1);
-		init_signals_history();
+		init_signals();
 		init_prompt(&msh);
 		msh.line = readline(msh.prompt);
 		if (!msh.line)
 			ctrl_d_exit(0);
-		// if (!ft_strncmp(msh.line, "\n", ft_strlen(msh.line)))
-		// 	continue ;
 		msh.paths = get_paths(&msh, msh.env.tab);
 		if (check_arrows(&msh))
 			parse_line(&msh);

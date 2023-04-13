@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 17:21:50 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:43:39 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,12 +183,12 @@ int			ft_echo(t_msh *msh, int cmd_id);
 
 /* signal */
 void		in_exec_signal_handler(int signal_num);
-void		init_signals_history(void);
+void		init_signals(void);
 void		reset_default_signal(void);
 void		in_exec_signal(void);
 void		no_exec_signal_handler(int signal_num);
-void		run_signal(void);
-void		print_something(int nb);
+void		child_signal(void);
+void		backslash_handler(int nb);
 
 /* exec */
 void		exec_to_pipe(t_msh *msh, int cmd_id, int *fd);

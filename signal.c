@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 14:40:35 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 17:17:14 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:51:46 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,32 +23,17 @@ void	no_exec_signal_handler(int signal_num)
 	}
 }
 
-void	init_signals_history(void)
+void	init_signals(void)
 {
 	signal(SIGINT, &no_exec_signal_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	in_exec_signal_handler(int signal_num)
-{
-	printf("here\n");
-	if (signal_num == SIGQUIT)
-	{
-		printf("core dumped\n");
-		update_msh_status(CTRL_BACKSLASH);
-	}
-	if (signal_num == SIGINT)
-	{
-		printf("here\n");
-		update_msh_status(CTRL_C);
-	}
-}
-
-void	print_something(int nb)
+void	backslash_handler(int nb)
 {
 	if (nb == SIGQUIT)
 	{
-		printf("core dumped\n");
+		printf("Quit (core dumped)\n");
 		update_msh_status(CTRL_BACKSLASH);
 	}
 	if (nb == SIGINT)
@@ -58,8 +43,9 @@ void	print_something(int nb)
 	}
 }
 
-void	run_signal(void)
+void	child_signal(void)
 {
-	signal(SIGINT, &no_exec_signal_handler);
-	signal(SIGQUIT, &print_something);
+	// signal(SIGINT, SIG_IGN);
+	// signal(SIGINT, &no_exec_signal_handler);
+	signal(SIGQUIT, &backslash_handler);
 }

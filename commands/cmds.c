@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/13 17:16:44 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:56:39 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,17 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 
 	if (pipe(fd) == -1)
 		printf("ERROR - 3\n");
-	run_signal();
+	child_signal();
 	pid = fork();
 	if (pid == -1)
 		printf("ERROR - 4\n");
 	if (pid == 0)
 	{
-		// in_exec_signal();
-		//signal(SIGINT, &in_exec_signal_handler);
 		exec_to_pipe(msh, cmd_id, fd);
 	}
-	signal(SIGINT, &print_something);
+	signal(SIGINT, &backslash_handler);
 	waitpid(pid, &g_status, 0);
+	signal(SIGINT, SIG_IGN);
 	if (g_status > 255)
 		g_status = g_status / 256;
 	else
