@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 14:33:43 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:38:40 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*copy_with_value(t_msh *msh, char *expanded, t_parse p, int cursor)
 
 char *expanded_if_isnt_num(t_parse *p, int cur, char *expanded)
 {
-	p->arg_sz = 1;
+	p->arg_sz = 0;
 	p->i++;
 	if (p->line[cur] == '?')
 		expanded = ft_itoa(msh_status);
@@ -94,7 +94,7 @@ char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor, int mode)
 			expanded = "$";
 	}
 	else if (!is_num(p->line[cursor]))
-		expanded_if_isnt_num(p, cursor, expanded);
+		expanded = expanded_if_isnt_num(p, cursor, expanded);
 	else
 		p->arg_sz = 1;
 	str = copy_with_value(msh, expanded, *p, cursor);
