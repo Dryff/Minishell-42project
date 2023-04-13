@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 16:39:43 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:55:05 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,12 +208,12 @@ void	free_all(char **strs);
 
 /* Parsing */
 int		parse_line(t_msh *msh);
-int 	get_cmd_nbr(char *str);
-int 	open_fd(t_msh *msh);
-int 	check_fd(t_msh *msh, int i, int j);
-int 	get_quote(char *s, int i);
-int 	is_in_quote(char *s, int *start_quote, int i, int is_in_quotes);
-int 	get_and_check_fd(t_msh *msh);
+int		get_cmd_nbr(char *str);
+int		open_fd(t_msh *msh);
+int		check_fd(t_msh *msh, int i, int j);
+int		get_quote(char *s, int i);
+int		is_in_quote(char *s, int *start_quote, int i, int is_in_quotes);
+int		get_and_check_fd(t_msh *msh);
 char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor, int mode);
 int		is_end_of_arg(int i, char *line, char q, int s);
 char	*quotes_dollars_and_redir(t_msh *msh, char *sub, int j);
