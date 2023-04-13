@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 02:03:35 by colas             #+#    #+#             */
-/*   Updated: 2023/04/13 15:12:01 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:17:56 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,6 @@ int	is_end_of_arg(int i, char *line, char q, int s)
 			return (0);
 	if (!line[i + 1])
 		return (1);
-	if (line[i + 1] != ' ' && line[i + 1] != '>' && \
-	line[i + 1] != '<' && line[i + 1] != '|' \
-	&& line[i + 1] != '\'' && line[i + 1] != '"')
-		return (0);
 	while (i >= s)
 	{
 		if (line[i] == q)
