@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 14:06:41 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/13 16:10:27 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int check_builtins(t_msh *msh)
 	{
 		cmd = msh->cmd[i].param;
 		j = 1;
-		if (!ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])))
+		if (cmd && cmd[0] && !ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])))
 		{
 			while (cmd[j])
 			{
@@ -92,7 +92,7 @@ int main(int argc, char **argv, char **old_env)
 		init_prompt(&msh);
 		msh.line = readline(msh.prompt);
 		if (!msh.line)
-			actually_exit(&msh, 0);
+			exit(0);
 		if (!ft_strncmp(msh.line, "\n", ft_strlen(msh.line)))
 		{
 			msh_status = 0;

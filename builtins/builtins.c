@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/12 15:36:35 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:02:28 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	is_builtin(char *cmd)
 
 int	is_not_builtin_fd(t_msh *msh, char *cmd, int i)
 {
+	if (!cmd)
+		return (0);
 	if (!ft_strncmp(cmd, "export", ft_strlen(cmd)) && msh->cmd[i].param[1])
 		return (EXPORT);
 	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)) && msh->cmd_nbr == 1)

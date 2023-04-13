@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   emoji.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 20:23:26 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 15:38:50 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/13 16:05:13 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int	get_value(char *str)
 char	*select_good_prompt(t_msh *msh)
 {
 	int	value;
+	(void)msh;
 	
-	value = get_value(msh->line);
+	value = 0;
 	// printf("value = %d\n", value);
 	return (select_good_prompt_1(value));
 }

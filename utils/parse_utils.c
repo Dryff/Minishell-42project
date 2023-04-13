@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 09:07:58 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/03 15:08:24 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 16:11:53 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	get_quote(char *s, int i)
 
 int	is_end_quote(char *str, int start_quote, int i)
 {
-	int count;
-	
+	int	count;
+
 	count = 0;
 	while (i >= start_quote)
 	{
