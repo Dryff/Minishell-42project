@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_utils_and_replace_spaces.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 02:03:35 by colas             #+#    #+#             */
-/*   Updated: 2023/03/31 10:47:23 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 15:12:01 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	is_end_of_arg(int i, char *line, char q, int s)
 	if (!line[i + 1])
 		return (1);
 	if (line[i + 1] != ' ' && line[i + 1] != '>' && \
-	line[i + 1] != '<' && line[i + 1] != '|')
+	line[i + 1] != '<' && line[i + 1] != '|' \
+	&& line[i + 1] != '\'' && line[i + 1] != '"')
 		return (0);
 	while (i >= s)
 	{

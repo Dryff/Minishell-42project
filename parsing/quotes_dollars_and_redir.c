@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 14:32:54 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:13:06 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ int	quote_rm_nbr(t_parse p)
 	return (count);
 }
 
+void	secure(t_parse *p)
+{
+	if (p->i <= 0)
+		p->i = 0;
+	if (p->i >= (int)ft_strlen(p->line))
+		p->i = (int)ft_strlen(p->line);
+}
+
 void	quote_handling(t_msh *msh, t_parse *p)
 {	
 	int	q_nbr;
@@ -62,10 +70,7 @@ void	quote_handling(t_msh *msh, t_parse *p)
 	p->line = get_dollar(msh, p);
 	p->line = getline_rm_quote(msh, *p);
 	p->i -= q_nbr;
-	if (p->i <= 0)
-		p->i = 0;
-	if (p->i >= (int)ft_strlen(p->line))
-		p->i = (int)ft_strlen(p->line);
+	secure(p);
 }
 
 void	init_output_input(t_msh *msh, char *str, int cmd_id)
