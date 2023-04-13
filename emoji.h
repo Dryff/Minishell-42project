@@ -6,10 +6,12 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 09:28:49 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 22:44:42 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 22:45:43 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+// GOOD PROMPTS //
 #define GOOD_PROMPT_1 "😃 msh-> 😃 "
 #define GOOD_PROMPT_2 "😎 msh-> 😎 "
 #define GOOD_PROMPT_3 "😍 msh-> 😍 "
@@ -32,6 +34,7 @@
 #define GOOD_PROMPT_20 "🤩 msh-> 🤩 "
 #define GOOD_PROMPT_21 "🤪 msh-> 🤪 "
 
+// BAD PROMPTS //
 #define BAD_PROMPT_1 "😡 msh-> 😡 "
 #define BAD_PROMPT_2 "😠 msh-> 😠 "
 #define BAD_PROMPT_3 "😤 msh-> 😤 "
