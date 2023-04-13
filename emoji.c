@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   emoji.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 20:23:26 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 16:05:13 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 16:24:01 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,11 @@ int	get_value(char *str)
 	return (value);
 }
 
-char	*select_good_prompt(t_msh *msh)
-{
-	int	value;
-	(void)msh;
-	
-	value = 0;
-	// printf("value = %d\n", value);
-	return (select_good_prompt_1(value));
-}
-
-char	*select_good_prompt_1(int value)
+char	*select_good_prompt_1(void)
 {
 	static int	i = 0;
 
 	i++;
-	i += value;
 	if (i % 20 == 0)
 		return (GOOD_PROMPT_1);
 	else if (i % 20 == 1)
@@ -61,15 +50,14 @@ char	*select_good_prompt_1(int value)
 		return (GOOD_PROMPT_9);
 	else if (i % 20 == 9)
 		return (GOOD_PROMPT_10);
-	return (select_good_prompt_2(i));
+	return (select_good_prompt_2());
 }
 
-char	*select_good_prompt_2(int value)
+char	*select_good_prompt_2(void)
 {
-	// static int	i;
-	int	i;
-	i = value;
-	// i++;
+	static int	i = 0;
+
+	i++;
 	if (i % 20 == 0)
 		return (GOOD_PROMPT_11);
 	else if (i % 20 == 1)
@@ -90,7 +78,7 @@ char	*select_good_prompt_2(int value)
 		return (GOOD_PROMPT_19);
 	else if (i % 20 == 9)
 		return (GOOD_PROMPT_20);
-	return (select_good_prompt_1(i));
+	return (select_good_prompt_1());
 }
 
 char	*select_bad_prompt_1(void)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 09:07:58 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 16:11:53 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 16:46:31 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ int	get_cmd_size(char *str, int start)
 	int		is_in_quotes;
 	int		start_quote;
 	int		i;
-	
+
 	i = start;
 	is_in_quotes = 0;
 	start_quote = 0;
 	while (str[i])
 	{
 		if (str[i] == '|' && !is_in_quotes)
-			break;
+			break ;
 		if (str[i] == '"' || str[i] == '\'')
 		{
 			if (!is_in_quotes)
@@ -87,4 +87,3 @@ int	get_cmd_size(char *str, int start)
 	}
 	return (i - start);
 }
-

@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:35:31 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 11:20:27 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:40:53 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	actually_exit(t_msh *msh, int status)
 	printf("exit\n");
 	free_things(msh);
 	free(msh->line);
-	exit(msh_status);
+	exit(g_status);
 }
 
 void	exit_one_parameter(t_msh *msh, char *cmd)

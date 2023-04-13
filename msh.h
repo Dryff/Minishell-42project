@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 14:33:52 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/13 16:39:43 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 #define OLD 1
 #define HOME 2
 
-extern int msh_status;
+extern int g_status;
 
 typedef struct s_env
 {
@@ -127,9 +127,8 @@ int ft_exit(t_msh *msh, int cmd_id);
 void    actually_exit(t_msh *msh, int status);
 
 /* EMOJI */
-char	*select_good_prompt(t_msh *msh);
-char	*select_good_prompt_1(int value);
-char	*select_good_prompt_2(int value);
+char	*select_good_prompt_1(void);
+char	*select_good_prompt_2(void);
 char	*select_bad_prompt_1(void);
 char    *select_bad_prompt_2(void);
 

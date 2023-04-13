@@ -3,48 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 16:10:27 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 16:43:02 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
 
-int msh_status = 0;
+int	g_status = 0;
 
-void update_msh_status(int status)
+void	update_msh_status(int status)
 {
-	msh_status = status;
+	g_status = status;
 }
 
-int init_prompt(t_msh *msh)
+int	init_prompt(t_msh *msh)
 {
-	if (msh_status == 0)
-		msh->prompt = select_good_prompt(msh);
+	if (g_status == 0)
+		msh->prompt = select_good_prompt_1();
 	else
 		msh->prompt = select_bad_prompt_1();
 	return (0);
 }
 
-int check_exit(t_msh msh)
+int	check_exit(t_msh msh)
 {
 	if (ft_strncmp(msh.line, "exit", 4) == 0)
 		return (0);
 	return (1);
 }
 
-void ft_print_status(void)
+void	ft_print_status(void)
 {
-	printf("%d\n", msh_status);
+	printf("%d\n", g_status);
 }
 
-int check_builtins(t_msh *msh)
+int	check_builtins(t_msh *msh)
 {
-	int i;
-	int j;
-	char **cmd;
+	int		i;
+	int		j;
+	char	**cmd;
 
 	i = 0;
 	while (i < msh->cmd_nbr)
@@ -72,12 +72,12 @@ int check_builtins(t_msh *msh)
 	return (1);
 }
 
-int main(int argc, char **argv, char **old_env)
+int	main(int argc, char **argv, char **old_env)
 {
-	t_msh msh;
+	t_msh	msh;
 
-	(void)argc;
-	(void)argv;
+	if (argc != 1)
+		return (printf("msh: %s: No such file or directory\n", argv[1]), 1);
 	msh.error = 0;
 	msh.env = init_env(old_env);
 	check_env(&msh);
@@ -95,8 +95,8 @@ int main(int argc, char **argv, char **old_env)
 			exit(0);
 		if (!ft_strncmp(msh.line, "\n", ft_strlen(msh.line)))
 		{
-			msh_status = 0;
-			continue;
+			update_msh_status(0);
+			continue ;
 		}
 		msh.paths = get_paths(&msh, msh.env.tab);
 		if (check_arrows(&msh))

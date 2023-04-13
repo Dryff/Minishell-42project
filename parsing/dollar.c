@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 15:38:40 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/13 16:45:58 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_alpha(char c)
 	return (0);
 }
 
-int is_num(char c)
+int	is_num(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
@@ -67,12 +67,12 @@ char	*copy_with_value(t_msh *msh, char *expanded, t_parse p, int cursor)
 	return (str);
 }
 
-char *expanded_if_isnt_num(t_parse *p, int cur, char *expanded)
+char	*expanded_if_isnt_num(t_parse *p, int cur, char *expanded)
 {
 	p->arg_sz = 0;
 	p->i++;
 	if (p->line[cur] == '?')
-		expanded = ft_itoa(msh_status);
+		expanded = ft_itoa(g_status);
 	else if (!is_alpha(p->line[cur]))
 		expanded = "$";
 	return (expanded);

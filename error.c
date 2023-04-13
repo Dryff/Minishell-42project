@@ -6,15 +6,15 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 10:09:00 by cgelin            #+#    #+#             */
-/*   Updated: 2023/03/29 10:25:40 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 16:47:25 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
 
-void    error_manager(t_msh *msh, int err_num)
+void	error_manager(t_msh *msh, int err_num)
 {
 	(void)msh;
-    if (err_num == MALLOC_ERR)
-        return (printf("Malloc error, stopping the program.\n"), exit(1));
+	if (err_num == MALLOC_ERR)
+		return (printf("Malloc error, stopping the program.\n"), exit(1));
 }

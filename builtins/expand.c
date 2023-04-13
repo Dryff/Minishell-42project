@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 10:01:38 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 10:47:04 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:40:41 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_expand_tab(char **tab, char *cmd)
 	i = 0;
 	expanded = NULL;
 	if (cmd[0] == '$' && cmd[1] == '?' && cmd[2] == '\0')
-		return (ft_itoa(msh_status));
+		return (ft_itoa(g_status));
 	while (tab[i])
 	{
 		if (ft_strstr(tab[i], cmd))

@@ -6,12 +6,11 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 14:40:35 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/12 15:24:59 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:49:43 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh.h"
-
 
 void	no_exec_signal_handler(int signal_num)
 {

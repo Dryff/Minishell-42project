@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/12 15:32:22 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:44:50 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 		exec_to_pipe(msh, cmd_id, fd);
 	}
 	signal(SIGINT, &print_something);
-	waitpid(pid, &msh_status, 0);
-	if (msh_status > 255)
-		msh_status = msh_status / 256;
+	waitpid(pid, &g_status, 0);
+	if (g_status > 255)
+		g_status = g_status / 256;
 	else
-		msh_status = msh_status % 256;
+		g_status = g_status % 256;
 	close(fd[1]);
 	if (dup2(fd[0], STDIN_FILENO) == -1)
 		printf("ERROR - 6\n");
@@ -139,7 +139,7 @@ int	commands(t_msh *msh)
 	}
 	builtin = is_builtin(msh->cmd[0].param[0]);
 	if (msh->cmd_nbr == 1 && is_not_builtin_fd(msh, msh->cmd[0].param[0], 0))
-		exec_builtins(msh, 0, builtin);	
+		exec_builtins(msh, 0, builtin);
 	if (error != 0)
 		return (0);
 	dup_inffd(0);

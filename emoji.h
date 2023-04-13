@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 09:28:49 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/12 09:28:53 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:25:11 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@
 #define GOOD_PROMPT_19 "🥳 msh-> 🥳 "
 #define GOOD_PROMPT_20 "🤩 msh-> 🤩 "
 #define GOOD_PROMPT_21 "🤪 msh-> 🤪 "
-
-
 
 #define BAD_PROMPT_1 "😡 msh-> 😡 "
 #define BAD_PROMPT_2 "😠 msh-> 😠 "
