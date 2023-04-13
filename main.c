@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 11:45:41 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 14:06:41 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int main(int argc, char **argv, char **old_env)
 			msh_status = 0;
 			continue;
 		}
-		msh.paths = get_paths(msh.env.tab);
+		msh.paths = get_paths(&msh, msh.env.tab);
 		if (check_arrows(&msh))
 			parse_line(&msh);
 		if (msh.cmd_nbr && check_builtins(&msh))

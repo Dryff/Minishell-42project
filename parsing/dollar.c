@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/05 14:32:46 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 14:33:43 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ int	is_alpha(char c)
 	return (0);
 }
 
+int is_num(char c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+
 char	*get_expanded(t_msh *msh, t_parse *p, int cursor)
 {
 	char	*arg;
@@ -27,7 +34,7 @@ char	*get_expanded(t_msh *msh, t_parse *p, int cursor)
 
 	k = cursor;
 	// printf("start : %d\n", p->line[k]);
-	while (p->line[k] && is_alpha(p->line[k]))
+	while (p->line[k] && (is_num(p->line[k]) || is_alpha(p->line[k])))
 		k++;
 	arg = ft_substr(p->line, cursor, k - cursor);
 	// printf("arg : %s\n", arg);
@@ -60,7 +67,18 @@ char	*copy_with_value(t_msh *msh, char *expanded, t_parse p, int cursor)
 	return (str);
 }
 
-char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor)
+char *expanded_if_isnt_num(t_parse *p, int cur, char *expanded)
+{
+	p->arg_sz = 1;
+	p->i++;
+	if (p->line[cur] == '?')
+		expanded = ft_itoa(msh_status);
+	else if (!is_alpha(p->line[cur]))
+		expanded = "$";
+	return (expanded);
+}
+
+char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor, int mode)
 {
 	char	*expanded;
 	char	*str;
@@ -69,15 +87,16 @@ char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor)
 	cursor++;
 	if (is_alpha(p->line[cursor]))
 		expanded = get_expanded(msh, p, cursor);
-	else
+	else if (p->line[cursor] == '\'' || p->line[cursor] == '"')
 	{
-		p->arg_sz = 1;
-		p->i++;
-		if (p->line[cursor] == '?')
-			expanded = ft_itoa(msh_status);
-		else if (!is_alpha(p->line[cursor]))
+		p->arg_sz = 0;
+		if (mode == 1)
 			expanded = "$";
 	}
+	else if (!is_num(p->line[cursor]))
+		expanded_if_isnt_num(p, cursor, expanded);
+	else
+		p->arg_sz = 1;
 	str = copy_with_value(msh, expanded, *p, cursor);
 	p->i += ft_strlen(expanded) - p->arg_sz - 1;
 	if (p->i < 0)
@@ -100,7 +119,7 @@ char	*get_dollar(t_msh *msh, t_parse *p)
 		if (p->line[cursor] == '$' && p->q == '"')
 		{
 			// printf("avant : %s\n", &p->line[cursor]);
-			p->line = replace_env_arg(msh, p, cursor);
+			p->line = replace_env_arg(msh, p, cursor, 1);
 		}
 		cursor++;
 	}

@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:53:02 by colas             #+#    #+#             */
-/*   Updated: 2023/04/12 11:02:45 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/13 14:00:45 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*path_finder(char **env)
 	return (&env[i][5]);
 }
 
-char	**get_paths(char **envp)
+char	**get_paths(t_msh *msh, char **envp)
 {
 	char	*raw_paths;
 	char	**paths;
@@ -34,7 +34,7 @@ char	**get_paths(char **envp)
 		return (NULL);
 	paths = ft_split(raw_paths, ':');
 	if (!paths)
-		return (NULL);
+		return (free(msh->line), exit(1),NULL);
 	return (paths);
 }
 

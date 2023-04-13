@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 11:45:30 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 14:33:52 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_strstr(const char *str, const char *to_find);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		commands(t_msh *msh);
-char	**get_paths(char **envp);
+char	**get_paths(t_msh *msh, char **envp);
 char	*get_pathing(t_msh msh, int j);
 void	here_doc(t_msh *msh, int cmd_id);
 char	*ft_itoa(int n);
@@ -215,7 +215,7 @@ int 	check_fd(t_msh *msh, int i, int j);
 int 	get_quote(char *s, int i);
 int 	is_in_quote(char *s, int *start_quote, int i, int is_in_quotes);
 int 	get_and_check_fd(t_msh *msh);
-char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor);
+char	*replace_env_arg(t_msh *msh, t_parse *p, int cursor, int mode);
 int		is_end_of_arg(int i, char *line, char q, int s);
 char	*quotes_dollars_and_redir(t_msh *msh, char *sub, int j);
 char	*get_dollar(t_msh *msh, t_parse *p);

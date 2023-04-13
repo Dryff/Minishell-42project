@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_dollars_and_redir.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/10 19:30:51 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 14:32:54 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_id)
 		else if (p.line[p.i] == '>' || p.line[p.i] == '<')
 			get_redir(msh, &p, cmd_id);
 		else if (p.line[p.i] == '$')
-			p.line = replace_env_arg(msh, &p, p.i);
+			p.line = replace_env_arg(msh, &p, p.i, 0);
 		else
 			p.line = replace_spaces(p, p.line);
 		if (p.line[p.i])

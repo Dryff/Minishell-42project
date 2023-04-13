@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   develop_name.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 18:40:05 by colas             #+#    #+#             */
-/*   Updated: 2023/04/10 19:25:50 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 14:34:41 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*develop_name(t_msh *msh, char *sub)
 			quote_handling(msh, &p);
 		}
 		else if (p.line[p.i] == '$')
-			p.line = replace_env_arg(msh, &p, p.i);
+			p.line = replace_env_arg(msh, &p, p.i, 0);
 		if (p.line[p.i])
 			p.i++;
 	}

@@ -21,8 +21,13 @@ PARSING DES CHEVRONS | Max
 echo -n salut > > out5
 msh 🤑-> echo $a $B
 << end cat delimiter stric
-
+echo $130
 /bin et /bin/ c gerer
+msh 😡-> cd commands/ parsing/
+msh 🤑-> cat
+^C
+msh 🤑-> cd /s
+cd: /s: No such file or directory
 ----------------------------------------------------------------
 CTRL + \ | Max
 CTRL + C dans plusieurs minishells | Max
@@ -30,24 +35,6 @@ CTRL + C dans plusieurs minishells | Max
 GERER ERREURS EN CAS DE MALLOC FOIRÉ COLAS | colas
 GERER ERREURS EN CAS DE MALLOC FOIRÉ MAX | Max
 SORTIE DERREUR DANS $? | Max
-msh 🤑-> cd /s
-cd: /s: No such file or directory
-msh 🤑-> cd /bin
-cd: /bin: No such file or directory
-
-msh 😡-> cd commands/ parsing/
-
-msh 🤑-> cat
-^C
-
-msh 🤑-> << end
-size : 3, end
-> asd
-> ^C
-> ^C
-> ^C
-> ^C
-> ^C
 
 msh 🤑-> echo ""'sdfsdfd'"''"
 exit : 15
