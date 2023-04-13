@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: colas <colas@student.42.fr>                +#+  +:+       +#+         #
+#    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/04/13 16:33:56 by colas            ###   ########.fr        #
+#    Updated: 2023/04/13 21:16:41 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC		= cc
-FLAGS	= -fsanitize=address -g3 -Wall -Wextra -Werror
+FLAGS	= -g3 -Wall -Wextra -Werror
 AR		= ar rcs
 RM		= @rm -f
 HEADER	= msh.h
@@ -78,7 +78,7 @@ OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 %.o:%.c $(HEADER)
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-	@$(CC) $(FLAGS) -c $< -o $@ 
+	@$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@echo "$(GREEN)😳😎minishell compiled!😎😳$(DEF_COLOR)"

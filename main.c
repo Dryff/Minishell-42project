@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 18:11:23 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 21:13:32 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	main(int argc, char **argv, char **old_env)
 		init_prompt(&msh);
 		msh.line = readline(msh.prompt);
 		if (!msh.line)
-			ctrl_d_exit(0);
+			ctrl_d_exit(&msh);
 		msh.paths = get_paths(&msh, msh.env.tab);
 		if (check_arrows(&msh))
 			parse_line(&msh);
@@ -102,5 +102,5 @@ int	main(int argc, char **argv, char **old_env)
 		free_things(&msh);
 		free(msh.line);
 	}
-	free_env(msh);
+	free_env(&msh);
 }

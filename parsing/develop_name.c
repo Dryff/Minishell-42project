@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   develop_name.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 18:40:05 by colas             #+#    #+#             */
-/*   Updated: 2023/04/13 18:30:04 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 21:07:05 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*develop_name(t_msh *msh, char *sub)
 	t_parse	p;
 	int flag;
 
+	(void)(flag);
 	p.line = sub;
 	p.i = 0;
 	p.strt = 0;

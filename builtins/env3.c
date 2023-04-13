@@ -6,30 +6,30 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:50:58 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 10:52:32 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 21:10:09 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-void	free_env(t_msh msh)
+void	free_env(t_msh *msh)
 {
 	int	i;
 
 	i = 0;
-	while (msh.env.tab[i])
+	while (msh->env.tab[i])
 	{
-		free(msh.env.tab[i]);
+		free(msh->env.tab[i]);
 		i++;
 	}
-	free(msh.env.tab);
+	free(msh->env.tab);
 	i = 0;
-	while (msh.env.sort_tab[i])
+	while (msh->env.sort_tab[i])
 	{
-		free(msh.env.sort_tab[i]);
+		free(msh->env.sort_tab[i]);
 		i++;
 	}
-	free(msh.env.sort_tab);
+	free(msh->env.sort_tab);
 }
 
 char	**envp_dup(char **tab)

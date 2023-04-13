@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 18:49:23 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/13 21:26:41 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,17 @@
 # define CTRL_BACKSLASH 131
 
 // CD //
-
 # define OLD 1
 # define HOME 2
 
+// EXIT HISTORY //
 # define FREE 0
 # define NOFREE 1
+
+// ACTUALLY EXIT //
+# define NOFLAG 0
+# define TOO_MANY 1
+# define NOT_NUMERIC 2
 
 extern int	g_status;
 
@@ -128,7 +133,7 @@ void		custom_add_history(char *line, int status);
 
 /* EXIT */
 int			ft_exit(t_msh *msh, int cmd_id);
-void		actually_exit(t_msh *msh, int status);
+void		actually_exit(t_msh *msh, int status, int flag, char *cmd);
 void		ctrl_d_exit(t_msh *msh);
 
 /* EMOJI */
@@ -147,7 +152,7 @@ int			*ft_bool_strnstr(const char *haystack, const char *needle, \
 size_t len);
 char		**add_comand_to_tab(char **tab, char *cmd);
 char		**envp_dup(char **tab);
-void		free_env(t_msh msh);
+void		free_env(t_msh *msh);
 char		**init_secret_env(char **envp);
 void		update_SHLVL(t_msh *msh);
 void		check_env(t_msh *msh);
