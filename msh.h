@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 21:26:41 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 21:34:55 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void		update_SHLVL(t_msh *msh);
 void		check_env(t_msh *msh);
 void		check_shlvl(t_msh *msh);
 void		check_pwd(t_msh *msh);
-void		reset_shlvl(t_msh *msh);
+void		reset_shlvl(t_msh *msh, int shlvl);
 int			is_valid_c(char c);
 
 /* Export*/

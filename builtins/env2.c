@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:42:57 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 10:56:26 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 21:33:58 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	check_shlvl(t_msh *msh)
 		if (shlvl < 0)
 			complete_export(msh, "SHLVL=0");
 		if (shlvl >= 999)
-			reset_shlvl(msh);
+			reset_shlvl(msh, shlvl);
 		if (shlvl >= 0 && shlvl < 999)
 		{
 			shlvl++;

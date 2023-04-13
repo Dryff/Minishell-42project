@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:50:58 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 21:10:09 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/13 21:34:13 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	check_pwd(t_msh *msh)
 		add_invisible_export(msh, "OLDPWD");
 }
 
-void	reset_shlvl(t_msh *msh)
+void	reset_shlvl(t_msh *msh, int nb)
 {
-	printf("resetting SHLVL to 1, limit exceeded(1000)\n");
+	printf("msh: warning: shell level (%d) too high, resetting to 1\n", nb);
 	complete_export(msh, "SHLVL=1");
 }
