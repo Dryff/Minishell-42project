@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/14 23:20:12 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:33:05 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ void	main_loop(t_msh *msh)
 	// 	signal(SIGQUIT, SIG_IGN);
 	// }
 	// else
-	init_signals();
+	// init_signals();
+	set_interactive_signals();
 	init_prompt(msh);
 	msh->line = readline(msh->prompt);
 	if (!msh->line)
@@ -100,6 +101,7 @@ int	main(int argc, char **argv, char **old_env)
 		return (printf("msh: %s: No such file or directory\n", argv[1]), 1);
 	msh.error = 0;
 	msh.env = init_env(old_env);
+	msh.program_name = argv[0];
 	check_env(&msh);
 	using_history();
 	rl_bind_key('\t', rl_complete);

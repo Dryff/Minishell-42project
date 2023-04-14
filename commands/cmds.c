@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/14 23:24:19 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:28:10 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,21 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 
 	if (pipe(fd) == -1)
 		printf("ERROR - 3\n");
-	signal(SIGINT, SIG_IGN);
+	// signal(SIGINT, SIG_IGN);
 	pid = fork();
+	set_execution_signals();
 	if (pid == -1)
 		printf("ERROR - 4\n");
+	if (pid != 0 && ft_strcmp(msh->cmd[cmd_id].param[0], msh->program_name) == 0)
+	{
+		printf("\n\n\nCOUCOUCOUCOUCOU\n\n\n");
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
 	if (pid == 0)
 	{
-		signal(SIGINT, &backslash_print);
-		signal(SIGQUIT, &backslash_print);
+		// signal(SIGINT, &backslash_print);
+		// signal(SIGQUIT, &backslash_print);
 		exec_to_pipe(msh, cmd_id, fd);
 	}
 	waitpid(pid, &g_status, 0);

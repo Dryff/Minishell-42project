@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/14 23:25:19 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:31:14 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_msh
 	char		*prompt;
 	char		*line;
 	char		*ex_val;
+	char		*program_name;
 }				t_msh;
 
 /* Minishell */
@@ -212,6 +213,8 @@ void		child_signal(void);
 void		backslash_handler(int nb);
 void		only_update_signal(int nb);
 void		backslash_print(int nb);
+void		set_interactive_signals(void);
+void		set_execution_signals(void);
 
 /* exec */
 void		exec_to_pipe(t_msh *msh, int cmd_id, int *fd);
