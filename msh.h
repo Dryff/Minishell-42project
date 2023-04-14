@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/14 12:53:35 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 13:47:30 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,7 @@ void		no_exec_signal_handler(int signal_num);
 void		child_signal(void);
 void		backslash_handler(int nb);
 void		only_update_signal(int nb);
+void		backslash_print(int nb);
 
 /* exec */
 void		exec_to_pipe(t_msh *msh, int cmd_id, int *fd);

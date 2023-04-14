@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/14 12:43:05 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 15:41:05 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,19 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 
 	if (pipe(fd) == -1)
 		printf("ERROR - 3\n");
-	child_signal();
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == -1)
 		printf("ERROR - 4\n");
 	if (pid == 0)
+	{
+		signal(SIGINT, &backslash_print);
+		signal(SIGQUIT, &backslash_print);
 		exec_to_pipe(msh, cmd_id, fd);
-	signal(SIGINT, &backslash_handler);
+	}
 	waitpid(pid, &g_status, 0);
-	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, &backslash_print);
+	signal(SIGQUIT, SIG_IGN);
 	if (g_status > 255)
 		g_status = g_status / 256;
 	else
