@@ -47,6 +47,8 @@ GERER ERREURS EN CAS DE MALLOC FOIRÉ MAX | Max
 VALEURE DE RETOUR CTRL C DANS UN CAT OU SLEEP| Max
 
 $_
+exp"$hello"ort""''
+export test="      "   ---> echo salut $test salut
 
 ---- Crash test ----
 - ./minishell | ./minishell -> explosion
