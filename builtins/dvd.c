@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 10:56:59 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 12:56:38 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	real_pwd(t_msh *msh, char *cmd)
 	char	*new_path;
 
 	actual_path = getcwd(NULL, 0);
+	if (!actual_path)
+		return ((void)cwd_error());
 	new_path = ft_strjoin(actual_path, "/");
 	tmp = ft_strjoin(new_path, cmd);
 	if (chdir(tmp) != 0)
@@ -128,4 +130,11 @@ void	ft_dvd(t_msh *msh, int cmd_id)
 		chdir_old(msh);
 	else
 		real_pwd(msh, cmd);
+}
+
+void	cwd_error(void)
+{
+	ft_err_printf("msh: cd: sorry I don't know where I am\n");
+	ft_err_printf("msh: cd: To return to the last existing directory, use cd -\n");
+	update_msh_status(1);
 }

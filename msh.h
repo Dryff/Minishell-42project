@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/14 22:00:11 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:25:19 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ char		*get_dvd_cmd(char *line);
 void		ft_dvd(t_msh *msh, int cmd_id);
 void		chdir_home_old(t_msh *msh, int code);
 void		update_old_pwd(t_msh *msh, char *actual_path);
+void		cwd_error(void);
 
 /* HISTORIC */
 void		init_history(void);
@@ -210,6 +211,7 @@ void		no_exec_signal_handler(int signal_num);
 void		child_signal(void);
 void		backslash_handler(int nb);
 void		only_update_signal(int nb);
+void		backslash_print(int nb);
 
 /* exec */
 void		exec_to_pipe(t_msh *msh, int cmd_id, int *fd);

@@ -33,13 +33,17 @@ $test
 command not found -> 127
 - ls | > out | cat = creation du fichier out et cést tout
 - < Makefile | grep NAME | sort | sed s/NAME/TOTO/g > out -> pipe en trop entre infile et cmd1
+- mkdir a/b/c -> cd a/b/c -> rm a -> segfault
+- export: invalid id error code
+SORTIE DERREUR DANS $? | Max
+- exit -> long overflow
+- fds 4094 - 4095 - trop grand
 ----------------------------------------------------------------
 CTRL + \ | Max
 CTRL + C dans plusieurs minishells | Max
 
 GERER ERREURS EN CAS DE MALLOC FOIRÉ COLAS | colas
 GERER ERREURS EN CAS DE MALLOC FOIRÉ MAX | Max
-SORTIE DERREUR DANS $? | Max
 VALEURE DE RETOUR CTRL C DANS UN CAT OU SLEEP| Max
 
 ls > path/bonjour
@@ -47,8 +51,4 @@ $_
 $USER"coucou"
 
 ---- Crash test ----
-- exit -> long overflow
-- export: invalid id error code
-- mkdir a/b/c -> cd a/b/c -> rm a -> segfault
-- fds 4094 - 4095 - trop grand
 - ./minishell | ./minishell -> explosion
