@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:25:58 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 22:32:55 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 13:09:02 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ int	ft_str_is_numeric(char *str)
 	int	i;
 
 	i = 0;
+	while (str[i] == '0')
+		i++;
+	if (ft_strlen(&str[i]) > 10)
+		return (0);
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
