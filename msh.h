@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 22:43:22 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:14:47 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,6 +233,7 @@ void		free_all(char **strs);
 /* Parsing */
 int			parse_line(t_msh *msh);
 int			get_cmd_nbr(char *str);
+int			ft_is_ascii(char c);
 int			open_fd(t_msh *msh);
 int			check_fd(t_msh *msh, int i, int j);
 int			get_quote(char *s, int i);

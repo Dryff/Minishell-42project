@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_hub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 22:38:18 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:34:45 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,24 @@ void	print_cmds(t_msh msh)
 	printf("--------------------------\n");
 }
 
+int	check_ascii(t_msh *msh)
+{
+	int		i;
+
+	i = 0;
+	while (msh->line[i])
+	{
+		if (msh->line[i] < 32 || msh->line[i] > 126)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	parse_line(t_msh *msh)
 {
+	if (!check_ascii(msh))
+		return (exit(0), 0);
 	msh->cmd_nbr = get_cmd_nbr(msh->line);
 	if (!msh->cmd_nbr)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:13:34 by cgelin            #+#    #+#             */
-/*   Updated: 2023/02/26 13:39:56 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 11:15:38 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,11 @@ char	*ft_strchr(const char *s, int c)
 	if (d[i] == u)
 		return (&d[i]);
 	return (NULL);
+}
+
+int	ft_is_ascii(char c)
+{
+	if (c >= 0 && c < 127)
+		return (1);
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/13 22:11:57 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:31:30 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 	{
 		if (cmd_id == msh->cmd_nbr - 1)
 		{
-			if (dup2(4094, STDOUT_FILENO) == -1)
-				printf("ERROR - 5\n");
+			if (dup2(5, STDOUT_FILENO) == -1)
+				printf("ERROR - a\n");
 		}
 		else
 			if (dup2(fd[1], STDOUT_FILENO) == -1)
-				printf("ERROR - 5\n");
+				printf("ERROR - b\n");
 	}
 	else if (msh->cmd[cmd_id].op)
 		if (dup2(msh->cmd[cmd_id].op[msh->cmd[cmd_id].redir_nbr - 1] \
 	.outfd, STDOUT_FILENO) == -1)
-			printf("ERROR - 5\n");
+			printf("ERROR - c\n");
 	close(fd[1]);
 }
 
@@ -68,16 +68,16 @@ void	dup_inffd(int mode)
 {
 	if (mode == 1)
 	{
-		if (dup2(STDIN_FILENO, 4095) == -1)
+		if (dup2(STDIN_FILENO, 4) == -1)
 			printf("ERROR - yo2\n");
-		if (dup2(STDOUT_FILENO, 4094) == -1)
+		if (dup2(STDOUT_FILENO, 5) == -1)
 			printf("ERROR - yo3\n");
 	}
 	else
 	{
-		if (dup2(4095, STDIN_FILENO) == -1)
+		if (dup2(4, STDIN_FILENO) == -1)
 			printf("ERROR - yo4\n");
-		if (dup2(4094, STDOUT_FILENO) == -1)
+		if (dup2(5, STDOUT_FILENO) == -1)
 			printf("ERROR - yo5\n");
 	}
 }

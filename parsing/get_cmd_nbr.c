@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_nbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 14:54:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/04 14:58:31 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/14 11:18:54 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ int	get_cmd_nbr(char *str)
 		quote_check(str, i, &start_quote, &is_in_quotes);
 		i++;
 	}
+	if (is_in_quotes)
+		return (ft_err_printf("quotes are not closed"), 0);
 	return (count);
 }
