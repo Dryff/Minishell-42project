@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:31:40 by colas             #+#    #+#             */
-/*   Updated: 2023/04/15 01:24:43 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 01:48:40 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	here_doc_ctrl_c(int nb)
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
-	rl_redisplay();	
+	rl_redisplay();
 	update_msh_status(CTRL_C);
 }
 
@@ -48,9 +48,6 @@ void	here_doc(t_msh *msh, int cmd_id)
 			line = readline("> ");
 			if (!line)
 				break ;
-			// len = ft_strlen(msh->cmd[cmd_id].ip.here_doc_delim[i]);
-			// if (len < (int)ft_strlen(line))
-			// 	len = ft_strlen(line);
 			if (!ft_strcmp(line, msh->cmd[cmd_id].ip.here_doc_delim[i]))
 				break ;
 			if (i == msh->cmd[cmd_id].hd_nbr - 1)

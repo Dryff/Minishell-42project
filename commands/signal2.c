@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 01:30:58 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 01:45:12 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 01:47:55 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	backslash_print(int nb)
 	}
 }
 
-void    enable_minishell_signals(void)
+void	enable_minishell_signals(void)
 {
-    signal(SIGINT, SIG_IGN);
-    signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	cwd_error(void)

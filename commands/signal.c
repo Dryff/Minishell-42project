@@ -6,12 +6,11 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 14:40:35 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 01:37:15 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 01:46:34 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
-
 
 void	handle_abort_input(int signum, siginfo_t *info, void *context)
 {

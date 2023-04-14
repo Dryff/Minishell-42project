@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:53:02 by colas             #+#    #+#             */
-/*   Updated: 2023/04/14 22:58:33 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/15 01:49:04 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**get_paths(t_msh *msh, char **envp)
 char	*check_slash(t_msh msh, int j)
 {
 	struct stat	path_stat;
-	
+
 	if (!msh.cmd[j].param[0])
 		return (NULL);
 	if (ft_strchr(msh.cmd[j].param[0], '/'))

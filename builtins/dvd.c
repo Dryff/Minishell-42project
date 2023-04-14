@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 01:45:01 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 01:48:50 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,4 +133,3 @@ void	ft_dvd(t_msh *msh, int cmd_id)
 	else
 		real_pwd(msh, cmd);
 }
-
