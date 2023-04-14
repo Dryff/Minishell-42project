@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 22:41:11 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 10:49:10 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,10 @@ char	*get_dollar(t_msh *msh, t_parse *p)
 
 	cursor = p->strt + 1;
 	end_quote_pos = go_to_end_quote(cursor, p->line, p->q, p->strt);
-	// printf("end_quote pos : %d\n", end_quote_pos);
 	while (p->line[cursor] && cursor != end_quote_pos)
 	{
 		if (p->line[cursor] == '$' && p->q == '"')
-		{
-			// printf("avant : %s\n", &p->line[cursor]);
 			p->line = replace_env_arg(msh, p, cursor, 1);
-		}
 		cursor++;
 	}
 	return (p->line);
