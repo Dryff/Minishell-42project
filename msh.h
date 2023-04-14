@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/14 11:14:47 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 12:53:35 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ char		*get_dvd_cmd(char *line);
 void		ft_dvd(t_msh *msh, int cmd_id);
 void		chdir_home_old(t_msh *msh, int code);
 void		update_old_pwd(t_msh *msh, char *actual_path);
+void		cwd_error(void);
 
 /* HISTORIC */
 void		init_history(void);

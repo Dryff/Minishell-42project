@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 16:02:28 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/14 12:57:19 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int	ft_pwd(void)
 	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
+	if (!pwd)
+	{
+		cwd_error();
+		return (1);
+	}
 	printf("%s\n", pwd);
 	free(pwd);
 	return (0);
