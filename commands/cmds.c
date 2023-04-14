@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/14 11:31:30 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 12:43:05 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 	{
 		if (cmd_id == msh->cmd_nbr - 1)
 		{
-			if (dup2(5, STDOUT_FILENO) == -1)
+			if (dup2(101, STDOUT_FILENO) == -1)
 				printf("ERROR - a\n");
 		}
 		else
@@ -48,9 +48,7 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 	if (pid == -1)
 		printf("ERROR - 4\n");
 	if (pid == 0)
-	{
 		exec_to_pipe(msh, cmd_id, fd);
-	}
 	signal(SIGINT, &backslash_handler);
 	waitpid(pid, &g_status, 0);
 	signal(SIGINT, SIG_IGN);
@@ -68,16 +66,16 @@ void	dup_inffd(int mode)
 {
 	if (mode == 1)
 	{
-		if (dup2(STDIN_FILENO, 4) == -1)
+		if (dup2(STDIN_FILENO, 100) == -1)
 			printf("ERROR - yo2\n");
-		if (dup2(STDOUT_FILENO, 5) == -1)
+		if (dup2(STDOUT_FILENO, 101) == -1)
 			printf("ERROR - yo3\n");
 	}
 	else
 	{
-		if (dup2(4, STDIN_FILENO) == -1)
+		if (dup2(100, STDIN_FILENO) == -1)
 			printf("ERROR - yo4\n");
-		if (dup2(5, STDOUT_FILENO) == -1)
+		if (dup2(101, STDOUT_FILENO) == -1)
 			printf("ERROR - yo5\n");
 	}
 }
@@ -107,7 +105,7 @@ int	commands(t_msh *msh)
 	error = 0;
 	while (++i < msh->cmd_nbr)
 	{
-		if (msh->cmd[i].param[0] && msh->cmd[i].ip.infd != -1 \
+		if (msh->cmd[i].ip.infd != -1 \
 		&& check_out(*msh, i))
 		{	
 			if (!is_not_builtin_fd(msh, msh->cmd[i].param[0], i))

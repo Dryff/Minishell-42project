@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/14 12:35:21 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 12:47:42 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,6 @@ int	parse_line(t_msh *msh)
 		return (error_manager(msh, MALLOC_ERR), 1);
 	store_cmds_between_pipes(msh);
 	get_and_check_fd(msh);
-	// print_cmds(*msh);
+	print_cmds(*msh);
 	return (1);
 }
