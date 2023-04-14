@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 22:34:33 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/14 21:18:20 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:35:22 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	actualize_ind(t_parse *p, char *expanded, char *str, int is_in_q)
 		p->end_q = p->i;
 	}
 	else if (ft_strlen(expanded))
-		p->i += ft_strlen(expanded);
+		p->i += ft_strlen(expanded) - 1;
 	else
 		p->i--;
 	if (p->arg_sz)

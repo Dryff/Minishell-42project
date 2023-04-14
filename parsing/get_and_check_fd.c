@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_and_check_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/04/13 16:41:48 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:27:59 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	hd_exec(t_msh *msh, int cmd_id)
 {
 	if (msh->cmd[cmd_id].hd_nbr)
 	{
-		msh->cmd[cmd_id].ip.infd = open("hd_tmp", \
+		msh->cmd[cmd_id].ip.infd = open("commands/.hd_tmp", \
 		O_CREAT | O_RDWR | O_TRUNC, 0644);
 		here_doc(msh, cmd_id);
 		close(msh->cmd[cmd_id].ip.infd);
-		msh->cmd[cmd_id].ip.infd = open("hd_tmp", O_RDONLY);
+		msh->cmd[cmd_id].ip.infd = open("commands/.hd_tmp", O_RDONLY);
 	}
 }
 
@@ -42,20 +42,27 @@ int	check_input(t_msh *msh, int cmd_id)
 
 int	check_output(t_msh *msh, int cmd_id, int op_id)
 {
+	struct stat path_stat;
+	
 	if (msh->cmd[cmd_id].op[op_id].output == 1)
+	{		
 		msh->cmd[cmd_id].op[op_id].outfd = \
 		open(msh->cmd[cmd_id].op[op_id].out_name, \
 		O_CREAT | O_RDWR | O_TRUNC, 0644);
+	}
 	else if (msh->cmd[cmd_id].op[op_id].output == 2)
 		msh->cmd[cmd_id].op[op_id].outfd = \
 		open(msh->cmd[cmd_id].op[op_id].out_name, \
 		O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (msh->cmd[cmd_id].op[op_id].outfd == -1)
 	{
-		ft_err_printf("msh: permission denied: %s\n", \
-		msh->cmd[cmd_id].op[op_id].out_name);
-		g_status = 1;
-		return (0);
+		path_stat.st_mode = 0;
+		if (stat(msh->cmd[cmd_id].op[op_id].out_name, &path_stat))
+			return (ft_err_printf("msh: %s: No such file or directory:\n", \
+			msh->cmd[cmd_id].op[op_id].out_name));
+		else
+			return (ft_err_printf("msh: permission denied: %s\n", \
+			msh->cmd[cmd_id].op[op_id].out_name), g_status = 1, 0);
 	}
 	return (1);
 }

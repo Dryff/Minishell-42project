@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/14 23:14:20 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/15 00:31:19 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,14 @@ char	*replace_env_arg(t_msh *msh, t_parse *p, int *cursor, int in_q)
 		expanded = expanded_if_isnt_num(p, tmp, expanded);
 	else if (is_num(p->line[tmp]))
 		p->arg_sz = 1;
-	printf("expanded : %s\n", expanded);
 	str = copy_with_value(msh, expanded, *p, tmp);
 	if (in_q == 0)
 		str = replace_spaces_of_expanded(*p, str);
-	printf("str : %s, p->i : %d, p->end_q : %d\n", str, p->i, p->end_q);
 	actualize_ind(p, expanded, str, in_q);
-	printf("str : %s, p->i : %d, p->end_q : %d\n", str, p->i, p->end_q);
 	if (p->line[tmp] == '?')
 		free(expanded);
 	if (in_q)
 		*cursor += ft_strlen(expanded) - 1;
-	printf("str : %s\n", str);
 	return (free(p->line), str);
 }
 
@@ -105,8 +101,6 @@ char	*get_dollar(t_msh *msh, t_parse *p, int *has_dollar)
 		{
 			p->line = replace_env_arg(msh, p, &cursor, 1);
 			*has_dollar = 1;
-			printf("new end : %d\n", p->end_q);
-			printf("new cursor : %d\n", cursor);
 		}
 		if (p->line[cursor])
 			cursor++;

@@ -46,9 +46,13 @@ GERER ERREURS EN CAS DE MALLOC FOIRÉ COLAS | colas
 GERER ERREURS EN CAS DE MALLOC FOIRÉ MAX | Max
 VALEURE DE RETOUR CTRL C DANS UN CAT OU SLEEP| Max
 
-ls > path/bonjour
 $_
-$USER"coucou"
 
 ---- Crash test ----
 - ./minishell | ./minishell -> explosion
+
+Norminette
+Malloc
+Exit
+Fonction interdites (atoi)
+enlever la todolist

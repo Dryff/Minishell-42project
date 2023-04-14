@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/14 20:59:40 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/15 00:33:21 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,11 @@ void	quote_handling(t_msh *msh, t_parse *p)
 	p->end_q = go_to_end_quote(*p, p->i, p->line);
 	p->line = getline_rm_quote(msh, *p);
 	p->end_q -= 2;
-	printf("p->strt = %d, p->end_q = %d, p->q = %c\n", p->strt, p->end_q, p->q);
 	if (p->q == '"')
 		p->line = get_dollar(msh, p, &has_dollar);
 	if (!has_dollar)
 		p->i = p->end_q;
 	secure(p);
-	printf("line after = %s, %d (%c)\n", p->line, p->i, p->line[p->i]);
 }
 
 void	init_output_input(t_msh *msh, char *str, int cmd_id)
