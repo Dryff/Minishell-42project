@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 22:03:31 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 09:28:50 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ int	main(int argc, char **argv, char **old_env)
 	using_history();
 	rl_bind_key('\t', rl_complete);
 	while (1)
-	{
 		main_loop(&msh);
-	}
 	free_env(&msh);
 }

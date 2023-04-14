@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   basic_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 22:34:33 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 22:43:05 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 09:33:24 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,13 @@ char	*get_expanded(t_msh *msh, t_parse *p, int cursor)
 void	actualize_ind(t_parse *p, char *expanded, char *str)
 {
 	p->i += ft_strlen(expanded) - p->arg_sz - 1;
-	if (p->i < 0)
-		p->i = 0;
-	else if (p->i > (int)ft_strlen(str))
-		p->i = ft_strlen(str);
+	if (p->arg_sz)
+	{		
+		if (p->i < 0)
+			p->i = 0;
+		else if (p->i > (int)ft_strlen(str))
+			p->i = ft_strlen(str);
+	}
 }
 
 void	secure(t_parse *p)
