@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:21:19 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 18:10:48 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 23:55:14 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,15 @@
 #define FREE 0
 #define NOFREE 1
 
-void	custom_add_history(char *line, int status)
+void	custom_add_history(char *line, int status, int i)
 {
 	static char	*last;
-	int			i;
 
 	if (status == FREE)
 	{
 		free (last);
 		return ;
 	}
-	i = 0;
 	if (ft_strlen(line) == 0)
 		return ;
 	if (!last)
@@ -37,6 +35,8 @@ void	custom_add_history(char *line, int status)
 			add_history(line);
 			free(last);
 			last = ft_strdup(line);
+			if (!last)
+				exit(1);
 			return ;
 		}
 		i++;

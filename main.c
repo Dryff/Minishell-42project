@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/14 23:33:05 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 23:55:01 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_builtins(t_msh *msh)
 	int		i;
 	int		j;
 	int		flag;
-	int len;
+	int 	len;
 
 	i = 0;
 	flag = 0;
@@ -71,13 +71,6 @@ void	main_loop(t_msh *msh)
 	msh->cmd_nbr = 0;
 	if (msh->env.error)
 		exit(1);
-	// if (!ft_expand_tab(msh->env.tab, "OLDPWD"))
-	// {
-	// 	signal(SIGINT, SIG_IGN);
-	// 	signal(SIGQUIT, SIG_IGN);
-	// }
-	// else
-	// init_signals();
 	set_interactive_signals();
 	init_prompt(msh);
 	msh->line = readline(msh->prompt);
@@ -88,7 +81,7 @@ void	main_loop(t_msh *msh)
 		parse_line(msh);
 	if (msh->cmd_nbr && check_builtins(msh))
 		commands(msh);
-	custom_add_history(msh->line, NOFREE);
+	custom_add_history(msh->line, NOFREE, 0);
 	free_things(msh);
 	free(msh->line);
 }

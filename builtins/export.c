@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/14 11:44:40 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:06:07 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,35 +83,6 @@ int	complete_export(t_msh *msh, char *cmd)
 	else
 		replace_secret_export(msh, cmd, pos);
 	free(purecmd);
-	return (1);
-}
-
-int	plus_export(t_msh *msh, char *cmd)
-{
-	char	*purecmd;
-	char	*dup;
-	char	*dup2;
-	char	*dup3;
-
-	dup = ft_substr(cmd, 0, ft_strlen_until(cmd, '=') - 1);
-	if (!dup)
-		return (msh->error = 1, 0);
-	purecmd = ft_expand(&msh->env, dup);
-	if (!purecmd)
-		complete_export(msh, cmd);
-	else
-	{
-		dup2 = ft_strjoin(dup, "=");
-		free(dup);
-		dup = ft_strjoin(dup2, purecmd);
-		dup3 = ft_substr(cmd, ft_strlen_until(cmd, '=') + 1, ft_strlen(cmd));
-		free(dup2);
-		dup2 = ft_strjoin(dup, dup3);
-		complete_export(msh, dup2);
-		free(dup2);
-		free(dup3);
-	}
-	free(dup);
 	return (1);
 }
 

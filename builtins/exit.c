@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:35:31 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 22:32:37 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:13:33 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	actually_exit(t_msh *msh, int status, int flag, char *cmd)
 		printf("msh: exit: %s: numeric argument required\n", cmd);
 	free_things(msh);
 	free_env(msh);
-	custom_add_history(msh->line, FREE);
+	custom_add_history(msh->line, FREE, 0);
 	free(msh->line);
 	exit(g_status);
 }
@@ -64,6 +64,6 @@ void	ctrl_d_exit(t_msh *msh)
 {
 	printf("exit\n");
 	free_env(msh);
-	custom_add_history(msh->line, FREE);
+	custom_add_history(msh->line, FREE, 0);
 	exit(g_status);
 }

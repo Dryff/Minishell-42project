@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/14 23:55:26 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:09:56 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,8 @@ int			ft_strcmp(char *s1, char *s2);
 void		replace_secret_export(t_msh *msh, char *cmd, int index);
 int			complete_export(t_msh *msh, char *cmd);
 int			valid_export(char *cmd);
+void    	actual_plus_export(t_msh *msh, char *dup, char *cmd, char *purecmd);
+int			plus_export(t_msh *msh, char *cmd);
 
 /* UNSET attention ca va chauffer sa mere*/
 char		*get_unset_cmd(char *line);

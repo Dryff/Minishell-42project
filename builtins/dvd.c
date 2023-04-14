@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/14 12:56:38 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 23:56:46 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	update_pwd_env(t_msh *msh, char *actual_path)
 
 	oldpwd = ft_strjoin("OLDPWD=", actual_path);
 	tmp = getcwd(NULL, 0);
+	if (!oldpwd || !tmp)
+		exit(1);
 	pwd = ft_strjoin("PWD=", tmp);
 	complete_export(msh, pwd);
 	complete_export(msh, oldpwd);

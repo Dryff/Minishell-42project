@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/14 23:28:10 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 23:48:14 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@ void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 {
 	if (msh->cmd[cmd_id].ip.input)
 		if (dup2(msh->cmd[cmd_id].ip.infd, STDIN_FILENO) == -1)
-			printf("ERROR - yo1\n");
+			exit(1);
 	close(fd[0]);
 	if (msh->cmd[cmd_id].redir_nbr == 0)
 	{
 		if (cmd_id == msh->cmd_nbr - 1)
 		{
 			if (dup2(101, STDOUT_FILENO) == -1)
-				printf("ERROR - a\n");
+				exit(1);
 		}
 		else
 			if (dup2(fd[1], STDOUT_FILENO) == -1)
-				printf("ERROR - b\n");
+				exit(1);
 	}
 	else if (msh->cmd[cmd_id].op)
 		if (dup2(msh->cmd[cmd_id].op[msh->cmd[cmd_id].redir_nbr - 1] \
 	.outfd, STDOUT_FILENO) == -1)
-			printf("ERROR - c\n");
+			exit(1);
 	close(fd[1]);
 }
 
@@ -42,24 +42,18 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 	int		fd[2];
 
 	if (pipe(fd) == -1)
-		printf("ERROR - 3\n");
-	// signal(SIGINT, SIG_IGN);
+		exit(1);
 	pid = fork();
 	set_execution_signals();
 	if (pid == -1)
-		printf("ERROR - 4\n");
+		exit(1);
 	if (pid != 0 && ft_strcmp(msh->cmd[cmd_id].param[0], msh->program_name) == 0)
 	{
-		printf("\n\n\nCOUCOUCOUCOUCOU\n\n\n");
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 	}
 	if (pid == 0)
-	{
-		// signal(SIGINT, &backslash_print);
-		// signal(SIGQUIT, &backslash_print);
 		exec_to_pipe(msh, cmd_id, fd);
-	}
 	waitpid(pid, &g_status, 0);
 	signal(SIGINT, &backslash_print);
 	signal(SIGQUIT, SIG_IGN);
@@ -69,7 +63,7 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 		g_status = g_status % 256;
 	close(fd[1]);
 	if (dup2(fd[0], STDIN_FILENO) == -1)
-		printf("ERROR - 6\n");
+		exit(1);
 	close(fd[0]);
 }
 
@@ -78,16 +72,16 @@ void	dup_inffd(int mode)
 	if (mode == 1)
 	{
 		if (dup2(STDIN_FILENO, 100) == -1)
-			printf("ERROR - yo2\n");
+			exit(1);
 		if (dup2(STDOUT_FILENO, 101) == -1)
-			printf("ERROR - yo3\n");
+			exit(1);
 	}
 	else
 	{
 		if (dup2(100, STDIN_FILENO) == -1)
-			printf("ERROR - yo4\n");
+			exit(1);
 		if (dup2(101, STDOUT_FILENO) == -1)
-			printf("ERROR - yo5\n");
+			exit(1);
 	}
 }
 

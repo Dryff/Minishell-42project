@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
+#    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/04/14 23:25:14 by cgelin           ###   ########.fr        #
+#    Updated: 2023/04/15 00:14:33 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,50 +23,51 @@ GREEN = \033[0;92m
 BLUE = \033[0;94m
 CYAN = \033[0;96m
 
-FILES = main							\
-	builtins/builtins				\
-	builtins/env					\
-	builtins/env2					\
-	builtins/env3					\
-	builtins/expand					\
-	builtins/export					\
-	builtins/export2				\
-	builtins/export3				\
-	builtins/unset					\
-	builtins/dvd					\
-	builtins/echo					\
-	builtins/exit					\
-	parsing/parsing_hub				\
-	parsing/dollar					\
-	parsing/get_cmd_nbr				\
-	parsing/get_redir				\
-	parsing/get_arrays				\
-	parsing/develop_name			\
-	parsing/quotes_dollars_and_redir\
+FILES = main											\
+	builtins/builtins									\
+	builtins/env										\
+	builtins/env2										\
+	builtins/env3										\
+	builtins/expand										\
+	builtins/export										\
+	builtins/export2									\
+	builtins/export3									\
+	builtins/export4									\
+	builtins/unset										\
+	builtins/dvd										\
+	builtins/echo										\
+	builtins/exit										\
+	parsing/parsing_hub									\
+	parsing/dollar										\
+	parsing/get_cmd_nbr									\
+	parsing/get_redir									\
+	parsing/get_arrays									\
+	parsing/develop_name								\
+	parsing/quotes_dollars_and_redir					\
 	parsing/quotes_utils_and_replace_spaces				\
-	parsing/get_and_check_fd		\
-	parsing/check_arrows			\
-	utils/parse_utils				\
-	utils/msh_utils					\
-	utils/cmd_utils					\
-	utils/env_utils					\
-	utils/ft_split					\
-	utils/basic_utils				\
-	utils/ft_calloc					\
-	utils/itoa						\
-	commands/cmds					\
-	commands/exec_to_pipe			\
-	commands/here_doc				\
-	commands/paths					\
-	ft_err_printf/ft_print_hexa		\
-	ft_err_printf/ft_printf			\
-	ft_err_printf/ft_putnbr			\
-	ft_err_printf/ft_putnbr_u		\
-	ft_err_printf/ft_putstr_int		\
-	history							\
-	free_things						\
-	error							\
-	signal							\
+	parsing/get_and_check_fd							\
+	parsing/check_arrows								\
+	utils/parse_utils									\
+	utils/msh_utils										\
+	utils/cmd_utils										\
+	utils/env_utils										\
+	utils/ft_split										\
+	utils/basic_utils									\
+	utils/ft_calloc										\
+	utils/itoa											\
+	commands/cmds										\
+	commands/exec_to_pipe								\
+	commands/here_doc									\
+	commands/paths										\
+	ft_err_printf/ft_print_hexa							\
+	ft_err_printf/ft_printf								\
+	ft_err_printf/ft_putnbr								\
+	ft_err_printf/ft_putnbr_u							\
+	ft_err_printf/ft_putstr_int							\
+	history												\
+	free_things											\
+	error												\
+	signal												\
 	emoji							
 
 all: $(NAME)
