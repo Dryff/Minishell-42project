@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 00:44:52 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 01:45:01 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,9 +134,3 @@ void	ft_dvd(t_msh *msh, int cmd_id)
 		real_pwd(msh, cmd);
 }
 
-void	cwd_error(void)
-{
-	ft_err_printf("msh: cd: sorry I don't know where I am. ");
-	ft_err_printf("To return to the last existing directory, use cd -\n");
-	update_msh_status(1);
-}

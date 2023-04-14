@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 01:30:58 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 01:32:10 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 01:45:12 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,11 @@ void    enable_minishell_signals(void)
 {
     signal(SIGINT, SIG_IGN);
     signal(SIGQUIT, SIG_IGN);
+}
+
+void	cwd_error(void)
+{
+	ft_err_printf("msh: cd: sorry I don't know where I am. ");
+	ft_err_printf("To return to the last existing directory, use cd -\n");
+	update_msh_status(1);
 }

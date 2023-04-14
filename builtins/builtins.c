@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/15 00:45:55 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 01:44:34 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	ft_pwd(void)
 
 int	is_builtin(char *cmd)
 {
-
 	if (cmd == NULL)
 		return (0);
 	if (!ft_strcmp(cmd, "pwd"))
