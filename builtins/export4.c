@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 00:05:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 00:12:56 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:17:22 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ void	actual_plus_export(t_msh *msh, char *dup, char *cmd, char *purecmd)
 	char	*dup3;
 
 	dup2 = ft_strjoin(dup, "=");
-    if (!dup2)
-        exit(1);
+	if (!dup2)
+		exit(1);
 	free(dup);
 	dup = ft_strjoin(dup2, purecmd);
-    if (!dup)
-        exit(1);
+	if (!dup)
+		exit(1);
 	dup3 = ft_substr(cmd, ft_strlen_until(cmd, '=') + 1, ft_strlen(cmd));
 	if (!dup3)
-        exit(1);
-    free(dup2);
+		exit(1);
+	free(dup2);
 	dup2 = ft_strjoin(dup, dup3);
-    if (!dup2)
-        exit(1);
+	if (!dup2)
+		exit(1);
 	complete_export(msh, dup2);
 	free(dup2);
 	free(dup3);
