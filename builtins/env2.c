@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:42:57 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 21:33:58 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:25:02 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	check_shlvl(t_msh *msh)
 			shlvl++;
 			dup = ft_itoa(shlvl);
 			joined = ft_strjoin("SHLVL=", dup);
+			if (!joined || !dup)
+				error_manager(msh, 1);
 			complete_export(msh, joined);
 			free(dup);
 			free(joined);

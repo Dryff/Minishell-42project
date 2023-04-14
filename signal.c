@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 14:40:35 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/14 17:30:20 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:19:52 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,6 @@ void	set_interactive_signals(void)
 	sa.sa_flags = SA_RESTART;
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	// sa.sa_sigaction = handle_interactive_sigquit;
-	// sigaction(SIGQUIT, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
 	sa.sa_sigaction = handle_abort_input;
 	sigaction(SIGINT, &sa, NULL);

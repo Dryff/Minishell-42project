@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/14 23:55:01 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:21:22 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int	main(int argc, char **argv, char **old_env)
 		return (printf("msh: %s: No such file or directory\n", argv[1]), 1);
 	msh.error = 0;
 	msh.env = init_env(old_env);
+	if (msh.env.error)
+		error_manager(&msh, 1);
 	msh.program_name = argv[0];
 	check_env(&msh);
 	using_history();

@@ -6,16 +6,11 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 10:01:38 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 16:40:41 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:25:59 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
-
-char	*get_expand_cmd(char *str)
-{
-	return (str + 4);
-}
 
 char	*ft_expand(t_env *env, char *cmd)
 {
