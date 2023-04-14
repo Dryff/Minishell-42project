@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/14 23:31:14 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 23:55:26 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void		cwd_error(void);
 
 /* HISTORIC */
 void		init_history(void);
-void		custom_add_history(char *line, int status);
+void		custom_add_history(char *line, int status, int i);
 
 /* EXIT */
 int			ft_exit(t_msh *msh, int cmd_id);
