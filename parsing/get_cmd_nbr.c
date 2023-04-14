@@ -6,11 +6,18 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 14:54:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/14 11:18:54 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 11:57:30 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
+
+int	is_white_space(char c)
+{
+	if ((c <= 13 && c >= 9) || c == ' ')
+		return (1);
+	return (0);
+}
 
 int	quote_check(char *str, int i, int *start_quote, int *is_in_quotes)
 {
@@ -32,6 +39,14 @@ int	quote_check(char *str, int i, int *start_quote, int *is_in_quotes)
 	return (i);
 }
 
+int	extension_cmd_nbr(char *str, int i)
+{
+	while (str[++i])
+		if (!is_white_space(str[i]))
+			break ;
+	return (i);
+}
+
 int	get_cmd_nbr(char *str)
 {
 	int		is_in_quotes;
@@ -43,9 +58,7 @@ int	get_cmd_nbr(char *str)
 	if (str[0] == '\0')
 		count = 0;
 	i = -1;
-	while (str[++i])
-		if (!is_white_space(str[i]))
-			break ;
+	i = extension_cmd_nbr(str, i);
 	if (i == (int)ft_strlen(str))
 		count = 0;
 	i = 0;
