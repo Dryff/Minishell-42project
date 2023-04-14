@@ -6,7 +6,7 @@
 #    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/04/15 00:14:33 by mfinette         ###   ########.fr        #
+#    Updated: 2023/04/15 01:34:18 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,8 @@ FILES = main											\
 	commands/exec_to_pipe								\
 	commands/here_doc									\
 	commands/paths										\
+	commands/signal										\
+	commands/signal2									\
 	ft_err_printf/ft_print_hexa							\
 	ft_err_printf/ft_printf								\
 	ft_err_printf/ft_putnbr								\
@@ -67,7 +69,6 @@ FILES = main											\
 	history												\
 	free_things											\
 	error												\
-	signal												\
 	emoji							
 
 all: $(NAME)

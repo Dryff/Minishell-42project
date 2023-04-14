@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/15 00:09:56 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 01:32:54 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,7 @@ void		only_update_signal(int nb);
 void		backslash_print(int nb);
 void		set_interactive_signals(void);
 void		set_execution_signals(void);
+void		enable_minishell_signals(void);
 
 /* exec */
 void		exec_to_pipe(t_msh *msh, int cmd_id, int *fd);
