@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 21:53:10 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:44:40 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,5 @@ int	ft_export(t_msh *msh, int cmd_id)
 			exit(1);
 		i++;
 	}
-	update_msh_status(0);
 	return (0);
 }

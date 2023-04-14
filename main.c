@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/14 10:55:19 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 11:44:03 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ int	check_builtins(t_msh *msh)
 {
 	int		i;
 	int		j;
+	int		flag;
 	char	**cmd;
 
 	i = 0;
+	flag = 0;
 	while (i < msh->cmd_nbr)
 	{
 		cmd = msh->cmd[i].param;
@@ -46,6 +48,7 @@ int	check_builtins(t_msh *msh)
 				if (valid_export(cmd[j]) == WRONG_EXPORT)
 				{
 					update_msh_status(1);
+					flag = 1;
 					printf("msh: export: '%s': not a valid identifier\n"\
 					, cmd[j]);
 				}
@@ -54,6 +57,8 @@ int	check_builtins(t_msh *msh)
 		}
 		i++;
 	}
+	if (!flag)
+		update_msh_status(0);
 	return (1);
 }
 

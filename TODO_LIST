@@ -30,6 +30,7 @@ msh 🤑-> cd /s
 cd: /s: No such file or directory
 reglage de echo "$'PATH'" et echo $'PATH'
 $test
+command not found -> 127
 ----------------------------------------------------------------
 CTRL + \ | Max
 CTRL + C dans plusieurs minishells | Max
@@ -38,3 +39,14 @@ GERER ERREURS EN CAS DE MALLOC FOIRÉ COLAS | colas
 GERER ERREURS EN CAS DE MALLOC FOIRÉ MAX | Max
 SORTIE DERREUR DANS $? | Max
 VALEURE DE RETOUR CTRL C DANS UN CAT OU SLEEP| Max
+
+
+
+---- Crash test ----
+- exit -> long overflow
+- export: invalid id error code
+- ls | > out | cat = creation du fichier out et cést tout
+- mkdir a/b/c -> cd a/b/c -> rm a -> segfault
+- fds 4094 - 4095 - trop grand
+- < Makefile | grep NAME | sort | sed s/NAME/TOTO/g > out -> pipe en trop entre infile et cmd1
+- ./minishell | ./minishell -> explosion

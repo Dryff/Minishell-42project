@@ -6,14 +6,14 @@
 #    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/04/13 22:36:00 by mfinette         ###   ########.fr        #
+#    Updated: 2023/04/14 11:14:54 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC		= cc
-FLAGS	= -fsanitize=address -g3 -Wall -Wextra -Werror
+FLAGS	=  -g3 -Wall -Wextra -Werror #-fsanitize=address
 AR		= ar rcs
 RM		= @rm -f
 HEADER	= msh.h
