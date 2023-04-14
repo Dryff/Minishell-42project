@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:53:02 by colas             #+#    #+#             */
-/*   Updated: 2023/04/13 16:45:43 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 22:58:33 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ char	**get_paths(t_msh *msh, char **envp)
 char	*check_slash(t_msh msh, int j)
 {
 	struct stat	path_stat;
-
+	
+	if (!msh.cmd[j].param[0])
+		return (NULL);
 	if (ft_strchr(msh.cmd[j].param[0], '/'))
 	{
 		path_stat.st_mode = 0;
@@ -50,10 +52,17 @@ char	*check_slash(t_msh msh, int j)
 		{
 			ft_err_printf("msh: %s: Is a directory\n", msh.cmd[j].param[0]);
 			g_status = 126;
-			return (msh.cmd[j].param[0]);
+			return (exit(1), msh.cmd[j].param[0]);
 		}
-		if (access(msh.cmd[j].param[0], 0) == 0)
+		if (access(msh.cmd[j].param[0], F_OK) == 0)
 			return (msh.cmd[j].param[0]);
+		else
+		{
+			ft_err_printf("msh: %s: No such file or directory\n", \
+			msh.cmd[j].param[0]);
+			g_status = 127;
+			return (exit(1), msh.cmd[j].param[0]);
+		}
 	}
 	return (NULL);
 }

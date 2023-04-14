@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/14 11:44:03 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/14 20:48:32 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,28 @@ int	check_builtins(t_msh *msh)
 	int		i;
 	int		j;
 	int		flag;
-	char	**cmd;
+	int len;
 
 	i = 0;
 	flag = 0;
 	while (i < msh->cmd_nbr)
 	{
-		cmd = msh->cmd[i].param;
 		j = 1;
-		if (cmd && cmd[0] && !ft_strncmp(cmd[0], "export", ft_strlen(cmd[0])))
+		if (ft_strlen(msh->cmd[i].param[0]) >= 6)
+			len = ft_strlen(msh->cmd[i].param[0]);
+		else
+			len = 6;
+		if (msh->cmd[i].param && msh->cmd[i].param[0] \
+		&& !ft_strncmp(msh->cmd[i].param[0], "export", len))
 		{
-			while (cmd[j])
+			while (msh->cmd[i].param[j])
 			{
-				if (valid_export(cmd[j]) == WRONG_EXPORT)
+				if (valid_export(msh->cmd[i].param[j]) == WRONG_EXPORT)
 				{
 					update_msh_status(1);
 					flag = 1;
 					printf("msh: export: '%s': not a valid identifier\n"\
-					, cmd[j]);
+					, msh->cmd[i].param[j]);
 				}
 				j++;
 			}

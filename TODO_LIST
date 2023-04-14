@@ -42,7 +42,9 @@ GERER ERREURS EN CAS DE MALLOC FOIRÉ MAX | Max
 SORTIE DERREUR DANS $? | Max
 VALEURE DE RETOUR CTRL C DANS UN CAT OU SLEEP| Max
 
-
+ls > path/bonjour
+$_
+$USER"coucou"
 
 ---- Crash test ----
 - exit -> long overflow

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   basic_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 22:34:33 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/14 09:33:24 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/14 21:18:20 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,17 @@ char	*get_expanded(t_msh *msh, t_parse *p, int cursor)
 	return (expanded);
 }
 
-void	actualize_ind(t_parse *p, char *expanded, char *str)
+void	actualize_ind(t_parse *p, char *expanded, char *str, int is_in_q)
 {
-	p->i += ft_strlen(expanded) - p->arg_sz - 1;
+	if (is_in_q)
+	{
+		p->i = p->end_q + (ft_strlen(expanded) - p->arg_sz - 1);
+		p->end_q = p->i;
+	}
+	else if (ft_strlen(expanded))
+		p->i += ft_strlen(expanded);
+	else
+		p->i--;
 	if (p->arg_sz)
 	{		
 		if (p->i < 0)

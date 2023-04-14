@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/14 11:14:47 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 22:00:11 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_cmd
 typedef struct s_parse
 {
 	int		i;
+	int		end_q;
 	int		strt;
 	int		arg_sz;
 	char	q;
@@ -239,20 +240,20 @@ int			check_fd(t_msh *msh, int i, int j);
 int			get_quote(char *s, int i);
 int			is_in_quote(char *s, int *start_quote, int i, int is_in_quotes);
 int			get_and_check_fd(t_msh *msh);
-char		*replace_env_arg(t_msh *msh, t_parse *p, int cursor, int mode);
+char		*replace_env_arg(t_msh *msh, t_parse *p, int *cursor, int mode);
 int			is_end_of_arg(int i, char *line, char q, int s);
 char		*quotes_dollars_and_redir(t_msh *msh, char *sub, int j);
-char		*get_dollar(t_msh *msh, t_parse *p);
+char		*get_dollar(t_msh *msh, t_parse *p, int *has_dollar);
 char		*getline_rm_quote(t_msh *msh, t_parse p);
 int			quote_rm_nbr(t_parse p);
 char		*replace_spaces(t_parse p, char *line);
 char		*replace_spaces_of_expanded(t_parse p, char *line);
-int			go_to_end_quote(int i, char *line, char q, int s);
+int			go_to_end_quote(t_parse p, int i, char *line);
 int			parse_fd_data(t_msh *msh);
 int			is_alpha(char c);
 void		quote_handling(t_msh *msh, t_parse *p);
 int			check_arrows(t_msh *msh);
-char		*develop_name(t_msh *msh, char *sub);
+char		*develop_name(t_msh *msh, char *sub, int hd);
 t_outputs	*get_op_array(t_msh *msh, char *str, int cmd_id);
 char		**get_hd_array(t_msh *msh, char *str, int cmd_id);
 int			is_name_before_arrow(t_msh *msh, t_parse p);
@@ -261,7 +262,7 @@ void		get_redir(t_msh *msh, t_parse *p, int cmd_index);
 int			quote_check(char *str, int i, int *start_quote, int *is_in_quotes);
 int			go_after_pipe(char *line, int i);
 char		*get_expanded(t_msh *msh, t_parse *p, int cursor);
-void		actualize_ind(t_parse *p, char *expanded, char *str);
+void		actualize_ind(t_parse *p, char *expanded, char *str, int in_q);
 void		secure(t_parse *p);
 
 /* Basic utils */

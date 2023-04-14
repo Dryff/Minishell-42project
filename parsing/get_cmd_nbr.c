@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 14:54:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/14 11:57:30 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 18:08:32 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ int	get_cmd_nbr(char *str)
 		i++;
 	}
 	if (is_in_quotes)
-		return (ft_err_printf("quotes are not closed"), 0);
+		return (ft_err_printf("quotes are not closed\n"), update_msh_status(1), 0);
 	return (count);
 }

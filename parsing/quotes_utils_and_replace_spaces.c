@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_utils_and_replace_spaces.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 02:03:35 by colas             #+#    #+#             */
-/*   Updated: 2023/04/13 18:30:27 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/14 17:44:57 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,11 @@ int	is_end_of_arg(int i, char *line, char q, int s)
 	return (1);
 }
 
-int	go_to_end_quote(int i, char *line, char q, int s)
+int	go_to_end_quote(t_parse p, int i, char *line)
 {
-	while (line[i] && !is_end_of_arg(i, line, q, s))
+	i++;
+	while (line[i] && line[i] != p.q)
 		i++;
-	while (i > 0 && line[i] != q)
-		i--;
 	return (i);
 }
 

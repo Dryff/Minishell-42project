@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/14 11:04:15 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 21:59:44 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ void	get_name(t_msh *msh, t_parse p, int mode, int cmd_ind)
 		sub = ft_substr(p.line, p.i, size);
 		if (msh->cmd[cmd_ind].ip.input == 2)
 			msh->cmd[cmd_ind].ip.here_doc_delim[msh->cmd[cmd_ind].hd_id] \
-			= develop_name(msh, sub);
+			= develop_name(msh, sub, 1);
 		msh->cmd[cmd_ind].hd_id++;
 		if (msh->cmd[cmd_ind].ip.input == 1)
-			msh->cmd[cmd_ind].ip.in_name = develop_name(msh, sub);
+			msh->cmd[cmd_ind].ip.in_name = develop_name(msh, sub, 0);
 	}
 	else
 	{
 		sub = ft_substr(p.line, p.i, size);
 		msh->cmd[cmd_ind].op[msh->redir_id].out_name \
-		= develop_name(msh, sub);
+		= develop_name(msh, sub, 0);
 		msh->redir_id++;
 	}
 }

@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
+#    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/04/14 11:14:54 by mfinette         ###   ########.fr        #
+#    Updated: 2023/04/14 21:04:34 by cgelin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC		= cc
-FLAGS	=  -g3 -Wall -Wextra -Werror #-fsanitize=address
+FLAGS	=  -fsanitize=address -g3 -Wall -Wextra -Werror #-fsanitize=address
 AR		= ar rcs
 RM		= @rm -f
 HEADER	= msh.h

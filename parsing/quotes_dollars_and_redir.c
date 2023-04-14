@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/14 11:11:22 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/14 20:59:40 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,43 +26,36 @@ char	*getline_rm_quote(t_msh *msh, t_parse p)
 	while (++j < p.strt)
 		str[j] = p.line[j];
 	i = j;
-	while (p.line[j] && j <= p.i)
+	while (p.line[j] && j <= p.end_q)
 	{
 		if (p.line[j] != p.q)
 			str[i++] = p.line[j];
 		j++;
 	}
+	str[i] = '\0';
 	while (p.line[j])
 		str[i++] = p.line[j++];
 	free(p.line);
 	return (str[i] = '\0', str);
 }
 
-int	quote_rm_nbr(t_parse p)
-{
-	int	count;
-
-	count = 0;
-	while (p.strt <= p.i)
-	{
-		if (p.line[p.strt] == p.q)
-			count ++;
-		p.strt++;
-	}
-	return (count);
-}
-
 void	quote_handling(t_msh *msh, t_parse *p)
 {	
-	int	q_nbr;
+	int	has_dollar;
 
+	p->strt = p->i;
+	has_dollar = 0;
 	p->q = p->line[p->i];
-	p->i = go_to_end_quote(p->i, p->line, p->q, p->strt);
-	q_nbr = quote_rm_nbr(*p);
-	p->line = get_dollar(msh, p);
+	p->end_q = go_to_end_quote(*p, p->i, p->line);
 	p->line = getline_rm_quote(msh, *p);
-	p->i -= q_nbr;
+	p->end_q -= 2;
+	printf("p->strt = %d, p->end_q = %d, p->q = %c\n", p->strt, p->end_q, p->q);
+	if (p->q == '"')
+		p->line = get_dollar(msh, p, &has_dollar);
+	if (!has_dollar)
+		p->i = p->end_q;
 	secure(p);
+	printf("line after = %s, %d (%c)\n", p->line, p->i, p->line[p->i]);
 }
 
 void	init_output_input(t_msh *msh, char *str, int cmd_id)
@@ -99,19 +92,16 @@ char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_id)
 	p.line = str;
 	p.i = 0;
 	p.strt = 0;
+	p.end_q = 0;
 	init_output_input(msh, str, cmd_id);
 	while (p.line[p.i])
 	{
 		if (p.line[p.i] == '"' || p.line[p.i] == '\'')
-		{
-			p.strt = p.i;
 			quote_handling(msh, &p);
-			p.line = replace_spaces(p, p.line);
-		}
 		else if (p.line[p.i] == '>' || p.line[p.i] == '<')
 			get_redir(msh, &p, cmd_id);
 		else if (p.line[p.i] == '$')
-			p.line = replace_env_arg(msh, &p, p.i, 0);
+			p.line = replace_env_arg(msh, &p, &p.i, 0);
 		else
 			p.line = replace_spaces(p, p.line);
 		if (p.line[p.i])
