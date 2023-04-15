@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/14 21:59:44 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/15 14:28:37 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,14 @@ void	get_name(t_msh *msh, t_parse p, int mode, int cmd_ind)
 	if (mode == 0)
 	{
 		sub = ft_substr(p.line, p.i, size);
+		printf("sub = %s\n", sub);
 		if (msh->cmd[cmd_ind].ip.input == 2)
+		{
 			msh->cmd[cmd_ind].ip.here_doc_delim[msh->cmd[cmd_ind].hd_id] \
 			= develop_name(msh, sub, 1);
-		msh->cmd[cmd_ind].hd_id++;
+			msh->cmd[cmd_ind].hd_id++;
+			msh->cmd[cmd_ind].ip.in_name = NULL;
+		}
 		if (msh->cmd[cmd_ind].ip.input == 1)
 			msh->cmd[cmd_ind].ip.in_name = develop_name(msh, sub, 0);
 	}
