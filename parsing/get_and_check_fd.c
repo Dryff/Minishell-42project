@@ -6,11 +6,29 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/04/15 00:27:59 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/15 02:03:40 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
+
+char	*get_dollar(t_msh *msh, t_parse *p, int *has_dollar)
+{
+	int	cursor;
+
+	cursor = p->strt;
+	while (p->line[cursor] && cursor != p->end_q)
+	{
+		if (p->line[cursor] == '$')
+		{
+			p->line = replace_env_arg(msh, p, &cursor, 1);
+			*has_dollar = 1;
+		}
+		if (p->line[cursor])
+			cursor++;
+	}
+	return (p->line);
+}
 
 void	hd_exec(t_msh *msh, int cmd_id)
 {
