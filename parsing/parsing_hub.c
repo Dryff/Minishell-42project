@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/15 00:23:20 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/15 02:06:32 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,55 +51,6 @@ int	store_cmds_between_pipes(t_msh *msh)
 	return (1);
 }
 
-void	print_cmds(t_msh msh)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	printf("---\n");
-	printf("cmd nbr : %d\n", msh.cmd_nbr);
-	printf("--------------------------\n");
-	while (i < msh.cmd_nbr)
-	{
-		printf("(CMD [%d])\n", i);
-		if (msh.cmd[i].ip.input)
-		{
-			printf("---INPUT INFO---\n");
-			printf("in = %s\n", msh.cmd[i].ip.in_name);
-			printf("input : = %d\n", msh.cmd[i].ip.input);
-			printf("infd : = %d\n", msh.cmd[i].ip.infd);
-		}
-		j = 0;
-		while (j < msh.cmd[i].hd_nbr)
-		{
-			printf("---HD [%d] INFO---\n", j);
-			printf("hd = %s\n", msh.cmd[i].ip.here_doc_delim[j++]);
-		}
-		j = 0;
-		while (j < msh.cmd[i].redir_nbr)
-		{
-			printf("---OUTPUT [%d] INFO---\n", j);
-			printf("out = %s\n", msh.cmd[i].op[j].out_name);
-			printf("outfd : %d\n", msh.cmd[i].op[j].outfd);
-			printf("output : %d\n", msh.cmd[i].op[j++].output);
-		}
-		j = 0;
-		j = 0;
-		printf("---ARGS---\n");
-		while (msh.cmd[i].param[j])
-		{
-			printf("cmd[%d].param[%d] = [%s]\n", i, j, msh.cmd[i].param[j]);
-			j++;
-		}
-		printf("--------------------------\n");
-		i++;
-	}
-	printf("|||||||| RESULT : ||||||||\n");
-	printf("--------------------------\n");
-}
-
 int	check_ascii(t_msh *msh)
 {
 	int		i;
@@ -126,6 +77,5 @@ int	parse_line(t_msh *msh)
 		return (error_manager(msh, MALLOC_ERR), 1);
 	store_cmds_between_pipes(msh);
 	get_and_check_fd(msh);
-	// print_cmds(*msh);
 	return (1);
 }

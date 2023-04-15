@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 14:54:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/15 00:44:46 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/15 02:09:03 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ int	quote_check(char *str, int i, int *start_quote, int *is_in_quotes)
 	return (i);
 }
 
-int	extension_cmd_nbr(char *str, int i)
+int	extension_cmd_nbr(char *str)
 {
+	int	i;
+
+	i = -1;
 	while (str[++i])
 		if (!is_white_space(str[i]))
 			break ;
@@ -57,8 +60,7 @@ int	get_cmd_nbr(char *str)
 	count = 1;
 	if (str[0] == '\0')
 		count = 0;
-	i = -1;
-	i = extension_cmd_nbr(str, i);
+	i = extension_cmd_nbr(str);
 	if (i == (int)ft_strlen(str))
 		count = 0;
 	i = 0;
