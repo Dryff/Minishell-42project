@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/15 01:50:06 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 02:09:14 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,13 @@ int	check_out(t_msh msh, int i)
 	return (1);
 }
 
-int	commands(t_msh *msh)
+int	commands(t_msh *msh, int error)
 {
 	int	i;
 	int	builtin;
-	int	error;
 
 	dup_inffd(1);
 	i = -1;
-	error = 0;
 	while (++i < msh->cmd_nbr)
 	{
 		if (msh->cmd[i].param[0] && msh->cmd[i].ip.infd != -1 \
@@ -117,7 +115,8 @@ int	commands(t_msh *msh)
 			error = 1;
 	}
 	builtin = is_builtin(msh->cmd[0].param[0]);
-	if (msh->cmd[0].param[0] && msh->cmd_nbr == 1 && is_not_builtin_fd(msh, msh->cmd[0].param[0], 0))
+	if (msh->cmd[0].param[0] && msh->cmd_nbr == 1 && \
+	is_not_builtin_fd(msh, msh->cmd[0].param[0], 0))
 		exec_builtins(msh, 0, builtin);
 	if (error != 0)
 		return (0);

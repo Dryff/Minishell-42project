@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/15 01:43:20 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 02:08:59 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ char		*ft_strchr(const char *s, int c);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int			ft_strstr(const char *str, const char *to_find);
 char		*ft_strjoin(char const *s1, char const *s2);
-int			commands(t_msh *msh);
+int			commands(t_msh *msh, int error);
 char		**get_paths(t_msh *msh, char **envp);
 char		*get_pathing(t_msh msh, int j);
 void		here_doc(t_msh *msh, int cmd_id);

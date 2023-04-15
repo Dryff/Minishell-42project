@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_and_check_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/04/15 02:03:40 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/15 02:07:17 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	check_input(t_msh *msh, int cmd_id)
 
 int	check_output(t_msh *msh, int cmd_id, int op_id)
 {
-	struct stat path_stat;
-	
+	struct stat	path_stat;
+
 	if (msh->cmd[cmd_id].op[op_id].output == 1)
 	{		
 		msh->cmd[cmd_id].op[op_id].outfd = \

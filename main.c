@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 01:44:56 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/15 02:08:39 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	main_loop(t_msh *msh)
 	if (check_arrows(msh))
 		parse_line(msh);
 	if (msh->cmd_nbr && check_builtins(msh))
-		commands(msh);
+		commands(msh, 0);
 	custom_add_history(msh->line, NOFREE, 0);
 	free_things(msh);
 	free(msh->line);
