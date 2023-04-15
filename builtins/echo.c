@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 11:17:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 16:18:37 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 16:56:55 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ static	void	echo_print(t_msh *msh, int cmd_id, int print, int i)
 	if (print)
 	{
 		ft_putstr(msh->cmd[cmd_id].param[i]);
-		// printf("\nPARAM = %s\n", msh->cmd[cmd_id].param[i]);
-		// printf("\nNEXT PARAM = %s\n", msh->cmd[cmd_id].param[i + 1]);
 		if (msh->cmd[cmd_id].param[i + 1])
 			ft_putstr(" ");
 	}
