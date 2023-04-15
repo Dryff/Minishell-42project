@@ -83,9 +83,9 @@ MOUNIR
 HERE_DOC
 here_doc fork | COLAS
 Expand dans le hd si delim sans single quotes | COLAS
-> b2 > b3 > b4 > b5 echo bonjour | COLAS
 
 PARSING
+> b2 > b3 > b4 > b5 echo bonjour | COLAS
 | > ls | COLAS
 | ls
 ./ls --> command not found au lieu de no such file or directory | COLAS

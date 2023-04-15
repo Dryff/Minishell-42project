@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/15 14:28:37 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/15 18:00:12 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	go_after_fd_name(t_msh *msh, t_parse *p)
 	}
 	while (p->line[p->i] && is_white_space(p->line[p->i]))
 		p->i++;
+	p->i--;
 }
 
 char	*remove_fd_name_and_arrow(t_msh *msh, t_parse p)
@@ -121,6 +122,7 @@ char	*remove_fd_name_and_arrow(t_msh *msh, t_parse p)
 
 void	get_redir(t_msh *msh, t_parse *p, int cmd_index)
 {
+	printf("get_redir : %s\n", &p->line[p->i]);
 	if (p->line[p->i] == '>')
 	{
 		if (msh->cmd[cmd_index].op)
@@ -136,7 +138,9 @@ void	get_redir(t_msh *msh, t_parse *p, int cmd_index)
 			msh->cmd[cmd_index].ip.input = 2;
 		get_name(msh, *p, 0, cmd_index);
 	}
+	printf("2get_redir : %s\n", p->line);
 	p->line = remove_fd_name_and_arrow(msh, *p);
+	printf("3get_redir : %s\n", p->line);
 	p->i--;
 	if (p->i < 0)
 		p->i = 0;

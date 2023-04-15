@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:31:40 by colas             #+#    #+#             */
-/*   Updated: 2023/04/15 01:48:40 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 17:44:54 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,47 @@ void	here_doc_ctrl_c(int nb)
 	update_msh_status(CTRL_C);
 }
 
-void	here_doc(t_msh *msh, int cmd_id)
+void	exec_here_doc(t_msh *msh, int cmd_id, int i)
 {
 	char	*line;
+
+	while (1)
+	{
+		line = readline("> ");
+		if (!line)
+			break ;
+		if (!ft_strcmp(line, msh->cmd[cmd_id].ip.here_doc_delim[i]))
+			break ;
+		if (i == msh->cmd[cmd_id].hd_nbr - 1)
+			ft_putendl_fd(line, msh->cmd[cmd_id].ip.infd);
+		free(line);
+	}
+	printf("exiting here_doc\n");
+	exit(1);
+}
+
+void	develop_here_doc(t_msh *msh)
+{
+	(void)msh;
+}
+
+void	here_doc(t_msh *msh, int cmd_id)
+{
 	int		i;
-	int		dup;
+	pid_t	pid;
 
 	i = 0;
-	dup = g_status;
+	printf("hd_nbr = %d\n", msh->cmd[cmd_id].hd_nbr);
 	while (i < msh->cmd[cmd_id].hd_nbr)
 	{
-		while (dup == g_status)
-		{
-			signal(SIGINT, &here_doc_ctrl_c);
-			line = readline("> ");
-			if (!line)
-				break ;
-			if (!ft_strcmp(line, msh->cmd[cmd_id].ip.here_doc_delim[i]))
-				break ;
-			if (i == msh->cmd[cmd_id].hd_nbr - 1)
-				ft_putendl_fd(line, msh->cmd[cmd_id].ip.infd);
-			free(line);
-		}
+		pid = fork();
+		if (pid == -1)
+			return (error_manager(msh, MALLOC_ERR));
+		if (pid == 0)
+			exec_here_doc(msh, cmd_id, i);
+		waitpid(pid, NULL, 0);
 		i++;
 	}
+	develop_here_doc(msh);
+	
 }
