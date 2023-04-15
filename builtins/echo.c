@@ -6,11 +6,20 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 11:17:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 11:07:27 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 16:01:31 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
+
+static	int	ft_putstr(char *str)
+{
+	int	len;
+
+	len = ft_strlen(str);
+	write(1, str, len);
+	return (len);
+}
 
 static	int	is_flag(char *str)
 {
@@ -32,7 +41,8 @@ static	void	echo_print(t_msh *msh, int cmd_id, int print, int i)
 {
 	if (print)
 	{
-		printf("%s", msh->cmd[cmd_id].param[i]);
+		ft_putstr(msh->cmd[cmd_id].param[i]);
+		// printf("%s", msh->cmd[cmd_id].param[i]);
 		if (msh->cmd[cmd_id].param[i + 1])
 			printf(" ");
 	}

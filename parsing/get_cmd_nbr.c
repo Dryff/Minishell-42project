@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 14:54:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/15 15:04:03 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/15 16:05:52 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ int	get_cmd_nbr(char *str)
 	}
 	if (is_in_quotes)
 		return (ft_err_printf("msh: Quotes are not closed, close it pls\n"), \
-		update_msh_status(1), 0);
+	update_msh_status(1), 0);
 	return (count);
 }
