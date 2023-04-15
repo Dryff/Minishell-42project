@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 00:05:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 00:17:22 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 16:48:51 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	actual_plus_export(t_msh *msh, char *dup, char *cmd, char *purecmd)
 	dup2 = ft_strjoin(dup, "=");
 	if (!dup2)
 		exit(1);
-	free(dup);
 	dup = ft_strjoin(dup2, purecmd);
 	if (!dup)
 		exit(1);
@@ -49,6 +48,7 @@ void	actual_plus_export(t_msh *msh, char *dup, char *cmd, char *purecmd)
 	if (!dup2)
 		exit(1);
 	complete_export(msh, dup2);
+	free(dup);
 	free(dup2);
 	free(dup3);
 }
