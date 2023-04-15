@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 11:17:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 16:01:31 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 16:18:37 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ static	void	echo_print(t_msh *msh, int cmd_id, int print, int i)
 	if (print)
 	{
 		ft_putstr(msh->cmd[cmd_id].param[i]);
-		// printf("%s", msh->cmd[cmd_id].param[i]);
+		// printf("\nPARAM = %s\n", msh->cmd[cmd_id].param[i]);
+		// printf("\nNEXT PARAM = %s\n", msh->cmd[cmd_id].param[i + 1]);
 		if (msh->cmd[cmd_id].param[i + 1])
-			printf(" ");
+			ft_putstr(" ");
 	}
 }
 
@@ -54,7 +55,7 @@ int	ft_echo(t_msh *msh, int cmd_id)
 	int	print;
 	int	flag;
 
-	i = 1;
+	i = 0;
 	print = 0;
 	flag = 0;
 	if (!msh->cmd[cmd_id].param[1])
@@ -62,12 +63,11 @@ int	ft_echo(t_msh *msh, int cmd_id)
 		printf("\n");
 		return (0);
 	}
+	while (is_flag(msh->cmd[cmd_id].param[i++]))
+		flag = 1;
 	while (msh->cmd[cmd_id].param[i])
 	{
-		if (!is_flag(msh->cmd[cmd_id].param[i]))
-			print = 1;
-		else
-			flag = 1;
+		print = 1;
 		echo_print(msh, cmd_id, print, i);
 		i++;
 	}
