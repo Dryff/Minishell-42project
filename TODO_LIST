@@ -38,26 +38,21 @@ command not found -> 127
 SORTIE DERREUR DANS $? | Max
 - exit -> long overflow
 - fds 4094 - 4095 - trop grand
-----------------------------------------------------------------
+echo jweqjkelwq -n | MAX
+ls + control c ---> enlever le ls | MAX
 CTRL + \ | Max
 CTRL + C dans plusieurs minishells | Max
+----------------------------------------------------------------
 
 GERER ERREURS EN CAS DE MALLOC FOIRÉ COLAS | colas
 GERER ERREURS EN CAS DE MALLOC FOIRÉ MAX | Max
 VALEURE DE RETOUR CTRL C DANS UN CAT OU SLEEP| Max
 
-$_
 exp"$hello"ort""''
 export test="      "   ---> echo salut $test salut
 
----- Crash test ----
-- ./minishell | ./minishell -> explosion
 
-Norminette
-Malloc
-Exit
 Fonction interdites (atoi)
-enlever la todolist
 
 
 corrections :
@@ -66,8 +61,6 @@ corrections :
 VPAC
 cat < Makefile << a | FAIT
 
-echo jweqjkelwq -n | MAX
-ls + control c ---> enlever le ls | MAX
 ctrl c -> valeur de retour (2) | MAX
 
 

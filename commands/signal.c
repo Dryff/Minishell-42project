@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 14:40:35 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 15:57:56 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 17:21:25 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	handle_execution_sigint(int signum, siginfo_t *info, void *context)
 	(void) signum;
 	(void) info;
 	(void) context;
-	write(1, "\n", 1);
-	update_msh_status(CTRL_C);
+	printf("\n");
+	update_msh_status(33280);
 }
 
 void	handle_execution_sigquit(int signum, siginfo_t *info, void *context)

@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:53:02 by colas             #+#    #+#             */
-/*   Updated: 2023/04/15 01:49:04 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 17:36:46 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ char	*check_slash(t_msh msh, int j)
 		if (S_ISDIR(path_stat.st_mode))
 		{
 			ft_err_printf("msh: %s: Is a directory\n", msh.cmd[j].param[0]);
-			g_status = 126;
-			return (exit(1), msh.cmd[j].param[0]);
+			update_msh_status(126);
+			return (exit(126), msh.cmd[j].param[0]);
 		}
 		if (access(msh.cmd[j].param[0], F_OK) == 0)
 			return (msh.cmd[j].param[0]);
@@ -60,8 +60,8 @@ char	*check_slash(t_msh msh, int j)
 		{
 			ft_err_printf("msh: %s: No such file or directory\n", \
 			msh.cmd[j].param[0]);
-			g_status = 127;
-			return (exit(1), msh.cmd[j].param[0]);
+			update_msh_status(127);
+			return (exit(127), msh.cmd[j].param[0]);
 		}
 	}
 	return (NULL);

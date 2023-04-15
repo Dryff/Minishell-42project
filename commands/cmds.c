@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/15 16:12:29 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/15 17:33:50 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 	.outfd, STDOUT_FILENO) == -1)
 			exit(1);
 	close(fd[1]);
+	close(100);
+	close(101);
 }
 
 void	exec_cmd(t_msh *msh, int cmd_id)
@@ -52,7 +54,9 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 		enable_minishell_signals();
 	if (pid == 0)
 		exec_to_pipe(msh, cmd_id, fd);
+	printf("g_status before = %d\n", g_status);
 	waitpid(pid, &g_status, 0);
+	printf("g_status after = %d\n", g_status);
 	signal(SIGQUIT, SIG_IGN);
 	if (g_status > 255)
 		g_status = g_status / 256;
