@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/15 15:41:08 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/15 16:06:56 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	check_ascii(t_msh *msh)
 int	parse_line(t_msh *msh)
 {
 	if (!check_ascii(msh))
-		return (exit(0), 0);
+		return (ctrl_d_exit(msh), 0);
 	msh->cmd_nbr = get_cmd_nbr(msh->line);
 	if (!msh->cmd_nbr)
 		return (0);

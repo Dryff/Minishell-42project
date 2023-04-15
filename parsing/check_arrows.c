@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_arrows.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 10:51:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 22:20:40 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:37:14 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ int	check_arrows(t_msh *msh)
 	i = 0;
 	is_in_quotes = 0;
 	start_quote = 0;
+	while (msh->line[i] && is_white_space(msh->line[i]))
+		i++;
+	if (msh->line[i] == '|')
+		return (printf("%s `|'\n", ERR_MESS), 0);
+	i = 0;
 	while (msh->line[i])
 	{
 		if (!is_in_quotes && (msh->line[i] == '>' || msh->line[i] == '<'))
