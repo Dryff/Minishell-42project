@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_hub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/15 02:06:32 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/15 15:41:08 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_ascii(t_msh *msh)
 	i = 0;
 	while (msh->line[i])
 	{
-		if (msh->line[i] < 32 || msh->line[i] > 126)
+		if (msh->line[i] < 0 || msh->line[i] > 126)
 			return (0);
 		i++;
 	}

@@ -64,19 +64,28 @@ corrections :
 -----------------
 
 VPAC
+cat < Makefile << a | FAIT
 
-echo jweqjkelwq -n
-cat | cat | ls
-ls + control c ---> enlever le ls
-cat < Makefile << a
-close fd 100 et 101 (plusieurs fd open a checker (ligne 48 get_and_check_fd))
-here_doc fork
-ctrl c -> valeur de retour (2)
+echo jweqjkelwq -n | MAX
+cat | cat | ls | COLAS
+ls + control c ---> enlever le ls | MAX
+close fd 100 et 101 (plusieurs fd open a checker (ligne 48 get_and_check_fd)) | COLAS
+here_doc fork | COLAS
+ctrl c -> valeur de retour (2) | MAX
+
 
 BLAKEHAL
+"\t" (cdm_nbr) | FAIT
 
-"\t" (cdm_nbr)
-| > ls
-./ls --> command not found au lieu de no such file or directory
-ls + control c ---> enlever le ls
-Expand dans le hd si delim sans single quotes
+| > ls | COLAS
+| ls
+./ls --> command not found au lieu de no such file or directory | COLAS
+ls + control c ---> enlever le ls | MAX
+Expand dans le hd si delim sans single quotes | COLAS
+> b2 > b3 > b4 > b5 echo bonjour | COLAS
+cat /dev/urandom | head > yo | COLAS 
+time cat Makefile | ls | sleep 3
+
+MOUNIR
+
+ls < in | wc -l > out
