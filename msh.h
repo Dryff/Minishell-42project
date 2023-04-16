@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/15 02:08:59 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/16 22:39:31 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ typedef struct s_inputs
 	int		infd;
 	char	*in_name;
 	char	**here_doc_delim;
-}				t_inputs;
+	int 	need_develop;
+} t_inputs;
 
 typedef struct s_cmd
 {

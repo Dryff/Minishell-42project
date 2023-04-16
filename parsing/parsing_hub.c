@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_hub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/15 18:00:29 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/16 22:40:34 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	print_cmds(t_msh msh)
 		{
 			printf("---HD [%d] INFO---\n", j);
 			printf("hd = %s\n", msh.cmd[i].ip.here_doc_delim[j++]);
+			printf("need develop = %d\n", msh.cmd[i].ip.need_develop);
 		}
 		j = 0;
 		while (j < msh.cmd[i].redir_nbr)

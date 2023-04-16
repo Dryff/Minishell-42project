@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/15 18:00:12 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/16 22:44:02 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ void	get_name(t_msh *msh, t_parse p, int mode, int cmd_ind)
 		printf("sub = %s\n", sub);
 		if (msh->cmd[cmd_ind].ip.input == 2)
 		{
+			msh->cmd[cmd_ind].ip.need_develop = 1;
+			if (msh->cmd[cmd_ind].hd_id == msh->cmd[cmd_ind].hd_nbr - 1 \
+			&& ft_strchr(sub, '\''))
+				msh->cmd[cmd_ind].ip.need_develop = 0;
 			msh->cmd[cmd_ind].ip.here_doc_delim[msh->cmd[cmd_ind].hd_id] \
 			= develop_name(msh, sub, 1);
 			msh->cmd[cmd_ind].hd_id++;
@@ -66,11 +70,12 @@ void	get_name(t_msh *msh, t_parse p, int mode, int cmd_ind)
 	}
 }
 
-void	go_after_fd_name(t_msh *msh, t_parse *p)
+void	go_after_fd_name(t_msh *msh, t_parse *p, int cmd_id)
 {
 	int	is_in_quotes;
 	int	start_quote;
 
+	(void)cmd_id;
 	(void)msh;
 	is_in_quotes = 0;
 	start_quote = 0;
@@ -88,10 +93,10 @@ void	go_after_fd_name(t_msh *msh, t_parse *p)
 	}
 	while (p->line[p->i] && is_white_space(p->line[p->i]))
 		p->i++;
-	p->i--;
+	printf("through : [%s]\n", &p->line[p->i]);
 }
 
-char	*remove_fd_name_and_arrow(t_msh *msh, t_parse p)
+char	*remove_fd_name_and_arrow(t_msh *msh, t_parse p, int cmd_id)
 {
 	char	*str;
 	int		j;
@@ -108,7 +113,7 @@ char	*remove_fd_name_and_arrow(t_msh *msh, t_parse p)
 		j++;
 		i++;
 	}
-	go_after_fd_name(msh, &p);
+	go_after_fd_name(msh, &p, cmd_id);
 	while (p.i < (int)ft_strlen(p.line))
 	{
 		str[j] = p.line[p.i];
@@ -122,7 +127,6 @@ char	*remove_fd_name_and_arrow(t_msh *msh, t_parse p)
 
 void	get_redir(t_msh *msh, t_parse *p, int cmd_index)
 {
-	printf("get_redir : %s\n", &p->line[p->i]);
 	if (p->line[p->i] == '>')
 	{
 		if (msh->cmd[cmd_index].op)
@@ -138,10 +142,7 @@ void	get_redir(t_msh *msh, t_parse *p, int cmd_index)
 			msh->cmd[cmd_index].ip.input = 2;
 		get_name(msh, *p, 0, cmd_index);
 	}
-	printf("2get_redir : %s\n", p->line);
-	p->line = remove_fd_name_and_arrow(msh, *p);
-	printf("3get_redir : %s\n", p->line);
+	p->line = remove_fd_name_and_arrow(msh, *p, cmd_index);
+	printf("hd_id : %d, hd_nbr : %d\n", msh->cmd[cmd_index].hd_id, msh->cmd[cmd_index].hd_nbr);
 	p->i--;
-	if (p->i < 0)
-		p->i = 0;
 }
