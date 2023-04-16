@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/16 22:44:02 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/16 22:51:00 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	get_name(t_msh *msh, t_parse p, int mode, int cmd_ind)
 	if (mode == 0)
 	{
 		sub = ft_substr(p.line, p.i, size);
-		printf("sub = %s\n", sub);
 		if (msh->cmd[cmd_ind].ip.input == 2)
 		{
 			msh->cmd[cmd_ind].ip.need_develop = 1;
@@ -93,7 +92,6 @@ void	go_after_fd_name(t_msh *msh, t_parse *p, int cmd_id)
 	}
 	while (p->line[p->i] && is_white_space(p->line[p->i]))
 		p->i++;
-	printf("through : [%s]\n", &p->line[p->i]);
 }
 
 char	*remove_fd_name_and_arrow(t_msh *msh, t_parse p, int cmd_id)
@@ -143,6 +141,5 @@ void	get_redir(t_msh *msh, t_parse *p, int cmd_index)
 		get_name(msh, *p, 0, cmd_index);
 	}
 	p->line = remove_fd_name_and_arrow(msh, *p, cmd_index);
-	printf("hd_id : %d, hd_nbr : %d\n", msh->cmd[cmd_index].hd_id, msh->cmd[cmd_index].hd_nbr);
 	p->i--;
 }

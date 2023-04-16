@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/15 17:33:50 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/16 22:52:30 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,7 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 		enable_minishell_signals();
 	if (pid == 0)
 		exec_to_pipe(msh, cmd_id, fd);
-	printf("g_status before = %d\n", g_status);
 	waitpid(pid, &g_status, 0);
-	printf("g_status after = %d\n", g_status);
 	signal(SIGQUIT, SIG_IGN);
 	if (g_status > 255)
 		g_status = g_status / 256;

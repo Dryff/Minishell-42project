@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:31:40 by colas             #+#    #+#             */
-/*   Updated: 2023/04/16 22:34:53 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/16 22:53:15 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	exec_here_doc(t_msh *msh, int cmd_id, int i)
 		if (i == msh->cmd[cmd_id].hd_nbr - 1)
 			develop_here_doc_and_write_to_fd(msh, line, cmd_id);
 	}
-	printf("exiting here_doc\n");
 	exit(1);
 }
 
