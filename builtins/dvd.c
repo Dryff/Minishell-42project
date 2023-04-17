@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/17 18:28:11 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/17 18:29:38 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,12 @@ void	ft_dvd(t_msh *msh, int cmd_id)
 	cmd = msh->cmd[cmd_id].param[1];
 	if (!cmd)
 		chdir_home(msh);
+	else if (msh->cmd[cmd_id].param[2])
+	{
+		ft_err_printf("cd: too many arguments\n");
+		update_msh_status(1);
+		return ;
+	}
 	else if (cmd[0] == '/')
 	{
 		if (chdir(cmd) != 0)
@@ -128,12 +134,6 @@ void	ft_dvd(t_msh *msh, int cmd_id)
 			ft_err_printf("%s%s%s", NOCD, cmd, NOP);
 			update_msh_status(1);
 		}
-		return ;
-	}
-	else if (msh->cmd[cmd_id].param[2])
-	{
-		ft_err_printf("cd: too many arguments\n");
-		update_msh_status(1);
 		return ;
 	}
 	else if (cmd[0] == '-' && !cmd[1])
