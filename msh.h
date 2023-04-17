@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/17 14:01:09 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/17 16:31:07 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct s_msh
 	char		*line;
 	char		*ex_val;
 	char		*program_name;
+	int			here_doc_signal;
 }				t_msh;
 
 /* Minishell */
@@ -220,10 +221,8 @@ void		only_update_signal(int nb);
 void		backslash_print(int nb);
 void		set_interactive_signals(void);
 void		set_execution_signals(void);
-void		enable_minishell_signals(void);
-void		set_here_doc_signals(void);
-void		handle_heredoc_sigint(int signum, siginfo_t *info, void *context);
-void		handle_heredoc_sigquit(int signum, siginfo_t *info, void *context);
+void		ignore_signals(void);
+void		here_doc_sigint(int nb);
 
 /* exec */
 void		exec_to_pipe(t_msh *msh, int cmd_id, int *fd);

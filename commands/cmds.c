@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/17 11:44:00 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/17 14:35:47 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 		exit(1);
 	if (pid != 0 && ft_strcmp(msh->cmd[cmd_id].param[0], \
 	msh->program_name) == 0)
-		enable_minishell_signals();
+		ignore_signals();
 	if (pid == 0)
 		exec_to_pipe(msh, cmd_id, fd);
 	waitpid(pid, &g_status, 0);
@@ -107,6 +107,8 @@ int	commands(t_msh *msh, int error)
 
 	dup_inffd(1);
 	i = -1;
+	if (msh->here_doc_signal == 1)
+		return (update_msh_status(CTRL_C), 0);
 	while (++i < msh->cmd_nbr)
 	{
 		if (msh->cmd[i].param[0] && msh->cmd[i].ip.infd != -1 \

@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 02:08:39 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:26:27 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	check_builtins(t_msh *msh)
 void	main_loop(t_msh *msh)
 {
 	msh->cmd_nbr = 0;
+	msh->here_doc_signal = 0;
 	if (msh->env.error)
 		exit(1);
 	set_interactive_signals();

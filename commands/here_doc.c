@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:31:40 by colas             #+#    #+#             */
-/*   Updated: 2023/04/16 22:53:15 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/17 16:30:22 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,6 @@ void	ft_putendl_fd(char *str, int fd)
 	while (str[i])
 		write(fd, &str[i++], 1);
 	write(fd, "\n", 1);
-}
-
-void	here_doc_ctrl_c(int nb)
-{
-	(void)nb;
-	write(1, "\n", 1);
-	// rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-	update_msh_status(CTRL_C);
 }
 
 void	develop_here_doc_and_write_to_fd(t_msh *msh, char *str, int cmd_id)
@@ -70,14 +60,21 @@ void	here_doc(t_msh *msh, int cmd_id)
 	pid_t	pid;
 
 	i = 0;
+	msh->here_doc_signal = 0;
+	ignore_signals();
 	while (i < msh->cmd[cmd_id].hd_nbr)
 	{
 		pid = fork();
 		if (pid == -1)
 			return (error_manager(msh, MALLOC_ERR));
 		if (pid == 0)
+		{
+			signal(SIGINT, here_doc_sigint);
 			exec_here_doc(msh, cmd_id, i);
-		waitpid(pid, NULL, 0);
+		}
+		waitpid(pid, &g_status, 0);
+		if (g_status == 33280)
+			msh->here_doc_signal = 1;
 		i++;
 	}	
 }

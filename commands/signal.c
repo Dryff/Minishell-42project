@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 14:40:35 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/17 10:36:37 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:28:47 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	handle_abort_input(int signum, siginfo_t *info, void *context)
 	(void) signum;
 	(void) info;
 	(void) context;
-	write(1, "\n", 1);
+	write(1, "\n", 2);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
@@ -29,7 +29,7 @@ void	handle_execution_sigint(int signum, siginfo_t *info, void *context)
 	(void) signum;
 	(void) info;
 	(void) context;
-	printf("\n");
+	printf("a\n");
 	update_msh_status(CTRL_C);
 }
 

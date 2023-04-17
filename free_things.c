@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_things.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:57:33 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/17 14:33:50 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/17 16:32:37 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ void	free_more_things(t_msh *msh, int i)
 	while (j < msh->cmd[i].redir_nbr)
 		free(msh->cmd[i].op[j++].out_name);
 	j = 0;
-	while (msh->cmd[i].ip.in_name[j])
-		free(msh->cmd[i].ip.in_name[j++]);
+	if (msh->cmd[i].ip.in_name)
+		while (msh->cmd[i].ip.in_name[j])
+			free(msh->cmd[i].ip.in_name[j++]);
 	j = 0;
 	while (j < msh->cmd[i].hd_nbr)
 		free(msh->cmd[i].ip.here_doc_delim[j++]);
