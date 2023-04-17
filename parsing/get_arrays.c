@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 19:29:38 by colas             #+#    #+#             */
-/*   Updated: 2023/04/17 16:57:21 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/17 17:32:45 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,8 @@ char	**get_in_name_array(t_msh *msh, char *str, int cmd_id)
 	if (!new)
 		return (NULL);
 	msh->cmd[cmd_id].in_nbr = count;
-	printf("%d|in nbr = %d\n", cmd_id, msh->cmd[cmd_id].in_nbr);
 	while (i <= count)
 	{
-		printf("oui\n");
 		new[i] = NULL;
 		i++;
 	}

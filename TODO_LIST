@@ -70,19 +70,18 @@ MOUNIR
 
 ------ COLAS ------
 
-cat /dev/urandom | head > yo  
 time cat Makefile | ls | sleep 3
-cat | cat | ls 
-ls < in | wc -l > out
-ctrl c dans here_doc doit exit tt les heredocs
+ls < in | wc -l > out <---| CA MARCHE PAS
 
+------ FAIT ------
+cat /dev/urandom | head > yo 
+cat | cat | ls
+ctrl c dans here_doc doit exit tt les heredocs
 < salut < main.c < yo doit mettre message d'erreur de non existence de gauche a droite
 ls + control c ---> enlever le ls | MAX
 ctrl c -> valeur de retour (2) | MAX
 cat < Makefile << a | FAIT
 "\t" (cdm_nbr) | FAIT
-
------- FAIT ------
 here_doc fork | COLAS
 Expand dans le hd si delim sans single quotes | COLAS
 

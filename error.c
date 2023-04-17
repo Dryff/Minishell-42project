@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 10:09:00 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 22:02:40 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:32:59 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ void	error_manager(t_msh *msh, int err_num)
 
 void	ft_print_status(void)
 {
-	printf("%d\n", g_status);
+	// printf("%d\n", g_status);
 }
