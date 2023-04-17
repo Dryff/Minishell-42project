@@ -59,33 +59,32 @@ corrections :
 -----------------
 
 VPAC
-cat < Makefile << a | FAIT
 
-ctrl c -> valeur de retour (2) | MAX
 
 
 BLAKEHAL
-"\t" (cdm_nbr) | FAIT
 
-ls + control c ---> enlever le ls | MAX
 
 MOUNIR
 
 
 ------ COLAS ------
-HERE_DOC
-here_doc fork | FAIT
-Expand dans le hd si delim sans single quotes | FAIT
 
-PARSING
-> b2 > b3 > b4 > b5 echo bonjour | FAIT
-| > ls | COLAS
+cat /dev/urandom | head > yo  
+time cat Makefile | ls | sleep 3
+cat | cat | ls 
+ls < in | wc -l > out
+ctrl c dans here_doc doit exit tt les heredocs
+
+------ FAIT ------
+ctrl c -> valeur de retour (2) | MAX
+ls + control c ---> enlever le ls | MAX
+cat < Makefile << a | FAIT
+here_doc fork | COLAS
+Expand dans le hd si delim sans single quotes | COLAS
+
+"\t" (cdm_nbr) | FAIT
+> b2 > b3 > b4 > b5 echo bonjour | COLAS
 | ls
 ./ls --> command not found au lieu de no such file or directory | COLAS
-
-EXEC 
 close fd 100 et 101 (plusieurs fd open a checker (ligne 48 get_and_check_fd)) | COLAS
-cat /dev/urandom | head > yo | COLAS 
-time cat Makefile | ls | sleep 3
-cat | cat | ls | COLAS
-ls < in | wc -l > out
