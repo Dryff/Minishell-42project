@@ -76,6 +76,8 @@ cat | cat | ls
 ls < in | wc -l > out
 ctrl c dans here_doc doit exit tt les heredocs
 
+< salut < main.c < yo doit mettre message d'erreur de non existence de gauche a droite
+
 ------ FAIT ------
 ctrl c -> valeur de retour (2) | MAX
 ls + control c ---> enlever le ls | MAX

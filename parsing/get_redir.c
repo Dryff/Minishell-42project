@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/17 11:14:14 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/17 13:31:21 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,7 @@ void	get_name(t_msh *msh, t_parse p, int mode, int cmd_ind)
 	{
 		sub = ft_substr(p.line, p.i, size);
 		if (msh->cmd[cmd_ind].ip.input == 2)
-		{
-			msh->cmd[cmd_ind].ip.need_develop = 1;
-			if (msh->cmd[cmd_ind].hd_id == msh->cmd[cmd_ind].hd_nbr - 1 \
-			&& ft_strchr(sub, '\''))
-				msh->cmd[cmd_ind].ip.need_develop = 0;
-			msh->cmd[cmd_ind].ip.here_doc_delim[msh->cmd[cmd_ind].hd_id] \
-			= develop_name(msh, sub, 1);
-			msh->cmd[cmd_ind].hd_id++;
-			if (msh->cmd[cmd_ind].ip.in_name != NULL)
-				free(msh->cmd[cmd_ind].ip.in_name);
-			msh->cmd[cmd_ind].ip.in_name = NULL;
-		}
+			handle_here_doc(msh, sub, cmd_ind);
 		if (msh->cmd[cmd_ind].ip.input == 1)
 		{
 			if (msh->cmd[cmd_ind].ip.in_name)

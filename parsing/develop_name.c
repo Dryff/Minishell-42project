@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 18:40:05 by colas             #+#    #+#             */
-/*   Updated: 2023/04/15 01:10:50 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/17 13:32:42 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,18 @@ char	*develop_name(t_msh *msh, char *sub, int hd)
 			p.i++;
 	}
 	return (p.line);
+}
+
+void	handle_here_doc(t_msh *msh, char *sub, int cmd_ind)
+{
+	msh->cmd[cmd_ind].ip.need_develop = 1;
+	if (msh->cmd[cmd_ind].hd_id == msh->cmd[cmd_ind].hd_nbr - 1 \
+	&& ft_strchr(sub, '\''))
+		msh->cmd[cmd_ind].ip.need_develop = 0;
+	msh->cmd[cmd_ind].ip.here_doc_delim[msh->cmd[cmd_ind].hd_id] \
+	= develop_name(msh, sub, 1);
+	msh->cmd[cmd_ind].hd_id++;
+	if (msh->cmd[cmd_ind].ip.in_name != NULL)
+		free(msh->cmd[cmd_ind].ip.in_name);
+	msh->cmd[cmd_ind].ip.in_name = NULL;
 }
