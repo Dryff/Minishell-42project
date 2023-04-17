@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_things.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:57:33 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/13 22:03:08 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:14:57 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	free_more_things(t_msh *msh, int i)
 		j++;
 	}
 	j = 0;
-	if (!msh->cmd[i].hd_nbr)
+	if (msh->cmd[i].ip.input == 1)
 		free(msh->cmd[i].ip.in_name);
 	while (j < msh->cmd[i].hd_nbr)
 	{

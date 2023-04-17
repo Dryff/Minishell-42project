@@ -74,11 +74,11 @@ MOUNIR
 
 ------ COLAS ------
 HERE_DOC
-here_doc fork | COLAS
-Expand dans le hd si delim sans single quotes | COLAS
+here_doc fork | FAIT
+Expand dans le hd si delim sans single quotes | FAIT
 
 PARSING
-> b2 > b3 > b4 > b5 echo bonjour | COLAS
+> b2 > b3 > b4 > b5 echo bonjour | FAIT
 | > ls | COLAS
 | ls
 ./ls --> command not found au lieu de no such file or directory | COLAS
