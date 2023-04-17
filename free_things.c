@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:57:33 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/17 11:14:57 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/17 14:33:50 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,14 @@ void	free_more_things(t_msh *msh, int i)
 	j = 0;
 	ft_free_tab(msh->cmd[i].param);
 	while (j < msh->cmd[i].redir_nbr)
-	{
-		free(msh->cmd[i].op[j].out_name);
-		j++;
-	}
+		free(msh->cmd[i].op[j++].out_name);
 	j = 0;
-	if (msh->cmd[i].ip.input == 1)
-		free(msh->cmd[i].ip.in_name);
+	while (msh->cmd[i].ip.in_name[j])
+		free(msh->cmd[i].ip.in_name[j++]);
+	j = 0;
 	while (j < msh->cmd[i].hd_nbr)
-	{
-		free(msh->cmd[i].ip.here_doc_delim[j]);
-		j++;
-	}
+		free(msh->cmd[i].ip.here_doc_delim[j++]);
+	free(msh->cmd[i].ip.in_name);
 	free(msh->cmd[i].ip.here_doc_delim);
 	free(msh->cmd[i].op);
 }

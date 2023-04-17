@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/17 13:31:21 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/17 14:30:46 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,15 @@ void	get_name(t_msh *msh, t_parse p, int mode, int cmd_ind)
 		if (msh->cmd[cmd_ind].ip.input == 2)
 			handle_here_doc(msh, sub, cmd_ind);
 		if (msh->cmd[cmd_ind].ip.input == 1)
-		{
-			if (msh->cmd[cmd_ind].ip.in_name)
-				free(msh->cmd[cmd_ind].ip.in_name);
-			msh->cmd[cmd_ind].ip.in_name = develop_name(msh, sub, 0);
-		}
+			msh->cmd[cmd_ind].ip.in_name[msh->in_id++] = \
+			develop_name(msh, sub, 0);
 	}
 	else
 	{
 		sub = ft_substr(p.line, p.i, size);
-		msh->cmd[cmd_ind].op[msh->redir_id].out_name \
+		msh->cmd[cmd_ind].op[msh->out_id].out_name \
 		= develop_name(msh, sub, 0);
-		msh->redir_id++;
+		msh->out_id++;
 	}
 }
 
@@ -123,9 +120,9 @@ void	get_redir(t_msh *msh, t_parse *p, int cmd_index)
 	if (p->line[p->i] == '>')
 	{
 		if (msh->cmd[cmd_index].op)
-			msh->cmd[cmd_index].op[msh->redir_id].output = 1;
+			msh->cmd[cmd_index].op[msh->out_id].output = 1;
 		if (p->line[p->i + 1] == '>')
-			msh->cmd[cmd_index].op[msh->redir_id].output = 2;
+			msh->cmd[cmd_index].op[msh->out_id].output = 2;
 		get_name(msh, *p, 1, cmd_index);
 	}
 	else if (p->line[p->i] == '<')

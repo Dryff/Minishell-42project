@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/17 13:35:47 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/17 14:01:09 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_inputs
 {
 	int		input;
 	int		infd;
-	char	*in_name;
+	char	**in_name;
 	char	**here_doc_delim;
 	int 	need_develop;
 } t_inputs;
@@ -96,6 +96,7 @@ typedef struct s_cmd
 	int			hd_id;
 	int			hd_tmp;
 	int			redir_nbr;
+	int			in_nbr;
 	t_outputs	*op;
 	t_inputs	ip;
 }				t_cmd;
@@ -114,7 +115,8 @@ typedef struct s_msh
 {
 	t_env		env;
 	t_cmd		*cmd;
-	int			redir_id;
+	int			out_id;
+	int			in_id;
 	int			cmd_nbr;
 	int			pid;
 	int			error;
@@ -277,6 +279,7 @@ char		*get_expanded(t_msh *msh, t_parse *p, int cursor);
 void		actualize_ind(t_parse *p, char *expanded, char *str, int in_q);
 void		secure(t_parse *p);
 void		handle_here_doc(t_msh *msh, char *sub, int cmd_ind);
+char		**get_in_name_array(t_msh *msh, char *str, int cmd_id);
 
 /* Basic utils */
 char		**ft_split(char const *str, char c);

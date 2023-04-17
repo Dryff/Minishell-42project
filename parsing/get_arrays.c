@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_arrays.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 19:29:38 by colas             #+#    #+#             */
-/*   Updated: 2023/04/11 10:32:33 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/17 14:34:20 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-int	get_count(char *str)
+int	get_count(char *str, char c)
 {
 	int		i;
 	int		count;
@@ -27,9 +27,9 @@ int	get_count(char *str)
 	{
 		while (str[++i])
 		{
-			if (str[i] == '>' && !is_in_quotes)
+			if (str[i] == c && !is_in_quotes)
 			{
-				while (str[i] == '>')
+				while (str[i] == c)
 					i++;
 				count++;
 			}
@@ -46,7 +46,7 @@ t_outputs	*get_op_array(t_msh *msh, char *str, int cmd_id)
 	t_outputs	*new;
 	int			count;
 
-	count = get_count(str);
+	count = get_count(str, '>');
 	if (count == -1)
 		return (NULL);
 	new = malloc((count + 1) * sizeof(t_outputs));
@@ -82,5 +82,27 @@ char	**get_hd_array(t_msh *msh, char *str, int cmd_id)
 	if (!new)
 		return (NULL);
 	msh->cmd[cmd_id].hd_nbr = count;
+	return (new);
+}
+
+char	**get_in_name_array(t_msh *msh, char *str, int cmd_id)
+{
+	char		**new;
+	int			count;
+	int			i;
+
+	i = 0;
+	count = get_count(str, '<');
+	if (count == -1)
+		return (NULL);
+	new = malloc((count + 1) * sizeof(char *));
+	if (!new)
+		return (NULL);
+	msh->cmd[cmd_id].in_nbr = count;
+	while (i <= count)
+	{
+		new[i] = NULL;
+		i++;
+	}
 	return (new);
 }

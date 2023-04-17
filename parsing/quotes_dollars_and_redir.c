@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_dollars_and_redir.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/16 22:51:14 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/17 14:20:19 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,11 @@ void	quote_handling(t_msh *msh, t_parse *p)
 
 void	init_output_input(t_msh *msh, char *str, int cmd_id)
 {
-	int	i;
 	int	j;
 
 	j = 0;
-	i = 0;
 	msh->cmd[cmd_id].op = get_op_array(msh, str, cmd_id);
+	msh->cmd[cmd_id].ip.in_name = get_in_name_array(msh, str, cmd_id);
 	while (j < msh->cmd[cmd_id].redir_nbr)
 	{
 		msh->cmd[cmd_id].op[j].output = 0;
@@ -77,10 +76,9 @@ void	init_output_input(t_msh *msh, char *str, int cmd_id)
 		msh->cmd[cmd_id].ip.here_doc_delim[0] = NULL;
 	msh->cmd[cmd_id].ip.input = 0;
 	msh->cmd[cmd_id].ip.infd = 0;
-	msh->cmd[cmd_id].ip.in_name = NULL;
-	msh->redir_id = 0;
+	msh->out_id = 0;
+	msh->in_id = 0;
 	msh->cmd[cmd_id].hd_id = 0;
-	i++;
 }	
 
 char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_id)

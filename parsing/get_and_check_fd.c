@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_and_check_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/04/16 20:23:29 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/17 14:36:56 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,19 @@ void	hd_exec(t_msh *msh, int cmd_id)
 	}
 }
 
-int	check_input(t_msh *msh, int cmd_id)
+int	check_input(t_msh *msh, int cmd_id, int ip_id)
 {
 	if (msh->cmd[cmd_id].ip.input == 1)
-		msh->cmd[cmd_id].ip.infd = open(msh->cmd[cmd_id].ip.in_name, O_RDONLY);
+		msh->cmd[cmd_id].ip.infd = \
+		open(msh->cmd[cmd_id].ip.in_name[ip_id], O_RDONLY);
 	if (msh->cmd[cmd_id].ip.infd == -1 && msh->cmd[cmd_id].ip.input == 1)
 	{
-		if (access(msh->cmd[cmd_id].ip.in_name, F_OK) == 0)
+		if (access(msh->cmd[cmd_id].ip.in_name[ip_id], F_OK) == 0)
 			return (ft_err_printf("msh: %s: Permission denied\n", \
-			msh->cmd[cmd_id].ip.in_name), g_status = 1, 0);
+			msh->cmd[cmd_id].ip.in_name[ip_id]), g_status = 1, 0);
 		else
 			return (ft_err_printf("msh: %s: No such file or directory\n", \
-			msh->cmd[cmd_id].ip.in_name), g_status = 1, 0);
+			msh->cmd[cmd_id].ip.in_name[ip_id]), g_status = 1, 0);
 	}
 	return (1);
 }
@@ -94,8 +95,15 @@ int	get_and_check_fd(t_msh *msh)
 	while (i < msh->cmd_nbr)
 	{
 		hd_exec(msh, i);
-		if (!check_input(msh, i))
-			break ;
+		j = 0;
+		while (j < msh->cmd[i].in_nbr)
+		{
+			if (!check_input(msh, i, j))
+				break ;
+			j++;
+		}
+		if (j != msh->cmd[i].in_nbr)
+			break;
 		j = 0;
 		while (j < msh->cmd[i].redir_nbr)
 		{
@@ -103,6 +111,8 @@ int	get_and_check_fd(t_msh *msh)
 				break ;
 			j++;
 		}
+		if (j != msh->cmd[i].redir_nbr)
+			break;
 		i++;
 	}
 	return (1);
