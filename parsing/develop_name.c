@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 18:40:05 by colas             #+#    #+#             */
-/*   Updated: 2023/04/17 13:32:42 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/17 17:05:42 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,4 @@ void	handle_here_doc(t_msh *msh, char *sub, int cmd_ind)
 	msh->cmd[cmd_ind].ip.here_doc_delim[msh->cmd[cmd_ind].hd_id] \
 	= develop_name(msh, sub, 1);
 	msh->cmd[cmd_ind].hd_id++;
-	if (msh->cmd[cmd_ind].ip.in_name != NULL)
-		free(msh->cmd[cmd_ind].ip.in_name);
-	msh->cmd[cmd_ind].ip.in_name = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/17 14:20:19 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/17 17:06:49 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	init_output_input(t_msh *msh, char *str, int cmd_id)
 
 	j = 0;
 	msh->cmd[cmd_id].op = get_op_array(msh, str, cmd_id);
-	msh->cmd[cmd_id].ip.in_name = get_in_name_array(msh, str, cmd_id);
 	while (j < msh->cmd[cmd_id].redir_nbr)
 	{
 		msh->cmd[cmd_id].op[j].output = 0;
@@ -74,6 +73,7 @@ void	init_output_input(t_msh *msh, char *str, int cmd_id)
 	msh->cmd[cmd_id].ip.here_doc_delim = get_hd_array(msh, str, cmd_id);
 	while (++j < msh->cmd[cmd_id].hd_nbr)
 		msh->cmd[cmd_id].ip.here_doc_delim[0] = NULL;
+	msh->cmd[cmd_id].ip.in_name = get_in_name_array(msh, str, cmd_id);
 	msh->cmd[cmd_id].ip.input = 0;
 	msh->cmd[cmd_id].ip.infd = 0;
 	msh->out_id = 0;

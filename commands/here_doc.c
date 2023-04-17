@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:31:40 by colas             #+#    #+#             */
-/*   Updated: 2023/04/17 16:30:22 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:08:31 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	develop_here_doc_and_write_to_fd(t_msh *msh, char *str, int cmd_id)
 	if (msh->cmd[cmd_id].ip.need_develop)
 		p.line = get_dollar(msh, &p, &useless);
 	ft_putendl_fd(p.line, msh->cmd[cmd_id].ip.infd);
+	if (msh->cmd[cmd_id].ip.need_develop)
+		free(p.line);
 }
 
 void	exec_here_doc(t_msh *msh, int cmd_id, int i)

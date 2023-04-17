@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/17 14:30:46 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/17 17:05:04 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,14 @@ void	get_name(t_msh *msh, t_parse p, int mode, int cmd_ind)
 	if (mode == 0)
 	{
 		sub = ft_substr(p.line, p.i, size);
+		printf("sub = %s\n", sub);
 		if (msh->cmd[cmd_ind].ip.input == 2)
 			handle_here_doc(msh, sub, cmd_ind);
 		if (msh->cmd[cmd_ind].ip.input == 1)
-			msh->cmd[cmd_ind].ip.in_name[msh->in_id++] = \
+		{	
+			msh->cmd[cmd_ind].ip.in_name[msh->in_id] = \
 			develop_name(msh, sub, 0);
+		}
 	}
 	else
 	{
