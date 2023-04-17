@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/17 14:35:47 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/17 17:08:44 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 	set_execution_signals();
 	if (pid == -1)
 		exit(1);
-	if (pid != 0 && ft_strcmp(msh->cmd[cmd_id].param[0], \
-	msh->program_name) == 0)
+	if (pid != 0 && is_minishell(msh->cmd[cmd_id].param[0], msh->program_name))
 		ignore_signals();
 	if (pid == 0)
 		exec_to_pipe(msh, cmd_id, fd);

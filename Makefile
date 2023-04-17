@@ -6,7 +6,7 @@
 #    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/04/17 16:31:21 by mfinette         ###   ########.fr        #
+#    Updated: 2023/04/17 16:53:10 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ FILES = main											\
 	parsing/quotes_utils_and_replace_spaces				\
 	parsing/get_and_check_fd							\
 	parsing/check_arrows								\
+	parsing/parse_minishell								\
 	utils/parse_utils									\
 	utils/msh_utils										\
 	utils/cmd_utils										\

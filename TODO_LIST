@@ -77,15 +77,15 @@ ls < in | wc -l > out
 ctrl c dans here_doc doit exit tt les heredocs
 
 < salut < main.c < yo doit mettre message d'erreur de non existence de gauche a droite
+ls + control c ---> enlever le ls | MAX
+ctrl c -> valeur de retour (2) | MAX
+cat < Makefile << a | FAIT
+"\t" (cdm_nbr) | FAIT
 
 ------ FAIT ------
-ctrl c -> valeur de retour (2) | MAX
-ls + control c ---> enlever le ls | MAX
-cat < Makefile << a | FAIT
 here_doc fork | COLAS
 Expand dans le hd si delim sans single quotes | COLAS
 
-"\t" (cdm_nbr) | FAIT
 > b2 > b3 > b4 > b5 echo bonjour | COLAS
 | ls
 ./ls --> command not found au lieu de no such file or directory | COLAS

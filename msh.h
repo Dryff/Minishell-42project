@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/17 16:31:07 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:55:28 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,6 +279,8 @@ void		actualize_ind(t_parse *p, char *expanded, char *str, int in_q);
 void		secure(t_parse *p);
 void		handle_here_doc(t_msh *msh, char *sub, int cmd_ind);
 char		**get_in_name_array(t_msh *msh, char *str, int cmd_id);
+int 		is_minishell(char *cmd, char *name);
+
 
 /* Basic utils */
 char		**ft_split(char const *str, char c);
