@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/17 17:18:34 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/17 17:47:22 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,10 @@ int	commands(t_msh *msh, int error)
 	}
 	while (waitpid(-1, &g_status, 0) > 0)
 		;
-	printf("g_status = %d\n", g_status);
 	if (WIFEXITED(g_status))
 		g_status = WEXITSTATUS(g_status);
 	else if (WIFSIGNALED(g_status))
 		g_status = 128 + WTERMSIG(g_status);
-	printf("g_status = %d\n", g_status);
 	builtin = is_builtin(msh->cmd[0].param[0]);
 	if (msh->cmd[0].param[0] && msh->cmd_nbr == 1 && \
 	is_not_builtin_fd(msh, msh->cmd[0].param[0], 0))

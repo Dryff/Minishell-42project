@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 01:48:50 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/17 18:28:11 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #define OLD 1
 #define HOME 2
 #define PWD 3
+#define NOCD "msh : cd : "
+#define NOP ": No such file or directory\n"
 
 void	update_pwd_env(t_msh *msh, char *actual_path)
 {
@@ -118,11 +120,17 @@ void	ft_dvd(t_msh *msh, int cmd_id)
 
 	cmd = msh->cmd[cmd_id].param[1];
 	if (!cmd)
-	{
 		chdir_home(msh);
+	else if (cmd[0] == '/')
+	{
+		if (chdir(cmd) != 0)
+		{
+			ft_err_printf("%s%s%s", NOCD, cmd, NOP);
+			update_msh_status(1);
+		}
 		return ;
 	}
-	if (msh->cmd[cmd_id].param[2])
+	else if (msh->cmd[cmd_id].param[2])
 	{
 		ft_err_printf("cd: too many arguments\n");
 		update_msh_status(1);
