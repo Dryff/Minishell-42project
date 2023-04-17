@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
+#    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/04/15 17:18:00 by cgelin           ###   ########.fr        #
+#    Updated: 2023/04/17 11:25:10 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC		= cc
-FLAGS	=  -fsanitize=address -g3 -Wall -Wextra -Werror 
+FLAGS	= -g3 -Wall -Wextra -Werror 
 AR		= ar rcs
 RM		= @rm -f
 HEADER	= msh.h
@@ -102,21 +102,23 @@ fclean: clean
 	@echo "$(GREEN)minishell executable files cleaned!$(DEF_COLOR)"
 
 
-leaks:  all
-	echo { > valgrind_ignore_leaks.txt
-	echo  leak readline >> valgrind_ignore_leaks.txt
-	echo  Memcheck:Leak >> valgrind_ignore_leaks.txt
-	echo  ... >> valgrind_ignore_leaks.txt
-	echo  fun:readline >> valgrind_ignore_leaks.txt
-	echo } >> valgrind_ignore_leaks.txt
-	echo { >> valgrind_ignore_leaks.txt
-	echo  leak add_history >> valgrind_ignore_leaks.txt
-	echo  Memcheck:Leak >> valgrind_ignore_leaks.txt
-	echo  ... >> valgrind_ignore_leaks.txt
-	echo  fun:add_history >> valgrind_ignore_leaks.txt
-	echo } >> valgrind_ignore_leaks.txt
-	valgrind --suppressions=valgrind_ignore_leaks.txt --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --show-mismatched-frees=yes --read-var-info=yes ./${NAME}
-
+leaks:    all
+	echo "{" > valgrind_ignore_leaks.txt
+	echo "leak readline" >> valgrind_ignore_leaks.txt
+	echo "    Memcheck:Leak" >> valgrind_ignore_leaks.txt
+	echo "    ..." >> valgrind_ignore_leaks.txt
+	echo "    fun:readline" >> valgrind_ignore_leaks.txt
+	echo "}" >> valgrind_ignore_leaks.txt
+	echo "{" >> valgrind_ignore_leaks.txt
+	echo "    leak add_history" >> valgrind_ignore_leaks.txt
+	echo "    Memcheck:Leak" >> valgrind_ignore_leaks.txt
+	echo "    ..." >> valgrind_ignore_leaks.txt
+	echo "    fun:add_history" >> valgrind_ignore_leaks.txt
+	echo "}" >> valgrind_ignore_leaks.txt
+	valgrind --suppressions=valgrind_ignore_leaks.txt --leak-check=full \
+		--show-leak-kinds=all --track-origins=yes \
+		--show-mismatched-frees=yes --read-var-info=yes \
+		--log-file=valgrind.txt ./${NAME}
 re: fclean all
 
 .PHONY: all clean fclean re leaks

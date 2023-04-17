@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/17 10:35:07 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:00:43 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,12 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 		enable_minishell_signals();
 	if (pid == 0)
 		exec_to_pipe(msh, cmd_id, fd);
-	printf("before waitpid = %d\n", g_status);
 	waitpid(pid, &g_status, 0);
-	printf("after waitpid = %d\n", g_status);
 	signal(SIGQUIT, SIG_IGN);
-	if (g_status > 255)
-		g_status = g_status / 256;
-	else
-		g_status = g_status % 256;
+	if (WIFEXITED(g_status))
+			g_status = WEXITSTATUS(g_status);
+	else if (WIFSIGNALED(g_status))
+		g_status = 128 + WTERMSIG(g_status);
 	close(fd[1]);
 	if (dup2(fd[0], STDIN_FILENO) == -1)
 		exit(1);
