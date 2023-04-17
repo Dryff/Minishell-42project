@@ -6,7 +6,7 @@
 #    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/04/17 11:25:10 by mfinette         ###   ########.fr        #
+#    Updated: 2023/04/17 11:31:58 by mfinette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,6 +117,7 @@ leaks:    all
 	echo "}" >> valgrind_ignore_leaks.txt
 	valgrind --suppressions=valgrind_ignore_leaks.txt --leak-check=full \
 		--show-leak-kinds=all --track-origins=yes \
+		--track-fds=yes								\
 		--show-mismatched-frees=yes --read-var-info=yes \
 		--log-file=valgrind.txt ./${NAME}
 re: fclean all
