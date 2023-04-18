@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_and_check_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/04/17 14:36:56 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/18 10:52:22 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	get_and_check_fd(t_msh *msh)
 			j++;
 		}
 		if (j != msh->cmd[i].in_nbr)
-			break;
+			break ;
 		j = 0;
 		while (j < msh->cmd[i].redir_nbr)
 		{
@@ -112,7 +112,7 @@ int	get_and_check_fd(t_msh *msh)
 			j++;
 		}
 		if (j != msh->cmd[i].redir_nbr)
-			break;
+			break ;
 		i++;
 	}
 	return (1);

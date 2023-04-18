@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_arrows.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 10:51:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/18 10:19:26 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/18 10:56:32 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	check_arrow_symbols(t_msh *msh, int i, char c)
 	else if (count == 4)
 		return (g_status = 2, ft_err_printf("%s `%c%c'\n", ERR_MESS, c, c), -1);
 	else if (count >= 5)
-		return (g_status = 2, ft_err_printf("%s `%c%c%c'\n", ERR_MESS, c, c, c), -1);
+		return (g_status = 2, ft_err_printf("%s `%c%c%c'\n", ERR_MESS, \
+		c, c, c), -1);
 	else if (msh->line[i] == '|')
 		return (g_status = 2, ft_err_printf("%s `|'\n", ERR_MESS), -1);
 	else if (msh->line[i] == '\0')

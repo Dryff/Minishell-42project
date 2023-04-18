@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_hub.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 08:41:06 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/17 14:34:40 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/18 10:52:37 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	print_cmds(t_msh msh)
 		if (msh.cmd[i].ip.input)
 		{
 			printf("input : = %d\n", msh.cmd[i].ip.input);
-			printf("infd : = %d\n", msh.cmd[i].ip.infd);	
+			printf("infd : = %d\n", msh.cmd[i].ip.infd);
 		}
 		j = 0;
 		while (j < msh.cmd[i].hd_nbr)

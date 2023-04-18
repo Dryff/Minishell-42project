@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 16:47:42 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/17 17:08:49 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:56:05 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,17 @@ char	*ft_strrchr(const char *s, int c)
 	return (0);
 }
 
-
-int is_minishell(char *cmd, char *name)
+int	is_minishell(char *cmd, char *name)
 {
-    char    *tmp;
+	char	*tmp;
 
-    tmp = ft_strrchr(cmd, '/');
-    if (!tmp)
-        return (0);
-    tmp++;
-    name = name + 2;
-    if (ft_strcmp(tmp, name) == 0)
-        return (1);
-    else
-        return (0);
+	tmp = ft_strrchr(cmd, '/');
+	if (!tmp)
+		return (0);
+	tmp++;
+	name = name + 2;
+	if (ft_strcmp(tmp, name) == 0)
+		return (1);
+	else
+		return (0);
 }

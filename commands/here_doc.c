@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:31:40 by colas             #+#    #+#             */
-/*   Updated: 2023/04/17 17:08:31 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/18 10:54:42 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ft_putendl_fd(char *str, int fd)
 
 void	develop_here_doc_and_write_to_fd(t_msh *msh, char *str, int cmd_id)
 {
-	t_parse p;
-	int useless;
+	t_parse	p;
+	int		useless;
 
 	p.line = str;
 	p.i = 0;
