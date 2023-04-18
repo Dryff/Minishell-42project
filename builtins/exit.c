@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:35:31 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 17:10:14 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:33:12 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	actually_exit(t_msh *msh, int status, int flag, char *cmd)
 	update_msh_status(status);
 	printf("exit\n");
 	if (flag == TOO_MANY)
-		printf("msh: exit: too many arguments\n");
+		ft_err_printf("msh: exit: too many arguments\n");
 	if (flag == NOT_NUMERIC)
-		printf("msh: exit: %s: numeric argument required\n", cmd);
+		ft_err_printf("msh: exit: %s: numeric argument required\n", cmd);
 	free_things(msh);
 	free_env(msh);
 	custom_add_history(msh->line, FREE, 0);
@@ -39,7 +39,7 @@ void	exit_multiple_parameters(t_msh *msh, char *cmd)
 {
 	update_msh_status(1);
 	if (ft_str_is_numeric(cmd))
-		printf("exit: too many arguments\n");
+		ft_err_printf("exit: too many arguments\n");
 	else
 		actually_exit(msh, 2, NOT_NUMERIC, cmd);
 }

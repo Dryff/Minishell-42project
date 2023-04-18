@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 01:30:58 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/17 16:29:20 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:18:31 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	backslash_print(int nb)
 {
 	if (nb == SIGQUIT)
 	{
-		printf("Quit (core dumped)\n");
+		ft_err_printf("Quit (core dumped)\n");
 		update_msh_status(CTRL_BACKSLASH);
 	}
 	if (nb == SIGINT)

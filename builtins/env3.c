@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 10:50:58 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 21:34:13 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:17:15 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ void	check_pwd(t_msh *msh)
 
 void	reset_shlvl(t_msh *msh, int nb)
 {
-	printf("msh: warning: shell level (%d) too high, resetting to 1\n", nb);
+	ft_err_printf("msh: warning: shell level (%d) too high, resetting to 1\n", nb);
 	complete_export(msh, "SHLVL=1");
 }

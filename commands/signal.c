@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 14:40:35 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/17 17:03:36 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:18:26 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	handle_abort_input(int signum, siginfo_t *info, void *context)
 	(void) context;
 	write(1, "\n", 2);
 	rl_on_new_line();
-	rl_replace_line("", 0);
+	// rl_replace_line("", 0);
 	rl_redisplay();
 	update_msh_status(CTRL_C);
 }
@@ -38,7 +38,7 @@ void	handle_execution_sigquit(int signum, siginfo_t *info, void *context)
 	(void) signum;
 	(void) info;
 	(void) context;
-	printf("Quit (core dumped)\n");
+	ft_err_printf("Quit (core dumped)\n");
 	update_msh_status(CTRL_BACKSLASH);
 }
 

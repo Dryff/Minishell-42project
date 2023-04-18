@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/17 17:47:22 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:42:29 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 {
 	if (msh->cmd[cmd_id].ip.input)
+	{
 		if (dup2(msh->cmd[cmd_id].ip.infd, STDIN_FILENO) == -1)
 			exit(1);
+		close(msh->cmd[cmd_id].ip.infd);
+	}
 	close(fd[0]);
 	if (msh->cmd[cmd_id].redir_nbr == 0)
 	{
@@ -24,15 +27,22 @@ void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 		{
 			if (dup2(101, STDOUT_FILENO) == -1)
 				exit(1);
+			close(101);
 		}
 		else
+		{
 			if (dup2(fd[1], STDOUT_FILENO) == -1)
 				exit(1);
+			close(fd[1]);
+		}
 	}
 	else if (msh->cmd[cmd_id].op)
+	{
 		if (dup2(msh->cmd[cmd_id].op[msh->cmd[cmd_id].redir_nbr - 1] \
 	.outfd, STDOUT_FILENO) == -1)
 			exit(1);
+		close(msh->cmd[cmd_id].op[msh->cmd[cmd_id].redir_nbr].outfd);
+	}
 	close(fd[1]);
 	close(100);
 	close(101);
@@ -54,7 +64,6 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 	if (pid == 0)
 		exec_to_pipe(msh, cmd_id, fd);
 	signal(SIGQUIT, SIG_IGN);
-	close(fd[1]);
 	if (dup2(fd[0], STDIN_FILENO) == -1)
 		exit(1);
 	close(fd[0]);
@@ -107,7 +116,7 @@ int	commands(t_msh *msh, int error)
 	{
 		if (msh->cmd[i].param[0] && msh->cmd[i].ip.infd != -1 \
 		&& check_out(*msh, i))
-		{	
+		{
 			if (!is_not_builtin_fd(msh, msh->cmd[i].param[0], i))
 				exec_cmd(msh, i);
 		}

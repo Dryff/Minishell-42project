@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/15 01:44:34 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:42:50 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ int	is_not_builtin_fd(t_msh *msh, char *cmd, int i)
 		return (CD);
 	else if (!ft_strcmp(cmd, "unset"))
 		return (UNSET);
-	else if (!ft_strcmp(cmd, "exit"))
-		return (EXIT);
 	return (0);
 }
 
@@ -90,7 +88,5 @@ int	exec_builtins(t_msh *msh, int cmd_id, int builtin)
 		return (ft_unset(msh, cmd_id), 1);
 	if (builtin == EXIT)
 		return (ft_exit(msh, cmd_id), 1);
-	if (builtin == VAR)
-		return (ft_print_status(), 1);
 	return (0);
 }

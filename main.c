@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/17 16:26:27 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:16:36 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	init_prompt(t_msh *msh)
 int	ext_check_built(t_msh *msh, int i, int j)
 {
 	update_msh_status(1);
-	printf("msh: export: '%s': not a valid identifier\n"\
+	ft_err_printf("msh: export: '%s': not a valid identifier\n"\
 	, msh->cmd[i].param[j]);
 	return (1);
 }
@@ -85,7 +85,7 @@ int	main(int argc, char **argv, char **old_env)
 	t_msh	msh;
 
 	if (argc != 1)
-		return (printf("msh: %s: No such file or directory\n", argv[1]), 1);
+		return (ft_err_printf("msh: %s: No such file or directory\n", argv[1]), 1);
 	msh.error = 0;
 	msh.env = init_env(old_env);
 	if (msh.env.error)
