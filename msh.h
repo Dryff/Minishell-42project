@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/18 10:56:56 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/18 11:29:55 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,7 +265,7 @@ int			go_to_end_quote(t_parse p, int i, char *line);
 int			parse_fd_data(t_msh *msh);
 int			is_alpha(char c);
 void		quote_handling(t_msh *msh, t_parse *p);
-int			check_arrows(t_msh *msh);
+int			check_arrows(t_msh *msh, int is_in_quotes);
 char		*develop_name(t_msh *msh, char *sub, int hd);
 t_outputs	*get_op_array(t_msh *msh, char *str, int cmd_id);
 char		**get_hd_array(t_msh *msh, char *str, int cmd_id);
