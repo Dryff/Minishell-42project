@@ -71,9 +71,9 @@ MOUNIR
 ------ COLAS ------
 
 time cat Makefile | ls | sleep 3
-ls < in | wc -l > out <---| CA MARCHE PAS
 
 ------ FAIT ------
+ls < in | wc -l > out
 cat /dev/urandom | head > yo 
 cat | cat | ls
 ctrl c dans here_doc doit exit tt les heredocs
