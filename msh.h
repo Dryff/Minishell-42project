@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/18 16:19:46 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/18 16:36:38 by laquarium        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ t_env		init_env(char **envp);
 void		ft_print_env(t_msh *msh);
 void		ft_declare_print(t_env *env);
 char		*get_export_cmd(char *line);
-int			ft_export(t_msh *msh, int cmd_id);
+int			ft_export(t_msh *msh, int cmd_id, int flag);
 int			*ft_bool_strnstr(const char *haystack, const char *needle, \
 size_t len);
 char		**add_comand_to_tab(char **tab, char *cmd);
@@ -210,9 +210,9 @@ char		*get_expand_cmd(char *str);
 int			exec_builtin_cmd(t_msh *msh);
 int			is_builtin(char *cmd);
 int			is_builtin_fd(t_msh *msh, char *cmd);
-int			exec_builtins(t_msh *msh, int cmd_id, int builtin, int mode);
+int			exec_builtins (t_msh *msh, int cmd_id, int builtin, int mode);
 int			ft_echo(t_msh *msh, int cmd_id);
-int			check_builtins(t_msh *msh);
+int			check_export(t_msh *msh);
 int			ext_check_built(t_msh *msh, int i, int j);
 int			check_exit(t_msh *msh);
 

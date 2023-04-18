@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/18 16:30:52 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/18 16:39:18 by laquarium        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	exec_builtins(t_msh *msh, int cmd_id, int builtin, int mode)
 	if (builtin == CD)
 		return (ft_dvd(msh, cmd_id), 1);
 	if (builtin == EXPORT)
-		return (ft_export(msh, cmd_id), 1);
+		return (ft_export(msh, cmd_id, mode), 1);
 	if (builtin == UNSET)
 		return (ft_unset(msh, cmd_id), 1);
 	if (builtin == EXIT)

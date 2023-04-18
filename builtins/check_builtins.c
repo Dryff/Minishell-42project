@@ -6,7 +6,7 @@
 /*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:53:30 by laquarium         #+#    #+#             */
-/*   Updated: 2023/04/18 15:46:19 by laquarium        ###   ########.fr       */
+/*   Updated: 2023/04/18 16:40:40 by laquarium        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ext_check_built(t_msh *msh, int i, int j)
 	return (1);
 }
 
-int	check_builtins(t_msh *msh)
+int	check_export(t_msh *msh)
 {
 	int		i;
 	int		j;
@@ -28,6 +28,7 @@ int	check_builtins(t_msh *msh)
 
 	i = 0;
 	flag = 0;
+    printf("ALEDLEDLLEDALD\n");
 	while (i < msh->cmd_nbr)
 	{
 		j = 1;

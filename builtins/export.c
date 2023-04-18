@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 00:06:07 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/18 16:10:36 by laquarium        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,14 @@ int	complete_export(t_msh *msh, char *cmd)
 	return (1);
 }
 
-int	ft_export(t_msh *msh, int cmd_id)
+int	ft_export(t_msh *msh, int cmd_id, int flag)
 {
 	char	*cmd;
 	int		i;
 
 	i = 0;
+	if (flag == NOEXEC)
+		return (check_export(msh), 0);
 	while (msh->cmd[cmd_id].param[i])
 		i++;
 	if (i < 2)
