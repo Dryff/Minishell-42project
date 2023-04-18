@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:07:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/18 11:29:11 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/18 15:17:43 by laquarium        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,42 +21,6 @@ int	init_prompt(t_msh *msh)
 	else
 		msh->prompt = select_bad_prompt_1();
 	return (0);
-}
-
-int	ext_check_built(t_msh *msh, int i, int j)
-{
-	update_msh_status(1);
-	ft_err_printf("msh: export: '%s': not a valid identifier\n"\
-	, msh->cmd[i].param[j]);
-	return (1);
-}
-
-int	check_builtins(t_msh *msh)
-{
-	int		i;
-	int		j;
-	int		flag;
-
-	i = 0;
-	flag = 0;
-	while (i < msh->cmd_nbr)
-	{
-		j = 1;
-		if (msh->cmd[i].param && msh->cmd[i].param[0] \
-		&& !ft_strcmp(msh->cmd[i].param[0], "export"))
-		{
-			while (msh->cmd[i].param[j])
-			{
-				if (valid_export(msh->cmd[i].param[j]) == WRONG_EXPORT)
-					flag = ext_check_built(msh, i, j);
-				j++;
-			}
-		}
-		i++;
-	}
-	if (!flag)
-		update_msh_status(0);
-	return (1);
 }
 
 void	main_loop(t_msh *msh)
@@ -74,7 +38,10 @@ void	main_loop(t_msh *msh)
 	if (check_arrows(msh, 0))
 		parse_line(msh);
 	if (msh->cmd_nbr && check_builtins(msh))
+	{
+		check_exit(msh);
 		commands(msh, 0);
+	}
 	custom_add_history(msh->line, NOFREE, 0);
 	free_things(msh);
 	free(msh->line);

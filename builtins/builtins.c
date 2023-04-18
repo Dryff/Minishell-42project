@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/18 10:42:50 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/18 14:40:03 by laquarium        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	is_not_builtin_fd(t_msh *msh, char *cmd, int i)
 		return (CD);
 	else if (!ft_strcmp(cmd, "unset"))
 		return (UNSET);
+	else if (!ft_strcmp(cmd, "exit"))
+		return (EXIT);
 	return (0);
 }
 
