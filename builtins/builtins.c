@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/18 10:42:50 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/18 15:57:34 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_pwd(void)
 	return (0);
 }
 
-int	is_builtin(char *cmd)
+int	is_builtin_fd(char *cmd)
 {
 	if (cmd == NULL)
 		return (0);
@@ -52,23 +52,29 @@ int	is_builtin(char *cmd)
 		return (ENV);
 	else if (!ft_strcmp(cmd, "export"))
 		return (EXPORT);
-	else if (!ft_strcmp(cmd, "unset"))
-		return (UNSET);
 	else if (!ft_strcmp(cmd, "exit"))
 		return (EXIT);
 	return (0);
 }
 
-int	is_not_builtin_fd(t_msh *msh, char *cmd, int i)
+int	is_builtin_fd(char *cmd)
 {
-	if (!cmd)
+	if (cmd == NULL)
 		return (0);
-	if (!ft_strcmp(cmd, "export") && msh->cmd[i].param[1])
-		return (EXPORT);
-	else if (!ft_strcmp(cmd, "cd") && msh->cmd_nbr == 1)
+	if (!ft_strcmp(cmd, "pwd"))
+		return (PWD);
+	else if (!ft_strcmp(cmd, "echo"))
+		return (ECHO);
+	else if (!ft_strcmp(cmd, "cd"))
 		return (CD);
+	else if (!ft_strcmp(cmd, "env"))
+		return (ENV);
+	else if (!ft_strcmp(cmd, "export"))
+		return (EXPORT);
+	else if (!ft_strcmp(cmd, "exit"))
+		return (EXIT);
 	else if (!ft_strcmp(cmd, "unset"))
-		return (UNSET);
+		return (EXIT);	
 	return (0);
 }
 
