@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 10:51:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/18 10:56:32 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/18 11:29:29 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,12 @@ int	check_pipe(t_msh *msh, int i)
 	return (1);
 }
 
-int	check_arrows(t_msh *msh)
+int	check_arrows(t_msh *msh, int is_in_quotes)
 {
 	int	i;
-	int	is_in_quotes;
 	int	start_quote;
 
 	i = 0;
-	is_in_quotes = 0;
 	start_quote = 0;
 	while (msh->line[i] && is_white_space(msh->line[i]))
 		i++;

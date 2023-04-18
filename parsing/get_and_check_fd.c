@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/04/18 10:52:22 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/18 11:32:17 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ int	get_and_check_fd(t_msh *msh)
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < msh->cmd_nbr)
+	i = -1;
+	while (++i < msh->cmd_nbr)
 	{
 		hd_exec(msh, i);
 		j = 0;
@@ -102,8 +102,6 @@ int	get_and_check_fd(t_msh *msh)
 				break ;
 			j++;
 		}
-		if (j != msh->cmd[i].in_nbr)
-			break ;
 		j = 0;
 		while (j < msh->cmd[i].redir_nbr)
 		{
@@ -113,7 +111,6 @@ int	get_and_check_fd(t_msh *msh)
 		}
 		if (j != msh->cmd[i].redir_nbr)
 			break ;
-		i++;
 	}
 	return (1);
 }
