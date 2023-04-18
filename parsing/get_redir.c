@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/18 14:03:16 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/18 14:56:19 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	get_name(t_msh *msh, t_parse p, int mode, int cmd_ind)
 	if (mode == 0)
 	{
 		sub = ft_substr(p.line, p.i, size);
-		printf("sub = %s\n", sub);
 		if (msh->cmd[cmd_ind].ip.input == 2)
 			handle_here_doc(msh, sub, cmd_ind);
 		if (msh->cmd[cmd_ind].ip.input == 1)

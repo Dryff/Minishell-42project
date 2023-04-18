@@ -6,41 +6,11 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/18 14:39:09 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/18 15:07:46 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
-
-void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
-{
-	if (msh->cmd[cmd_id].ip.infd >= 1)
-	{
-		if (dup2(msh->cmd[cmd_id].ip.infd, STDIN_FILENO) == -1)
-			exit(1);
-	}
-	else if (msh->cmd[cmd_id].ip.infd == -1)
-		exit(1);
-	close(fd[0]);
-	if (msh->cmd[cmd_id].redir_nbr == 0)
-	{
-		if (cmd_id == msh->cmd_nbr - 1)
-		{
-			if (dup2(101, STDOUT_FILENO) == -1)
-				exit(1);
-		}
-		else
-			if (dup2(fd[1], STDOUT_FILENO) == -1)
-				exit(1);
-	}
-	else if (msh->cmd[cmd_id].op)
-		if (dup2(msh->cmd[cmd_id].op[msh->cmd[cmd_id].redir_nbr - 1] \
-	.outfd, STDOUT_FILENO) == -1)
-			exit(1);
-	close(fd[1]);
-	close(100);
-	close(101);
-}
 
 void	exec_cmd(t_msh *msh, int cmd_id)
 {
@@ -103,6 +73,15 @@ void	check_redir_to_status(t_msh *msh)
 	int i;
 
 	i = 0;
+	if (WIFEXITED(g_status))
+		g_status = WEXITSTATUS(g_status);
+	else if (WIFSIGNALED(g_status))
+	{
+		if (WTERMSIG(g_status) == 13)
+			g_status = 0;
+		else
+			g_status = 128 + WTERMSIG(g_status);
+	}
 	while (i < msh->cmd[msh->cmd_nbr - 1].redir_nbr)
 	{
 		if (msh->cmd[msh->cmd_nbr - 1].op[i].outfd == -1)
@@ -132,15 +111,10 @@ int	commands(t_msh *msh, int error)
 	}
 	while (waitpid(-1, &g_status, 0) > 0)
 		;
-	if (WIFEXITED(g_status))
-		g_status = WEXITSTATUS(g_status);
-	else if (WIFSIGNALED(g_status))
-		g_status = 128 + WTERMSIG(g_status);
 	check_redir_to_status(msh);
 	builtin = is_builtin(msh->cmd[0].param[0]);
 	if (msh->cmd[0].param[0] && msh->cmd_nbr == 1 && \
 	is_not_builtin_fd(msh, msh->cmd[0].param[0], 0))
 		exec_builtins(msh, 0, builtin);
-	dup_inffd(0);
-	return (0);
+	return (dup_inffd(0), 0);
 }
