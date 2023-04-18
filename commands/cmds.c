@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/18 12:02:29 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/18 14:39:09 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 {
-	if (msh->cmd[cmd_id].ip.infd == 1)
+	if (msh->cmd[cmd_id].ip.infd >= 1)
 	{
 		if (dup2(msh->cmd[cmd_id].ip.infd, STDIN_FILENO) == -1)
 			exit(1);
@@ -98,6 +98,19 @@ int	check_out(t_msh msh, int i)
 	return (1);
 }
 
+void	check_redir_to_status(t_msh *msh)
+{
+	int i;
+
+	i = 0;
+	while (i < msh->cmd[msh->cmd_nbr - 1].redir_nbr)
+	{
+		if (msh->cmd[msh->cmd_nbr - 1].op[i].outfd == -1)
+			g_status = 1;
+		i++;
+	}
+}
+
 int	commands(t_msh *msh, int error)
 {
 	int	i;
@@ -110,7 +123,7 @@ int	commands(t_msh *msh, int error)
 	while (++i < msh->cmd_nbr)
 	{
 		if (msh->cmd[i].param[0] && check_out(*msh, i))
-		{	
+		{
 			if (!is_not_builtin_fd(msh, msh->cmd[i].param[0], i))
 				exec_cmd(msh, i);
 		}
@@ -123,12 +136,11 @@ int	commands(t_msh *msh, int error)
 		g_status = WEXITSTATUS(g_status);
 	else if (WIFSIGNALED(g_status))
 		g_status = 128 + WTERMSIG(g_status);
+	check_redir_to_status(msh);
 	builtin = is_builtin(msh->cmd[0].param[0]);
 	if (msh->cmd[0].param[0] && msh->cmd_nbr == 1 && \
 	is_not_builtin_fd(msh, msh->cmd[0].param[0], 0))
 		exec_builtins(msh, 0, builtin);
 	dup_inffd(0);
-	if (error != 0)
-		return (0);
 	return (0);
 }

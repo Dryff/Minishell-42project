@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:39:11 by colas             #+#    #+#             */
-/*   Updated: 2023/04/18 11:28:50 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/18 13:29:55 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 	int		builtin;
 
 	get_op_ip_and_hd(msh, cmd_id, fd);
-	ft_err_printf("cmd = %s\n", msh->cmd[cmd_id].param[0]);
 	builtin = is_builtin(msh->cmd[cmd_id].param[0]);
 	if (!builtin)
 	{
