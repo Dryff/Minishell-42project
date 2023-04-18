@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/18 11:29:55 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/18 16:19:46 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@
 
 // PARSING ERROR //
 # define ERR_MESS "msh: syntax error near unexpected token"
+
+// EXEC COMMANDS
+# define EXEC 1
+# define NOEXEC 2
 
 extern int	g_status;
 
@@ -150,7 +154,7 @@ void		init_history(void);
 void		custom_add_history(char *line, int status, int i);
 
 /* EXIT */
-int			ft_exit(t_msh *msh, int cmd_id);
+int			ft_exit(t_msh *msh, int cmd_id, int flag);
 void		actually_exit(t_msh *msh, int status, int flag, char *cmd);
 void		ctrl_d_exit(t_msh *msh);
 
@@ -205,9 +209,12 @@ char		*get_expand_cmd(char *str);
 /* builtins */
 int			exec_builtin_cmd(t_msh *msh);
 int			is_builtin(char *cmd);
-int			is_not_builtin_fd(t_msh *msh, char *cmd, int i);
-int			exec_builtins(t_msh *msh, int cmd_id, int builtin);
+int			is_builtin_fd(t_msh *msh, char *cmd);
+int			exec_builtins(t_msh *msh, int cmd_id, int builtin, int mode);
 int			ft_echo(t_msh *msh, int cmd_id);
+int			check_builtins(t_msh *msh);
+int			ext_check_built(t_msh *msh, int i, int j);
+int			check_exit(t_msh *msh);
 
 /* signal */
 void		in_exec_signal_handler(int signal_num);

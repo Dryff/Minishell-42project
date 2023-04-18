@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/18 15:57:34 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/18 16:30:52 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,29 @@ int	ft_pwd(void)
 	return (0);
 }
 
-int	is_builtin_fd(char *cmd)
+int	is_builtin_fd(t_msh *msh, char *cmd)
 {
+	(void)msh;
 	if (cmd == NULL)
 		return (0);
-	if (!ft_strcmp(cmd, "pwd"))
-		return (PWD);
-	else if (!ft_strcmp(cmd, "echo"))
-		return (ECHO);
-	else if (!ft_strcmp(cmd, "cd"))
-		return (CD);
-	else if (!ft_strcmp(cmd, "env"))
-		return (ENV);
-	else if (!ft_strcmp(cmd, "export"))
-		return (EXPORT);
-	else if (!ft_strcmp(cmd, "exit"))
-		return (EXIT);
-	return (0);
+	if (!ft_strcmp(cmd, "unset"))
+		return (0);
+	else if (!ft_strcmp(cmd, "pwd") && msh->cmd_nbr == 1)
+		return (0);
+	else if (!ft_strcmp(cmd, "echo") && msh->cmd_nbr == 1)
+		return (0);
+	else if (!ft_strcmp(cmd, "cd") && msh->cmd_nbr == 1)
+		return (0);
+	else if (!ft_strcmp(cmd, "env") && msh->cmd_nbr == 1)
+		return (0);
+	else if (!ft_strcmp(cmd, "export") && msh->cmd_nbr == 1)
+		return (0);
+	else if (!ft_strcmp(cmd, "exit") && msh->cmd_nbr == 1)
+		return (0);
+	return (1);
 }
 
-int	is_builtin_fd(char *cmd)
+int	is_builtin(char *cmd)
 {
 	if (cmd == NULL)
 		return (0);
@@ -74,11 +77,11 @@ int	is_builtin_fd(char *cmd)
 	else if (!ft_strcmp(cmd, "exit"))
 		return (EXIT);
 	else if (!ft_strcmp(cmd, "unset"))
-		return (EXIT);	
+		return (UNSET);	
 	return (0);
 }
 
-int	exec_builtins(t_msh *msh, int cmd_id, int builtin)
+int	exec_builtins(t_msh *msh, int cmd_id, int builtin, int mode)
 {
 	if (builtin == PWD)
 		return (ft_pwd(), 1);
@@ -93,6 +96,6 @@ int	exec_builtins(t_msh *msh, int cmd_id, int builtin)
 	if (builtin == UNSET)
 		return (ft_unset(msh, cmd_id), 1);
 	if (builtin == EXIT)
-		return (ft_exit(msh, cmd_id), 1);
+		return (ft_exit(msh, cmd_id, mode), 1);
 	return (0);
 }

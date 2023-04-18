@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/18 15:07:46 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/18 16:27:16 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	check_redir_to_status(t_msh *msh)
 		if (WTERMSIG(g_status) == 13)
 			g_status = 0;
 		else
-			g_status = 128 + WTERMSIG(g_status);
+		g_status = 128 + WTERMSIG(g_status);
 	}
 	while (i < msh->cmd[msh->cmd_nbr - 1].redir_nbr)
 	{
@@ -103,7 +103,7 @@ int	commands(t_msh *msh, int error)
 	{
 		if (msh->cmd[i].param[0] && check_out(*msh, i))
 		{
-			if (!is_not_builtin_fd(msh, msh->cmd[i].param[0], i))
+			if (is_builtin_fd(msh, msh->cmd[i].param[0]))
 				exec_cmd(msh, i);
 		}
 		else
@@ -114,7 +114,7 @@ int	commands(t_msh *msh, int error)
 	check_redir_to_status(msh);
 	builtin = is_builtin(msh->cmd[0].param[0]);
 	if (msh->cmd[0].param[0] && msh->cmd_nbr == 1 && \
-	is_not_builtin_fd(msh, msh->cmd[0].param[0], 0))
-		exec_builtins(msh, 0, builtin);
+	is_builtin(msh->cmd[0].param[0]))
+		exec_builtins(msh, 0, builtin, EXEC);
 	return (dup_inffd(0), 0);
 }

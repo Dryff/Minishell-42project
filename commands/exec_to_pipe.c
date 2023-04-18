@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:39:11 by colas             #+#    #+#             */
-/*   Updated: 2023/04/18 15:01:47 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/18 16:15:37 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 		}
 	}
 	else
-		exec_builtins(msh, cmd_id, builtin);
+		exec_builtins(msh, cmd_id, builtin, NOEXEC);
 	exit(0);
 }

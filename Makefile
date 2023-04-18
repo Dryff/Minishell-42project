@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+         #
+#    By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/04/17 16:53:10 by mfinette         ###   ########.fr        #
+#    Updated: 2023/04/18 14:54:28 by laquarium        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ FILES = main											\
 	builtins/dvd										\
 	builtins/echo										\
 	builtins/exit										\
+	builtins/check_builtins								\
 	parsing/parsing_hub									\
 	parsing/dollar										\
 	parsing/get_cmd_nbr									\
