@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/18 16:10:36 by laquarium        ###   ########.fr       */
+/*   Updated: 2023/04/19 16:17:40 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,11 @@ int	ft_export(t_msh *msh, int cmd_id, int flag)
 {
 	char	*cmd;
 	int		i;
-
+	(void)flag;
 	i = 0;
-	if (flag == NOEXEC)
-		return (check_export(msh), 0);
+	//if NOEXEC doit renvoyer msg d'erreur et doit faire marcher export seul
+	//if EXEC doit renvoyer msg d'erreur et doit faire marcher export dans tt les cas
+	check_export(msh->cmd[cmd_id].param);
 	while (msh->cmd[cmd_id].param[i])
 		i++;
 	if (i < 2)
@@ -102,6 +103,7 @@ int	ft_export(t_msh *msh, int cmd_id, int flag)
 	while (msh->cmd[cmd_id].param[i])
 	{
 		cmd = msh->cmd[cmd_id].param[i];
+		printf("cmd = %s, valid = %d\n", cmd, valid_export(cmd));
 		if (valid_export(cmd) == EMPTY_EXPORT)
 			add_invisible_export(msh, cmd);
 		else if (valid_export(cmd) == VALID_EXPORT)

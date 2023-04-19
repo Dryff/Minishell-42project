@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/18 16:36:38 by laquarium        ###   ########.fr       */
+/*   Updated: 2023/04/19 16:14:00 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,8 +212,7 @@ int			is_builtin(char *cmd);
 int			is_builtin_fd(t_msh *msh, char *cmd);
 int			exec_builtins (t_msh *msh, int cmd_id, int builtin, int mode);
 int			ft_echo(t_msh *msh, int cmd_id);
-int			check_export(t_msh *msh);
-int			ext_check_built(t_msh *msh, int i, int j);
+int			check_export(char **str);
 int			check_exit(t_msh *msh);
 
 /* signal */

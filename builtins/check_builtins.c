@@ -3,45 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   check_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:53:30 by laquarium         #+#    #+#             */
-/*   Updated: 2023/04/18 16:40:40 by laquarium        ###   ########.fr       */
+/*   Updated: 2023/04/19 16:13:51 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-int	ext_check_built(t_msh *msh, int i, int j)
+int	ext_check_built(char **str, int i)
 {
 	update_msh_status(1);
 	ft_err_printf("msh: export: '%s': not a valid identifier\n"\
-	, msh->cmd[i].param[j]);
+	, str[i]);
 	return (1);
 }
 
-int	check_export(t_msh *msh)
+int	check_export(char **str)
 {
 	int		i;
-	int		j;
 	int		flag;
-
-	i = 0;
+	
 	flag = 0;
-    printf("ALEDLEDLLEDALD\n");
-	while (i < msh->cmd_nbr)
+	i = 0;
+	while (str[i])
 	{
-		j = 1;
-		if (msh->cmd[i].param && msh->cmd[i].param[0] \
-		&& !ft_strcmp(msh->cmd[i].param[0], "export"))
-		{
-			while (msh->cmd[i].param[j])
-			{
-				if (valid_export(msh->cmd[i].param[j]) == WRONG_EXPORT)
-					flag = ext_check_built(msh, i, j);
-				j++;
-			}
-		}
+		if (valid_export(str[i]) == WRONG_EXPORT)
+			flag = ext_check_built(str, i);
 		i++;
 	}
 	if (!flag)

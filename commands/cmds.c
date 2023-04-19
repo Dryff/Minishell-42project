@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/18 16:27:16 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/19 14:46:04 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,7 @@ int	commands(t_msh *msh, int error)
 		;
 	check_redir_to_status(msh);
 	builtin = is_builtin(msh->cmd[0].param[0]);
-	if (msh->cmd[0].param[0] && msh->cmd_nbr == 1 && \
-	is_builtin(msh->cmd[0].param[0]))
+	if (msh->cmd[0].param[0] && msh->cmd_nbr == 1 && builtin)
 		exec_builtins(msh, 0, builtin, EXEC);
 	return (dup_inffd(0), 0);
 }
