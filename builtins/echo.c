@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 11:17:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 16:56:55 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/19 23:00:24 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_echo(t_msh *msh, int cmd_id)
 		printf("\n");
 		return (0);
 	}
-	while (is_flag(msh->cmd[cmd_id].param[i++]))
+	while (is_flag(msh->cmd[cmd_id].param[++i]))
 		flag = 1;
 	while (msh->cmd[cmd_id].param[i])
 	{
