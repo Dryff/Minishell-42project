@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/18 16:39:18 by laquarium        ###   ########.fr       */
+/*   Updated: 2023/04/19 23:45:54 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	is_builtin(char *cmd)
 	else if (!ft_strcmp(cmd, "exit"))
 		return (EXIT);
 	else if (!ft_strcmp(cmd, "unset"))
-		return (UNSET);	
+		return (UNSET);
 	return (0);
 }
 

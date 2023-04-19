@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/19 16:17:40 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/19 23:46:09 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,16 @@ int	ft_export(t_msh *msh, int cmd_id, int flag)
 {
 	char	*cmd;
 	int		i;
+
 	(void)flag;
 	i = 0;
-	//if NOEXEC doit renvoyer msg d'erreur et doit faire marcher export seul
-	//if EXEC doit renvoyer msg d'erreur et doit faire marcher export dans tt les cas
 	check_export(msh->cmd[cmd_id].param);
 	while (msh->cmd[cmd_id].param[i])
 		i++;
 	if (i < 2)
 		ft_declare_print(&msh->env);
 	i = 1;
-	while (msh->cmd[cmd_id].param[i])
+	while (msh->cmd[cmd_id].param[i++])
 	{
 		cmd = msh->cmd[cmd_id].param[i];
 		printf("cmd = %s, valid = %d\n", cmd, valid_export(cmd));
@@ -112,7 +111,6 @@ int	ft_export(t_msh *msh, int cmd_id, int flag)
 			plus_export(msh, cmd);
 		if (msh->error)
 			exit(1);
-		i++;
 	}
 	return (0);
 }

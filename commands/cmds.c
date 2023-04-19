@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/19 14:46:04 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/19 23:43:10 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	check_out(t_msh msh, int i)
 
 void	check_redir_to_status(t_msh *msh)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (WIFEXITED(g_status))
@@ -80,7 +80,7 @@ void	check_redir_to_status(t_msh *msh)
 		if (WTERMSIG(g_status) == 13)
 			g_status = 0;
 		else
-		g_status = 128 + WTERMSIG(g_status);
+			g_status = 128 + WTERMSIG(g_status);
 	}
 	while (i < msh->cmd[msh->cmd_nbr - 1].redir_nbr)
 	{
@@ -95,6 +95,7 @@ int	commands(t_msh *msh, int error)
 	int	i;
 	int	builtin;
 
+	(void)error;
 	dup_inffd(1);
 	i = -1;
 	if (msh->here_doc_signal == 1)
@@ -106,8 +107,6 @@ int	commands(t_msh *msh, int error)
 			if (is_builtin_fd(msh, msh->cmd[i].param[0]))
 				exec_cmd(msh, i);
 		}
-		else
-			error = 1;
 	}
 	while (waitpid(-1, &g_status, 0) > 0)
 		;
