@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_to_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:39:11 by colas             #+#    #+#             */
-/*   Updated: 2023/04/20 12:54:13 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/20 16:52:57 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
+int	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 {
 	if (msh->cmd[cmd_id].ip.infd >= 1)
 	{
@@ -25,11 +25,9 @@ void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 	if (msh->cmd[cmd_id].redir_nbr == 0)
 	{
 		if (cmd_id == msh->cmd_nbr - 1)
-		{
 			if (dup2(101, STDOUT_FILENO) == -1)
 				exit(1);
-		}
-		else
+		if (cmd_id != msh->cmd_nbr - 1)
 			if (dup2(fd[1], STDOUT_FILENO) == -1)
 				exit(1);
 	}
@@ -39,9 +37,7 @@ void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 	.outfd, STDOUT_FILENO) == -1)
 			exit(1);
 	}
-	close(fd[1]);
-	close(100);
-	close(101);
+	return (close(fd[1]), close(100), close(101), 0);
 }
 
 void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)

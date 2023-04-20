@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:53:30 by laquarium         #+#    #+#             */
-/*   Updated: 2023/04/20 15:40:06 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/20 16:48:03 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ int	check_exit(char **str)
 	if (len == 2)
 	{
 		if (!ft_str_is_numeric(str[1]))
-			return (ft_err_printf("msh: exit: %s: numeric argument required\n", str[1]), 1);
+			return (ft_err_printf("msh: exit: %s: numeric argument required\n"\
+			, str[1]), 1);
 	}
 	if (len > 2)
 	{
 		if (!ft_str_is_numeric(str[1]))
-			return (ft_err_printf("msh: exit: %s: numeric argument required\n", str[1]), 1);
+			return (ft_err_printf("msh: exit: %s: numeric argument required\n"\
+			, str[1]), 1);
 		else
 			return (ft_err_printf("msh: exit: too many arguments\n", 1));
 	}

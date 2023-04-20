@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/20 15:13:52 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/20 16:47:28 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	get_name(t_msh *msh, t_parse p, int mode, int cmd_ind)
 	if (mode == 0)
 	{
 		sub = ft_substr(p.line, p.i, size);
-		printf("sub = %s\n", sub);
 		if (msh->cmd[cmd_ind].ip.input == 2)
 			handle_here_doc(msh, sub, cmd_ind);
 		if (msh->cmd[cmd_ind].ip.input == 1)
@@ -77,8 +76,9 @@ void	go_after_fd_name(t_msh *msh, t_parse *p, int cmd_id)
 		p->i++;
 	while (p->line[p->i])
 	{
-		if ((p->line[p->i] == '|' || p->line[p->i] == '>' || p->line[p->i] == '<' \
-		|| p->line[p->i] == 10 || p->line[p->i] == ' ') && !is_in_quotes)
+		if ((p->line[p->i] == '|' || p->line[p->i] == '>' \
+		|| p->line[p->i] == '<' || p->line[p->i] == 10 \
+		|| p->line[p->i] == ' ') && !is_in_quotes)
 			break ;
 		quote_check(p->line, p->i, &start_quote, &is_in_quotes);
 		p->i++;
@@ -134,6 +134,5 @@ void	get_redir(t_msh *msh, t_parse *p, int cmd_index)
 		get_name(msh, *p, 0, cmd_index);
 	}
 	p->line = remove_fd_name_and_arrow(msh, *p, cmd_index);
-	printf("p->line = %s\n", p->line);
 	p->i--;
 }

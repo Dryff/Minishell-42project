@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/20 15:40:48 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/20 16:48:27 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-int builtin_work_only_solo(t_msh *msh, char **cmd)
+int	builtin_work_only_solo(t_msh *msh, char **cmd)
 {
 	(void)msh;
 	if (cmd[0] == NULL)
@@ -89,20 +89,20 @@ int	display_fake_error(char **str)
 int	exec_builtins(t_msh *msh, int cmd_id, int builtin)
 {
 	if (builtin == PWD)
-		return (ft_pwd(), 1);
+		return (ft_pwd());
 	if (builtin == ECHO)
-		return (ft_echo(msh, cmd_id), 1);
+		return (ft_echo(msh, cmd_id), 0);
 	if (builtin == ENV)
-		return (ft_print_env(msh), 1);
+		return (ft_print_env(msh), 0);
 	if (builtin == CD)
 		return (ft_dvd(msh, cmd_id), 1);
 	if (builtin == EXPORT)
-		return (ft_export(msh, cmd_id), 1);
+		return (ft_export(msh, cmd_id));
 	if (builtin == UNSET && msh->cmd_nbr == 1)
-		return (ft_unset(msh, cmd_id), 1);
+		return (ft_unset(msh, cmd_id), 0);
 	if (builtin == EXIT && msh->cmd_nbr == 1)
-		return (ft_exit(msh, cmd_id), 1);
+		return (ft_exit(msh, cmd_id));
 	if (builtin == EXIT)
-		return (check_exit(msh->cmd[cmd_id].param), 1);
+		return (check_exit(msh->cmd[cmd_id].param));
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/20 13:08:39 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:50:20 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,31 +90,27 @@ int	ft_export(t_msh *msh, int cmd_id)
 {
 	char	*cmd;
 	int		i;
+	int		ret;
 
 	i = 0;
-	check_export(msh->cmd[cmd_id].param);
+	ret = check_export(msh->cmd[cmd_id].param);
 	while (msh->cmd[cmd_id].param[i])
 		i++;
 	if (i < 2)
 		ft_declare_print(&msh->env);
-	i = 1;
+	i = 0;
 	if (msh->cmd_nbr == 1)
 	{
-		while (msh->cmd[cmd_id].param[i])
+		while (msh->cmd[cmd_id].param[++i])
 		{
 			cmd = msh->cmd[cmd_id].param[i];
-			// printf("cmd = %s, valid = %d\n", cmd, valid_export(cmd));
 			if (valid_export(cmd) == EMPTY_EXPORT)
 				add_invisible_export(msh, cmd);
 			else if (valid_export(cmd) == VALID_EXPORT)
 				complete_export(msh, cmd);
 			else if (valid_export(cmd) == PLUS_EXPORT)
 				plus_export(msh, cmd);
-			if (msh->error)
-				exit(1);
-			i++;
 		}
 	}
-	
-	return (0);
+	return (ret);
 }

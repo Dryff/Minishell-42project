@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/20 15:40:32 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/20 16:53:11 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,6 @@ void		here_doc_sigint(int nb);
 
 /* exec */
 void		exec_to_pipe(t_msh *msh, int cmd_id, int *fd);
-void		get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd);
 
 /* Cmd_utils */
 char		*ft_strchr(const char *s, int c);

@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:35:31 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/20 09:37:06 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/20 16:48:40 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,26 @@ void	exit_one_parameter(t_msh *msh, char *cmd)
 		actually_exit(msh, 2, NOT_NUMERIC, cmd);
 }
 
-void	exit_multiple_parameters(t_msh *msh, char *cmd)
+int	exit_multiple_parameters(t_msh *msh, char *cmd)
 {
 	update_msh_status(1);
 	if (ft_str_is_numeric(cmd))
+	{	
 		ft_err_printf("exit: too many arguments\n");
+		return (1);
+	}
 	else
 		actually_exit(msh, 2, NOT_NUMERIC, cmd);
+	return (0);
 }
 
 int	ft_exit(t_msh *msh, int cmd_id)
 {
 	int	i;
+	int	res;
 
 	i = 0;
+	res = 0;
 	while (msh->cmd[cmd_id].param[i])
 		i++;
 	if (i == 1)
@@ -56,8 +62,8 @@ int	ft_exit(t_msh *msh, int cmd_id)
 	if (i == 2)
 		exit_one_parameter(msh, msh->cmd[cmd_id].param[1]);
 	if (i > 2)
-		exit_multiple_parameters(msh, msh->cmd[cmd_id].param[1]);
-	return (0);
+		res = exit_multiple_parameters(msh, msh->cmd[cmd_id].param[1]);
+	return (res);
 }
 
 void	ctrl_d_exit(t_msh *msh)

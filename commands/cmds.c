@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/20 15:45:25 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/20 16:41:38 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	actualize_status(t_msh *msh, int builtin_error)
 		else
 			g_status = 128 + WTERMSIG(g_status);
 	}
-	if (builtin_error)
+	if (builtin_error || (is_builtin(msh->cmd[msh->cmd_nbr - 1].param[0]) && msh->cmd_nbr == 1 && builtin_error))
 		update_msh_status(1);
 	while (i < msh->cmd[msh->cmd_nbr - 1].redir_nbr)
 	{
@@ -107,7 +107,7 @@ int	commands(t_msh *msh)
 		if (check_out(*msh, i) && !builtin_work_only_solo(msh, msh->cmd[i].param))
 			exec_cmd(msh, i);
 		else if (msh->cmd_nbr == 1)
-			exec_builtins(msh, i, is_builtin(msh->cmd[i].param[0]));
+			builtin_error = exec_builtins(msh, i, is_builtin(msh->cmd[i].param[0]));
 		else if (builtin_work_only_solo(msh, msh->cmd[i].param))
 			builtin_error = display_fake_error(msh->cmd[i].param);
 		if (i != msh->cmd_nbr - 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_and_check_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/04/19 22:56:57 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/20 16:46:21 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,20 +97,14 @@ int	get_and_check_fd(t_msh *msh)
 	i = -1;
 	while (++i < msh->cmd_nbr)
 	{
-		j = 0;
-		while (j < msh->cmd[i].in_nbr)
-		{
+		j = -1;
+		while (++j < msh->cmd[i].in_nbr)
 			if (!check_input(msh, i, j))
 				break ;
-			j++;
-		}
-		j = 0;
-		while (j < msh->cmd[i].redir_nbr)
-		{
+		j = -1;
+		while (++j < msh->cmd[i].redir_nbr)
 			if (!check_output(msh, i, j))
 				break ;
-			j++;
-		}
 		if (j != msh->cmd[i].redir_nbr)
 			break ;
 	}
