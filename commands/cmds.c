@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/20 13:25:57 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/20 14:43:06 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,14 @@ int	commands(t_msh *msh, int error)
 		return (update_msh_status(CTRL_C), 0);
 	while (++i < msh->cmd_nbr)
 	{
-		if (check_out(*msh, i) && !builtin_work_only_solo(msh->cmd[i].param))
+		if (check_out(*msh, i) && !builtin_work_only_solo(msh, msh->cmd[i].param))
+		{
+			printf("oui\n");
 			exec_cmd(msh, i);
+		}
 		else if (msh->cmd_nbr == 1)
 			exec_builtins(msh, i, is_builtin(msh->cmd[i].param[0]));
-		else if (builtin_work_only_solo(msh->cmd[i].param))
+		else if (builtin_work_only_solo(msh, msh->cmd[i].param))
 			display_fake_error(msh->cmd[i].param);
 	}
 	while (waitpid(-1, &g_status, 0) > 0)

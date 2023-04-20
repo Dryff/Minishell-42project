@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/20 11:50:23 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/20 14:49:20 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,18 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-int builtin_work_only_solo(char **cmd)
+int builtin_work_only_solo(t_msh *msh, char **cmd)
 {
-	if (cmd[0] == NULL) 
+	(void)msh;
+	if (cmd[0] == NULL)
 		return (0);
 	if (!ft_strcmp(cmd[0], "export") && cmd[1])
 		return (1);
-	if (!ft_strcmp(cmd[0], "cd") && ft_strcmp(cmd[1], "-"))
-		return (1);
-	if (!ft_strcmp(cmd[0], "exit"))
+	else if (!ft_strcmp(cmd[0], "exit"))
 		return (1);
 	else if (!ft_strcmp(cmd[0], "unset"))
+		return (1);
+	else if (!ft_strcmp(cmd[0], "cd") && msh->cmd_nbr == 1)
 		return (1);
 	return (0);
 }

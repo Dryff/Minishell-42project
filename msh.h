@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/20 11:29:00 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/20 14:42:01 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ char		*get_expand_cmd(char *str);
 
 /* builtins */
 int			exec_builtin_cmd(t_msh *msh);
-int 		builtin_work_only_solo(char **cmd);
+int 		builtin_work_only_solo(t_msh *msh, char **cmd);
 void 		display_fake_error(char **str);
 int 		is_builtin(char *cmd);
 int			exec_builtins(t_msh *msh, int cmd_id, int builtin);
