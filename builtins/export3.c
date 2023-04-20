@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 11:10:01 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/13 21:51:19 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/20 13:12:26 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ int	get_position(char **tab, char *cmd)
 		{
 			if (tab[i][ft_strlen(temp)] == '=' || !tab[i][ft_strlen(temp)])
 			{
-				free(temp);
-				return (i);
+				if (tab[i][0] == temp[0])
+				{
+					free(temp);
+					return (i);
+				}
 			}
 		}
 		i++;
