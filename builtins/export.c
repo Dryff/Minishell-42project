@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/19 23:46:09 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/20 09:39:37 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,11 @@ int	complete_export(t_msh *msh, char *cmd)
 	return (1);
 }
 
-int	ft_export(t_msh *msh, int cmd_id, int flag)
+int	ft_export(t_msh *msh, int cmd_id)
 {
 	char	*cmd;
 	int		i;
 
-	(void)flag;
 	i = 0;
 	check_export(msh->cmd[cmd_id].param);
 	while (msh->cmd[cmd_id].param[i])
@@ -99,18 +98,23 @@ int	ft_export(t_msh *msh, int cmd_id, int flag)
 	if (i < 2)
 		ft_declare_print(&msh->env);
 	i = 1;
-	while (msh->cmd[cmd_id].param[i++])
+	if (msh->cmd_nbr == 1)
 	{
-		cmd = msh->cmd[cmd_id].param[i];
-		printf("cmd = %s, valid = %d\n", cmd, valid_export(cmd));
-		if (valid_export(cmd) == EMPTY_EXPORT)
-			add_invisible_export(msh, cmd);
-		else if (valid_export(cmd) == VALID_EXPORT)
-			complete_export(msh, cmd);
-		else if (valid_export(cmd) == PLUS_EXPORT)
-			plus_export(msh, cmd);
-		if (msh->error)
-			exit(1);
+		while (msh->cmd[cmd_id].param[i])
+		{
+			cmd = msh->cmd[cmd_id].param[i];
+			printf("cmd = %s, valid = %d\n", cmd, valid_export(cmd));
+			if (valid_export(cmd) == EMPTY_EXPORT)
+				add_invisible_export(msh, cmd);
+			else if (valid_export(cmd) == VALID_EXPORT)
+				complete_export(msh, cmd);
+			else if (valid_export(cmd) == PLUS_EXPORT)
+				plus_export(msh, cmd);
+			if (msh->error)
+				exit(1);
+			i++;
+		}
 	}
+	
 	return (0);
 }

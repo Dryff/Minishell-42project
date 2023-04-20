@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/19 16:14:00 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/20 09:53:51 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void		init_history(void);
 void		custom_add_history(char *line, int status, int i);
 
 /* EXIT */
-int			ft_exit(t_msh *msh, int cmd_id, int flag);
+int			ft_exit(t_msh *msh, int cmd_id);
 void		actually_exit(t_msh *msh, int status, int flag, char *cmd);
 void		ctrl_d_exit(t_msh *msh);
 
@@ -169,7 +169,7 @@ t_env		init_env(char **envp);
 void		ft_print_env(t_msh *msh);
 void		ft_declare_print(t_env *env);
 char		*get_export_cmd(char *line);
-int			ft_export(t_msh *msh, int cmd_id, int flag);
+int			ft_export(t_msh *msh, int cmd_id);
 int			*ft_bool_strnstr(const char *haystack, const char *needle, \
 size_t len);
 char		**add_comand_to_tab(char **tab, char *cmd);
@@ -208,12 +208,12 @@ char		*get_expand_cmd(char *str);
 
 /* builtins */
 int			exec_builtin_cmd(t_msh *msh);
+int 		builtin_work_with_pipe(char *cmd);
 int			is_builtin(char *cmd);
-int			is_builtin_fd(t_msh *msh, char *cmd);
-int			exec_builtins (t_msh *msh, int cmd_id, int builtin, int mode);
+int			exec_builtins(t_msh *msh, int cmd_id, int builtin);
 int			ft_echo(t_msh *msh, int cmd_id);
 int			check_export(char **str);
-int			check_exit(t_msh *msh);
+int			check_exit(char **str);
 
 /* signal */
 void		in_exec_signal_handler(int signal_num);

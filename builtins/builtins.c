@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/19 23:45:54 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/20 09:53:20 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,6 @@ int	ft_pwd(void)
 	return (0);
 }
 
-int	is_builtin_fd(t_msh *msh, char *cmd)
-{
-	(void)msh;
-	if (cmd == NULL)
-		return (0);
-	if (!ft_strcmp(cmd, "unset"))
-		return (0);
-	else if (!ft_strcmp(cmd, "pwd") && msh->cmd_nbr == 1)
-		return (0);
-	else if (!ft_strcmp(cmd, "echo") && msh->cmd_nbr == 1)
-		return (0);
-	else if (!ft_strcmp(cmd, "cd") && msh->cmd_nbr == 1)
-		return (0);
-	else if (!ft_strcmp(cmd, "env") && msh->cmd_nbr == 1)
-		return (0);
-	else if (!ft_strcmp(cmd, "export") && msh->cmd_nbr == 1)
-		return (0);
-	else if (!ft_strcmp(cmd, "exit") && msh->cmd_nbr == 1)
-		return (0);
-	return (1);
-}
-
 int	is_builtin(char *cmd)
 {
 	if (cmd == NULL)
@@ -81,7 +59,24 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-int	exec_builtins(t_msh *msh, int cmd_id, int builtin, int mode)
+int builtin_work_with_pipe(char *cmd)
+{
+	if (cmd == NULL)
+		return (0);
+	if (!ft_strcmp(cmd, "pwd"))
+		return (1);
+	else if (!ft_strcmp(cmd, "echo"))
+		return (1);
+	else if (!ft_strcmp(cmd, "cd"))
+		return (1);
+	else if (!ft_strcmp(cmd, "exit"))
+		return (1);
+	else if (!ft_strcmp(cmd, "unset"))
+		return (1);
+	return (0);
+}
+
+int	exec_builtins(t_msh *msh, int cmd_id, int builtin)
 {
 	if (builtin == PWD)
 		return (ft_pwd(), 1);
@@ -92,10 +87,10 @@ int	exec_builtins(t_msh *msh, int cmd_id, int builtin, int mode)
 	if (builtin == CD)
 		return (ft_dvd(msh, cmd_id), 1);
 	if (builtin == EXPORT)
-		return (ft_export(msh, cmd_id, mode), 1);
+		return (ft_export(msh, cmd_id), 1);
 	if (builtin == UNSET)
 		return (ft_unset(msh, cmd_id), 1);
 	if (builtin == EXIT)
-		return (ft_exit(msh, cmd_id, mode), 1);
+		return (ft_exit(msh, cmd_id), 1);
 	return (0);
 }

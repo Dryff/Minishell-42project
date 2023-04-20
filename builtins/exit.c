@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:35:31 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/18 15:58:32 by laquarium        ###   ########.fr       */
+/*   Updated: 2023/04/20 09:37:06 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,11 @@ void	exit_multiple_parameters(t_msh *msh, char *cmd)
 		actually_exit(msh, 2, NOT_NUMERIC, cmd);
 }
 
-int	ft_exit(t_msh *msh, int cmd_id, int flag)
+int	ft_exit(t_msh *msh, int cmd_id)
 {
 	int	i;
 
 	i = 0;
-	if (flag == NOEXEC)
-		return (check_exit(msh), 0);
 	while (msh->cmd[cmd_id].param[i])
 		i++;
 	if (i == 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_to_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:39:11 by colas             #+#    #+#             */
-/*   Updated: 2023/04/18 16:15:37 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/20 09:53:29 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ void	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 				exit(1);
 	}
 	else if (msh->cmd[cmd_id].op)
+	{
 		if (dup2(msh->cmd[cmd_id].op[msh->cmd[cmd_id].redir_nbr - 1] \
 	.outfd, STDOUT_FILENO) == -1)
 			exit(1);
+	}
 	close(fd[1]);
 	close(100);
 	close(101);
@@ -62,6 +64,6 @@ void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 		}
 	}
 	else
-		exec_builtins(msh, cmd_id, builtin, NOEXEC);
+		exec_builtins(msh, cmd_id, builtin);
 	exit(0);
 }

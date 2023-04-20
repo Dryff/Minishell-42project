@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/19 23:43:10 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/20 09:53:39 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	check_redir_to_status(t_msh *msh)
 int	commands(t_msh *msh, int error)
 {
 	int	i;
-	int	builtin;
 
 	(void)error;
 	dup_inffd(1);
@@ -102,17 +101,15 @@ int	commands(t_msh *msh, int error)
 		return (update_msh_status(CTRL_C), 0);
 	while (++i < msh->cmd_nbr)
 	{
-		if (msh->cmd[i].param[0] && check_out(*msh, i))
-		{
-			if (is_builtin_fd(msh, msh->cmd[i].param[0]))
+		if (msh->cmd[i].param[0] && check_out(*msh, i) \
+		&& builtin_work_with_pipe(msh->cmd[i].param[0]))
 				exec_cmd(msh, i);
-		}
+		else if (msh->cmd_nbr == 1)
+			return (exec_builtins(msh, i, is_builtin(msh->cmd[i].param[0])));
 	}
 	while (waitpid(-1, &g_status, 0) > 0)
 		;
 	check_redir_to_status(msh);
-	builtin = is_builtin(msh->cmd[0].param[0]);
-	if (msh->cmd[0].param[0] && msh->cmd_nbr == 1 && builtin)
-		exec_builtins(msh, 0, builtin, EXEC);
-	return (dup_inffd(0), 0);
+	dup_inffd(0);
+	return (0);
 }
