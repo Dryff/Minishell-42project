@@ -6,7 +6,7 @@
 /*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 10:03:09 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/20 15:07:38 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/20 15:13:52 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	get_name_after_arrow(t_msh *msh, t_parse *p)
 	end = p->i;
 	while (p->line[end])
 	{
-		if ((p->line[end] == '|' || p->line[end] == '>' || p->line[end] == '<' || p->line[end] == 10) && !is_in_quotes)
+		if ((p->line[end] == '|' || p->line[end] == '>' || p->line[end] == '<' \
+		|| p->line[end] == 10 || p->line[end] == ' ') && !is_in_quotes)
 			break ;
 		quote_check(p->line, end, &start_quote, &is_in_quotes);
 		end++;
@@ -76,8 +77,8 @@ void	go_after_fd_name(t_msh *msh, t_parse *p, int cmd_id)
 		p->i++;
 	while (p->line[p->i])
 	{
-		if ((p->line[p->i] == '|' || p->line[p->i] == '>' \
-		|| p->line[p->i] == '<' || p->line[p->i] == 10) && !is_in_quotes)
+		if ((p->line[p->i] == '|' || p->line[p->i] == '>' || p->line[p->i] == '<' \
+		|| p->line[p->i] == 10 || p->line[p->i] == ' ') && !is_in_quotes)
 			break ;
 		quote_check(p->line, p->i, &start_quote, &is_in_quotes);
 		p->i++;
