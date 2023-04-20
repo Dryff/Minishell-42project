@@ -6,11 +6,26 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 00:05:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 16:54:44 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/21 00:19:44 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
+
+void	simple_plus_export(t_msh *msh, char *cmd)
+{
+	char	*dup;
+	char	*dup2;
+
+	dup = ft_substr(cmd, 0, ft_strlen_until(cmd, '=') - 1);
+	dup2 = ft_strjoin(dup, "=");
+	if (!dup || !dup2)
+		exit(1);
+	if (get_position(msh->env.tab, dup) == -1)
+		complete_export(msh, dup2);
+	free(dup);
+	free(dup2);
+}
 
 char	*get_plus_export_cmd(char *cmd)
 {
@@ -42,6 +57,8 @@ int	plus_export(t_msh *msh, char *cmd)
 	char	*dup;
 	char	*export_cmd;
 
+	if (!cmd[ft_strlen_until(cmd, '=') + 1])
+		return (simple_plus_export(msh, cmd), 1);
 	dup = ft_substr(cmd, 0, ft_strlen_until(cmd, '=') - 1);
 	if (!dup)
 		return (msh->error = 1, 0);

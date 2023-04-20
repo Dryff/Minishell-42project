@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/20 16:53:11 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/21 00:22:21 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,9 +208,9 @@ char		*get_expand_cmd(char *str);
 
 /* builtins */
 int			exec_builtin_cmd(t_msh *msh);
-int 		builtin_work_only_solo(t_msh *msh, char **cmd);
+int			builtin_work_only_solo(t_msh *msh, char **cmd);
 int			display_fake_error(char **str);
-int 		is_builtin(char *cmd);
+int			is_builtin(char *cmd);
 int			exec_builtins(t_msh *msh, int cmd_id, int builtin);
 int			ft_echo(t_msh *msh, int cmd_id);
 int			check_export(char **str);

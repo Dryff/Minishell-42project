@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/20 19:10:44 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/21 00:22:49 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 
 	if (pipe(fd) == -1)
 		exit(1);
-	if (msh->cmd[cmd_id].param[0] && !is_minishell(msh->cmd[cmd_id].param[0], msh->program_name))
+	if (msh->cmd[cmd_id].param[0] && \
+	!is_minishell(msh->cmd[cmd_id].param[0], msh->program_name))
 		set_execution_signals();
 	else
 		ignore_signals();
