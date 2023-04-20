@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/20 14:49:20 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/20 15:40:48 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,15 @@ int builtin_work_only_solo(t_msh *msh, char **cmd)
 	return (0);
 }
 
-void	display_fake_error(char **str)
+int	display_fake_error(char **str)
 {
 	if (!ft_strcmp(str[0], "export"))
-		check_export(str);
+		return (check_export(str));
 	else if (!ft_strcmp(str[0], "exit"))
-		check_exit(str);
+		return (check_exit(str));
 	else if (!ft_strcmp(str[0], "cd"))
-		check_exit(str);
+		return (check_exit(str));
+	return (0);
 }
 
 int	exec_builtins(t_msh *msh, int cmd_id, int builtin)

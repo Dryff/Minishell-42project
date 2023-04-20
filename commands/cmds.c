@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/20 14:54:27 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/20 15:45:25 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	check_out(t_msh msh, int i)
 	return (1);
 }
 
-void	check_redir_to_status(t_msh *msh)
+void	actualize_status(t_msh *msh, int builtin_error)
 {
 	int	i;
 
@@ -82,6 +82,8 @@ void	check_redir_to_status(t_msh *msh)
 		else
 			g_status = 128 + WTERMSIG(g_status);
 	}
+	if (builtin_error)
+		update_msh_status(1);
 	while (i < msh->cmd[msh->cmd_nbr - 1].redir_nbr)
 	{
 		if (msh->cmd[msh->cmd_nbr - 1].op[i].outfd == -1)
@@ -90,13 +92,14 @@ void	check_redir_to_status(t_msh *msh)
 	}
 }
 
-int	commands(t_msh *msh, int error)
+int	commands(t_msh *msh)
 {
 	int	i;
+	int builtin_error;
 
-	(void)error;
 	dup_inffd(1);
 	i = -1;
+	builtin_error = 0;
 	if (msh->here_doc_signal == 1)
 		return (update_msh_status(CTRL_C), 0);
 	while (++i < msh->cmd_nbr)
@@ -106,11 +109,13 @@ int	commands(t_msh *msh, int error)
 		else if (msh->cmd_nbr == 1)
 			exec_builtins(msh, i, is_builtin(msh->cmd[i].param[0]));
 		else if (builtin_work_only_solo(msh, msh->cmd[i].param))
-			display_fake_error(msh->cmd[i].param);
+			builtin_error = display_fake_error(msh->cmd[i].param);
+		if (i != msh->cmd_nbr - 1)
+			builtin_error = 0;
 	}
 	while (waitpid(-1, &g_status, 0) > 0)
 		;
-	check_redir_to_status(msh);
+	actualize_status(msh, builtin_error);
 	dup_inffd(0);
 	return (0);
 }

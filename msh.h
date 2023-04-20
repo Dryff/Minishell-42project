@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/20 14:42:01 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/20 15:40:32 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,7 @@ char		*get_expand_cmd(char *str);
 /* builtins */
 int			exec_builtin_cmd(t_msh *msh);
 int 		builtin_work_only_solo(t_msh *msh, char **cmd);
-void 		display_fake_error(char **str);
+int			display_fake_error(char **str);
 int 		is_builtin(char *cmd);
 int			exec_builtins(t_msh *msh, int cmd_id, int builtin);
 int			ft_echo(t_msh *msh, int cmd_id);
@@ -240,7 +240,7 @@ char		*ft_strchr(const char *s, int c);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int			ft_strstr(const char *str, const char *to_find);
 char		*ft_strjoin(char const *s1, char const *s2);
-int			commands(t_msh *msh, int error);
+int			commands(t_msh *msh);
 char		**get_paths(t_msh *msh, char **envp);
 char		*get_pathing(t_msh msh, int j);
 void		here_doc(t_msh *msh, int cmd_id);
