@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/20 16:57:54 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/20 17:24:45 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,15 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 
 	if (pipe(fd) == -1)
 		exit(1);
+	if (!is_minishell(msh->cmd[cmd_id].param[0], msh->program_name))
+		set_execution_signals();
+	else
+		ignore_signals();
 	pid = fork();
-	set_execution_signals();
 	if (pid == -1)
 		exit(1);
-	if (pid != 0 && msh->cmd[cmd_id].param[0] \
-	&& is_minishell(msh->cmd[cmd_id].param[0], msh->program_name))
-		ignore_signals();
 	if (pid == 0)
 		exec_to_pipe(msh, cmd_id, fd);
-	signal(SIGQUIT, SIG_IGN);
 	close(fd[1]);
 	if (dup2(fd[0], STDIN_FILENO) == -1)
 		exit(1);
