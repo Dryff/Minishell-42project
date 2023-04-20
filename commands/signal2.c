@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 01:30:58 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/18 10:55:04 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/20 09:18:14 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ void	here_doc_sigint(int nb)
 {
 	(void)nb;
 	write(1, "\n", 1);
+	update_msh_status(CTRL_C);
 	exit(CTRL_C);
 }
