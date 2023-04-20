@@ -52,30 +52,14 @@ export test="      "   ---> echo salut $test salut
 
 Fonction interdites (atoi)
 > b2 > b3 > b4 > b5 echo bonjour | COLAS
+- ls | > out | cat = creation du fichier out et cést tout
+< huds < Makefile | grep SRC
+- < Makefile | grep NAME | sort
+ctrl c dans here_doc doit exit tt les heredocs ? 
 
 ---------
 PAS BON :
 ---------
-- < Makefile | grep NAME | sort
-- ls | > out | cat = creation du fichier out et cést tout
-< huds < Makefile | grep SRC
-ctrl c dans here_doc doit exit tt les heredocs ? 
-
-corrections :
------------------
-
-VPAC
-
-
-
-BLAKEHAL
-
-
-MOUNIR
-
-GUSIMONE
-
-exit pete
 
 
 ls > o > o2
