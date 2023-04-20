@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:31:40 by colas             #+#    #+#             */
-/*   Updated: 2023/04/20 09:31:12 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:58:10 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	here_doc(t_msh *msh, int cmd_id)
 	while (i < msh->cmd[cmd_id].hd_nbr)
 	{
 		if (msh->here_doc_signal == 1)
-			break;
+			break ;
 		pid = fork();
 		if (pid == -1)
 			return (error_manager(msh, MALLOC_ERR));
