@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/20 14:43:06 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/20 14:54:27 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,7 @@ int	commands(t_msh *msh, int error)
 	while (++i < msh->cmd_nbr)
 	{
 		if (check_out(*msh, i) && !builtin_work_only_solo(msh, msh->cmd[i].param))
-		{
-			printf("oui\n");
 			exec_cmd(msh, i);
-		}
 		else if (msh->cmd_nbr == 1)
 			exec_builtins(msh, i, is_builtin(msh->cmd[i].param[0]));
 		else if (builtin_work_only_solo(msh, msh->cmd[i].param))
