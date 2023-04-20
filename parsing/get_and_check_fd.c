@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_and_check_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/04/18 11:32:17 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/19 22:56:57 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,10 @@ int	get_and_check_fd(t_msh *msh)
 
 	i = -1;
 	while (++i < msh->cmd_nbr)
-	{
 		hd_exec(msh, i);
+	i = -1;
+	while (++i < msh->cmd_nbr)
+	{
 		j = 0;
 		while (j < msh->cmd[i].in_nbr)
 		{

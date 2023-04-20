@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/20 09:53:39 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/20 12:33:11 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 	set_execution_signals();
 	if (pid == -1)
 		exit(1);
-	if (pid != 0 && is_minishell(msh->cmd[cmd_id].param[0], msh->program_name))
+	if (pid != 0 && msh->cmd[cmd_id].param[0] && is_minishell(msh->cmd[cmd_id].param[0], msh->program_name))
 		ignore_signals();
 	if (pid == 0)
 		exec_to_pipe(msh, cmd_id, fd);
@@ -101,11 +101,15 @@ int	commands(t_msh *msh, int error)
 		return (update_msh_status(CTRL_C), 0);
 	while (++i < msh->cmd_nbr)
 	{
-		if (msh->cmd[i].param[0] && check_out(*msh, i) \
-		&& builtin_work_with_pipe(msh->cmd[i].param[0]))
-				exec_cmd(msh, i);
+		if (check_out(*msh, i) && !builtin_work_only_solo(msh->cmd[i].param))
+		{
+			printf("oui\n");
+			exec_cmd(msh, i);
+		}
 		else if (msh->cmd_nbr == 1)
-			return (exec_builtins(msh, i, is_builtin(msh->cmd[i].param[0])));
+			exec_builtins(msh, i, is_builtin(msh->cmd[i].param[0]));
+		else if (builtin_work_only_solo(msh->cmd[i].param))
+			display_fake_error(msh->cmd[i].param);
 	}
 	while (waitpid(-1, &g_status, 0) > 0)
 		;

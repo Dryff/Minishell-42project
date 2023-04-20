@@ -51,11 +51,11 @@ export test="      "   ---> echo salut $test salut
 
 
 Fonction interdites (atoi)
+> b2 > b3 > b4 > b5 echo bonjour | COLAS
 
 ---------
 PAS BON :
 ---------
-> b2 > b3 > b4 > b5 echo bonjour | COLAS
 - < Makefile | grep NAME | sort
 - ls | > out | cat = creation du fichier out et cést tout
 < huds < Makefile | grep SRC

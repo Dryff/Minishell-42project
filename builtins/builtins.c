@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/20 09:53:20 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/20 11:50:23 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,29 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-int builtin_work_with_pipe(char *cmd)
+int builtin_work_only_solo(char **cmd)
 {
-	if (cmd == NULL)
+	if (cmd[0] == NULL) 
 		return (0);
-	if (!ft_strcmp(cmd, "pwd"))
+	if (!ft_strcmp(cmd[0], "export") && cmd[1])
 		return (1);
-	else if (!ft_strcmp(cmd, "echo"))
+	if (!ft_strcmp(cmd[0], "cd") && ft_strcmp(cmd[1], "-"))
 		return (1);
-	else if (!ft_strcmp(cmd, "cd"))
+	if (!ft_strcmp(cmd[0], "exit"))
 		return (1);
-	else if (!ft_strcmp(cmd, "exit"))
-		return (1);
-	else if (!ft_strcmp(cmd, "unset"))
+	else if (!ft_strcmp(cmd[0], "unset"))
 		return (1);
 	return (0);
+}
+
+void	display_fake_error(char **str)
+{
+	if (!ft_strcmp(str[0], "export"))
+		check_export(str);
+	else if (!ft_strcmp(str[0], "exit"))
+		check_exit(str);
+	else if (!ft_strcmp(str[0], "cd"))
+		check_exit(str);
 }
 
 int	exec_builtins(t_msh *msh, int cmd_id, int builtin)
@@ -88,9 +96,11 @@ int	exec_builtins(t_msh *msh, int cmd_id, int builtin)
 		return (ft_dvd(msh, cmd_id), 1);
 	if (builtin == EXPORT)
 		return (ft_export(msh, cmd_id), 1);
-	if (builtin == UNSET)
+	if (builtin == UNSET && msh->cmd_nbr == 1)
 		return (ft_unset(msh, cmd_id), 1);
-	if (builtin == EXIT)
+	if (builtin == EXIT && msh->cmd_nbr == 1)
 		return (ft_exit(msh, cmd_id), 1);
+	if (builtin == EXIT)
+		return (check_exit(msh->cmd[cmd_id].param), 1);
 	return (0);
 }

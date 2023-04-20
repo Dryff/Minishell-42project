@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:53:30 by laquarium         #+#    #+#             */
-/*   Updated: 2023/04/20 09:30:51 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/20 11:21:41 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	check_exit(char **str)
 {
 	int		len;
 
-	printf("oui\n");
 	len = tab_len(str);
 	if (len == 2)
 	{

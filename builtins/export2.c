@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:45:07 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/20 09:41:52 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/20 11:18:35 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	add_invisible_export(t_msh *msh, char *cmd)
 	pos = get_position(msh->env.sort_tab, cmd);
 	if (pos == -2)
 		return ((void)(msh->error = 1));
-	printf("oui\n");
 	if (pos < 0)
 	{
 		dup = add_comand_to_tab(msh->env.sort_tab, cmd);

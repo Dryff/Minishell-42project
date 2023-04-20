@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 08:36:02 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/20 09:39:37 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/20 11:18:19 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	ft_export(t_msh *msh, int cmd_id)
 		while (msh->cmd[cmd_id].param[i])
 		{
 			cmd = msh->cmd[cmd_id].param[i];
-			printf("cmd = %s, valid = %d\n", cmd, valid_export(cmd));
+			// printf("cmd = %s, valid = %d\n", cmd, valid_export(cmd));
 			if (valid_export(cmd) == EMPTY_EXPORT)
 				add_invisible_export(msh, cmd);
 			else if (valid_export(cmd) == VALID_EXPORT)
