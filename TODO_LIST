@@ -31,8 +31,6 @@ cd: /s: No such file or directory
 reglage de echo "$'PATH'" et echo $'PATH'
 $test
 command not found -> 127
-- ls | > out | cat = creation du fichier out et cést tout
-- < Makefile | grep NAME | sort | sed s/NAME/TOTO/g > out -> pipe en trop entre infile et cmd1
 - mkdir a/b/c -> cd a/b/c -> rm a -> segfault
 - export: invalid id error code
 SORTIE DERREUR DANS $? | Max
@@ -54,6 +52,14 @@ export test="      "   ---> echo salut $test salut
 
 Fonction interdites (atoi)
 
+---------
+PAS BON :
+---------
+> b2 > b3 > b4 > b5 echo bonjour | COLAS
+- < Makefile | grep NAME | sort
+- ls | > out | cat = creation du fichier out et cést tout
+< huds < Makefile | grep SRC
+ctrl c dans here_doc doit exit tt les heredocs ? 
 
 corrections :
 -----------------
@@ -70,13 +76,12 @@ MOUNIR
 GUSIMONE
 
 exit pete
+
+
 ls > o > o2
 cat | cat | ls > mauvaise return value
-
-
 < Makefile cat | grep SRC
-< huds < Makefile cat | cat -e
------- COLAS ------
+------ PAS FAIT ------
 
 time cat Makefile | ls | sleep 3
 
@@ -84,7 +89,6 @@ time cat Makefile | ls | sleep 3
 ls < in | wc -l > out
 cat /dev/urandom | head > yo 
 cat | cat | ls
-ctrl c dans here_doc doit exit tt les heredocs
 < salut < main.c < yo doit mettre message d'erreur de non existence de gauche a droite
 ls + control c ---> enlever le ls | MAX
 ctrl c -> valeur de retour (2) | MAX
@@ -93,7 +97,6 @@ cat < Makefile << a | FAIT
 here_doc fork | COLAS
 Expand dans le hd si delim sans single quotes | COLAS
 
-> b2 > b3 > b4 > b5 echo bonjour | COLAS
 | ls
 ./ls --> command not found au lieu de no such file or directory | COLAS
 close fd 100 et 101 (plusieurs fd open a checker (ligne 48 get_and_check_fd)) | COLAS

@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:31:40 by colas             #+#    #+#             */
-/*   Updated: 2023/04/18 10:54:42 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/20 09:31:12 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	exec_here_doc(t_msh *msh, int cmd_id, int i)
 	while (1)
 	{
 		line = readline("> ");
+		if (g_status == CTRL_C)
+			exit (CTRL_C);
 		if (!line)
 			break ;
 		if (!ft_strcmp(line, msh->cmd[cmd_id].ip.here_doc_delim[i]))
@@ -53,7 +55,7 @@ void	exec_here_doc(t_msh *msh, int cmd_id, int i)
 		if (i == msh->cmd[cmd_id].hd_nbr - 1)
 			develop_here_doc_and_write_to_fd(msh, line, cmd_id);
 	}
-	exit(1);
+	exit(0);
 }
 
 void	here_doc(t_msh *msh, int cmd_id)
@@ -66,6 +68,8 @@ void	here_doc(t_msh *msh, int cmd_id)
 	ignore_signals();
 	while (i < msh->cmd[cmd_id].hd_nbr)
 	{
+		if (msh->here_doc_signal == 1)
+			break;
 		pid = fork();
 		if (pid == -1)
 			return (error_manager(msh, MALLOC_ERR));
