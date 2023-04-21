@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/21 11:59:25 by colas            ###   ########.fr       */
+/*   Updated: 2023/04/21 12:37:55 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	actualize_status(t_msh *msh, int builtin_error)
 	int	i;
 
 	i = 0;
-	printf("status before = %d\n", g_status);
 	if (WIFEXITED(g_status))
 		g_status = WEXITSTATUS(g_status);
 	else if (WIFSIGNALED(g_status))
@@ -84,7 +83,6 @@ void	actualize_status(t_msh *msh, int builtin_error)
 		else
 			g_status = 128 + WTERMSIG(g_status);
 	}
-	printf("status after = %d\n", g_status);
 	if (builtin_error)
 		update_msh_status(1);
 	while (i < msh->cmd[msh->cmd_nbr - 1].redir_nbr)
@@ -121,7 +119,10 @@ int	commands(t_msh *msh)
 			builtin_error = display_fake_error(msh->cmd[i].param);
 		if (i != msh->cmd_nbr - 1)
 			builtin_error = 0;
-		waitpid(pid[i], &g_status, 0);
 	}
+	i = -1;
+	while (++i < msh->cmd_nbr)
+		waitpid(pid[i], &g_status, 0);
+	free(pid);
 	return (actualize_status(msh, builtin_error), dup_inffd(0), 0);
 }

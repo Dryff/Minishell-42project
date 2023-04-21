@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 09:41:27 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/21 10:46:25 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/21 11:41:35 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,4 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return ((int)nb);
-}
-
-void	*ft_memcpy(void *dst, const void *src, size_t len)
-{
-	char		*tab1;
-	const char	*tab2;
-	size_t		i;
-
-	if (!dst && !src)
-		return (NULL);
-	i = 0;
-	tab1 = dst;
-	tab2 = src;
-	while (i < len)
-	{
-		tab1[i] = tab2[i];
-		i++;
-	}
-	return (dst);
 }
