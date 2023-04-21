@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: colas <colas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/21 11:39:57 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/21 11:59:25 by colas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
 
-void	exec_cmd(t_msh *msh, int cmd_id)
+int	exec_cmd(t_msh *msh, int cmd_id, int pid)
 {
-	pid_t	pid;
 	int		fd[2];
-
+	
 	if (pipe(fd) == -1)
 		exit(1);
 	if (msh->cmd[cmd_id].param[0] && \
@@ -33,6 +32,7 @@ void	exec_cmd(t_msh *msh, int cmd_id)
 	if (dup2(fd[0], STDIN_FILENO) == -1)
 		exit(1);
 	close(fd[0]);
+	return (pid);
 }
 
 void	dup_inffd(int mode)
@@ -74,7 +74,7 @@ void	actualize_status(t_msh *msh, int builtin_error)
 	int	i;
 
 	i = 0;
-	printf("status before = %d\n", builtin_error);
+	printf("status before = %d\n", g_status);
 	if (WIFEXITED(g_status))
 		g_status = WEXITSTATUS(g_status);
 	else if (WIFSIGNALED(g_status))
@@ -84,7 +84,7 @@ void	actualize_status(t_msh *msh, int builtin_error)
 		else
 			g_status = 128 + WTERMSIG(g_status);
 	}
-	printf("status after = %d\n", builtin_error);
+	printf("status after = %d\n", g_status);
 	if (builtin_error)
 		update_msh_status(1);
 	while (i < msh->cmd[msh->cmd_nbr - 1].redir_nbr)
@@ -99,7 +99,11 @@ int	commands(t_msh *msh)
 {
 	int	i;
 	int	builtin_error;
+	pid_t	*pid;
 
+	pid = malloc(sizeof(pid_t) * msh->cmd_nbr + 1);
+	if (!pid)
+		return (0);
 	dup_inffd(1);
 	i = -1;
 	builtin_error = 0;
@@ -109,7 +113,7 @@ int	commands(t_msh *msh)
 	{
 		if (check_out(*msh, i) \
 		&& !builtin_work_only_solo(msh, msh->cmd[i].param))
-			exec_cmd(msh, i);
+			pid[i] = exec_cmd(msh, i, pid[i]);
 		else if (msh->cmd_nbr == 1)
 			builtin_error = exec_builtins(msh, i, \
 			is_builtin(msh->cmd[i].param[0]));
@@ -117,9 +121,7 @@ int	commands(t_msh *msh)
 			builtin_error = display_fake_error(msh->cmd[i].param);
 		if (i != msh->cmd_nbr - 1)
 			builtin_error = 0;
+		waitpid(pid[i], &g_status, 0);
 	}
-	while (waitpid(-1, &g_status, 0) > 0)
-		;
-	printf("builtinerror = %d\n", builtin_error);
 	return (actualize_status(msh, builtin_error), dup_inffd(0), 0);
 }
