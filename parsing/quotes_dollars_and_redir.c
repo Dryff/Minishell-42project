@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:24 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/17 17:06:49 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/21 13:57:46 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ char	*quotes_dollars_and_redir(t_msh *msh, char *str, int cmd_id)
 			p.line = replace_env_arg(msh, &p, &p.i, 0);
 		else
 			p.line = replace_spaces(p, p.line);
-		p.i++;
+		if (p.i < (int)ft_strlen(p.line))
+			p.i++;
 	}
 	return (p.line);
 }

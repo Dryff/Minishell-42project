@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:39:11 by colas             #+#    #+#             */
-/*   Updated: 2023/04/21 11:24:23 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/21 13:50:22 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,31 @@ int	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 	{
 		if (dup2(msh->cmd[cmd_id].ip.infd, STDIN_FILENO) == -1)
 			exit(1);
+		close(msh->cmd[cmd_id].ip.infd);
 	}
 	else if (msh->cmd[cmd_id].ip.infd == -1)
 		exit(1);
-	close(fd[0]);
 	if (msh->cmd[cmd_id].redir_nbr == 0)
 	{
 		if (cmd_id == msh->cmd_nbr - 1)
+		{
 			if (dup2(101, STDOUT_FILENO) == -1)
 				exit(1);
+			close(101);
+		}
 		if (cmd_id != msh->cmd_nbr - 1)
+		{
 			if (dup2(fd[1], STDOUT_FILENO) == -1)
 				exit(1);
+			close(fd[1]);
+		}
 	}
 	else if (msh->cmd[cmd_id].op)
 	{
 		if (dup2(msh->cmd[cmd_id].op[msh->cmd[cmd_id].redir_nbr - 1] \
 	.outfd, STDOUT_FILENO) == -1)
 			exit(1);
+		close(msh->cmd[cmd_id].op[msh->cmd[cmd_id].redir_nbr - 1].outfd);
 	}
 	return (close(fd[1]), close(100), close(101), 0);
 }
