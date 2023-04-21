@@ -6,7 +6,7 @@
 /*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/21 12:37:55 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/21 14:34:29 by mfinette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,13 @@ int	commands(t_msh *msh)
 {
 	int	i;
 	int	builtin_error;
-	pid_t	*pid;
+	static	pid_t	*pid;
+	static	int		is_malloced = 0;
 
+	if (is_malloced)
+		free(pid);
 	pid = malloc(sizeof(pid_t) * msh->cmd_nbr + 1);
+	is_malloced = 1;
 	if (!pid)
 		return (0);
 	dup_inffd(1);
@@ -124,5 +128,6 @@ int	commands(t_msh *msh)
 	while (++i < msh->cmd_nbr)
 		waitpid(pid[i], &g_status, 0);
 	free(pid);
+	is_malloced = 0;
 	return (actualize_status(msh, builtin_error), dup_inffd(0), 0);
 }
