@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/21 00:22:49 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:39:57 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	actualize_status(t_msh *msh, int builtin_error)
 	int	i;
 
 	i = 0;
+	printf("status before = %d\n", builtin_error);
 	if (WIFEXITED(g_status))
 		g_status = WEXITSTATUS(g_status);
 	else if (WIFSIGNALED(g_status))
@@ -83,8 +84,8 @@ void	actualize_status(t_msh *msh, int builtin_error)
 		else
 			g_status = 128 + WTERMSIG(g_status);
 	}
-	if (builtin_error || (is_builtin(msh->cmd[msh->cmd_nbr - 1].param[0]) \
-	&& msh->cmd_nbr == 1 && builtin_error))
+	printf("status after = %d\n", builtin_error);
+	if (builtin_error)
 		update_msh_status(1);
 	while (i < msh->cmd[msh->cmd_nbr - 1].redir_nbr)
 	{
@@ -119,5 +120,6 @@ int	commands(t_msh *msh)
 	}
 	while (waitpid(-1, &g_status, 0) > 0)
 		;
+	printf("builtinerror = %d\n", builtin_error);
 	return (actualize_status(msh, builtin_error), dup_inffd(0), 0);
 }

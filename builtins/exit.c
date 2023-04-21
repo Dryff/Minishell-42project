@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:35:31 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/20 16:48:40 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/21 10:42:32 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	actually_exit(t_msh *msh, int status, int flag, char *cmd)
 void	exit_one_parameter(t_msh *msh, char *cmd)
 {
 	if (ft_str_is_numeric(cmd))
-		actually_exit(msh, atoi(cmd), NOFLAG, cmd);
+		actually_exit(msh, ft_atoi(cmd), NOFLAG, cmd);
 	else
 		actually_exit(msh, 2, NOT_NUMERIC, cmd);
 }

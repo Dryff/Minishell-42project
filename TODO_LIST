@@ -92,3 +92,5 @@ fonctions non autorisees:
 
 memcpy
 atoi
+enlever -fsanitize
+enlever emojis

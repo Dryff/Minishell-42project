@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: laquarium <laquarium@student.42.fr>        +#+  +:+       +#+         #
+#    By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 15:04:30 by mfinette          #+#    #+#              #
-#    Updated: 2023/04/18 14:54:28 by laquarium        ###   ########.fr        #
+#    Updated: 2023/04/21 10:47:21 by cgelin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ FILES = main											\
 	utils/basic_utils									\
 	utils/ft_calloc										\
 	utils/itoa											\
+	utils/ft_atoi											\
 	commands/cmds										\
 	commands/exec_to_pipe								\
 	commands/here_doc									\

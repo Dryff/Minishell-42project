@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:39:11 by colas             #+#    #+#             */
-/*   Updated: 2023/04/20 16:52:57 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/21 11:24:23 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,5 @@ void	exec_to_pipe(t_msh *msh, int cmd_id, int *fd)
 		}
 	}
 	else
-		exec_builtins(msh, cmd_id, builtin);
-	exit(0);
+		exit(exec_builtins(msh, cmd_id, builtin));
 }

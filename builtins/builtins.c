@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:49:30 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/20 16:48:27 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/21 11:12:19 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	exec_builtins(t_msh *msh, int cmd_id, int builtin)
 	if (builtin == ENV)
 		return (ft_print_env(msh), 0);
 	if (builtin == CD)
-		return (ft_dvd(msh, cmd_id), 1);
+		return (ft_dvd(msh, cmd_id));
 	if (builtin == EXPORT)
 		return (ft_export(msh, cmd_id));
 	if (builtin == UNSET && msh->cmd_nbr == 1)

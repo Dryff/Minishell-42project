@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/20 16:29:44 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/21 11:14:07 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	real_pwd(t_msh *msh, char *cmd)
 
 	actual_path = getcwd(NULL, 0);
 	if (!actual_path)
-		return ((void)cwd_error());
+		return (update_msh_status(1), (void)cwd_error());
 	new_path = ft_strjoin(actual_path, "/");
 	tmp = ft_strjoin(new_path, cmd);
 	if (chdir(tmp) != 0)
@@ -114,7 +114,7 @@ void	real_pwd(t_msh *msh, char *cmd)
 	free(actual_path);
 }
 
-void	ft_dvd(t_msh *msh, int cmd_id)
+int		ft_dvd(t_msh *msh, int cmd_id)
 {
 	char	*cmd;
 
@@ -125,7 +125,6 @@ void	ft_dvd(t_msh *msh, int cmd_id)
 	{
 		ft_err_printf("cd: too many arguments\n");
 		update_msh_status(1);
-		return ;
 	}
 	else if (cmd[0] == '/')
 	{
@@ -134,10 +133,11 @@ void	ft_dvd(t_msh *msh, int cmd_id)
 			ft_err_printf("%s%s%s", NOCD, cmd, NOP);
 			update_msh_status(1);
 		}
-		return ;
+		return (0);
 	}
 	else if (cmd[0] == '-' && !cmd[1])
 		chdir_old(msh);
 	else
 		real_pwd(msh, cmd);
+	return (g_status);
 }

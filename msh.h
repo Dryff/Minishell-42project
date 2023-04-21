@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/21 00:22:21 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:12:10 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void		update_msh_status(int status);
 
 /* DVD*/
 char		*get_dvd_cmd(char *line);
-void		ft_dvd(t_msh *msh, int cmd_id);
+int			ft_dvd(t_msh *msh, int cmd_id);
 void		chdir_home_old(t_msh *msh, int code);
 void		update_old_pwd(t_msh *msh, char *actual_path);
 void		cwd_error(void);
@@ -249,6 +249,10 @@ char		*ft_itoa(int n);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t		ft_strlen(const char *s);
 void		free_all(char **strs);
+int			ft_atoi(const char *str);
+void		*ft_memcpy(void *dst, const void *src, size_t len);
+
+
 
 /* Parsing */
 int			parse_line(t_msh *msh);

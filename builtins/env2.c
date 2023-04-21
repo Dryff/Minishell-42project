@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 14:42:57 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/20 11:50:35 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/21 10:42:28 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	check_shlvl(t_msh *msh)
 		complete_export(msh, "SHLVL=1");
 	else
 	{
-		shlvl = atoi(ft_expand_tab(msh->env.tab, "SHLVL"));
+		shlvl = ft_atoi(ft_expand_tab(msh->env.tab, "SHLVL"));
 		if (shlvl < 0)
 			complete_export(msh, "SHLVL=0");
 		if (shlvl >= 999)
