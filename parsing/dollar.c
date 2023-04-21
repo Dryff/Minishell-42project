@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:43:22 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/15 02:04:01 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/21 13:26:52 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ char	*replace_env_arg(t_msh *msh, t_parse *p, int *cursor, int in_q)
 		p->arg_sz = 1;
 	str = get_str(p, in_q, expanded, tmp);
 	actualize_ind(p, expanded, str, in_q);
-	if (p->line[tmp] == '?')
-		free(expanded);
 	if (in_q)
 		*cursor += ft_strlen(expanded) - 1;
+	if (p->line[tmp] == '?')
+		free(expanded);
 	return (free(p->line), str);
 }

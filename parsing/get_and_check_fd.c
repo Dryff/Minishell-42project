@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:37:28 by colas             #+#    #+#             */
-/*   Updated: 2023/04/20 16:46:21 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/21 13:28:38 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_dollar(t_msh *msh, t_parse *p, int *has_dollar)
 			p->line = replace_env_arg(msh, p, &cursor, 1);
 			*has_dollar = 1;
 		}
-		if (p->line[cursor])
+		if (cursor < (int)ft_strlen(p->line))
 			cursor++;
 	}
 	return (p->line);
