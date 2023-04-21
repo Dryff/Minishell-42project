@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:39:11 by colas             #+#    #+#             */
-/*   Updated: 2023/04/21 15:08:48 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/21 15:27:11 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 	}
 	else if (msh->cmd[cmd_id].ip.infd == -1)
 		exit(1);
+	close(fd[0]);
 	if (msh->cmd[cmd_id].redir_nbr == 0)
 		handle_out(msh, cmd_id, fd);
 	else if (msh->cmd[cmd_id].op)
