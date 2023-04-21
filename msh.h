@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 08:47:10 by cgelin            #+#    #+#             */
-/*   Updated: 2023/04/21 11:41:43 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/21 15:14:15 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,6 +233,9 @@ void		here_doc_sigint(int nb);
 
 /* exec */
 void		exec_to_pipe(t_msh *msh, int cmd_id, int *fd);
+pid_t		ext_cmds(t_msh *msh, int i, int *builtin_error, pid_t *pid);
+int			exec_cmd(t_msh *msh, int cmd_id, int pid);
+int			check_out(t_msh msh, int i);
 
 /* Cmd_utils */
 char		*ft_strchr(const char *s, int c);

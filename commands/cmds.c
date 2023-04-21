@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfinette <mfinette@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 22:51:19 by colas             #+#    #+#             */
-/*   Updated: 2023/04/21 14:34:29 by mfinette         ###   ########.fr       */
+/*   Updated: 2023/04/21 15:13:33 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	exec_cmd(t_msh *msh, int cmd_id, int pid)
 {
 	int		fd[2];
-	
+
 	if (pipe(fd) == -1)
 		exit(1);
 	if (msh->cmd[cmd_id].param[0] && \
@@ -55,20 +55,6 @@ void	dup_inffd(int mode)
 	}
 }
 
-int	check_out(t_msh msh, int i)
-{
-	int	j;
-
-	j = 0;
-	while (j < msh.cmd[i].redir_nbr)
-	{
-		if (msh.cmd[i].op[j].outfd == -1)
-			return (0);
-		j++;
-	}
-	return (1);
-}
-
 void	actualize_status(t_msh *msh, int builtin_error)
 {
 	int	i;
@@ -93,37 +79,41 @@ void	actualize_status(t_msh *msh, int builtin_error)
 	}
 }
 
-int	commands(t_msh *msh)
+pid_t	ext_cmds(t_msh *msh, int i, int *builtin_error, pid_t *pid)
 {
-	int	i;
-	int	builtin_error;
-	static	pid_t	*pid;
-	static	int		is_malloced = 0;
-
-	if (is_malloced)
-		free(pid);
-	pid = malloc(sizeof(pid_t) * msh->cmd_nbr + 1);
-	is_malloced = 1;
-	if (!pid)
-		return (0);
-	dup_inffd(1);
-	i = -1;
-	builtin_error = 0;
-	if (msh->here_doc_signal == 1)
-		return (update_msh_status(CTRL_C), 0);
-	while (++i < msh->cmd_nbr)
-	{
-		if (check_out(*msh, i) \
+	if (check_out(*msh, i) \
 		&& !builtin_work_only_solo(msh, msh->cmd[i].param))
 			pid[i] = exec_cmd(msh, i, pid[i]);
 		else if (msh->cmd_nbr == 1)
-			builtin_error = exec_builtins(msh, i, \
+			*builtin_error = exec_builtins(msh, i, \
 			is_builtin(msh->cmd[i].param[0]));
 		else if (builtin_work_only_solo(msh, msh->cmd[i].param))
-			builtin_error = display_fake_error(msh->cmd[i].param);
+			*builtin_error = display_fake_error(msh->cmd[i].param);
 		if (i != msh->cmd_nbr - 1)
-			builtin_error = 0;
-	}
+			*builtin_error = 0;
+		return (pid[i]);
+}
+
+int	commands(t_msh *msh)
+{
+	int				i;
+	int				builtin_error;
+	static pid_t	*pid;
+	static int		is_malloced = 0;
+
+	i = -1;
+	builtin_error = 0;
+	pid = malloc(sizeof(pid_t) * msh->cmd_nbr + 1);
+	if (!pid)
+		return (error_manager(msh, MALLOC_ERR), 1);
+	if (is_malloced)
+		free(pid);
+	dup_inffd(1);
+	is_malloced = 1;
+	if (msh->here_doc_signal == 1)
+		return (update_msh_status(CTRL_C), 0);
+	while (++i < msh->cmd_nbr)
+		pid[i] = ext_cmds(msh, i , &builtin_error, pid);		
 	i = -1;
 	while (++i < msh->cmd_nbr)
 		waitpid(pid[i], &g_status, 0);

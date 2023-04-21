@@ -6,11 +6,46 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:39:11 by colas             #+#    #+#             */
-/*   Updated: 2023/04/21 13:50:22 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/21 15:08:48 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../msh.h"
+
+int	check_out(t_msh msh, int i)
+{
+	int	j;
+
+	j = 0;
+	while (j < msh.cmd[i].redir_nbr)
+	{
+		if (msh.cmd[i].op[j].outfd == -1)
+			return (0);
+		j++;
+	}
+	return (1);
+}
+
+// pid_t	ext_cmds(t_msh *msh, int i, int *builtin_error, pid_t pid)
+// {
+	
+// }
+
+void	handle_out(t_msh *msh, int cmd_id, int *fd)
+{
+	if (cmd_id == msh->cmd_nbr - 1)
+	{
+		if (dup2(101, STDOUT_FILENO) == -1)
+			exit(1);
+		close(101);
+	}
+	if (cmd_id != msh->cmd_nbr - 1)
+	{
+		if (dup2(fd[1], STDOUT_FILENO) == -1)
+			exit(1);
+		close(fd[1]);
+	}
+}
 
 int	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 {
@@ -23,20 +58,7 @@ int	get_op_ip_and_hd(t_msh *msh, int cmd_id, int *fd)
 	else if (msh->cmd[cmd_id].ip.infd == -1)
 		exit(1);
 	if (msh->cmd[cmd_id].redir_nbr == 0)
-	{
-		if (cmd_id == msh->cmd_nbr - 1)
-		{
-			if (dup2(101, STDOUT_FILENO) == -1)
-				exit(1);
-			close(101);
-		}
-		if (cmd_id != msh->cmd_nbr - 1)
-		{
-			if (dup2(fd[1], STDOUT_FILENO) == -1)
-				exit(1);
-			close(fd[1]);
-		}
-	}
+		handle_out(msh, cmd_id, fd);
 	else if (msh->cmd[cmd_id].op)
 	{
 		if (dup2(msh->cmd[cmd_id].op[msh->cmd[cmd_id].redir_nbr - 1] \

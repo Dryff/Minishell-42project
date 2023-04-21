@@ -6,7 +6,7 @@
 /*   By: cgelin <cgelin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 10:22:55 by mfinette          #+#    #+#             */
-/*   Updated: 2023/04/21 11:14:07 by cgelin           ###   ########.fr       */
+/*   Updated: 2023/04/21 14:32:27 by cgelin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	real_pwd(t_msh *msh, char *cmd)
 	free(actual_path);
 }
 
-int		ft_dvd(t_msh *msh, int cmd_id)
+int	ft_dvd(t_msh *msh, int cmd_id)
 {
 	char	*cmd;
 
